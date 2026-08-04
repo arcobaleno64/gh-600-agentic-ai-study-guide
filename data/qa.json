@@ -1,0 +1,170 @@
+[
+  {
+    "id": "QA-01",
+    "category": "D1",
+    "question": "代理收到『改善整個平台』便直接改 40 個檔案，缺少哪個核心？",
+    "answer": "缺少明確輸入、輸出、成功標準與範圍；應先把任務拆成可審查的小步驟。",
+    "keyWords": ["D1"]
+  },
+  {
+    "id": "QA-02",
+    "category": "D1",
+    "question": "代理已完成計畫，但下一步要部署正式環境，能直接繼續嗎？",
+    "answer": "不能因計畫核准推定部署獲准；正式部署是獨立高風險動作，應走明確核准閘門。",
+    "keyWords": ["D1"]
+  },
+  {
+    "id": "QA-03",
+    "category": "D1",
+    "question": "低風險文件拼字修正也要逐字人工核准嗎？",
+    "answer": "通常不需要；可在明確檔案範圍內自動修正並用 diff 與檢查驗證。",
+    "keyWords": ["D1"]
+  },
+  {
+    "id": "QA-04",
+    "category": "D1",
+    "question": "代理只回報『已完成』但沒有 diff 或測試，問題在哪裡？",
+    "answer": "缺少可檢查產物，審查者無法重建變更與驗證完成狀態。",
+    "keyWords": ["D1"]
+  },
+  {
+    "id": "QA-05",
+    "category": "D2",
+    "question": "代理只需查 issue，卻取得所有 repo 寫入權限，應如何評估？",
+    "answer": "違反最小權限；工具能力與 scope 應收窄到完成查詢所需的唯讀範圍。",
+    "keyWords": ["D2"]
+  },
+  {
+    "id": "QA-06",
+    "category": "D2",
+    "question": "MCP server 回傳內容含不受信任指令，代理應直接照做嗎？",
+    "answer": "不應。MCP 輸出跨越信任邊界，必須視為資料並依政策與工具權限驗證。",
+    "keyWords": ["D2"]
+  },
+  {
+    "id": "QA-07",
+    "category": "D2",
+    "question": "CI runner 缺少 SDK，重跑五次是否合理？",
+    "answer": "不合理；這是持續性環境問題，應停止重試、保留證據並修正 setup steps。",
+    "keyWords": ["D2"]
+  },
+  {
+    "id": "QA-08",
+    "category": "D2",
+    "question": "API 暫時回 503，最佳反應是什麼？",
+    "answer": "使用有上限的退避重試，達上限後停止並升級；避免無限重試放大負載。",
+    "keyWords": ["D2"]
+  },
+  {
+    "id": "QA-09",
+    "category": "D3",
+    "question": "代理把每次聊天完整永久保存，有何問題？",
+    "answer": "缺少相關性、到期、裁剪與重設規則，會增加隱私、過期脈絡與衝突風險。",
+    "keyWords": ["D3"]
+  },
+  {
+    "id": "QA-10",
+    "category": "D3",
+    "question": "長任務中斷後代理從頭重做，應補哪項設計？",
+    "answer": "建立 checkpoint、決策紀錄與已完成步驟，讓 resume 從已驗證狀態開始。",
+    "keyWords": ["D3"]
+  },
+  {
+    "id": "QA-11",
+    "category": "D3",
+    "question": "IDE 與 CI 對任務狀態說法不同，應相信哪個？",
+    "answer": "依事先指定的 source of truth 對帳，處理矛盾並記錄裁決，不能任意選一個。",
+    "keyWords": ["D3"]
+  },
+  {
+    "id": "QA-12",
+    "category": "D3",
+    "question": "昨天正確的環境資訊今天已失效，這是什麼風險？",
+    "answer": "stale context；應依 expiry 或重新驗證規則更新，不讓舊資訊主導新決策。",
+    "keyWords": ["D3"]
+  },
+  {
+    "id": "QA-13",
+    "category": "D4",
+    "question": "測試失敗只顯示症狀，如何找根因？",
+    "answer": "沿 plan、trace、工具輸入輸出、runner log 與 artifact 追查，再分類為推理、工具、脈絡或環境。",
+    "keyWords": ["D4"]
+  },
+  {
+    "id": "QA-14",
+    "category": "D4",
+    "question": "調整後一次成功就能宣告改善嗎？",
+    "answer": "不能；應用固定 evaluation set 與基準重測，確認改善可重現且沒有 regression。",
+    "keyWords": ["D4"]
+  },
+  {
+    "id": "QA-15",
+    "category": "D4",
+    "question": "代理經常選錯相似工具，最小調校是什麼？",
+    "answer": "先澄清工具描述與適用條件，必要時收窄 allowlist；不要同時大改所有設定。",
+    "keyWords": ["D4"]
+  },
+  {
+    "id": "QA-16",
+    "category": "D4",
+    "question": "code scanning 新增高風險告警，但功能測試通過，算成功嗎？",
+    "answer": "不算；成功標準應同時納入功能與安全操作限制。",
+    "keyWords": ["D4"]
+  },
+  {
+    "id": "QA-17",
+    "category": "D5",
+    "question": "兩代理平行修改同檔，如何預防？",
+    "answer": "以獨立 worktree／branch、明確檔案所有權與不重疊任務隔離。",
+    "keyWords": ["D5"]
+  },
+  {
+    "id": "QA-18",
+    "category": "D5",
+    "question": "代理 A 完成研究、代理 B 失敗，是否全部重跑？",
+    "answer": "先驗證 A 的 artifact 是否可保留，再只重派失敗範圍，避免重複工作。",
+    "keyWords": ["D5"]
+  },
+  {
+    "id": "QA-19",
+    "category": "D5",
+    "question": "代理被替換時哪些資訊必須交接？",
+    "answer": "任務狀態、關鍵決策、已驗證產物、剩餘工作與 audit chain。",
+    "keyWords": ["D5"]
+  },
+  {
+    "id": "QA-20",
+    "category": "D5",
+    "question": "兩代理給出矛盾結論，誰負責裁決？",
+    "answer": "指定 integrator 依共享證據與驗收標準裁決，並保存理由。",
+    "keyWords": ["D5"]
+  },
+  {
+    "id": "QA-21",
+    "category": "D6",
+    "question": "所有工具呼叫都要人工核准會更安全嗎？",
+    "answer": "不一定；無效核准會造成 approval fatigue。人工介入應集中在能實質降低風險的節點。",
+    "keyWords": ["D6"]
+  },
+  {
+    "id": "QA-22",
+    "category": "D6",
+    "question": "代理要刪除正式資料，最小護欄是什麼？",
+    "answer": "阻擋未授權執行，要求明確核准、可驗證備份／回滾與完整 audit log。",
+    "keyWords": ["D6"]
+  },
+  {
+    "id": "QA-23",
+    "category": "D6",
+    "question": "代理嘗試越過 repository scope，應如何處理？",
+    "answer": "policy block 應拒絕動作並記錄原因，不得自動擴權。",
+    "keyWords": ["D6"]
+  },
+  {
+    "id": "QA-24",
+    "category": "D6",
+    "question": "如何兼顧速度與人工介入？",
+    "answer": "依風險分級：低風險自動化，中風險抽查或閘門，高風險及不可逆動作明確核准。",
+    "keyWords": ["D6"]
+  }
+]

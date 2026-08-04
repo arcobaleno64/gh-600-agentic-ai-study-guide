@@ -1,0 +1,279 @@
+{
+  "version": "1.0.0",
+  "weeks": [
+    {
+      "id": "week-1",
+      "week": 1,
+      "title": "架構與 SDLC",
+      "days": [
+        {
+          "day": 1,
+          "title": "建立考試地圖",
+          "reading": "讀認證頁、Study Guide 與六領域權重。",
+          "output": "畫出六領域與 19 個 objective 的一頁地圖。",
+          "passCriteria": "能不看資料說出六領域順序與權重區間。",
+          "domainId": "D1"
+        },
+        {
+          "day": 2,
+          "title": "代理系統與 SDLC",
+          "reading": "代理工作流程、適合交給代理的步驟與常見反模式。",
+          "output": "列出一個開發任務的輸入、輸出及成功標準。",
+          "passCriteria": "能區分目標不清、範圍過大與缺乏驗證三種反模式。",
+          "domainId": "D1"
+        },
+        {
+          "day": 3,
+          "title": "規劃、推理與行動",
+          "reading": "結構化計畫、審查閘門與行動延後。",
+          "output": "把一個高風險任務拆成 plan／approve／act。",
+          "passCriteria": "能說明為何計畫核准不等於所有動作都獲准。",
+          "domainId": "D1"
+        },
+        {
+          "day": 4,
+          "title": "自主程度",
+          "reading": "依風險調整自主程度、護欄與人工介入。",
+          "output": "建立低、中、高風險動作矩陣。",
+          "passCriteria": "每一級都能指出允許動作與升級條件。",
+          "domainId": "D1"
+        },
+        {
+          "day": 5,
+          "title": "可檢查產物",
+          "reading": "讓代理產生 diff、測試、log、trace 與 PR。",
+          "output": "設計一份最小審查證據清單。",
+          "passCriteria": "清單能讓另一人重現代理做了什麼。",
+          "domainId": "D1"
+        },
+        {
+          "day": 6,
+          "title": "D1 題組",
+          "reading": "重讀 D1 三個 objectives 並做題。",
+          "output": "完成 D1 錯題分類。",
+          "passCriteria": "D1 題組達 80%，且每個錯誤都有原因。",
+          "domainId": "D1"
+        },
+        {
+          "day": 7,
+          "title": "週一回顧",
+          "reading": "整合 SDLC、界線與控制。",
+          "output": "口述一個從 issue 到 PR 的受控代理流程。",
+          "passCriteria": "能在五分鐘內完成且不混淆護欄與評估。",
+          "domainId": "D1"
+        }
+      ]
+    },
+    {
+      "id": "week-2",
+      "week": 2,
+      "title": "工具、MCP 與環境",
+      "days": [
+        {
+          "day": 8,
+          "title": "工具選擇",
+          "reading": "工具能力、工具說明、最小權限與輸入驗證。",
+          "output": "替一個代理列出必要工具與拒絕工具。",
+          "passCriteria": "每個工具都有可驗證的必要性。",
+          "domainId": "D2"
+        },
+        {
+          "day": 9,
+          "title": "工具權限",
+          "reading": "讀寫範圍、分支範圍、憑證與危險操作。",
+          "output": "建立工具權限表。",
+          "passCriteria": "權限符合最小權限且沒有萬用範圍。",
+          "domainId": "D2"
+        },
+        {
+          "day": 10,
+          "title": "MCP 核心",
+          "reading": "MCP server、tool、resource、transport 與信任邊界。",
+          "output": "畫出代理到 MCP 再到外部系統的資料流。",
+          "passCriteria": "能指出憑證、輸入與輸出的三個邊界。",
+          "domainId": "D2"
+        },
+        {
+          "day": 11,
+          "title": "MCP 設定",
+          "reading": "遠端 MCP、registry、allowlist 與工具命名空間。",
+          "output": "審查一份 MCP 設定範例。",
+          "passCriteria": "能找出未限制工具與不當 secret 傳遞。",
+          "domainId": "D2"
+        },
+        {
+          "day": 12,
+          "title": "開發環境",
+          "reading": "repo、branch、runner、setup steps 與環境限制。",
+          "output": "定義一個可重現的代理執行環境。",
+          "passCriteria": "從乾淨環境可安裝、測試並產生相同結果。",
+          "domainId": "D2"
+        },
+        {
+          "day": 13,
+          "title": "CI 中的代理",
+          "reading": "工作流程觸發、權限、產物與 PR 路徑。",
+          "output": "設計一條只在必要事件啟動的代理 CI。",
+          "passCriteria": "觸發條件與權限均可解釋。",
+          "domainId": "D2"
+        },
+        {
+          "day": 14,
+          "title": "健全錯誤處理",
+          "reading": "retry、timeout、cancel、escalation 與冪等性。",
+          "output": "為三種失敗指定 retry 或停止策略。",
+          "passCriteria": "不會對永久錯誤盲目重試。",
+          "domainId": "D2"
+        }
+      ]
+    },
+    {
+      "id": "week-3",
+      "week": 3,
+      "title": "記憶、評估與調校",
+      "days": [
+        {
+          "day": 15,
+          "title": "追溯與課責",
+          "reading": "動作 log、actor、輸入、工具結果與核准紀錄。",
+          "output": "定義一次代理執行的 audit record。",
+          "passCriteria": "能回答誰、何時、為何、用什麼工具做了什麼。",
+          "domainId": "D2"
+        },
+        {
+          "day": 16,
+          "title": "D2 題組",
+          "reading": "完成工具、MCP、環境與錯誤處理題組。",
+          "output": "整理五個最常混淆點。",
+          "passCriteria": "D2 題組達 80%。",
+          "domainId": "D2"
+        },
+        {
+          "day": 17,
+          "title": "記憶策略",
+          "reading": "短期、長期與外部記憶的用途與風險。",
+          "output": "為一個任務選擇記憶層級。",
+          "passCriteria": "只保存任務需要且可治理的資訊。",
+          "domainId": "D3"
+        },
+        {
+          "day": 18,
+          "title": "過期與裁剪",
+          "reading": "expiry、pruning、reset 與敏感資料最小化。",
+          "output": "定義三條記憶生命週期規則。",
+          "passCriteria": "能防止過期脈絡繼續影響決策。",
+          "domainId": "D3"
+        },
+        {
+          "day": 19,
+          "title": "狀態與脈絡漂移",
+          "reading": "決策紀錄、checkpoint、resume 與 drift detection。",
+          "output": "建立可恢復的任務 checkpoint。",
+          "passCriteria": "恢復後不重做已完成步驟。",
+          "domainId": "D3"
+        },
+        {
+          "day": 20,
+          "title": "跨工具連續性",
+          "reading": "共享狀態、衝突來源與 source of truth。",
+          "output": "指定跨 IDE／CI 的唯一權威狀態。",
+          "passCriteria": "能解決矛盾與陳舊脈絡。",
+          "domainId": "D3"
+        },
+        {
+          "day": 21,
+          "title": "成功標準",
+          "reading": "預期成果、操作限制、定量與定性訊號。",
+          "output": "為一個代理任務寫驗收標準。",
+          "passCriteria": "標準可在執行後客觀判定。",
+          "domainId": "D4"
+        }
+      ]
+    },
+    {
+      "id": "week-4",
+      "week": 4,
+      "title": "多代理、護欄與總複習",
+      "days": [
+        {
+          "day": 22,
+          "title": "自動評估訊號",
+          "reading": "測試、lint、code scanning、secret scanning 與產物。",
+          "output": "把三個自動訊號連到失敗處理。",
+          "passCriteria": "每個訊號都有明確閾值與責任人。",
+          "domainId": "D4"
+        },
+        {
+          "day": 23,
+          "title": "錯誤與根因",
+          "reading": "利用 log、plan、trace、output 分類失敗。",
+          "output": "完成一張 reasoning／tool／context／environment 魚骨圖。",
+          "passCriteria": "能區分症狀與根因。",
+          "domainId": "D4"
+        },
+        {
+          "day": 24,
+          "title": "行為調校",
+          "reading": "調整 instructions、workflow、constraints、memory 與 tools。",
+          "output": "針對一個根因只改一個主要變因。",
+          "passCriteria": "重新評估可證明改善而非偶然。",
+          "domainId": "D4"
+        },
+        {
+          "day": 25,
+          "title": "多代理協調",
+          "reading": "主管／工作者、管線、平行分工與共享黑板。",
+          "output": "替一個任務選擇協調模式。",
+          "passCriteria": "分工邊界清楚且輸出可合併。",
+          "domainId": "D5"
+        },
+        {
+          "day": 26,
+          "title": "隔離與衝突",
+          "reading": "worktree、檔案所有權、重複工作與矛盾輸出。",
+          "output": "定義平行代理的隔離規則。",
+          "passCriteria": "沒有兩個代理同時修改同一範圍。",
+          "domainId": "D5"
+        },
+        {
+          "day": 27,
+          "title": "恢復與生命週期",
+          "reading": "partial、stalled、rollback、replacement 與 audit continuity。",
+          "output": "設計一個失敗代理的替換流程。",
+          "passCriteria": "更換代理不會遺失決策與稽核鏈。",
+          "domainId": "D5"
+        },
+        {
+          "day": 28,
+          "title": "總模擬與補弱",
+          "reading": "完成 60 題混合模擬並複習最低兩領域。",
+          "output": "產出最後一頁弱點清單。",
+          "passCriteria": "總正確率達 85%，且六領域皆不低於 75%。",
+          "domainId": "D6"
+        }
+      ]
+    }
+  ],
+  "wrongAnswerMethod": [
+    {
+      "type": "觀念錯置",
+      "symptom": "把不同控制層或生命週期階段混在一起。",
+      "remedy": "回到 objective，寫出邊界與反例。"
+    },
+    {
+      "type": "題幹漏讀",
+      "symptom": "忽略最小權限、不可逆或跨環境等限制詞。",
+      "remedy": "圈出動詞與限制後再看選項。"
+    },
+    {
+      "type": "產品記憶",
+      "symptom": "只憑產品名稱選答案。",
+      "remedy": "先判斷能力與風險，再對應產品。"
+    },
+    {
+      "type": "過度設計",
+      "symptom": "替題目加入未要求的元件與流程。",
+      "remedy": "選能直接滿足全部明示條件的最小方案。"
+    }
+  ]
+}

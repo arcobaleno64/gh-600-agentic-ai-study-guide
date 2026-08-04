@@ -1,0 +1,100 @@
+{
+  "mustRemember": {
+    "GH-600": [
+      "先定義輸入、輸出與成功標準，再讓代理行動。",
+      "計畫核准不等於每個後續動作都獲授權。",
+      "自主程度應隨操作、資安與合規風險調整。",
+      "可檢查 artifact 是代理課責的基礎。",
+      "工具只給完成任務所需的最小權限。",
+      "MCP server 與其輸出都跨越信任邊界。",
+      "secret 應由受管機制注入，不得寫入 repository。",
+      "暫時性錯誤才適合有界重試。",
+      "取消、逾時與升級是安全執行路徑的一部分。",
+      "乾淨 runner 能重現結果，才算環境設定完整。",
+      "記憶只保留與任務相關且可治理的資訊。",
+      "長期記憶必須有到期、裁剪與重設規則。",
+      "checkpoint 讓任務恢復而不重做。",
+      "source of truth 用來解決跨工具狀態衝突。",
+      "stale context 必須重新驗證或淘汰。",
+      "評估要同時包含定量與定性訊號。",
+      "測試通過不代表安全與操作限制也通過。",
+      "根因不是錯誤訊息本身，而是造成它的底層原因。",
+      "調校時先改最小主要變因，再用固定基準重測。",
+      "推理、工具、脈絡與環境是四個常見失敗類別。",
+      "多代理平行化前先切清任務與檔案所有權。",
+      "共享工作目錄會放大重疊修改風險。",
+      "多代理交接必須保存決策與 audit chain。",
+      "partial failure 不等於所有可驗證產物都要丟棄。",
+      "stalled agent 需要逾時、重派或人工介入。",
+      "integrator 應依共享證據裁決矛盾輸出。",
+      "代理生命週期包含加入、更新、替換與停止。",
+      "post-hoc 分析依賴完整 log、artifact 與交接紀錄。",
+      "護欄應阻擋違規行動並留下可稽核原因。",
+      "不可逆與合規敏感動作需要明確授權。",
+      "最小權限同時限制工具、資源與執行脈絡。",
+      "人工介入應集中在能實質降低風險的節點。",
+      "過多無效核准會造成 approval fatigue。",
+      "受控路徑串起授權、執行、驗證與稽核。",
+      "700 是量尺分數，不是固定答對百分比。",
+      "正式應考前重新核對認證頁與 Study Guide。"
+    ]
+  },
+  "cheatsheet": [
+    {
+      "combination": "Plan vs Act",
+      "summary": "計畫描述要做什麼；行動會對環境造成效果，應分開授權。"
+    },
+    {
+      "combination": "Guardrail vs Evaluation",
+      "summary": "護欄在執行前後限制行為；評估衡量結果是否符合標準。"
+    },
+    {
+      "combination": "Retry vs Escalate",
+      "summary": "暫時性錯誤有界重試；權限或永久錯誤停止並升級。"
+    },
+    {
+      "combination": "Memory vs State",
+      "summary": "記憶保存可重用脈絡；狀態表示目前任務進度與決策。"
+    },
+    {
+      "combination": "Short vs Long term",
+      "summary": "短期服務當前步驟；長期跨工作階段且必須治理。"
+    },
+    {
+      "combination": "Log vs Trace",
+      "summary": "log 是事件紀錄；trace 串起一次執行的因果序列。"
+    },
+    {
+      "combination": "Tool vs MCP server",
+      "summary": "tool 是能力；MCP server 以協定提供工具與資料來源。"
+    },
+    {
+      "combination": "Scope vs Permission",
+      "summary": "scope 限定資源範圍；permission 限定允許的操作。"
+    },
+    {
+      "combination": "Symptom vs Root cause",
+      "summary": "症狀是觀察到的失敗；根因是造成失敗的底層原因。"
+    },
+    {
+      "combination": "Parallel vs Pipeline",
+      "summary": "平行處理互不依賴工作；管線按階段交接輸出。"
+    },
+    {
+      "combination": "Partial vs Stalled",
+      "summary": "partial 已有部分結果；stalled 尚未完成且無進展。"
+    },
+    {
+      "combination": "Autonomy vs Authority",
+      "summary": "自主是無人介入程度；權限是代理實際能做的範圍。"
+    }
+  ],
+  "examDayChecklist": [
+    "確認英文考試、時間與預約資訊。",
+    "完成官方 exam sandbox 操作熟悉。",
+    "只帶考試中心允許的身分證明。",
+    "先讀題幹動詞與風險限制詞。",
+    "不確定題先標記，完成後回看。",
+    "交卷前檢查複選題是否選齊。"
+  ]
+}

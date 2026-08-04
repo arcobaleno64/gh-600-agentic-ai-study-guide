@@ -1,0 +1,153 @@
+{
+  "lastVerified": "2026-08-04",
+  "disclaimer": "本網站是繁體中文原創學習整理，並非 Microsoft 或 GitHub 官方出版品；不包含實際考題、考古題或外洩題庫。正式應考前請重新核對官方認證頁與 Study Guide。",
+  "exam": {
+    "code": "GH-600",
+    "certificationName": "GitHub Certified: Agentic AI Developer",
+    "examName": "Developing in Agentic AI Systems",
+    "durationMinutes": 120,
+    "passingScore": 700,
+    "languages": ["English"],
+    "studyGuideUpdatedAt": "2026-05-14",
+    "domains": [
+      {
+        "id": "D1",
+        "name": "準備代理架構與 SDLC 流程",
+        "weight": {
+          "min": 15,
+          "max": 20
+        },
+        "objectives": [
+          {
+            "id": "D1-O1",
+            "name": "將代理整合至軟體開發生命週期"
+          },
+          {
+            "id": "D1-O2",
+            "name": "定義規劃、推理與行動的界線"
+          },
+          {
+            "id": "D1-O3",
+            "name": "設定自主代理的可觀測性與控制"
+          }
+        ]
+      },
+      {
+        "id": "D2",
+        "name": "實作工具使用與環境互動",
+        "weight": {
+          "min": 20,
+          "max": 25
+        },
+        "objectives": [
+          {
+            "id": "D2-O1",
+            "name": "選擇與設定代理工具"
+          },
+          {
+            "id": "D2-O2",
+            "name": "設定 MCP 伺服器"
+          },
+          {
+            "id": "D2-O3",
+            "name": "將代理整合至開發環境"
+          },
+          {
+            "id": "D2-O4",
+            "name": "以安全執行路徑與健全錯誤處理操作代理"
+          }
+        ]
+      },
+      {
+        "id": "D3",
+        "name": "管理記憶、狀態與執行",
+        "weight": {
+          "min": 10,
+          "max": 15
+        },
+        "objectives": [
+          {
+            "id": "D3-O1",
+            "name": "實作代理記憶策略"
+          },
+          {
+            "id": "D3-O2",
+            "name": "保留代理狀態並管理脈絡漂移"
+          },
+          {
+            "id": "D3-O3",
+            "name": "確保跨工具與環境的記憶及狀態連續性"
+          }
+        ]
+      },
+      {
+        "id": "D4",
+        "name": "執行評估、錯誤分析與調校",
+        "weight": {
+          "min": 15,
+          "max": 20
+        },
+        "objectives": [
+          {
+            "id": "D4-O1",
+            "name": "定義成功標準與評估訊號"
+          },
+          {
+            "id": "D4-O2",
+            "name": "分析代理失敗並識別根因"
+          },
+          {
+            "id": "D4-O3",
+            "name": "依評估結果調整代理行為"
+          }
+        ]
+      },
+      {
+        "id": "D5",
+        "name": "協調多代理協作",
+        "weight": {
+          "min": 15,
+          "max": 20
+        },
+        "objectives": [
+          {
+            "id": "D5-O1",
+            "name": "操作與管理多代理工作流程"
+          },
+          {
+            "id": "D5-O2",
+            "name": "設定多代理行為的可觀測性"
+          },
+          {
+            "id": "D5-O3",
+            "name": "偵測並回應多代理失敗與效能退化"
+          },
+          {
+            "id": "D5-O4",
+            "name": "管理多代理工作流程中的代理生命週期"
+          }
+        ]
+      },
+      {
+        "id": "D6",
+        "name": "實作護欄與課責",
+        "weight": {
+          "min": 10,
+          "max": 15
+        },
+        "objectives": [
+          {
+            "id": "D6-O1",
+            "name": "定義自主程度"
+          },
+          {
+            "id": "D6-O2",
+            "name": "實作護欄與人工介入工作流程"
+          }
+        ]
+      }
+    ],
+    "studyGuide": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-600",
+    "certificationPage": "https://learn.microsoft.com/en-us/credentials/certifications/agentic-ai-developer/"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "GH-600 Agentic AI Developer 四週備考指南",
+  "short_name": "GH-600 備考",
+  "description": "28 天計畫、六領域教材、60 題原創題庫與考前速查。",
+  "lang": "zh-Hant-TW",
+  "dir": "ltr",
+  "start_url": "./#/dashboard",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f7f6",
+  "theme_color": "#0f5f62",
+  "categories": ["education", "productivity"],
+  "icons": [
+    { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

@@ -1,0 +1,881 @@
+{
+  "version": "1.0.0",
+  "categories": [
+    {
+      "id": "D1",
+      "title": "準備代理架構與 SDLC 流程",
+      "terms": [
+        {
+          "id": "D1-T01",
+          "term": "Agentic AI system",
+          "explanation": "能以目標為導向規劃、使用工具並在環境中採取行動的 AI 系統。",
+          "exams": ["GH-600"],
+          "category": "準備代理架構與 SDLC 流程"
+        },
+        {
+          "id": "D1-T02",
+          "term": "Agent workflow",
+          "explanation": "代理從接收任務、規劃、執行到驗證與回報的受控流程。",
+          "exams": ["GH-600"],
+          "category": "準備代理架構與 SDLC 流程"
+        },
+        {
+          "id": "D1-T03",
+          "term": "SDLC",
+          "explanation": "軟體從規劃、開發、測試、部署到維護的生命週期。",
+          "exams": ["GH-600"],
+          "category": "準備代理架構與 SDLC 流程"
+        },
+        {
+          "id": "D1-T04",
+          "term": "Input contract",
+          "explanation": "代理可接受資料的格式、範圍與前置條件。",
+          "exams": ["GH-600"],
+          "category": "準備代理架構與 SDLC 流程"
+        },
+        {
+          "id": "D1-T05",
+          "term": "Output contract",
+          "explanation": "代理必須產出的格式、內容與品質條件。",
+          "exams": ["GH-600"],
+          "category": "準備代理架構與 SDLC 流程"
+        },
+        {
+          "id": "D1-T06",
+          "term": "Success criteria",
+          "explanation": "能客觀判定任務是否完成的驗收條件。",
+          "exams": ["GH-600"],
+          "category": "準備代理架構與 SDLC 流程"
+        },
+        {
+          "id": "D1-T07",
+          "term": "Agent anti-pattern",
+          "explanation": "容易造成失控、不可驗證或低品質結果的代理設計模式。",
+          "exams": ["GH-600"],
+          "category": "準備代理架構與 SDLC 流程"
+        },
+        {
+          "id": "D1-T08",
+          "term": "Planning",
+          "explanation": "在行動前建立步驟、依賴、風險與驗證方式。",
+          "exams": ["GH-600"],
+          "category": "準備代理架構與 SDLC 流程"
+        },
+        {
+          "id": "D1-T09",
+          "term": "Reasoning",
+          "explanation": "依目標與脈絡選擇下一步的判斷過程。",
+          "exams": ["GH-600"],
+          "category": "準備代理架構與 SDLC 流程"
+        },
+        {
+          "id": "D1-T10",
+          "term": "Action",
+          "explanation": "透過工具對 repository、服務或環境造成可觀察效果。",
+          "exams": ["GH-600"],
+          "category": "準備代理架構與 SDLC 流程"
+        },
+        {
+          "id": "D1-T11",
+          "term": "Approval gate",
+          "explanation": "在特定風險點要求授權後才允許流程繼續。",
+          "exams": ["GH-600"],
+          "category": "準備代理架構與 SDLC 流程"
+        },
+        {
+          "id": "D1-T12",
+          "term": "Structured plan",
+          "explanation": "具有明確步驟、狀態、輸入與完成條件的計畫。",
+          "exams": ["GH-600"],
+          "category": "準備代理架構與 SDLC 流程"
+        },
+        {
+          "id": "D1-T13",
+          "term": "Autonomy level",
+          "explanation": "代理在不需人工介入下可採取行動的程度。",
+          "exams": ["GH-600"],
+          "category": "準備代理架構與 SDLC 流程"
+        },
+        {
+          "id": "D1-T14",
+          "term": "Human intervention",
+          "explanation": "由人類審查、核准、修正或停止代理行動。",
+          "exams": ["GH-600"],
+          "category": "準備代理架構與 SDLC 流程"
+        },
+        {
+          "id": "D1-T15",
+          "term": "Inspectability",
+          "explanation": "能由產物重建與檢查代理工作內容的特性。",
+          "exams": ["GH-600"],
+          "category": "準備代理架構與 SDLC 流程"
+        },
+        {
+          "id": "D1-T16",
+          "term": "Artifact",
+          "explanation": "代理產生且可保存、審查或稽核的輸出。",
+          "exams": ["GH-600"],
+          "category": "準備代理架構與 SDLC 流程"
+        },
+        {
+          "id": "D1-T17",
+          "term": "Control plane",
+          "explanation": "集中套用權限、政策、觀測與治理的管理層。",
+          "exams": ["GH-600"],
+          "category": "準備代理架構與 SDLC 流程"
+        },
+        {
+          "id": "D1-T18",
+          "term": "System of record",
+          "explanation": "特定狀態與決策的權威資料來源。",
+          "exams": ["GH-600"],
+          "category": "準備代理架構與 SDLC 流程"
+        },
+        {
+          "id": "D1-T19",
+          "term": "Rollback",
+          "explanation": "把變更恢復到已知良好狀態的程序。",
+          "exams": ["GH-600"],
+          "category": "準備代理架構與 SDLC 流程"
+        },
+        {
+          "id": "D1-T20",
+          "term": "Reversibility",
+          "explanation": "動作能否以清楚、低成本方式撤回的性質。",
+          "exams": ["GH-600"],
+          "category": "準備代理架構與 SDLC 流程"
+        }
+      ]
+    },
+    {
+      "id": "D2",
+      "title": "實作工具使用與環境互動",
+      "terms": [
+        {
+          "id": "D2-T01",
+          "term": "Tool",
+          "explanation": "代理可呼叫以讀取資訊或執行動作的明確能力。",
+          "exams": ["GH-600"],
+          "category": "實作工具使用與環境互動"
+        },
+        {
+          "id": "D2-T02",
+          "term": "Tool schema",
+          "explanation": "描述工具參數、型別與回傳格式的契約。",
+          "exams": ["GH-600"],
+          "category": "實作工具使用與環境互動"
+        },
+        {
+          "id": "D2-T03",
+          "term": "Tool permission",
+          "explanation": "限制代理可使用哪些工具及操作範圍。",
+          "exams": ["GH-600"],
+          "category": "實作工具使用與環境互動"
+        },
+        {
+          "id": "D2-T04",
+          "term": "Least privilege",
+          "explanation": "只授予完成明確任務所需的最小權限。",
+          "exams": ["GH-600"],
+          "category": "實作工具使用與環境互動"
+        },
+        {
+          "id": "D2-T05",
+          "term": "MCP",
+          "explanation": "Model Context Protocol，讓 AI 應用以標準方式連接工具與資料來源。",
+          "exams": ["GH-600"],
+          "category": "實作工具使用與環境互動"
+        },
+        {
+          "id": "D2-T06",
+          "term": "MCP server",
+          "explanation": "透過 MCP 暴露工具、資源或提示的服務。",
+          "exams": ["GH-600"],
+          "category": "實作工具使用與環境互動"
+        },
+        {
+          "id": "D2-T07",
+          "term": "MCP client",
+          "explanation": "連線 MCP server 並代表代理呼叫能力的應用端。",
+          "exams": ["GH-600"],
+          "category": "實作工具使用與環境互動"
+        },
+        {
+          "id": "D2-T08",
+          "term": "MCP registry",
+          "explanation": "提供可發現與管理 MCP server 資訊的登錄來源。",
+          "exams": ["GH-600"],
+          "category": "實作工具使用與環境互動"
+        },
+        {
+          "id": "D2-T09",
+          "term": "MCP allowlist",
+          "explanation": "限定可使用 MCP server 或工具的允許清單。",
+          "exams": ["GH-600"],
+          "category": "實作工具使用與環境互動"
+        },
+        {
+          "id": "D2-T10",
+          "term": "Remote MCP server",
+          "explanation": "透過網路端點提供 MCP 能力的伺服器。",
+          "exams": ["GH-600"],
+          "category": "實作工具使用與環境互動"
+        },
+        {
+          "id": "D2-T11",
+          "term": "Execution context",
+          "explanation": "代理執行時可見的 repository、分支、環境與權限集合。",
+          "exams": ["GH-600"],
+          "category": "實作工具使用與環境互動"
+        },
+        {
+          "id": "D2-T12",
+          "term": "Repository scope",
+          "explanation": "代理被允許讀寫的 repository 範圍。",
+          "exams": ["GH-600"],
+          "category": "實作工具使用與環境互動"
+        },
+        {
+          "id": "D2-T13",
+          "term": "Branch scope",
+          "explanation": "代理可操作的分支或分支命名範圍。",
+          "exams": ["GH-600"],
+          "category": "實作工具使用與環境互動"
+        },
+        {
+          "id": "D2-T14",
+          "term": "Runner",
+          "explanation": "執行 CI job 或代理工作負載的運算環境。",
+          "exams": ["GH-600"],
+          "category": "實作工具使用與環境互動"
+        },
+        {
+          "id": "D2-T15",
+          "term": "Setup step",
+          "explanation": "在代理開始工作前安裝依賴與準備環境的步驟。",
+          "exams": ["GH-600"],
+          "category": "實作工具使用與環境互動"
+        },
+        {
+          "id": "D2-T16",
+          "term": "Retry",
+          "explanation": "對暫時性失敗重新嘗試的受限策略。",
+          "exams": ["GH-600"],
+          "category": "實作工具使用與環境互動"
+        },
+        {
+          "id": "D2-T17",
+          "term": "Backoff",
+          "explanation": "在重試之間逐步增加等待時間的機制。",
+          "exams": ["GH-600"],
+          "category": "實作工具使用與環境互動"
+        },
+        {
+          "id": "D2-T18",
+          "term": "Cancellation",
+          "explanation": "安全停止進行中代理工作的訊號與處理。",
+          "exams": ["GH-600"],
+          "category": "實作工具使用與環境互動"
+        },
+        {
+          "id": "D2-T19",
+          "term": "Timeout",
+          "explanation": "超過指定時間後終止或升級工作的限制。",
+          "exams": ["GH-600"],
+          "category": "實作工具使用與環境互動"
+        },
+        {
+          "id": "D2-T20",
+          "term": "Escalation path",
+          "explanation": "代理無法安全前進時交由人類或更高權限流程處理的路徑。",
+          "exams": ["GH-600"],
+          "category": "實作工具使用與環境互動"
+        }
+      ]
+    },
+    {
+      "id": "D3",
+      "title": "管理記憶、狀態與執行",
+      "terms": [
+        {
+          "id": "D3-T01",
+          "term": "Short-term memory",
+          "explanation": "只服務目前工作階段或局部步驟的暫時脈絡。",
+          "exams": ["GH-600"],
+          "category": "管理記憶、狀態與執行"
+        },
+        {
+          "id": "D3-T02",
+          "term": "Long-term memory",
+          "explanation": "跨工作階段保存且需治理的持久知識。",
+          "exams": ["GH-600"],
+          "category": "管理記憶、狀態與執行"
+        },
+        {
+          "id": "D3-T03",
+          "term": "External memory",
+          "explanation": "由文件、資料庫或其他外部系統保存的代理記憶。",
+          "exams": ["GH-600"],
+          "category": "管理記憶、狀態與執行"
+        },
+        {
+          "id": "D3-T04",
+          "term": "Memory scope",
+          "explanation": "限定記憶能包含的任務、repository 或使用者範圍。",
+          "exams": ["GH-600"],
+          "category": "管理記憶、狀態與執行"
+        },
+        {
+          "id": "D3-T05",
+          "term": "Memory expiry",
+          "explanation": "記憶在指定時間或條件後失效的規則。",
+          "exams": ["GH-600"],
+          "category": "管理記憶、狀態與執行"
+        },
+        {
+          "id": "D3-T06",
+          "term": "Memory pruning",
+          "explanation": "移除不再相關、重複或低價值記憶的程序。",
+          "exams": ["GH-600"],
+          "category": "管理記憶、狀態與執行"
+        },
+        {
+          "id": "D3-T07",
+          "term": "Memory reset",
+          "explanation": "清除或重建特定範圍記憶的受控動作。",
+          "exams": ["GH-600"],
+          "category": "管理記憶、狀態與執行"
+        },
+        {
+          "id": "D3-T08",
+          "term": "State",
+          "explanation": "代理任務目前進度、決策、產物與待辦的可恢復表示。",
+          "exams": ["GH-600"],
+          "category": "管理記憶、狀態與執行"
+        },
+        {
+          "id": "D3-T09",
+          "term": "Checkpoint",
+          "explanation": "可讓中斷工作從已驗證位置恢復的狀態快照。",
+          "exams": ["GH-600"],
+          "category": "管理記憶、狀態與執行"
+        },
+        {
+          "id": "D3-T10",
+          "term": "Resume",
+          "explanation": "根據 checkpoint 繼續工作而不重複已完成步驟。",
+          "exams": ["GH-600"],
+          "category": "管理記憶、狀態與執行"
+        },
+        {
+          "id": "D3-T11",
+          "term": "Context drift",
+          "explanation": "代理在長時間執行中逐漸偏離目標或既有決策。",
+          "exams": ["GH-600"],
+          "category": "管理記憶、狀態與執行"
+        },
+        {
+          "id": "D3-T12",
+          "term": "Decision log",
+          "explanation": "保存重要選擇、理由與影響的持久紀錄。",
+          "exams": ["GH-600"],
+          "category": "管理記憶、狀態與執行"
+        },
+        {
+          "id": "D3-T13",
+          "term": "Task continuity",
+          "explanation": "跨中斷、工具或代理持續推進同一任務的能力。",
+          "exams": ["GH-600"],
+          "category": "管理記憶、狀態與執行"
+        },
+        {
+          "id": "D3-T14",
+          "term": "Shared state",
+          "explanation": "多個工具或代理依共同格式讀寫的任務狀態。",
+          "exams": ["GH-600"],
+          "category": "管理記憶、狀態與執行"
+        },
+        {
+          "id": "D3-T15",
+          "term": "Stale context",
+          "explanation": "已過期但仍可能影響新決策的脈絡。",
+          "exams": ["GH-600"],
+          "category": "管理記憶、狀態與執行"
+        },
+        {
+          "id": "D3-T16",
+          "term": "Conflicting context",
+          "explanation": "不同來源對同一事實或決策給出矛盾資訊。",
+          "exams": ["GH-600"],
+          "category": "管理記憶、狀態與執行"
+        },
+        {
+          "id": "D3-T17",
+          "term": "Source of truth",
+          "explanation": "發生矛盾時被指定為權威的資料來源。",
+          "exams": ["GH-600"],
+          "category": "管理記憶、狀態與執行"
+        },
+        {
+          "id": "D3-T18",
+          "term": "Context window",
+          "explanation": "模型在單次推理中可使用的有限輸入範圍。",
+          "exams": ["GH-600"],
+          "category": "管理記憶、狀態與執行"
+        },
+        {
+          "id": "D3-T19",
+          "term": "State handoff",
+          "explanation": "把可恢復狀態與責任從一個執行者交給另一個。",
+          "exams": ["GH-600"],
+          "category": "管理記憶、狀態與執行"
+        },
+        {
+          "id": "D3-T20",
+          "term": "Idempotency",
+          "explanation": "相同操作重做時不會產生額外非預期效果的性質。",
+          "exams": ["GH-600"],
+          "category": "管理記憶、狀態與執行"
+        }
+      ]
+    },
+    {
+      "id": "D4",
+      "title": "執行評估、錯誤分析與調校",
+      "terms": [
+        {
+          "id": "D4-T01",
+          "term": "Evaluation",
+          "explanation": "以明確標準衡量代理輸出與行為品質的程序。",
+          "exams": ["GH-600"],
+          "category": "執行評估、錯誤分析與調校"
+        },
+        {
+          "id": "D4-T02",
+          "term": "Evaluation signal",
+          "explanation": "用於判斷品質、風險或成功程度的觀測值。",
+          "exams": ["GH-600"],
+          "category": "執行評估、錯誤分析與調校"
+        },
+        {
+          "id": "D4-T03",
+          "term": "Qualitative signal",
+          "explanation": "由人工判斷清晰度、適切性或可用性的評估。",
+          "exams": ["GH-600"],
+          "category": "執行評估、錯誤分析與調校"
+        },
+        {
+          "id": "D4-T04",
+          "term": "Quantitative signal",
+          "explanation": "以數值表達的通過率、錯誤率、延遲或成本。",
+          "exams": ["GH-600"],
+          "category": "執行評估、錯誤分析與調校"
+        },
+        {
+          "id": "D4-T05",
+          "term": "Baseline",
+          "explanation": "調校前用於比較的固定評估結果。",
+          "exams": ["GH-600"],
+          "category": "執行評估、錯誤分析與調校"
+        },
+        {
+          "id": "D4-T06",
+          "term": "Test suite",
+          "explanation": "可重複執行以驗證正確性的一組測試。",
+          "exams": ["GH-600"],
+          "category": "執行評估、錯誤分析與調校"
+        },
+        {
+          "id": "D4-T07",
+          "term": "Code scanning",
+          "explanation": "分析程式碼以找出安全弱點的自動化能力。",
+          "exams": ["GH-600"],
+          "category": "執行評估、錯誤分析與調校"
+        },
+        {
+          "id": "D4-T08",
+          "term": "Secret scanning",
+          "explanation": "偵測 repository 中權杖與憑證等機密的能力。",
+          "exams": ["GH-600"],
+          "category": "執行評估、錯誤分析與調校"
+        },
+        {
+          "id": "D4-T09",
+          "term": "Dependency review",
+          "explanation": "評估相依套件變更所帶來供應鏈風險的程序。",
+          "exams": ["GH-600"],
+          "category": "執行評估、錯誤分析與調校"
+        },
+        {
+          "id": "D4-T10",
+          "term": "Error analysis",
+          "explanation": "從證據分類失敗並追查原因的過程。",
+          "exams": ["GH-600"],
+          "category": "執行評估、錯誤分析與調校"
+        },
+        {
+          "id": "D4-T11",
+          "term": "Root cause",
+          "explanation": "造成失敗的底層原因，而非表面症狀。",
+          "exams": ["GH-600"],
+          "category": "執行評估、錯誤分析與調校"
+        },
+        {
+          "id": "D4-T12",
+          "term": "Reasoning error",
+          "explanation": "代理判斷或步驟選擇不正確造成的失敗。",
+          "exams": ["GH-600"],
+          "category": "執行評估、錯誤分析與調校"
+        },
+        {
+          "id": "D4-T13",
+          "term": "Tool misuse",
+          "explanation": "選錯工具、參數錯誤或超出工具預期用途。",
+          "exams": ["GH-600"],
+          "category": "執行評估、錯誤分析與調校"
+        },
+        {
+          "id": "D4-T14",
+          "term": "Context issue",
+          "explanation": "缺漏、矛盾或過期脈絡導致的錯誤。",
+          "exams": ["GH-600"],
+          "category": "執行評估、錯誤分析與調校"
+        },
+        {
+          "id": "D4-T15",
+          "term": "Environment issue",
+          "explanation": "依賴、權限、網路或 runner 狀態造成的失敗。",
+          "exams": ["GH-600"],
+          "category": "執行評估、錯誤分析與調校"
+        },
+        {
+          "id": "D4-T16",
+          "term": "Trace",
+          "explanation": "記錄代理步驟與工具互動的可分析事件序列。",
+          "exams": ["GH-600"],
+          "category": "執行評估、錯誤分析與調校"
+        },
+        {
+          "id": "D4-T17",
+          "term": "Tuning",
+          "explanation": "依評估結果調整指令、流程、記憶或工具設定。",
+          "exams": ["GH-600"],
+          "category": "執行評估、錯誤分析與調校"
+        },
+        {
+          "id": "D4-T18",
+          "term": "Regression",
+          "explanation": "變更使原本正常的能力退化或失效。",
+          "exams": ["GH-600"],
+          "category": "執行評估、錯誤分析與調校"
+        },
+        {
+          "id": "D4-T19",
+          "term": "Evaluation set",
+          "explanation": "固定且具代表性、用來重複比較的任務集合。",
+          "exams": ["GH-600"],
+          "category": "執行評估、錯誤分析與調校"
+        },
+        {
+          "id": "D4-T20",
+          "term": "Operational constraint",
+          "explanation": "代理執行時必須遵守的成本、時間、權限或安全限制。",
+          "exams": ["GH-600"],
+          "category": "執行評估、錯誤分析與調校"
+        }
+      ]
+    },
+    {
+      "id": "D5",
+      "title": "協調多代理協作",
+      "terms": [
+        {
+          "id": "D5-T01",
+          "term": "Multi-agent system",
+          "explanation": "由多個代理分工並協調完成共同目標的系統。",
+          "exams": ["GH-600"],
+          "category": "協調多代理協作"
+        },
+        {
+          "id": "D5-T02",
+          "term": "Orchestration",
+          "explanation": "安排代理角色、順序、依賴、交接與整合的控制。",
+          "exams": ["GH-600"],
+          "category": "協調多代理協作"
+        },
+        {
+          "id": "D5-T03",
+          "term": "Supervisor pattern",
+          "explanation": "由主管代理分派工作並整合多個工作者結果的模式。",
+          "exams": ["GH-600"],
+          "category": "協調多代理協作"
+        },
+        {
+          "id": "D5-T04",
+          "term": "Pipeline pattern",
+          "explanation": "讓不同代理依固定階段串接處理工作的模式。",
+          "exams": ["GH-600"],
+          "category": "協調多代理協作"
+        },
+        {
+          "id": "D5-T05",
+          "term": "Parallel execution",
+          "explanation": "讓互不衝突的代理工作同時執行。",
+          "exams": ["GH-600"],
+          "category": "協調多代理協作"
+        },
+        {
+          "id": "D5-T06",
+          "term": "Agent isolation",
+          "explanation": "以 branch、worktree、權限或環境隔離代理影響。",
+          "exams": ["GH-600"],
+          "category": "協調多代理協作"
+        },
+        {
+          "id": "D5-T07",
+          "term": "Worktree",
+          "explanation": "同一 Git repository 的獨立工作目錄與分支檢出。",
+          "exams": ["GH-600"],
+          "category": "協調多代理協作"
+        },
+        {
+          "id": "D5-T08",
+          "term": "Task ownership",
+          "explanation": "明確指定每個代理負責的範圍與產物。",
+          "exams": ["GH-600"],
+          "category": "協調多代理協作"
+        },
+        {
+          "id": "D5-T09",
+          "term": "Overlap conflict",
+          "explanation": "多個代理同時修改相同範圍造成的衝突。",
+          "exams": ["GH-600"],
+          "category": "協調多代理協作"
+        },
+        {
+          "id": "D5-T10",
+          "term": "Duplicate effort",
+          "explanation": "多個代理未協調而重複完成同一工作。",
+          "exams": ["GH-600"],
+          "category": "協調多代理協作"
+        },
+        {
+          "id": "D5-T11",
+          "term": "Contradictory output",
+          "explanation": "代理對同一問題產生無法同時成立的結果。",
+          "exams": ["GH-600"],
+          "category": "協調多代理協作"
+        },
+        {
+          "id": "D5-T12",
+          "term": "Handoff",
+          "explanation": "代理間移交任務、脈絡、決策與產物。",
+          "exams": ["GH-600"],
+          "category": "協調多代理協作"
+        },
+        {
+          "id": "D5-T13",
+          "term": "Audit continuity",
+          "explanation": "代理替換或失敗後仍保留完整稽核鏈。",
+          "exams": ["GH-600"],
+          "category": "協調多代理協作"
+        },
+        {
+          "id": "D5-T14",
+          "term": "Partial failure",
+          "explanation": "多代理流程中只有部分工作成功的狀態。",
+          "exams": ["GH-600"],
+          "category": "協調多代理協作"
+        },
+        {
+          "id": "D5-T15",
+          "term": "Stalled agent",
+          "explanation": "沒有完成也未明確失敗、長時間無進展的代理。",
+          "exams": ["GH-600"],
+          "category": "協調多代理協作"
+        },
+        {
+          "id": "D5-T16",
+          "term": "Degraded coordination",
+          "explanation": "代理仍運作但衝突、延遲或品質已顯著惡化。",
+          "exams": ["GH-600"],
+          "category": "協調多代理協作"
+        },
+        {
+          "id": "D5-T17",
+          "term": "Recovery pattern",
+          "explanation": "從部分失敗、衝突或中斷恢復的預定方式。",
+          "exams": ["GH-600"],
+          "category": "協調多代理協作"
+        },
+        {
+          "id": "D5-T18",
+          "term": "Agent lifecycle",
+          "explanation": "代理加入、更新、替換與停止的完整過程。",
+          "exams": ["GH-600"],
+          "category": "協調多代理協作"
+        },
+        {
+          "id": "D5-T19",
+          "term": "Post-hoc analysis",
+          "explanation": "執行結束後利用 log 與產物分析整體行為。",
+          "exams": ["GH-600"],
+          "category": "協調多代理協作"
+        },
+        {
+          "id": "D5-T20",
+          "term": "Integrator",
+          "explanation": "負責裁決衝突並合併多代理輸出的單一角色。",
+          "exams": ["GH-600"],
+          "category": "協調多代理協作"
+        }
+      ]
+    },
+    {
+      "id": "D6",
+      "title": "實作護欄與課責",
+      "terms": [
+        {
+          "id": "D6-T01",
+          "term": "Guardrail",
+          "explanation": "限制、阻擋或引導代理行動符合政策的控制。",
+          "exams": ["GH-600"],
+          "category": "實作護欄與課責"
+        },
+        {
+          "id": "D6-T02",
+          "term": "Accountability",
+          "explanation": "能把代理動作、授權與結果歸屬到明確責任。",
+          "exams": ["GH-600"],
+          "category": "實作護欄與課責"
+        },
+        {
+          "id": "D6-T03",
+          "term": "Human-in-the-loop",
+          "explanation": "在代理流程的特定風險點納入人工判斷。",
+          "exams": ["GH-600"],
+          "category": "實作護欄與課責"
+        },
+        {
+          "id": "D6-T04",
+          "term": "Risk classification",
+          "explanation": "依操作、資安與合規衝擊對動作分級。",
+          "exams": ["GH-600"],
+          "category": "實作護欄與課責"
+        },
+        {
+          "id": "D6-T05",
+          "term": "Operational risk",
+          "explanation": "代理動作造成服務中斷、資料損失或流程失敗的風險。",
+          "exams": ["GH-600"],
+          "category": "實作護欄與課責"
+        },
+        {
+          "id": "D6-T06",
+          "term": "Security risk",
+          "explanation": "代理造成未授權存取、機密外洩或弱點的風險。",
+          "exams": ["GH-600"],
+          "category": "實作護欄與課責"
+        },
+        {
+          "id": "D6-T07",
+          "term": "Compliance risk",
+          "explanation": "代理行為違反法律、政策或稽核要求的風險。",
+          "exams": ["GH-600"],
+          "category": "實作護欄與課責"
+        },
+        {
+          "id": "D6-T08",
+          "term": "Policy block",
+          "explanation": "偵測到違規動作時直接拒絕執行的控制。",
+          "exams": ["GH-600"],
+          "category": "實作護欄與課責"
+        },
+        {
+          "id": "D6-T09",
+          "term": "Explicit authorization",
+          "explanation": "由具權限者對特定敏感動作清楚授權。",
+          "exams": ["GH-600"],
+          "category": "實作護欄與課責"
+        },
+        {
+          "id": "D6-T10",
+          "term": "Sensitive action",
+          "explanation": "可能影響機密、權限、正式環境或合規的動作。",
+          "exams": ["GH-600"],
+          "category": "實作護欄與課責"
+        },
+        {
+          "id": "D6-T11",
+          "term": "Irreversible action",
+          "explanation": "無法合理恢復原狀或回復成本極高的動作。",
+          "exams": ["GH-600"],
+          "category": "實作護欄與課責"
+        },
+        {
+          "id": "D6-T12",
+          "term": "Controlled path",
+          "explanation": "把授權、執行、驗證與稽核串連的受管流程。",
+          "exams": ["GH-600"],
+          "category": "實作護欄與課責"
+        },
+        {
+          "id": "D6-T13",
+          "term": "Scope restriction",
+          "explanation": "限制代理只能在指定資源與脈絡內行動。",
+          "exams": ["GH-600"],
+          "category": "實作護欄與課責"
+        },
+        {
+          "id": "D6-T14",
+          "term": "Execution boundary",
+          "explanation": "代理不得跨越的環境、權限或資源界線。",
+          "exams": ["GH-600"],
+          "category": "實作護欄與課責"
+        },
+        {
+          "id": "D6-T15",
+          "term": "Pre-tool hook",
+          "explanation": "工具執行前可檢查、核准或阻擋呼叫的 hook。",
+          "exams": ["GH-600"],
+          "category": "實作護欄與課責"
+        },
+        {
+          "id": "D6-T16",
+          "term": "Post-tool hook",
+          "explanation": "工具完成後可記錄或驗證結果的 hook。",
+          "exams": ["GH-600"],
+          "category": "實作護欄與課責"
+        },
+        {
+          "id": "D6-T17",
+          "term": "Audit log",
+          "explanation": "保存可追溯事件、actor、時間與結果的紀錄。",
+          "exams": ["GH-600"],
+          "category": "實作護欄與課責"
+        },
+        {
+          "id": "D6-T18",
+          "term": "Responsible AI",
+          "explanation": "讓 AI 系統符合公平、可靠、安全、隱私與課責等原則。",
+          "exams": ["GH-600"],
+          "category": "實作護欄與課責"
+        },
+        {
+          "id": "D6-T19",
+          "term": "Approval fatigue",
+          "explanation": "過多無效核准使人類降低注意力的風險。",
+          "exams": ["GH-600"],
+          "category": "實作護欄與課責"
+        },
+        {
+          "id": "D6-T20",
+          "term": "Material risk reduction",
+          "explanation": "能實質降低失敗機率或衝擊的控制效果。",
+          "exams": ["GH-600"],
+          "category": "實作護欄與課責"
+        }
+      ]
+    }
+  ]
+}

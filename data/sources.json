@@ -1,0 +1,182 @@
+[
+  {
+    "id": "GH600-CERT",
+    "title": "GitHub Certified: Agentic AI Developer",
+    "url": "https://learn.microsoft.com/en-us/credentials/certifications/agentic-ai-developer/",
+    "publisher": "Microsoft Learn"
+  },
+  {
+    "id": "GH600-SG",
+    "title": "Exam GH-600 Study Guide",
+    "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-600",
+    "publisher": "Microsoft Learn"
+  },
+  {
+    "id": "GH-DOC-01",
+    "title": "About GitHub Copilot agents",
+    "url": "https://docs.github.com/en/copilot/concepts/agents",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-02",
+    "title": "About GitHub Copilot coding agent",
+    "url": "https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-coding-agent",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-03",
+    "title": "Best practices for Copilot coding agent",
+    "url": "https://docs.github.com/en/copilot/tutorials/coding-agent/get-the-best-results",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-04",
+    "title": "Adding repository custom instructions",
+    "url": "https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-05",
+    "title": "About custom agents",
+    "url": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-custom-agents",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-06",
+    "title": "Custom agents configuration",
+    "url": "https://docs.github.com/en/copilot/reference/custom-agents-configuration",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-07",
+    "title": "About Model Context Protocol",
+    "url": "https://docs.github.com/en/copilot/concepts/context/mcp",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-08",
+    "title": "Extending Copilot coding agent with MCP",
+    "url": "https://docs.github.com/en/copilot/customizing-copilot/extending-copilot-coding-agent-with-mcp",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-09",
+    "title": "Configuring access to MCP servers",
+    "url": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/extend-coding-agent-with-mcp",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-10",
+    "title": "About hooks for GitHub Copilot",
+    "url": "https://docs.github.com/en/copilot/concepts/agents/hooks",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-11",
+    "title": "GitHub Copilot hooks reference",
+    "url": "https://docs.github.com/en/copilot/reference/hooks-reference",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-12",
+    "title": "Customizing the development environment",
+    "url": "https://docs.github.com/en/copilot/customizing-copilot/customizing-the-development-environment-for-copilot-coding-agent",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-13",
+    "title": "About GitHub Actions",
+    "url": "https://docs.github.com/en/actions/about-github-actions/understanding-github-actions",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-14",
+    "title": "About protected branches",
+    "url": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-15",
+    "title": "About rulesets",
+    "url": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-16",
+    "title": "Reviewing pull requests",
+    "url": "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-17",
+    "title": "About status checks",
+    "url": "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/about-status-checks",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-18",
+    "title": "About secret scanning",
+    "url": "https://docs.github.com/en/code-security/secret-scanning/introduction/about-secret-scanning",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-19",
+    "title": "About code scanning",
+    "url": "https://docs.github.com/en/code-security/code-scanning/introduction-to-code-scanning/about-code-scanning",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-20",
+    "title": "About dependency review",
+    "url": "https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/about-dependency-review",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-21",
+    "title": "Responsible use of Copilot coding agent",
+    "url": "https://docs.github.com/en/copilot/responsible-use/copilot-coding-agent",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-22",
+    "title": "Troubleshooting Copilot coding agent",
+    "url": "https://docs.github.com/en/copilot/troubleshooting-github-copilot/troubleshooting-copilot-coding-agent",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-23",
+    "title": "About GitHub Copilot Memory",
+    "url": "https://docs.github.com/en/copilot/concepts/agents/copilot-memory",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-24",
+    "title": "About Copilot code review",
+    "url": "https://docs.github.com/en/copilot/concepts/agents/code-review",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-25",
+    "title": "About GitHub-hosted runners",
+    "url": "https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-26",
+    "title": "Using secrets in GitHub Actions",
+    "url": "https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-27",
+    "title": "Security hardening for GitHub Actions",
+    "url": "https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-28",
+    "title": "Copilot customization cheat sheet",
+    "url": "https://docs.github.com/en/copilot/reference/customization-cheat-sheet",
+    "publisher": "GitHub Docs"
+  }
+]

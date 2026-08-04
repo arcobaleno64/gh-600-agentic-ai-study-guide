@@ -1,0 +1,1934 @@
+[
+  {
+    "id": "GH600-001",
+    "exam": "GH-600",
+    "number": 1,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O1"],
+    "sourceIds": ["GH600-SG", "GH-DOC-02"],
+    "type": "multiple",
+    "options": [
+      {
+        "id": "A",
+        "text": "輸入與輸出"
+      },
+      {
+        "id": "B",
+        "text": "成功標準"
+      },
+      {
+        "id": "C",
+        "text": "每次都使用最高權限"
+      },
+      {
+        "id": "D",
+        "text": "失敗與升級路徑"
+      }
+    ],
+    "answer": ["A", "B", "D"],
+    "question": "一個團隊要讓代理處理 issue 到 PR 的流程。哪些定義應在執行前完成？",
+    "explanation": "本題對應 D1-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "準備代理架構與 SDLC 流程",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O1"]
+  },
+  {
+    "id": "GH600-002",
+    "exam": "GH-600",
+    "number": 2,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O2"],
+    "sourceIds": ["GH600-SG", "GH-DOC-02"],
+    "type": "multiple",
+    "options": [
+      {
+        "id": "A",
+        "text": "先輸出結構化計畫"
+      },
+      {
+        "id": "B",
+        "text": "核准前禁止寫入"
+      },
+      {
+        "id": "C",
+        "text": "把計畫與執行混成一個不可中斷步驟"
+      },
+      {
+        "id": "D",
+        "text": "驗證計畫涵蓋限制"
+      }
+    ],
+    "answer": ["A", "B", "D"],
+    "question": "哪些做法能清楚分離規劃與行動？",
+    "explanation": "本題對應 D1-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "準備代理架構與 SDLC 流程",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O2"]
+  },
+  {
+    "id": "GH600-003",
+    "exam": "GH-600",
+    "number": 3,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O2"],
+    "sourceIds": ["GH600-SG", "GH-DOC-02"],
+    "type": "true-false",
+    "answer": false,
+    "question": "只要代理產生了可讀的計畫，就可以視為後續所有工具動作都已獲授權。",
+    "explanation": "本題對應 D1-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "準備代理架構與 SDLC 流程",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O2"]
+  },
+  {
+    "id": "GH600-004",
+    "exam": "GH-600",
+    "number": 4,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O3"],
+    "sourceIds": ["GH600-SG", "GH-DOC-02"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "只回報口頭摘要"
+      },
+      {
+        "id": "B",
+        "text": "產生包含 diff、測試結果與來源 issue 的 PR"
+      },
+      {
+        "id": "C",
+        "text": "隱藏失敗 log"
+      },
+      {
+        "id": "D",
+        "text": "直接寫入受保護分支"
+      }
+    ],
+    "answer": "B",
+    "question": "哪一項最能讓代理工作在標準開發工具中接受審查？",
+    "explanation": "本題對應 D1-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "準備代理架構與 SDLC 流程",
+    "difficulty": "基礎",
+    "keywords": ["D1", "D1-O3"]
+  },
+  {
+    "id": "GH600-005",
+    "exam": "GH-600",
+    "number": 5,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O1"],
+    "sourceIds": ["GH600-SG", "GH-DOC-02"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "良好委派"
+      },
+      {
+        "id": "B",
+        "text": "代理反模式"
+      },
+      {
+        "id": "C",
+        "text": "狀態連續性"
+      },
+      {
+        "id": "D",
+        "text": "工具 allowlist"
+      }
+    ],
+    "answer": "B",
+    "question": "把模糊的大型需求直接交給代理、未定義完成條件，最接近哪種問題？",
+    "explanation": "本題對應 D1-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "準備代理架構與 SDLC 流程",
+    "difficulty": "基礎",
+    "keywords": ["D1", "D1-O1"]
+  },
+  {
+    "id": "GH600-006",
+    "exam": "GH-600",
+    "number": 6,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O3"],
+    "sourceIds": ["GH600-SG", "GH-DOC-02"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "提高 temperature"
+      },
+      {
+        "id": "B",
+        "text": "執行前人工核准並保留回滾"
+      },
+      {
+        "id": "C",
+        "text": "增加長期記憶"
+      },
+      {
+        "id": "D",
+        "text": "平行啟動更多代理"
+      }
+    ],
+    "answer": "B",
+    "question": "高風險資料刪除工作應採用哪種最小控制？",
+    "explanation": "本題對應 D1-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "準備代理架構與 SDLC 流程",
+    "difficulty": "基礎",
+    "keywords": ["D1", "D1-O3"]
+  },
+  {
+    "id": "GH600-007",
+    "exam": "GH-600",
+    "number": 7,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O1"],
+    "sourceIds": ["GH600-SG", "GH-DOC-02"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "結果看起來不錯"
+      },
+      {
+        "id": "B",
+        "text": "代理盡力完成"
+      },
+      {
+        "id": "C",
+        "text": "指定測試全數通過且只修改授權檔案"
+      },
+      {
+        "id": "D",
+        "text": "回覆內容很長"
+      }
+    ],
+    "answer": "C",
+    "question": "何者是可驗證的成功標準？",
+    "explanation": "本題對應 D1-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "準備代理架構與 SDLC 流程",
+    "difficulty": "基礎",
+    "keywords": ["D1", "D1-O1"]
+  },
+  {
+    "id": "GH600-008",
+    "exam": "GH-600",
+    "number": 8,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O2"],
+    "sourceIds": ["GH600-SG", "GH-DOC-02"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "增加提示長度"
+      },
+      {
+        "id": "B",
+        "text": "建立 plan approval gate"
+      },
+      {
+        "id": "C",
+        "text": "改用長期記憶"
+      },
+      {
+        "id": "D",
+        "text": "移除 log"
+      }
+    ],
+    "answer": "B",
+    "question": "要避免代理一邊規劃一邊進行未審查的部署，最直接的設計是什麼？",
+    "explanation": "本題對應 D1-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "準備代理架構與 SDLC 流程",
+    "difficulty": "進階",
+    "keywords": ["D1", "D1-O2"]
+  },
+  {
+    "id": "GH600-009",
+    "exam": "GH-600",
+    "number": 9,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O3"],
+    "sourceIds": ["GH600-SG", "GH-DOC-02"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "在明確範圍內自動執行並驗證"
+      },
+      {
+        "id": "B",
+        "text": "一律要求高階主管逐字核准"
+      },
+      {
+        "id": "C",
+        "text": "完全禁止代理"
+      },
+      {
+        "id": "D",
+        "text": "賦予組織管理權限"
+      }
+    ],
+    "answer": "A",
+    "question": "低風險且可回滾的格式修正，適合哪種自主程度？",
+    "explanation": "本題對應 D1-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "準備代理架構與 SDLC 流程",
+    "difficulty": "進階",
+    "keywords": ["D1", "D1-O3"]
+  },
+  {
+    "id": "GH600-010",
+    "exam": "GH-600",
+    "number": 10,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O3"],
+    "sourceIds": ["GH600-SG", "GH-DOC-02"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "增加模型上下文直到無限"
+      },
+      {
+        "id": "B",
+        "text": "重建代理決策、工具動作與結果"
+      },
+      {
+        "id": "C",
+        "text": "取代所有測試"
+      },
+      {
+        "id": "D",
+        "text": "讓輸出更像人類"
+      }
+    ],
+    "answer": "B",
+    "question": "可觀測性資料最重要的用途是什麼？",
+    "explanation": "本題對應 D1-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "準備代理架構與 SDLC 流程",
+    "difficulty": "進階",
+    "keywords": ["D1", "D1-O3"]
+  },
+  {
+    "id": "GH600-011",
+    "exam": "GH-600",
+    "number": 11,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O1"],
+    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "type": "multiple",
+    "options": [
+      {
+        "id": "A",
+        "text": "任務必要性"
+      },
+      {
+        "id": "B",
+        "text": "最小權限"
+      },
+      {
+        "id": "C",
+        "text": "輸入輸出驗證"
+      },
+      {
+        "id": "D",
+        "text": "圖示顏色"
+      }
+    ],
+    "answer": ["A", "B", "C"],
+    "question": "選擇代理工具時應同時評估哪些項目？",
+    "explanation": "本題對應 D2-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "實作工具使用與環境互動",
+    "difficulty": "中等",
+    "keywords": ["D2", "D2-O1"]
+  },
+  {
+    "id": "GH600-012",
+    "exam": "GH-600",
+    "number": 12,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O4"],
+    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "type": "multiple",
+    "options": [
+      {
+        "id": "A",
+        "text": "有界重試"
+      },
+      {
+        "id": "B",
+        "text": "取消與逾時"
+      },
+      {
+        "id": "C",
+        "text": "升級路徑"
+      },
+      {
+        "id": "D",
+        "text": "對所有錯誤無限重試"
+      }
+    ],
+    "answer": ["A", "B", "C"],
+    "question": "健全的代理錯誤處理通常包含哪些能力？",
+    "explanation": "本題對應 D2-O4。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "實作工具使用與環境互動",
+    "difficulty": "中等",
+    "keywords": ["D2", "D2-O4"]
+  },
+  {
+    "id": "GH600-013",
+    "exam": "GH-600",
+    "number": 13,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O2"],
+    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "type": "true-false",
+    "answer": false,
+    "question": "MCP server 已列入設定檔，就代表它提供的每個工具都應自動獲得完整權限。",
+    "explanation": "本題對應 D2-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "實作工具使用與環境互動",
+    "difficulty": "中等",
+    "keywords": ["D2", "D2-O2"]
+  },
+  {
+    "id": "GH600-014",
+    "exam": "GH-600",
+    "number": 14,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O1"],
+    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "組織擁有者"
+      },
+      {
+        "id": "B",
+        "text": "repository 唯讀"
+      },
+      {
+        "id": "C",
+        "text": "所有 repository 寫入"
+      },
+      {
+        "id": "D",
+        "text": "雲端帳戶管理員"
+      }
+    ],
+    "answer": "B",
+    "question": "代理只需讀取 repository 內容時，最佳權限為何？",
+    "explanation": "本題對應 D2-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "實作工具使用與環境互動",
+    "difficulty": "基礎",
+    "keywords": ["D2", "D2-O1"]
+  },
+  {
+    "id": "GH600-015",
+    "exam": "GH-600",
+    "number": 15,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O2"],
+    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "控制允許連線或使用的 MCP 來源與工具"
+      },
+      {
+        "id": "B",
+        "text": "自動修正程式"
+      },
+      {
+        "id": "C",
+        "text": "保存長期記憶"
+      },
+      {
+        "id": "D",
+        "text": "提高題庫分數"
+      }
+    ],
+    "answer": "A",
+    "question": "MCP allowlist 的主要作用是什麼？",
+    "explanation": "本題對應 D2-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "實作工具使用與環境互動",
+    "difficulty": "基礎",
+    "keywords": ["D2", "D2-O2"]
+  },
+  {
+    "id": "GH600-016",
+    "exam": "GH-600",
+    "number": 16,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O2"],
+    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "server 名稱"
+      },
+      {
+        "id": "B",
+        "text": "工具描述"
+      },
+      {
+        "id": "C",
+        "text": "存取權杖"
+      },
+      {
+        "id": "D",
+        "text": "允許的工具名稱"
+      }
+    ],
+    "answer": "C",
+    "question": "哪項資訊不應硬編碼在 repository 的 MCP 設定？",
+    "explanation": "本題對應 D2-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "實作工具使用與環境互動",
+    "difficulty": "基礎",
+    "keywords": ["D2", "D2-O2"]
+  },
+  {
+    "id": "GH600-017",
+    "exam": "GH-600",
+    "number": 17,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O3"],
+    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "setup steps 與鎖定依賴"
+      },
+      {
+        "id": "B",
+        "text": "個人 shell history"
+      },
+      {
+        "id": "C",
+        "text": "未記錄的全域套件"
+      },
+      {
+        "id": "D",
+        "text": "本機快取"
+      }
+    ],
+    "answer": "A",
+    "question": "要讓代理從乾淨 runner 重現本機結果，應優先提供什麼？",
+    "explanation": "本題對應 D2-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "實作工具使用與環境互動",
+    "difficulty": "基礎",
+    "keywords": ["D2", "D2-O3"]
+  },
+  {
+    "id": "GH600-018",
+    "exam": "GH-600",
+    "number": 18,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O3"],
+    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "脈絡視窗太短"
+      },
+      {
+        "id": "B",
+        "text": "未授權範圍被修改"
+      },
+      {
+        "id": "C",
+        "text": "測試執行太快"
+      },
+      {
+        "id": "D",
+        "text": "題目太少"
+      }
+    ],
+    "answer": "B",
+    "question": "限制代理只在指定 branch 工作，主要降低哪一種風險？",
+    "explanation": "本題對應 D2-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "實作工具使用與環境互動",
+    "difficulty": "進階",
+    "keywords": ["D2", "D2-O3"]
+  },
+  {
+    "id": "GH600-019",
+    "exam": "GH-600",
+    "number": 19,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O4"],
+    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "有上限的指數退避重試"
+      },
+      {
+        "id": "B",
+        "text": "永久忽略"
+      },
+      {
+        "id": "C",
+        "text": "立即刪除資料"
+      },
+      {
+        "id": "D",
+        "text": "無限快速重試"
+      }
+    ],
+    "answer": "A",
+    "question": "暫時性網路 503 適合什麼處理？",
+    "explanation": "本題對應 D2-O4。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "實作工具使用與環境互動",
+    "difficulty": "進階",
+    "keywords": ["D2", "D2-O4"]
+  },
+  {
+    "id": "GH600-020",
+    "exam": "GH-600",
+    "number": 20,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O4"],
+    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "繼續重試"
+      },
+      {
+        "id": "B",
+        "text": "停止並沿升級路徑回報"
+      },
+      {
+        "id": "C",
+        "text": "提高權限且不記錄"
+      },
+      {
+        "id": "D",
+        "text": "清除所有 log"
+      }
+    ],
+    "answer": "B",
+    "question": "權限拒絕錯誤重試三次仍相同，下一步應是什麼？",
+    "explanation": "本題對應 D2-O4。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "實作工具使用與環境互動",
+    "difficulty": "進階",
+    "keywords": ["D2", "D2-O4"]
+  },
+  {
+    "id": "GH600-021",
+    "exam": "GH-600",
+    "number": 21,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O4"],
+    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "只有最終自然語言摘要"
+      },
+      {
+        "id": "B",
+        "text": "時間、actor、工具、輸入摘要、結果與核准者"
+      },
+      {
+        "id": "C",
+        "text": "只有 CPU 使用率"
+      },
+      {
+        "id": "D",
+        "text": "只有模型名稱"
+      }
+    ],
+    "answer": "B",
+    "question": "哪個紀錄最能支援工具動作課責？",
+    "explanation": "本題對應 D2-O4。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "實作工具使用與環境互動",
+    "difficulty": "進階",
+    "keywords": ["D2", "D2-O4"]
+  },
+  {
+    "id": "GH600-022",
+    "exam": "GH-600",
+    "number": 22,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O3"],
+    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "直接 push 到受保護 main"
+      },
+      {
+        "id": "B",
+        "text": "使用受限 token 建分支與 PR，再經 checks/review"
+      },
+      {
+        "id": "C",
+        "text": "關閉 branch protection"
+      },
+      {
+        "id": "D",
+        "text": "跳過所有 hooks"
+      }
+    ],
+    "answer": "B",
+    "question": "代理在 CI 建立 PR 時，哪個設計較安全？",
+    "explanation": "本題對應 D2-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "實作工具使用與環境互動",
+    "difficulty": "進階",
+    "keywords": ["D2", "D2-O3"]
+  },
+  {
+    "id": "GH600-023",
+    "exam": "GH-600",
+    "number": 23,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O1"],
+    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "代理誤選或誤用工具"
+      },
+      {
+        "id": "B",
+        "text": "repository 自動封存"
+      },
+      {
+        "id": "C",
+        "text": "MCP transport 加密"
+      },
+      {
+        "id": "D",
+        "text": "測試自動變快"
+      }
+    ],
+    "answer": "A",
+    "question": "工具描述含糊最可能造成什麼問題？",
+    "explanation": "本題對應 D2-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "實作工具使用與環境互動",
+    "difficulty": "進階",
+    "keywords": ["D2", "D2-O1"]
+  },
+  {
+    "id": "GH600-024",
+    "exam": "GH-600",
+    "number": 24,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O4"],
+    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "代理停止新動作、清理可安全清理的資源並記錄狀態"
+      },
+      {
+        "id": "B",
+        "text": "忽略直到任務完成"
+      },
+      {
+        "id": "C",
+        "text": "改寫 main"
+      },
+      {
+        "id": "D",
+        "text": "刪除稽核資料"
+      }
+    ],
+    "answer": "A",
+    "question": "取消訊號應如何處理？",
+    "explanation": "本題對應 D2-O4。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "實作工具使用與環境互動",
+    "difficulty": "進階",
+    "keywords": ["D2", "D2-O4"]
+  },
+  {
+    "id": "GH600-025",
+    "exam": "GH-600",
+    "number": 25,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O1"],
+    "sourceIds": ["GH600-SG", "GH-DOC-23"],
+    "type": "multiple",
+    "options": [
+      {
+        "id": "A",
+        "text": "相關性範圍"
+      },
+      {
+        "id": "B",
+        "text": "到期與裁剪"
+      },
+      {
+        "id": "C",
+        "text": "重設條件"
+      },
+      {
+        "id": "D",
+        "text": "永久保存所有提示"
+      }
+    ],
+    "answer": ["A", "B", "C"],
+    "question": "長期記憶治理應包含哪些規則？",
+    "explanation": "本題對應 D3-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "管理記憶、狀態與執行",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O1"]
+  },
+  {
+    "id": "GH600-026",
+    "exam": "GH-600",
+    "number": 26,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O2"],
+    "sourceIds": ["GH600-SG", "GH-DOC-23"],
+    "type": "multiple",
+    "options": [
+      {
+        "id": "A",
+        "text": "checkpoint"
+      },
+      {
+        "id": "B",
+        "text": "決策紀錄"
+      },
+      {
+        "id": "C",
+        "text": "已完成步驟清單"
+      },
+      {
+        "id": "D",
+        "text": "未保存的口頭假設"
+      }
+    ],
+    "answer": ["A", "B", "C"],
+    "question": "哪些產物有助於長時間任務恢復而不重做？",
+    "explanation": "本題對應 D3-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "管理記憶、狀態與執行",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O2"]
+  },
+  {
+    "id": "GH600-027",
+    "exam": "GH-600",
+    "number": 27,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O3"],
+    "sourceIds": ["GH600-SG", "GH-DOC-23"],
+    "type": "true-false",
+    "answer": false,
+    "question": "跨工具共享狀態時，來源越多越好，不需要指定權威來源。",
+    "explanation": "本題對應 D3-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "管理記憶、狀態與執行",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O3"]
+  },
+  {
+    "id": "GH600-028",
+    "exam": "GH-600",
+    "number": 28,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O1"],
+    "sourceIds": ["GH600-SG", "GH-DOC-23"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "短期記憶"
+      },
+      {
+        "id": "B",
+        "text": "永久組織記憶"
+      },
+      {
+        "id": "C",
+        "text": "公開 wiki"
+      },
+      {
+        "id": "D",
+        "text": "憑證庫"
+      }
+    ],
+    "answer": "A",
+    "question": "只供本次工具呼叫使用的中間結果，最適合哪種記憶？",
+    "explanation": "本題對應 D3-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "管理記憶、狀態與執行",
+    "difficulty": "基礎",
+    "keywords": ["D3", "D3-O1"]
+  },
+  {
+    "id": "GH600-029",
+    "exam": "GH-600",
+    "number": 29,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O2"],
+    "sourceIds": ["GH600-SG", "GH-DOC-23"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "脈絡漂移"
+      },
+      {
+        "id": "B",
+        "text": "有界重試"
+      },
+      {
+        "id": "C",
+        "text": "工具 allowlist"
+      },
+      {
+        "id": "D",
+        "text": "依賴掃描"
+      }
+    ],
+    "answer": "A",
+    "question": "偵測到代理開始違反先前已核准決策，這稱為什麼？",
+    "explanation": "本題對應 D3-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "管理記憶、狀態與執行",
+    "difficulty": "基礎",
+    "keywords": ["D3", "D3-O2"]
+  },
+  {
+    "id": "GH600-030",
+    "exam": "GH-600",
+    "number": 30,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O3"],
+    "sourceIds": ["GH600-SG", "GH-DOC-23"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "選最新但未驗證的訊息"
+      },
+      {
+        "id": "B",
+        "text": "依指定 source of truth 對帳並記錄解決結果"
+      },
+      {
+        "id": "C",
+        "text": "同時保留兩個矛盾狀態"
+      },
+      {
+        "id": "D",
+        "text": "刪除全部紀錄"
+      }
+    ],
+    "answer": "B",
+    "question": "跨 IDE 與 CI 出現矛盾任務狀態時，最佳處理為何？",
+    "explanation": "本題對應 D3-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "管理記憶、狀態與執行",
+    "difficulty": "基礎",
+    "keywords": ["D3", "D3-O3"]
+  },
+  {
+    "id": "GH600-031",
+    "exam": "GH-600",
+    "number": 31,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O1"],
+    "sourceIds": ["GH600-SG", "GH-DOC-23"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "永久保留"
+      },
+      {
+        "id": "B",
+        "text": "依到期或重設規則移除"
+      },
+      {
+        "id": "C",
+        "text": "複製到更多工具"
+      },
+      {
+        "id": "D",
+        "text": "放進 prompt 範例"
+      }
+    ],
+    "answer": "B",
+    "question": "敏感資料已不再與任務相關，記憶策略應如何處理？",
+    "explanation": "本題對應 D3-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "管理記憶、狀態與執行",
+    "difficulty": "基礎",
+    "keywords": ["D3", "D3-O1"]
+  },
+  {
+    "id": "GH600-032",
+    "exam": "GH-600",
+    "number": 32,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O2"],
+    "sourceIds": ["GH600-SG", "GH-DOC-23"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "checkpoint、決策與剩餘工作"
+      },
+      {
+        "id": "B",
+        "text": "隨機另一個 repo"
+      },
+      {
+        "id": "C",
+        "text": "模型行銷頁"
+      },
+      {
+        "id": "D",
+        "text": "所有歷史聊天全文"
+      }
+    ],
+    "answer": "A",
+    "question": "恢復中斷任務前最應先讀什麼？",
+    "explanation": "本題對應 D3-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "管理記憶、狀態與執行",
+    "difficulty": "進階",
+    "keywords": ["D3", "D3-O2"]
+  },
+  {
+    "id": "GH600-033",
+    "exam": "GH-600",
+    "number": 33,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O1"],
+    "sourceIds": ["GH600-SG", "GH-DOC-19"],
+    "type": "multiple",
+    "options": [
+      {
+        "id": "A",
+        "text": "測試通過率"
+      },
+      {
+        "id": "B",
+        "text": "安全掃描結果"
+      },
+      {
+        "id": "C",
+        "text": "人工品質評分"
+      },
+      {
+        "id": "D",
+        "text": "回覆字數越多越好"
+      }
+    ],
+    "answer": ["A", "B", "C"],
+    "question": "有效的代理評估可包含哪些訊號？",
+    "explanation": "本題對應 D4-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "執行評估、錯誤分析與調校",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O1"]
+  },
+  {
+    "id": "GH600-034",
+    "exam": "GH-600",
+    "number": 34,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O2"],
+    "sourceIds": ["GH600-SG", "GH-DOC-19"],
+    "type": "multiple",
+    "options": [
+      {
+        "id": "A",
+        "text": "plan 與 trace"
+      },
+      {
+        "id": "B",
+        "text": "工具呼叫與 log"
+      },
+      {
+        "id": "C",
+        "text": "輸出與 workflow artifacts"
+      },
+      {
+        "id": "D",
+        "text": "只看最終一句話"
+      }
+    ],
+    "answer": ["A", "B", "C"],
+    "question": "分析代理失敗時應檢查哪些證據？",
+    "explanation": "本題對應 D4-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "執行評估、錯誤分析與調校",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O2"]
+  },
+  {
+    "id": "GH600-035",
+    "exam": "GH-600",
+    "number": 35,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O3"],
+    "sourceIds": ["GH600-SG", "GH-DOC-19"],
+    "type": "true-false",
+    "answer": false,
+    "question": "評估分數變差時，同時更換模型、工具、記憶與工作流程最容易找出根因。",
+    "explanation": "本題對應 D4-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "執行評估、錯誤分析與調校",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O3"]
+  },
+  {
+    "id": "GH600-036",
+    "exam": "GH-600",
+    "number": 36,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O1"],
+    "sourceIds": ["GH600-SG", "GH-DOC-19"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "reviewer 覺得合理"
+      },
+      {
+        "id": "B",
+        "text": "測試通過 98/100"
+      },
+      {
+        "id": "C",
+        "text": "語氣專業"
+      },
+      {
+        "id": "D",
+        "text": "解釋清楚"
+      }
+    ],
+    "answer": "B",
+    "question": "哪一項是定量評估訊號？",
+    "explanation": "本題對應 D4-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "執行評估、錯誤分析與調校",
+    "difficulty": "基礎",
+    "keywords": ["D4", "D4-O1"]
+  },
+  {
+    "id": "GH600-037",
+    "exam": "GH-600",
+    "number": 37,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O2"],
+    "sourceIds": ["GH600-SG", "GH-DOC-19"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "工具誤用"
+      },
+      {
+        "id": "B",
+        "text": "記憶到期"
+      },
+      {
+        "id": "C",
+        "text": "多代理生命週期"
+      },
+      {
+        "id": "D",
+        "text": "自主程度"
+      }
+    ],
+    "answer": "A",
+    "question": "代理呼叫正確工具但使用錯誤參數，根因類別最接近什麼？",
+    "explanation": "本題對應 D4-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "執行評估、錯誤分析與調校",
+    "difficulty": "基礎",
+    "keywords": ["D4", "D4-O2"]
+  },
+  {
+    "id": "GH600-038",
+    "exam": "GH-600",
+    "number": 38,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O2"],
+    "sourceIds": ["GH600-SG", "GH-DOC-19"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "推理錯誤"
+      },
+      {
+        "id": "B",
+        "text": "環境問題"
+      },
+      {
+        "id": "C",
+        "text": "護欄過強"
+      },
+      {
+        "id": "D",
+        "text": "人工審查"
+      }
+    ],
+    "answer": "B",
+    "question": "runner 缺少必要 SDK 造成 build 失敗，根因類別為何？",
+    "explanation": "本題對應 D4-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "執行評估、錯誤分析與調校",
+    "difficulty": "基礎",
+    "keywords": ["D4", "D4-O2"]
+  },
+  {
+    "id": "GH600-039",
+    "exam": "GH-600",
+    "number": 39,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O3"],
+    "sourceIds": ["GH600-SG", "GH-DOC-19"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "收窄指令與工具範圍"
+      },
+      {
+        "id": "B",
+        "text": "加入更多長期記憶"
+      },
+      {
+        "id": "C",
+        "text": "移除所有限制"
+      },
+      {
+        "id": "D",
+        "text": "加倍平行代理"
+      }
+    ],
+    "answer": "A",
+    "question": "評估顯示代理持續讀取不相關檔案，最小調校為何？",
+    "explanation": "本題對應 D4-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "執行評估、錯誤分析與調校",
+    "difficulty": "基礎",
+    "keywords": ["D4", "D4-O3"]
+  },
+  {
+    "id": "GH600-040",
+    "exam": "GH-600",
+    "number": 40,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O3"],
+    "sourceIds": ["GH600-SG", "GH-DOC-19"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "用同一評估集重新測量並比較"
+      },
+      {
+        "id": "B",
+        "text": "只看單一成功案例"
+      },
+      {
+        "id": "C",
+        "text": "改完立即宣告完成"
+      },
+      {
+        "id": "D",
+        "text": "刪除基準結果"
+      }
+    ],
+    "answer": "A",
+    "question": "要判斷調校是否有效，應怎麼做？",
+    "explanation": "本題對應 D4-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "執行評估、錯誤分析與調校",
+    "difficulty": "進階",
+    "keywords": ["D4", "D4-O3"]
+  },
+  {
+    "id": "GH600-041",
+    "exam": "GH-600",
+    "number": 41,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O1"],
+    "sourceIds": ["GH600-SG", "GH-DOC-19"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "開發意圖與操作限制"
+      },
+      {
+        "id": "B",
+        "text": "模型偏好的格式"
+      },
+      {
+        "id": "C",
+        "text": "最長輸出"
+      },
+      {
+        "id": "D",
+        "text": "工具數量"
+      }
+    ],
+    "answer": "A",
+    "question": "成功標準應與什麼對齊？",
+    "explanation": "本題對應 D4-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "執行評估、錯誤分析與調校",
+    "difficulty": "進階",
+    "keywords": ["D4", "D4-O1"]
+  },
+  {
+    "id": "GH600-042",
+    "exam": "GH-600",
+    "number": 42,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O1"],
+    "sourceIds": ["GH600-SG", "GH-DOC-19"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "自動評估與安全訊號"
+      },
+      {
+        "id": "B",
+        "text": "短期記憶"
+      },
+      {
+        "id": "C",
+        "text": "協調模式"
+      },
+      {
+        "id": "D",
+        "text": "考試語言"
+      }
+    ],
+    "answer": "A",
+    "question": "code scanning 找到新增高風險弱點時，這是什麼類型訊號？",
+    "explanation": "本題對應 D4-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "執行評估、錯誤分析與調校",
+    "difficulty": "進階",
+    "keywords": ["D4", "D4-O1"]
+  },
+  {
+    "id": "GH600-043",
+    "exam": "GH-600",
+    "number": 43,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O1"],
+    "sourceIds": ["GH600-SG", "GH-DOC-05"],
+    "type": "multiple",
+    "options": [
+      {
+        "id": "A",
+        "text": "獨立 worktree 或 branch"
+      },
+      {
+        "id": "B",
+        "text": "明確檔案所有權"
+      },
+      {
+        "id": "C",
+        "text": "避免重疊任務"
+      },
+      {
+        "id": "D",
+        "text": "共享同一未鎖定工作目錄"
+      }
+    ],
+    "answer": ["A", "B", "C"],
+    "question": "平行多代理隔離可使用哪些控制？",
+    "explanation": "本題對應 D5-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "協調多代理協作",
+    "difficulty": "中等",
+    "keywords": ["D5", "D5-O1"]
+  },
+  {
+    "id": "GH600-044",
+    "exam": "GH-600",
+    "number": 44,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O2"],
+    "sourceIds": ["GH600-SG", "GH-DOC-05"],
+    "type": "multiple",
+    "options": [
+      {
+        "id": "A",
+        "text": "任務交接"
+      },
+      {
+        "id": "B",
+        "text": "關鍵決策"
+      },
+      {
+        "id": "C",
+        "text": "各代理結果"
+      },
+      {
+        "id": "D",
+        "text": "只記錄成功代理"
+      }
+    ],
+    "answer": ["A", "B", "C"],
+    "question": "多代理 audit artifact 應記錄哪些內容？",
+    "explanation": "本題對應 D5-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "協調多代理協作",
+    "difficulty": "中等",
+    "keywords": ["D5", "D5-O2"]
+  },
+  {
+    "id": "GH600-045",
+    "exam": "GH-600",
+    "number": 45,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O4"],
+    "sourceIds": ["GH600-SG", "GH-DOC-05"],
+    "type": "true-false",
+    "answer": false,
+    "question": "替換失敗代理時，為了乾淨起見應丟棄先前全部決策與稽核紀錄。",
+    "explanation": "本題對應 D5-O4。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "協調多代理協作",
+    "difficulty": "中等",
+    "keywords": ["D5", "D5-O4"]
+  },
+  {
+    "id": "GH600-046",
+    "exam": "GH-600",
+    "number": 46,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O1"],
+    "sourceIds": ["GH600-SG", "GH-DOC-05"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "讓第三個代理也修改"
+      },
+      {
+        "id": "B",
+        "text": "停止重疊工作、比較意圖並指定單一整合者"
+      },
+      {
+        "id": "C",
+        "text": "直接選較長的 diff"
+      },
+      {
+        "id": "D",
+        "text": "刪除兩邊紀錄"
+      }
+    ],
+    "answer": "B",
+    "question": "兩個代理修改同一檔案造成衝突，首先應做什麼？",
+    "explanation": "本題對應 D5-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "協調多代理協作",
+    "difficulty": "基礎",
+    "keywords": ["D5", "D5-O1"]
+  },
+  {
+    "id": "GH600-047",
+    "exam": "GH-600",
+    "number": 47,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O3"],
+    "sourceIds": ["GH600-SG", "GH-DOC-05"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "stalled"
+      },
+      {
+        "id": "B",
+        "text": "success"
+      },
+      {
+        "id": "C",
+        "text": "pruned"
+      },
+      {
+        "id": "D",
+        "text": "allowlisted"
+      }
+    ],
+    "answer": "A",
+    "question": "多代理流程中某代理長時間無進度，屬於哪種狀態？",
+    "explanation": "本題對應 D5-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "協調多代理協作",
+    "difficulty": "基礎",
+    "keywords": ["D5", "D5-O3"]
+  },
+  {
+    "id": "GH600-048",
+    "exam": "GH-600",
+    "number": 48,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O3"],
+    "sourceIds": ["GH600-SG", "GH-DOC-05"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "從可驗證 checkpoint 判定可保留產物，再重派失敗範圍"
+      },
+      {
+        "id": "B",
+        "text": "全部盲目重跑"
+      },
+      {
+        "id": "C",
+        "text": "直接合併所有輸出"
+      },
+      {
+        "id": "D",
+        "text": "關閉 log"
+      }
+    ],
+    "answer": "A",
+    "question": "部分代理完成、部分失敗時，最合理的恢復起點是什麼？",
+    "explanation": "本題對應 D5-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "協調多代理協作",
+    "difficulty": "基礎",
+    "keywords": ["D5", "D5-O3"]
+  },
+  {
+    "id": "GH600-049",
+    "exam": "GH-600",
+    "number": 49,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O1"],
+    "sourceIds": ["GH600-SG", "GH-DOC-05"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "主管／工作者模式"
+      },
+      {
+        "id": "B",
+        "text": "無協調共享寫入"
+      },
+      {
+        "id": "C",
+        "text": "永久重試"
+      },
+      {
+        "id": "D",
+        "text": "單一工具 allowlist"
+      }
+    ],
+    "answer": "A",
+    "question": "哪種模式適合先由多個專家各自分析，再由一個角色整合？",
+    "explanation": "本題對應 D5-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "協調多代理協作",
+    "difficulty": "基礎",
+    "keywords": ["D5", "D5-O1"]
+  },
+  {
+    "id": "GH600-050",
+    "exam": "GH-600",
+    "number": 50,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O2"],
+    "sourceIds": ["GH600-SG", "GH-DOC-05"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "代理 log、artifact、交接與操作訊號"
+      },
+      {
+        "id": "B",
+        "text": "只看最終 PR 標題"
+      },
+      {
+        "id": "C",
+        "text": "只看 token 數"
+      },
+      {
+        "id": "D",
+        "text": "只看執行時間"
+      }
+    ],
+    "answer": "A",
+    "question": "post-hoc 分析需要哪種資料？",
+    "explanation": "本題對應 D5-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "協調多代理協作",
+    "difficulty": "進階",
+    "keywords": ["D5", "D5-O2"]
+  },
+  {
+    "id": "GH600-051",
+    "exam": "GH-600",
+    "number": 51,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O4"],
+    "sourceIds": ["GH600-SG", "GH-DOC-05"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "版本化設定、受控切換與狀態交接"
+      },
+      {
+        "id": "B",
+        "text": "直接覆寫執行中程序"
+      },
+      {
+        "id": "C",
+        "text": "刪除 checkpoint"
+      },
+      {
+        "id": "D",
+        "text": "取消全部 audit"
+      }
+    ],
+    "answer": "A",
+    "question": "更新代理而不干擾進行中工作，應優先使用什麼策略？",
+    "explanation": "本題對應 D5-O4。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "協調多代理協作",
+    "difficulty": "進階",
+    "keywords": ["D5", "D5-O4"]
+  },
+  {
+    "id": "GH600-052",
+    "exam": "GH-600",
+    "number": 52,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O3"],
+    "sourceIds": ["GH600-SG", "GH-DOC-05"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "隨機選一個"
+      },
+      {
+        "id": "B",
+        "text": "回到共享證據與驗收標準裁決並記錄原因"
+      },
+      {
+        "id": "C",
+        "text": "同時宣稱兩者正確"
+      },
+      {
+        "id": "D",
+        "text": "增加輸出字數"
+      }
+    ],
+    "answer": "B",
+    "question": "兩個代理回報互相矛盾的結論，整合者應怎麼做？",
+    "explanation": "本題對應 D5-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "協調多代理協作",
+    "difficulty": "進階",
+    "keywords": ["D5", "D5-O3"]
+  },
+  {
+    "id": "GH600-053",
+    "exam": "GH-600",
+    "number": 53,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O1"],
+    "sourceIds": ["GH600-SG", "GH-DOC-10"],
+    "type": "multiple",
+    "options": [
+      {
+        "id": "A",
+        "text": "不可逆資料刪除"
+      },
+      {
+        "id": "B",
+        "text": "擴大正式環境權限"
+      },
+      {
+        "id": "C",
+        "text": "影響合規的政策變更"
+      },
+      {
+        "id": "D",
+        "text": "讀取公開文件"
+      }
+    ],
+    "answer": ["A", "B", "C"],
+    "question": "哪些動作通常需要較強人工介入？",
+    "explanation": "本題對應 D6-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "實作護欄與課責",
+    "difficulty": "中等",
+    "keywords": ["D6", "D6-O1"]
+  },
+  {
+    "id": "GH600-054",
+    "exam": "GH-600",
+    "number": 54,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O2"],
+    "sourceIds": ["GH600-SG", "GH-DOC-10"],
+    "type": "multiple",
+    "options": [
+      {
+        "id": "A",
+        "text": "最小權限"
+      },
+      {
+        "id": "B",
+        "text": "policy block"
+      },
+      {
+        "id": "C",
+        "text": "明確核准路徑"
+      },
+      {
+        "id": "D",
+        "text": "隱藏稽核紀錄"
+      }
+    ],
+    "answer": ["A", "B", "C"],
+    "question": "有效護欄可包含哪些控制？",
+    "explanation": "本題對應 D6-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "實作護欄與課責",
+    "difficulty": "中等",
+    "keywords": ["D6", "D6-O2"]
+  },
+  {
+    "id": "GH600-055",
+    "exam": "GH-600",
+    "number": 55,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O2"],
+    "sourceIds": ["GH600-SG", "GH-DOC-10"],
+    "type": "true-false",
+    "answer": false,
+    "question": "為了維持速度，任何人工核准都應移除，即使它能降低不可逆變更風險。",
+    "explanation": "本題對應 D6-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "實作護欄與課責",
+    "difficulty": "中等",
+    "keywords": ["D6", "D6-O2"]
+  },
+  {
+    "id": "GH600-056",
+    "exam": "GH-600",
+    "number": 56,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O1"],
+    "sourceIds": ["GH600-SG", "GH-DOC-10"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "操作、資安與合規風險"
+      },
+      {
+        "id": "B",
+        "text": "模型名稱長度"
+      },
+      {
+        "id": "C",
+        "text": "代理頭像"
+      },
+      {
+        "id": "D",
+        "text": "輸出語言"
+      }
+    ],
+    "answer": "A",
+    "question": "自主程度最應依什麼調整？",
+    "explanation": "本題對應 D6-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "實作護欄與課責",
+    "difficulty": "基礎",
+    "keywords": ["D6", "D6-O1"]
+  },
+  {
+    "id": "GH600-057",
+    "exam": "GH-600",
+    "number": 57,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O2"],
+    "sourceIds": ["GH600-SG", "GH-DOC-10"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "不降低實質風險卻對每個唯讀動作逐次核准"
+      },
+      {
+        "id": "B",
+        "text": "部署正式環境前核准"
+      },
+      {
+        "id": "C",
+        "text": "刪除資料前核准"
+      },
+      {
+        "id": "D",
+        "text": "提高權限前核准"
+      }
+    ],
+    "answer": "A",
+    "question": "哪一種核准最可能是無效摩擦？",
+    "explanation": "本題對應 D6-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "實作護欄與課責",
+    "difficulty": "基礎",
+    "keywords": ["D6", "D6-O2"]
+  },
+  {
+    "id": "GH600-058",
+    "exam": "GH-600",
+    "number": 58,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O2"],
+    "sourceIds": ["GH600-SG", "GH-DOC-10"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "阻擋並留下可稽核原因"
+      },
+      {
+        "id": "B",
+        "text": "靜默放行"
+      },
+      {
+        "id": "C",
+        "text": "改寫政策"
+      },
+      {
+        "id": "D",
+        "text": "刪除 log"
+      }
+    ],
+    "answer": "A",
+    "question": "代理嘗試執行政策禁止的命令時，護欄應如何反應？",
+    "explanation": "本題對應 D6-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "實作護欄與課責",
+    "difficulty": "基礎",
+    "keywords": ["D6", "D6-O2"]
+  },
+  {
+    "id": "GH600-059",
+    "exam": "GH-600",
+    "number": 59,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O2"],
+    "sourceIds": ["GH600-SG", "GH-DOC-10"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "只授予完成明確任務所需的最小存取"
+      },
+      {
+        "id": "B",
+        "text": "預先給全部權限"
+      },
+      {
+        "id": "C",
+        "text": "每次都用管理員"
+      },
+      {
+        "id": "D",
+        "text": "把 token 寫入設定"
+      }
+    ],
+    "answer": "A",
+    "question": "最低權限的核心是什麼？",
+    "explanation": "本題對應 D6-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "實作護欄與課責",
+    "difficulty": "基礎",
+    "keywords": ["D6", "D6-O2"]
+  },
+  {
+    "id": "GH600-060",
+    "exam": "GH-600",
+    "number": 60,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O1"],
+    "sourceIds": ["GH600-SG", "GH-DOC-10"],
+    "type": "single",
+    "options": [
+      {
+        "id": "A",
+        "text": "把授權、執行、驗證與稽核串成可追溯流程"
+      },
+      {
+        "id": "B",
+        "text": "保證模型永不出錯"
+      },
+      {
+        "id": "C",
+        "text": "取代所有測試"
+      },
+      {
+        "id": "D",
+        "text": "取消責任歸屬"
+      }
+    ],
+    "answer": "A",
+    "question": "受控路徑對敏感變更的價值是什麼？",
+    "explanation": "本題對應 D6-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
+    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "domain": "實作護欄與課責",
+    "difficulty": "進階",
+    "keywords": ["D6", "D6-O1"]
+  }
+]

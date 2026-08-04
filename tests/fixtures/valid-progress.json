@@ -1,0 +1,14 @@
+{
+  "schema": "gh-600-study-progress",
+  "version": 1,
+  "completedDays": [1, 2],
+  "dayNotes": { "2": "匯入測試" },
+  "favoriteTerms": [],
+  "familiarTerms": [],
+  "questionStats": {},
+  "wrongQuestionIds": [],
+  "quizAttempts": [],
+  "reviewChecks": [],
+  "examDates": { "GH-600": "2026-09-01" },
+  "theme": "light"
+}

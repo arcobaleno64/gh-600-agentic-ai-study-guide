@@ -1,0 +1,170 @@
+[
+  {
+    "id": "FAQ-01",
+    "category": "考試資訊",
+    "question": "GH-600 的正式考試名稱是什麼？",
+    "answer": "Exam GH-600: Developing in Agentic AI Systems；通過後對應 GitHub Certified: Agentic AI Developer。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-02",
+    "category": "考試資訊",
+    "question": "考試時間多久？",
+    "answer": "官方認證頁目前列為 120 分鐘。報名前仍應重新核對預約頁。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-03",
+    "category": "考試資訊",
+    "question": "及格分數是多少？",
+    "answer": "Microsoft Learn 的 Study Guide 說明量尺分數 700 以上為及格；它不是固定答對百分比。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-04",
+    "category": "考試資訊",
+    "question": "考試提供哪些語言？",
+    "answer": "截至本站最後核對日，認證頁只列 English。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-05",
+    "category": "考試資訊",
+    "question": "哪個領域占比最高？",
+    "answer": "實作工具使用與環境互動占 20%–25%，是六領域中最高。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-06",
+    "category": "備考方法",
+    "question": "四週計畫一定要每天完成嗎？",
+    "answer": "不必固定日曆日期，但應維持順序並完成每日輸出與通關標準。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-07",
+    "category": "備考方法",
+    "question": "模擬題是實際考題嗎？",
+    "answer": "不是。本站題目皆依公開 objectives 原創，用於概念辨析，不含 exam dump。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-08",
+    "category": "備考方法",
+    "question": "為何建議 85% 而官方是 700？",
+    "answer": "700 是量尺分數，無法直接換算固定答對率；85% 只是本站較保守的練習門檻。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-09",
+    "category": "備考方法",
+    "question": "如何使用 objectiveIds？",
+    "answer": "每題與教材段落都標記 objective，可由錯題快速回到對應範圍補強。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-10",
+    "category": "備考方法",
+    "question": "先背產品名稱有效嗎？",
+    "answer": "效果有限。先判斷目標、風險、權限與生命週期，再對應 GitHub 功能。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-11",
+    "category": "網站操作",
+    "question": "學習進度儲存在哪裡？",
+    "answer": "只存在目前瀏覽器的 localStorage，不會上傳到伺服器。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-12",
+    "category": "網站操作",
+    "question": "更換電腦如何保留進度？",
+    "answer": "先在設定頁匯出 JSON，再到另一裝置匯入。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-13",
+    "category": "網站操作",
+    "question": "舊 AZ／SC 進度能匯入嗎？",
+    "answer": "不能；本站只接受 schema 為 gh-600-study-progress、版本 1 的檔案。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-14",
+    "category": "網站操作",
+    "question": "離線能使用嗎？",
+    "answer": "完成首次載入後，PWA 會快取站殼；外部官方來源仍需網路。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-15",
+    "category": "網站操作",
+    "question": "如何只練錯題？",
+    "answer": "到模擬題頁啟用只練目前錯題；答對後該題會移出錯題簿。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-16",
+    "category": "網站操作",
+    "question": "複選答案順序重要嗎？",
+    "answer": "不重要；必須選齊所有正確項目，且重複答案會被契約拒絕。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-17",
+    "category": "內容維護",
+    "question": "資料最後查核日代表考綱生效日嗎？",
+    "answer": "不是。lastVerified 是本站重新核對官方頁面的日期；Study Guide 另記 updated date。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-18",
+    "category": "內容維護",
+    "question": "官方來源有哪些網域？",
+    "answer": "驗證器只接受 learn.microsoft.com 與 docs.github.com。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-19",
+    "category": "內容維護",
+    "question": "內容更新時先改哪裡？",
+    "answer": "先更新 exam-meta 的 domains/objectives，再調整教材與題目參照，最後跑內容驗證。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-20",
+    "category": "內容維護",
+    "question": "為何每題要保留 sourceIds？",
+    "answer": "讓解析可回查官方文件，也讓文件變動時能定位受影響題目。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-21",
+    "category": "應考策略",
+    "question": "英文題幹應先看什麼？",
+    "answer": "先抓動詞與風險限制詞，例如 configure、prevent、least privilege、irreversible。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-22",
+    "category": "應考策略",
+    "question": "遇到兩個都可行的選項怎麼辦？",
+    "answer": "選直接滿足所有明示限制、權限更小、較可驗證且較易回滾者。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-23",
+    "category": "應考策略",
+    "question": "考前最後一天應做什麼？",
+    "answer": "只補最弱 objectives、重讀必背句與錯題原因，不再開新主題。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-24",
+    "category": "應考策略",
+    "question": "如何避免在單題耗時過久？",
+    "answer": "先排除違反安全或範圍的選項；仍不確定就標記，完成其餘題目後再回看。",
+    "keyWords": []
+  }
+]
