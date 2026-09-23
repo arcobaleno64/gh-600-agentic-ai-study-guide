@@ -202,5 +202,11 @@
     "title": "About code owners",
     "url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners",
     "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-33",
+    "title": "Rate limits for the REST API",
+    "url": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+    "publisher": "GitHub Docs"
   }
 ]

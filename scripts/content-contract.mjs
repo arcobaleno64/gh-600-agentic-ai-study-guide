@@ -229,9 +229,9 @@ export function validateContentData(data) {
   );
   ok(
     Array.isArray(sources) &&
-      sources.length === 34 &&
+      sources.length === 35 &&
       unique(sources.map((source) => source.id)),
-    "官方來源必須正好 34 項且 ID 不重複。",
+    "官方來源必須正好 35 項且 ID 不重複。",
   );
   for (const source of sources) {
     let host = "";

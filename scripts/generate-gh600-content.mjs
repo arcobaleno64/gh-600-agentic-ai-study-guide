@@ -280,6 +280,12 @@ const sources = [
     "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners",
     "GitHub Docs",
   ],
+  [
+    "GH-DOC-33",
+    "Rate limits for the REST API",
+    "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+    "GitHub Docs",
+  ],
 ].map(([id, title, url, publisher]) => ({ id, title, url, publisher }));
 
 const examMeta = {
@@ -597,15 +603,15 @@ const questionSpecs = {
       question:
         "代理的工作要在標準開發工具中接受審查，而且 reviewer 要能直接看出這次變更對應哪一個需求。cloud agent 完成後應交付什麼？",
       options: o(
-        "PR，附 diff、測試結果並連結來源 issue",
-        "PR，附 diff 與測試結果，不另外連結",
-        "在來源 issue 留言，附上完整的 patch",
-        "推送到 copilot/ 分支，在 issue 留言",
+        "PR 附 diff 與測試，並連結來源 issue",
+        "PR 附 diff 與測試，並連結 session log",
+        "PR 附 diff 與測試，並指定兩位 reviewer",
+        "issue 留言附 diff 與測試，並連結分支",
       ),
       answer: "A",
       explanation:
-        "D1-O3 要求代理在標準開發工具中產出可檢查的產物。PR 讓 reviewer 用既有流程檢查 diff、跑 status checks、留言與核准；連結來源 issue，reviewer 才能直接對照需求。沒有連結的 PR 仍可審查，但看不出對應哪個需求；在 issue 留言附 patch 或只推送分支，都不在 PR 的審查流程中。",
-      trap: "兩個 PR 選項都能審查，差別在題幹的第二個條件：對應哪一個需求。",
+        "D1-O3 要求代理在標準開發工具中產出可檢查的產物。PR 讓 reviewer 用既有流程檢查 diff、跑 status checks、留言與核准；連結來源 issue，reviewer 才能直接對照需求。連結 session log 能看到代理的過程，但看不出對應哪個需求；指定 reviewer 決定的是誰來審，不是審什麼；在 issue 留言附 diff，則不在 PR 的審查流程中。",
+      trap: "三個 PR 選項都能審查，差別只在最後附上的東西。題幹的第二個條件是「對應哪一個需求」。",
       sources: ["GH600-SG", "GH-DOC-29"],
     },
     {
@@ -648,15 +654,15 @@ const questionSpecs = {
       question:
         "任務是修正 CSV 匯出時逗號沒有跳脫的錯誤，而且不得改變其他匯出格式。下列哪一項最適合作為成功標準？",
       options: o(
-        "新的跳脫測試與既有匯出測試都通過",
-        "新的跳脫測試通過，覆蓋率沒有下降",
-        "既有匯出測試都通過，lint 沒有新警告",
-        "新的跳脫測試通過，執行時間沒有變長",
+        "新的逗號跳脫測試與既有匯出測試都通過",
+        "新的逗號跳脫測試與既有匯入測試都通過",
+        "新的引號跳脫測試與既有匯出測試都通過",
+        "新的逗號跳脫測試與既有 CSV 解析測試都通過",
       ),
       answer: "A",
       explanation:
-        "D1-O1 要求成功標準可以驗證，而且涵蓋任務的目標與限制。新的跳脫測試驗證錯誤已修正，既有匯出測試驗證其他格式沒有改變，兩者合起來才完整。覆蓋率、lint 與執行時間都可以驗證，但都不是題幹要求的條件；只跑既有測試，則沒有驗證錯誤是否修好。",
-      trap: "四個選項都「可以驗證」。題目要的是可以驗證，而且剛好對應題幹的目標與限制。",
+        "D1-O1 要求成功標準可以驗證，而且涵蓋任務的目標與限制。新的逗號跳脫測試驗證錯誤已修正，既有的匯出測試驗證其他匯出格式沒有改變，兩者合起來才完整。匯入測試與 CSV 解析測試檢查的是讀取，不是匯出；引號跳脫測試驗證的不是這次要修的逗號。",
+      trap: "四個選項長得幾乎一樣，差別在「逗號或引號」與「匯出、匯入或解析」。成功標準要逐字對照題幹。",
       sources: ["GH600-SG", "GH-DOC-17"],
     },
     {
@@ -682,15 +688,15 @@ const questionSpecs = {
       question:
         "代理要用 formatter 修正 200 個檔案的格式，CI 會跑測試。其中 3 個檔案是對外公開的 API 定義，任何變更都要先經法務確認。最合適的安排是什麼？",
       options: o(
-        "其餘檔案自動修正，3 個 API 檔另開 PR 待確認",
-        "200 個檔案全部自動修正，交給 CI 驗證",
-        "200 個檔案全部先逐一請人核准再修正",
-        "200 個檔案都只產生建議，由人手動套用",
+        "其餘自動修正；3 個 API 檔另開 PR 待確認",
+        "其餘另開 PR 待確認；3 個 API 檔自動修正",
+        "全部自動修正；3 個 API 檔合併後再補確認",
+        "全部另開 PR；200 個檔案都先請法務確認",
       ),
       answer: "A",
       explanation:
-        "D1-O3 要求安排人工介入時不拖慢交付。格式修正本身低風險，CI 會驗證，197 個一般檔案可以自動修正；3 個 API 定義檔有法務確認的要求，應分開處理，另開 PR 等待確認。全部自動修正會略過法務要求；全部逐一核准或只給建議，則讓 197 個低風險檔案也承擔不必要的等待。",
-      trap: "自主程度不必整批決定。同一個任務裡，可以依檔案的風險分開處理。",
+        "D1-O3 要求安排人工介入時不拖慢交付。格式修正本身低風險，CI 會驗證，197 個一般檔案可以自動修正；3 個 API 定義檔有「先經法務確認」的要求，應分開處理，另開 PR 等待確認。把兩組的處理方式對調，會讓需要確認的檔案跳過確認；合併後再補確認違反「先確認」；200 個檔案都請法務確認，讓低風險檔案承擔不必要的等待。",
+      trap: "自主程度不必整批決定。先找出題幹中真正需要人工確認的那一部分，再把控制放在那裡。",
       sources: ["GH600-SG", "GH-DOC-30"],
     },
     {
@@ -699,15 +705,15 @@ const questionSpecs = {
       question:
         "一次事故後，你要說明 cloud agent 為什麼刪除了某個設定檔，以及它刪除前做了哪些檢查。最需要的是哪一類資料？",
       options: o(
-        "session log 中的步驟與工具呼叫",
-        "PR 上最後合併的 diff 內容",
-        "該次工作階段的 token 用量",
-        "PR 上 CI workflow 的執行時間",
+        "cloud agent 該次工作的 session log",
+        "PR 的 commit 歷史與每個 commit 的 diff",
+        "PR 上所有 workflow 執行的日誌",
+        "組織層級的 audit log 事件紀錄",
       ),
       answer: "A",
       explanation:
-        "可觀測性資料要能重建代理的決策、工具動作與結果。session log 逐步記錄代理做了什麼、呼叫了哪些工具，能回答「為什麼刪除」與「刪除前檢查了什麼」。diff 只顯示檔案被刪除了，看不到過程；token 用量與 CI 執行時間是成本與營運指標，回答不了決策的問題。",
-      trap: "diff 能證明「刪了」，但題幹問的是「為什麼」與「之前做了什麼」，那要看過程紀錄。",
+        "可觀測性資料要能重建代理的決策、工具動作與結果。session log 逐步記錄代理在該次工作中做了什麼、呼叫了哪些工具，能回答「為什麼刪除」與「刪除前檢查了什麼」。commit 與 diff 只顯示檔案被刪除；workflow 日誌記錄的是 CI 的執行；audit log 記錄組織中的事件，都看不到代理在工作中的判斷過程。",
+      trap: "四個選項都是「紀錄」，但只有一個記錄代理自己的過程。其他紀錄能證明「刪了」，不能說明「為什麼」。",
       sources: ["GH600-SG", "GH-DOC-29"],
     },
   ],
@@ -863,18 +869,18 @@ const questionSpecs = {
       type: "single",
       objective: "D2-O4",
       question:
-        "代理用權杖呼叫 GitHub API 建立 release 時收到 403；這個權杖只有 contents: read 權限。下一步應該是什麼？",
+        "代理大量呼叫 GitHub REST API 時收到 403，回應訊息指出觸發了次要速率限制（secondary rate limit），標頭帶有 retry-after: 60。下一步應該是什麼？",
       options: o(
-        "停止並把需要的權限回報給負責人",
-        "以指數退避重試，並設定次數上限",
-        "改用觸發者的個人權杖再建立一次",
-        "改為建立 draft release 避開權限",
+        "等待 60 秒後再重試這個請求",
+        "停止並回報權杖的權限不足",
+        "改用觸發者的個人權杖立即重試",
+        "立即重試，直到請求成功為止",
       ),
       answer: "A",
       explanation:
-        "建立 release 需要寫入權限，權杖只有 contents: read，這是確定性的權限不足，重試不會改變結果。應停止，並把需要的權限與失敗內容回報給有權決定的人。改用個人權杖是繞過授權設計；draft release 同樣需要寫入權限，也改變了原本的任務。",
-      trap: "退避重試是處理暫時性錯誤的做法。403 加上明確不足的權限，是設定問題，不是暫時性問題。",
-      sources: ["GH600-SG"],
+        "GitHub 超過次要速率限制時會回傳 403 或 429；若有 retry-after 標頭，應等待指定的秒數後才重試，持續失敗時再以指數退避並設定次數上限。這個 403 來自速率限制，不是權限不足，停止並回報權限問題會誤判原因；改用個人權杖是繞過控制；限制期間持續發送請求，可能讓整合被封鎖。",
+      trap: "403 不一定是權限問題。先讀回應訊息與標頭，再決定是重試還是停止。",
+      sources: ["GH-DOC-33", "GH600-SG"],
     },
     {
       type: "single",
@@ -914,34 +920,34 @@ const questionSpecs = {
       type: "single",
       objective: "D2-O1",
       question:
-        "某個 custom agent 經常選錯工具。它的 tools 設定是 github/*，能用該 MCP server 的 20 多個工具，但任務只需要其中 3 個。最直接的改善是什麼？",
+        "某個 custom agent 的任務會用到 github MCP server 大部分的工具，而且這個 server 經常新增工具，團隊希望新工具不需修改 profile 就能使用。tools 應該怎麼設定？",
       options: o(
-        "改用 github/工具名稱，只列出那 3 個工具",
-        "保留 github/*，在指示中說明各工具用途",
-        "保留 github/*，在 profile 改用較大的模型",
-        '改用 tools: ["*"]，讓代理自行挑選工具',
+        "使用 github/* 開放這個 server 的工具",
+        "逐一列出 github/工具名稱，需要時再補",
+        '使用 ["*"] 開放所有 server 的全部工具',
+        "不設定 github server，改由指示描述",
       ),
       answer: "A",
       explanation:
-        'custom agent 的 tools 可以用 server-name/tool-name 只開放特定 MCP 工具，server-name/* 則開放整個 server。可用工具越多、描述越相近，代理越容易選錯；只列出需要的 3 個工具，直接縮小選擇範圍，也符合最小權限。在指示中說明有幫助，但擋不住誤用；換模型沒有處理根因；["*"] 反而開放更多工具。',
-      trap: "說明工具用途是常見的補救，但工具仍然全部可用。能用設定移除的選項，就不要只靠指示。",
+        'custom agent 的 tools 可以用 server-name/* 開放某個 MCP server 的全部工具，也可以用 server-name/tool-name 只開放特定工具。任務會用到大部分工具、又希望新工具自動可用時，github/* 最符合需求，範圍也只限這個 server。逐一列出需要每次新增時修改 profile；["*"] 會開放所有 server 與內建工具，超出需求；不設定 server，代理就無法使用這些工具。',
+      trap: "最小權限不代表每次都要逐一列出工具。範圍限定在需要的 server，已經比開放全部小得多。",
       sources: ["GH-DOC-06"],
     },
     {
       type: "single",
       objective: "D2-O4",
       question:
-        "代理正在執行一個多步驟任務，已經推送了兩個 commit。使用者此時取消了任務。代理應該怎麼處理？",
+        "代理已推送兩個 commit，正在執行一個還要 20 分鐘的檔案產生步驟。使用者此時取消了任務。代理應該怎麼處理？",
       options: o(
-        "停止新動作，清理暫存並記錄完成到哪一步",
-        "把剩下的步驟做完，再回報取消的結果",
-        "停止並回滾已經推送的兩個 commit",
-        "暫停並等使用者再次確認是否要取消",
+        "立即停止新動作，清理暫存並記錄進度",
+        "做完這個 20 分鐘的步驟後再記錄進度",
+        "立即停止新動作，並回滾兩個 commit",
+        "立即停止新動作，並刪除暫存與紀錄",
       ),
       answer: "A",
       explanation:
-        "取消代表不再授權新的動作，但已經做的事要能交代：清理可以安全清理的暫存資源，並記錄完成到哪一步，方便之後恢復或由人決定是否回滾。把剩下的步驟做完等於忽略取消；自行回滾已推送的 commit 是未經授權的新動作，也可能造成新的破壞；再次確認則是無視已經明確送出的取消。",
-      trap: "回滾看起來很負責，但取消的意思是「停下來」，不是「還原一切」。要不要回滾，應由人根據紀錄決定。",
+        "取消代表不再授權新的動作，但已經做的事要能交代：清理可以安全清理的暫存資源，並記錄完成到哪一步，方便之後恢復或由人決定是否回滾。把 20 分鐘的步驟做完等於忽略取消；自行回滾已推送的 commit 是未經授權的新動作；連紀錄一起刪除，就沒有人知道任務停在哪裡。",
+      trap: "三個「立即停止」的選項差在後半句。取消之後該留下的是紀錄，該清掉的是暫存，已推送的變更留給人決定。",
       sources: ["GH600-SG"],
     },
   ],
@@ -1203,15 +1209,15 @@ const questionSpecs = {
       question:
         "代理的任務是讓日期格式化函式支援時區，限制是不得變更公開 API 的簽章。下列哪一項最適合作為成功標準？",
       options: o(
-        "時區測試通過，且公開函式簽章未變",
-        "時區測試通過，且測試覆蓋率達九成",
-        "公開函式簽章未變，且 lint 全部通過",
-        "時區測試通過，且執行時間沒有增加",
+        "時區測試通過，且公開函式的簽章未變",
+        "時區測試通過，且內部函式的簽章未變",
+        "時區測試通過，且公開函式的名稱未變",
+        "時區測試通過，且公開函式的註解未變",
       ),
       answer: "A",
       explanation:
-        "D4-O1 要求評估標準對齊開發意圖與操作限制。這項任務的意圖是支援時區，限制是不得變更公開 API 簽章，成功標準應同時涵蓋兩者。覆蓋率與執行時間都不是題幹提出的要求；只檢查簽章與 lint，則完全沒有驗證時區功能。",
-      trap: "每個選項都有一半是對的。成功標準要逐條對照題幹的意圖與限制，缺一項就不完整。",
+        "D4-O1 要求評估標準對齊開發意圖與操作限制。意圖是支援時區，限制是公開 API 的簽章不得變更，成功標準要同時涵蓋兩者。內部函式本來就可以調整；只檢查名稱，參數或回傳型別改了也不會被發現；註解與 API 的相容性無關。",
+      trap: "四個選項前半句都一樣。差別在限制條件檢查的對象：公開或內部、簽章或只有名稱。",
       sources: ["GH600-SG"],
     },
     {
@@ -1384,17 +1390,17 @@ const questionSpecs = {
       type: "single",
       objective: "D5-O3",
       question:
-        "兩個代理對某個函式有沒有 race condition 給出相反的結論：一方附上可重現的失敗測試，另一方只有閱讀程式碼後的推論。整合者應該怎麼做？",
+        "代理甲與代理乙對某個函式有沒有 race condition 給出相反的結論：乙附上可重現的失敗測試，甲只有閱讀程式碼後的推論。整合者應該怎麼做？",
       options: o(
-        "採用附失敗測試那一方的結論並記錄依據",
-        "採用推論較完整那一方的結論並記錄依據",
-        "請兩方都補上可重現的測試後再裁決",
-        "採用信心分數較高那一方的結論並記錄",
+        "採用乙的結論，並記錄採用的依據",
+        "採用甲的結論，並記錄採用的依據",
+        "兩個結論都寫進報告，由讀者判斷",
+        "請第三個代理投票，採用多數結論",
       ),
       answer: "A",
       explanation:
-        "D5-O3 要求依證據化解代理之間的矛盾。可重現的失敗測試直接證明 race condition 存在，足以裁決；另一方的推論再完整，也推翻不了一個能重現的失敗。已有足夠證據時，再要求雙方補測試只會延後修正；信心分數是代理的自評，不是證據。",
-      trap: "「兩方都補測試」聽起來公平，但裁決需要的是足夠的證據，不是對稱的程序；一個可重現的失敗就夠了。",
+        "D5-O3 要求依證據化解代理之間的矛盾。乙的可重現失敗測試直接證明 race condition 存在；甲的推論再完整，也推翻不了一個能重現的失敗。把矛盾原樣寫進報告等於沒有整合；投票可能讓共用錯誤前提的代理形成多數，票數取代不了證據。",
+      trap: "甲、乙的順序不代表誰先誰後或誰比較可信。依據是題幹描述的證據，不是選項的位置。",
       sources: ["GH600-SG"],
     },
   ],
@@ -1482,18 +1488,18 @@ const questionSpecs = {
       type: "single",
       objective: "D6-O2",
       question:
-        "組織政策禁止代理執行 curl | sh 這類指令，但其他 shell 指令仍要可以用。你要在執行前擋下並留下理由，應該設定什麼？",
+        "合規要求：cloud agent 每執行一個 shell 指令，都要自動把指令內容與執行結果送到稽核系統；不需要阻擋任何指令。應該設定什麼？",
       options: o(
-        "preToolUse hook 比對指令後回傳 deny 與理由",
-        "postToolUse hook 比對指令後回傳 deny 與理由",
+        "postToolUse hook，送出指令與執行結果",
+        "preToolUse hook，送出指令後回傳 allow",
         "在 custom agent 的 tools 移除 execute",
-        "在 copilot-instructions.md 列出禁止指令",
+        "在指示中要求代理每次執行後自行回報",
       ),
       answer: "A",
       explanation:
-        "D6-O2 要求阻擋違反政策的動作。preToolUse 在工具執行前觸發，可以只針對特定指令回傳 permissionDecision 為 deny，並用 permissionDecisionReason 留下理由。postToolUse 在執行後才觸發，無法阻擋；移除 execute 會連其他 shell 指令一起禁止，不符合題幹；instructions 沒有強制力，也不會留下拒絕紀錄。",
-      trap: "兩種 hook 的比對邏輯可以一模一樣，差別在觸發時間：執行後才比對，指令早已跑完了。",
-      sources: ["GH-DOC-11", "GH-DOC-10", "GH-DOC-06"],
+        "postToolUse 在工具執行後觸發，輸入包含工具名稱、參數與執行結果，適合自動送出稽核紀錄；它不能阻擋，而題幹也不需要阻擋。preToolUse 在執行前觸發，拿不到執行結果；移除 execute 會讓代理無法執行任何 shell 指令；要求代理自行回報沒有強制力，也可能遺漏。",
+      trap: "preToolUse 是擋指令的正確選擇，但這題要的是記錄結果。先看需求是「阻擋」還是「記錄」，再選觸發時間。",
+      sources: ["GH-DOC-11", "GH-DOC-10"],
     },
     {
       type: "single",
@@ -2094,7 +2100,7 @@ const chapterBodies = {
 
 本指南以 **GH-600: Developing in Agentic AI Systems** 的技能範圍組織內容，對應 **GitHub Certified: Agentic AI Developer** 認證。讀者應已熟悉 repository、branch、PR 與基本 CI 操作；本書把重點放在如何讓代理在開發流程中可靠地工作，以及何時需要人做決定。
 
-教材於 2026-09-22 擴寫，核對官方 Study Guide 與本次引用的 GitHub 功能文件。題庫於 2026-09-23 逐題重寫解析、陷阱與選項，並重新核對 34 項來源的網址與標題；這仍是本站自行整理，不代表經過官方或專家審訂。考試時間、語言、預約條件與最新範圍，請在報名前查閱[認證頁](https://learn.microsoft.com/en-us/credentials/certifications/agentic-ai-developer/)與[Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-600)（GH600-CERT、GH600-SG）。
+教材於 2026-09-22 擴寫，核對官方 Study Guide 與本次引用的 GitHub 功能文件。題庫於 2026-09-23 逐題重寫解析、陷阱與選項，並重新核對 35 項來源的網址與標題；這仍是本站自行整理，不代表經過官方或專家審訂。考試時間、語言、預約條件與最新範圍，請在報名前查閱[認證頁](https://learn.microsoft.com/en-us/credentials/certifications/agentic-ai-developer/)與[Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-600)（GH600-CERT、GH600-SG）。
 
 ### 分清三種內容
 
