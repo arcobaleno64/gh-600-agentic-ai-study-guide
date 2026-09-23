@@ -58,9 +58,7 @@ function countdown(date: string) {
       <div>
         <span class="badge badge--accent">4 週／1 科／6 領域</span>
         <h2>總覽</h2>
-        <p>
-          把教材、題庫、名詞與複習節奏放在同一個地方。進度只保存在這個瀏覽器，不會為了幾個核取方塊替你建立另一套會員宇宙。
-        </p>
+        <p>查看學習進度與作答紀錄。無須註冊，資料保存在目前使用的瀏覽器。</p>
       </div>
     </div>
     <div class="dashboard-grid">
@@ -171,7 +169,7 @@ function countdown(date: string) {
         </div>
         <div v-else class="empty-card">
           <strong>尚無作答資料</strong
-          ><span>先做一輪 10 題練習，弱項才有東西可分析。</span>
+          ><span>完成練習後，這裡會顯示各領域的作答表現。</span>
         </div>
       </section>
       <section class="panel">
@@ -236,7 +234,7 @@ function countdown(date: string) {
           <strong>還沒有模擬紀錄</strong
           ><span
             >題庫有 {{ questions.length }} 題，名詞庫有
-            {{ terms.length }} 個詞。數字已經備妥，輪到人類開始作答。</span
+            {{ terms.length }} 個詞。可先從 10 題練習開始。</span
           >
         </div>
       </section>

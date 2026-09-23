@@ -1,4 +1,4 @@
-import { computed, reactive, watch } from "vue";
+import { computed, reactive, ref, watch } from "vue";
 import type {
   ExamCode,
   ProgressData,
@@ -167,10 +167,20 @@ function load(): ProgressData {
 }
 
 export const progress = reactive<ProgressData>(load());
+export const storageStatus = ref<"idle" | "saved" | "error">("idle");
 
-watch(progress, (value) => localStorage.setItem(KEY, JSON.stringify(value)), {
-  deep: true,
-});
+watch(
+  progress,
+  (value) => {
+    try {
+      localStorage.setItem(KEY, JSON.stringify(value));
+      storageStatus.value = "saved";
+    } catch {
+      storageStatus.value = "error";
+    }
+  },
+  { deep: true },
+);
 
 export const completedCount = computed(() => progress.completedDays.length);
 export const wrongCount = computed(() => progress.wrongQuestionIds.length);

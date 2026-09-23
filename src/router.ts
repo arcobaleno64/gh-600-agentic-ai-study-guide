@@ -5,7 +5,7 @@ export const route = reactive<{
   name: RouteName;
   param: string;
   query: Record<string, string>;
-}>({ name: "dashboard", param: "", query: {} });
+}>({ name: "knowledge", param: "", query: {} });
 const names = new Set<RouteName>([
   "dashboard",
   "plan",
@@ -20,7 +20,7 @@ const names = new Set<RouteName>([
 function parse() {
   const raw = location.hash.replace(/^#\/?/, "");
   const [path, search = ""] = raw.split("?");
-  const [candidate = "dashboard", param = ""] = path.split("/");
+  const [candidate = "knowledge", param = ""] = path.split("/");
   route.name = names.has(candidate as RouteName)
     ? (candidate as RouteName)
     : "dashboard";
@@ -41,7 +41,7 @@ export function navigate(
   else location.hash = next;
 }
 window.addEventListener("hashchange", parse);
-if (!location.hash) location.hash = "#/dashboard";
+if (!location.hash) location.hash = "#/knowledge/start-here";
 parse();
 export const routeTitles: Record<RouteName, string> = {
   dashboard: "總覽",

@@ -25,7 +25,8 @@ import type {
   StudyDay,
   StudyWeek,
 } from "./types";
-import { normalize } from "./utils";
+import { rankSearch, type SearchFilter, type SearchEntry } from "./search";
+import { readingSections, readingExcerpt } from "./reading";
 export const studyPlan = planData as {
   version: string;
   weeks: StudyWeek[];
@@ -77,60 +78,116 @@ export const chapters = [
     raw: integration,
   },
 ];
-export function searchContent(query: string): SearchResult[] {
-  const q = normalize(query.trim());
-  if (!q) return [];
-  const hit = (...values: string[]) => normalize(values.join(" ")).includes(q);
-  const out: SearchResult[] = [];
-  for (const t of terms)
-    if (hit(t.term, t.explanation, t.category))
-      out.push({
-        id: t.id,
-        type: "名詞",
-        title: t.term,
-        excerpt: t.explanation,
-        route: "glossary",
-        param: t.id,
-      });
-  for (const item of [...faqs, ...qas])
-    if (hit(item.question, item.answer, item.category))
-      out.push({
-        id: item.id,
-        type: "問答",
-        title: item.question,
-        excerpt: item.answer,
-        route: "faq",
-        param: item.id,
-      });
-  for (const s of sources)
-    if (hit(s.title, s.id))
-      out.push({
-        id: s.id,
-        type: "來源",
-        title: s.title,
-        excerpt: s.url,
-        route: "sources",
-        param: s.id,
-      });
-  for (const item of questions)
-    if (hit(item.question, item.explanation, item.domain, item.trap))
-      out.push({
-        id: item.id,
-        type: "題目",
-        title: `${item.exam} 第 ${item.number} 題`,
-        excerpt: item.question,
-        route: "quiz",
-        param: item.id,
-      });
-  for (const c of chapters)
-    if (hit(c.title, c.raw))
-      out.push({
-        id: c.id,
+type ContentEntry = SearchEntry & {
+  result: SearchResult & { section?: string };
+  markdown?: string;
+  prefix?: string;
+};
+const searchEntries: ContentEntry[] = chapters.flatMap((chapter) => {
+  const { introduction, sections } = readingSections(chapter.raw);
+  return [
+    {
+      type: "章節",
+      title: chapter.title,
+      keywords: `${chapter.id} ${chapter.domain}`,
+      body: introduction,
+      markdown: introduction || chapter.raw,
+      result: {
+        id: chapter.id,
         type: "章節",
-        title: c.title,
-        excerpt: "在教材章節內找到相關內容。",
+        title: chapter.title,
+        excerpt: "",
         route: "knowledge",
-        param: c.id,
-      });
-  return out.slice(0, 50);
+        param: chapter.id,
+      },
+    },
+    ...sections.map((section): ContentEntry => ({
+      type: "教材",
+      title: section.title,
+      keywords: section.objectiveId,
+      body: section.raw,
+      markdown: section.raw,
+      prefix: `${chapter.title}｜`,
+      result: {
+        id: `${chapter.id}-${section.id}`,
+        type: "教材",
+        title: section.title,
+        excerpt: "",
+        route: "knowledge",
+        param: chapter.id,
+        section: section.id,
+      },
+    })),
+  ];
+});
+searchEntries.push(
+  ...terms.map((t): ContentEntry => ({
+    type: "名詞",
+    title: t.term,
+    keywords: `${t.id} ${t.category}`,
+    body: t.explanation,
+    result: {
+      id: t.id,
+      type: "名詞",
+      title: t.term,
+      excerpt: t.explanation,
+      route: "glossary",
+      param: t.id,
+    },
+  })),
+  ...questions.map((item): ContentEntry => ({
+    type: "題目",
+    title: item.question,
+    keywords: `${item.id} ${item.domain} ${item.objectiveIds.join(" ")}`,
+    body: `${item.explanation} ${item.trap}`,
+    result: {
+      id: item.id,
+      type: "題目",
+      title: `${item.exam} 第 ${item.number} 題`,
+      excerpt: item.question,
+      route: "quiz",
+      param: item.id,
+    },
+  })),
+  ...[...faqs, ...qas].map((item): ContentEntry => ({
+    type: "問答",
+    title: item.question,
+    keywords: `${item.id} ${item.category}`,
+    body: item.answer,
+    result: {
+      id: item.id,
+      type: "問答",
+      title: item.question,
+      excerpt: item.answer,
+      route: "faq",
+      param: item.id,
+    },
+  })),
+  ...sources.map((s): ContentEntry => ({
+    type: "來源",
+    title: s.title,
+    keywords: s.id,
+    body: s.url,
+    result: {
+      id: s.id,
+      type: "來源",
+      title: s.title,
+      excerpt: s.url,
+      route: "sources",
+      param: s.id,
+    },
+  })),
+);
+export function searchContent(query: string, filter: SearchFilter = "全部") {
+  const { items, total } = rankSearch(searchEntries, query, filter);
+  return Object.assign(
+    items.map((item) => ({
+      ...item.result,
+      excerpt:
+        item.markdown === undefined
+          ? item.result.excerpt
+          : `${item.prefix ?? ""}${readingExcerpt(item.markdown, query)}`,
+    })),
+    { total },
+  );
 }
