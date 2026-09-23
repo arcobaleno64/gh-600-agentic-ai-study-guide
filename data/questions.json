@@ -1703,10 +1703,10 @@
         "text": "調整正式站的樣式表並重新部署"
       }
     ],
-    "answer": ["A", "C"],
-    "question": "團隊的分級規則是：出錯後無法靠 revert PR 還原的動作才需要人工核准，其餘交給 CI 與 review。下列哪些動作需要人工核准？",
-    "explanation": "D6-O1 要求依風險分類代理的動作，決定人工介入的程度；這題的分級規則是「能不能用 revert 還原」。刪除的資料列不會因為 revert 遷移檔而回來，寄出的信也收不回，兩者都需要人工核准。workflow 排程與樣式表都存在 repository 中，出錯時 revert PR 再部署即可還原，交給 CI 與 review 把關就夠了。",
-    "trap": "「正式環境」四個字不等於高風險。依題幹規則，要問的是出錯後能不能還原，不是動作聽起來多重要。",
+    "answer": ["B", "D"],
+    "question": "團隊的分級規則是：出錯後無法靠 revert PR 還原的動作才需要人工核准，其餘交給 CI 與 review。下列哪些動作可以不設人工核准？",
+    "explanation": "D6-O1 要求依風險分類代理的動作，決定人工介入的程度；這題的分級規則是「能不能用 revert 還原」。workflow 排程與樣式表都存在 repository 中，出錯時 revert PR 再部署即可還原，交給 CI 與 review 把關就夠了，不需要人工核准。刪除的資料列不會因為 revert 遷移檔而回來，寄出的信也收不回，這兩項仍需人工核准。",
+    "trap": "題目問的是「可以不設」核准的動作。「正式環境」四個字不等於高風險，依題幹規則只看出錯後能不能還原。",
     "domain": "實作護欄與課責",
     "difficulty": "中等",
     "keywords": ["D6", "D6-O1"]
@@ -1806,24 +1806,24 @@
     "options": [
       {
         "id": "A",
-        "text": "代理讀取 repo 檔案前需要人工確認"
+        "text": "代理推送到自己的 copilot/ 分支前需確認"
       },
       {
         "id": "B",
-        "text": "代理在自己的分支 commit 前需要確認"
-      },
-      {
-        "id": "C",
         "text": "Copilot PR 的 workflow 執行前需要核准"
       },
       {
+        "id": "C",
+        "text": ".github/agents/ 的變更需 Code Owners 審查"
+      },
+      {
         "id": "D",
-        "text": "代理建立 draft PR 前需要人工確認"
+        "text": "執行刪除正式資料的遷移前需要人工核准"
       }
     ],
-    "answer": "C",
-    "question": "cloud agent 的流程中有四個人工關卡。依 D6-O2，哪一個是實質降低風險、應該保留的？",
-    "explanation": "cloud agent 開的 PR 上，workflow 預設不會自動執行，要等有寫入權的使用者審查程式碼、按下 Approve and run workflows 才會執行，避免未經人看過的程式碼自動觸發 workflow 並使用其中的 secrets 與權限。讀取檔案不改變任何狀態；代理只能推送到自己的分支；draft PR 在合併前還要經過審查，這三個關卡都不改變結果，只增加等待。",
+    "answer": "A",
+    "question": "cloud agent 的流程中有四個人工關卡。依 D6-O2，哪一個不實質降低風險、最適合移除？",
+    "explanation": "cloud agent 只能推送到自己的 copilot/ 分支，分支上的變更在合併前本來就要經過 PR 審查，推送前再確認一次不會改變任何結果，只增加等待。其餘三項都實質降低風險：cloud agent 開的 PR 上，workflow 預設要等有寫入權的使用者按下 Approve and run workflows 才執行，避免未經審查的程式碼使用 secrets 與權限；Code Owners 審查保護代理設定檔；資料刪除不可逆。",
     "trap": "每個關卡看起來都在「多一道確認」。判斷標準是：拿掉它之後，會不會有未經審查的東西真的被執行或合併。",
     "domain": "實作護欄與課責",
     "difficulty": "基礎",
@@ -1874,11 +1874,11 @@
     "options": [
       {
         "id": "A",
-        "text": "CODEOWNERS 指定平台團隊，並要求 Code Owners 審查"
+        "text": "只用 CODEOWNERS 指定平台團隊，不啟用審查規則"
       },
       {
         "id": "B",
-        "text": "ruleset 要求合併前至少取得一位 reviewer 核准"
+        "text": "CODEOWNERS 指定平台團隊，並要求 Code Owners 審查"
       },
       {
         "id": "C",
@@ -1886,13 +1886,13 @@
       },
       {
         "id": "D",
-        "text": "在 custom agent 的 tools 移除 edit 別名"
+        "text": "ruleset 要求合併前至少取得一位 reviewer 核准"
       }
     ],
     "answer": "A",
-    "question": "你要確保 .github/agents/ 的任何修改都必須經平台團隊核准才能合併，不論修改者是人還是代理。應該設定什麼？",
-    "explanation": "GitHub 建議用 CODEOWNERS 搭配 ruleset 的「Require review from Code Owners」保護 Copilot 與 agent 設定檔：指定平台團隊為擁有者後，這個目錄的任何變更都必須由他們核准。一般的核准規則任何 reviewer 都能滿足，不限平台團隊；hook 與 tools 只約束代理，擋不住人直接修改。",
-    "trap": "題幹有兩個條件：核准者限定平台團隊，對象包含人與代理。只約束代理的控制，或不限核准者的控制，都只滿足一半。",
+    "question": "你希望 .github/agents/ 被修改時，自動請平台團隊審查，但團隊人力有限，不能因此擋住合併。應該設定什麼？",
+    "explanation": "CODEOWNERS 會在 PR 修改到對應路徑時，自動請擁有者審查；只有再搭配 ruleset 的「Require review from Code Owners」，擁有者的核准才會成為合併條件。題幹要的是通知而不阻擋，所以只設定 CODEOWNERS 即可。要求 Code Owners 審查與要求一位核准都會擋住合併；hook 直接禁止代理修改，也不會請任何人審查。",
+    "trap": "GitHub 建議用 CODEOWNERS 加上審查規則保護代理設定檔，但這題的條件是「不能擋住合併」。先看題幹限制，再選控制強度。",
     "domain": "實作護欄與課責",
     "difficulty": "基礎",
     "keywords": ["D6", "D6-O2"]
@@ -1908,11 +1908,11 @@
     "options": [
       {
         "id": "A",
-        "text": "代理開 PR 修改 IaC 檔，核准後由 workflow 套用"
+        "text": "代理直接以受限權杖套用，保留 session log"
       },
       {
         "id": "B",
-        "text": "代理在 session 中直接呼叫雲端 CLI 套用變更"
+        "text": "代理開 PR 修改設定檔，核准後由 workflow 套用"
       },
       {
         "id": "C",
@@ -1920,13 +1920,13 @@
       },
       {
         "id": "D",
-        "text": "代理先套用到 staging，成功後自動套用到正式環境"
+        "text": "代理產生指令，由 reviewer 在主控台手動套用"
       }
     ],
     "answer": "A",
-    "question": "要調整正式環境服務帳號的權限，事後必須能回答「誰核准、誰執行、改了什麼」。哪一種做法能留下這三項紀錄？",
-    "explanation": "敏感變更要走受控路徑，讓授權、執行、驗證與稽核都能追溯。PR 記錄了改了什麼與誰核准，workflow 的執行紀錄說明誰在何時套用。直接用 CLI 套用只有 session log，沒有核准紀錄；聊天中的同意不是可稽核的核准；staging 成功後自動套用到正式環境，則完全沒有人工核准。",
-    "trap": "session log 能說明代理做了什麼，但不能證明有人核准。三項紀錄要同時存在，缺一項就無法稽核。",
+    "question": "代理要調整 staging 一個 feature flag 的預設值：隨時可改回，不涉及權限與資料。團隊只要求事後查得到代理做了什麼，不增加人工關卡。哪一種做法最合適？",
+    "explanation": "D6-O1 要求依風險決定自主程度。這個變更可隨時撤回、不涉及權限與資料，屬於低風險，可以讓代理自動執行；session log 已能說明代理做了什麼，符合「事後查得到」。PR 核准與主控台手動套用都增加了人工關卡；以管理員權杖套用則給了超出需求的權限，還多了一道聊天中的核准。",
+    "trap": "受控路徑是給敏感變更用的。低風險、可撤回的變更也套上完整核准，就是 D6-O2 所說的多餘摩擦。",
     "domain": "實作護欄與課責",
     "difficulty": "進階",
     "keywords": ["D6", "D6-O1"]
