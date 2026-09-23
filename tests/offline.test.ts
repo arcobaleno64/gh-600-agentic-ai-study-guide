@@ -29,7 +29,14 @@ test("正式產物預存完整資源，離線可讀；安裝失敗不強制接�
       return {
         addAll: async (paths: string[]) => {
           if (failInstall) throw new Error("network failure");
-          paths.forEach((p) => entries.set(address(p), { url: address(p) }));
+          // Cloudflare redirects index.html to "/"; addAll keeps that
+          // redirected response, which a navigation must never receive.
+          paths.forEach((p) =>
+            entries.set(address(p), {
+              url: address(p),
+              redirected: address(p).endsWith("/index.html"),
+            }),
+          );
         },
         // Precache requests have no Origin header. Vary: Origin must reject
         // a later browser module/stylesheet request carrying that header.
@@ -91,7 +98,9 @@ test("正式產物預存完整資源，離線可讀；安裝失敗不強制接�
       pending = p;
     },
   });
-  assert.ok(await pending!);
+  const page = await pending!;
+  assert.ok(page, "離線導覽須有快取頁面");
+  assert.equal(page.redirected, false, "導覽不得回應重新導向過的快取");
   failInstall = true;
   events.install({
     waitUntil: (p: Promise<any>) => {

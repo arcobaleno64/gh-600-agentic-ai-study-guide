@@ -35,12 +35,14 @@ self.addEventListener("fetch", (e) => {
   // for existing tabs to close before activation; do not force skipWaiting.
   // This cache contains only public static build files. Match the URL used
   // during precaching so Vary: Origin does not miss module/style requests.
+  // Navigations use "./": hosts may redirect index.html to "/", and a
+  // redirected response served to a navigation fails with ERR_FAILED.
   e.respondWith(
     caches
       .open(CACHE)
       .then(
         async (cache) =>
-          (await cache.match(r.mode === "navigate" ? "./index.html" : r.url)) ||
+          (await cache.match(r.mode === "navigate" ? "./" : r.url)) ||
           fetch(r),
       ),
   );
