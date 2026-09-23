@@ -139,6 +139,14 @@ function choose(id: string) {
   };
   if (mode.value === "練習模式") revealed.value.push(questionId);
 }
+// 複選題尚未確認時，把「下一題」降為次要按鈕，讓「確認複選答案」成為主要動作。
+const awaitingConfirm = computed(
+  () =>
+    mode.value === "練習模式" &&
+    active.value?.question.type === "multiple" &&
+    !revealed.value.includes(active.value.question.id),
+);
+
 function confirmMultiple() {
   if (!active.value || !isAnswered(answers.value[active.value.question.id]))
     return;
@@ -492,7 +500,8 @@ onBeforeUnmount(stopTimer);
               上一題</button
             ><button
               v-if="current < session.length - 1"
-              class="button button--primary"
+              class="button"
+              :class="awaitingConfirm ? 'button--soft' : 'button--primary'"
               @click="next"
             >
               下一題</button
