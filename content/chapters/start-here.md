@@ -4,13 +4,13 @@
 
 本指南以 **GH-600: Developing in Agentic AI Systems** 的技能範圍組織內容，對應 **GitHub Certified: Agentic AI Developer** 認證。讀者應已熟悉 repository、branch、PR 與基本 CI 操作；本書把重點放在如何讓代理在開發流程中可靠地工作，以及何時需要人做決定。
 
-教材於 2026-09-22 擴寫，核對官方 Study Guide 與本次引用的 GitHub 功能文件。站內題庫與考試 metadata 仍保留 2026-08-04 的資料基準；本次沒有宣稱全部 30 項來源與題庫已重新審訂。考試時間、語言、預約條件與最新範圍，請在報名前查閱[認證頁](https://learn.microsoft.com/en-us/credentials/certifications/agentic-ai-developer/)與[Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-600)（GH600-CERT、GH600-SG）。
+教材於 2026-09-22 擴寫，核對官方 Study Guide 與本次引用的 GitHub 功能文件。題庫於 2026-09-23 逐題重寫解析、陷阱與選項，並重新核對 33 項來源的網址與標題；這仍是本站自行整理，不代表經過官方或專家審訂。考試時間、語言、預約條件與最新範圍，請在報名前查閱[認證頁](https://learn.microsoft.com/en-us/credentials/certifications/agentic-ai-developer/)與[Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-600)（GH600-CERT、GH600-SG）。
 
 ### 分清三種內容
 
 **官方技能範圍**說明需要掌握的能力；**產品文件**描述特定環境與版本的功能；**本書案例與練習**用來訓練判斷，不是官方固定程序，也不是實際考題。章內附日期的產品敘述，只代表該次核對範圍，不代表所有 IDE、CLI 與雲端環境行為相同。
 
-近期 GitHub 文件使用 cloud agent 名稱，部分來源連結與站內既有題目仍使用 coding agent。閱讀時應確認文件談的是哪個執行環境，尤其是 MCP、hooks、記憶與工具設定，不能只憑名稱相近就套用相同限制。
+GitHub 文件已把 coding agent 改名為 cloud agent，本站來源標題與連結已於 2026-09-23 更新。閱讀時應確認文件談的是哪個執行環境，尤其是 MCP、hooks、記憶與工具設定，不能只憑名稱相近就套用相同限制。
 
 ## 使用方式
 

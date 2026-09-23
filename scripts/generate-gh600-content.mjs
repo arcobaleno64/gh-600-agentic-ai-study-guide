@@ -96,20 +96,20 @@ const sources = [
   ],
   [
     "GH-DOC-02",
-    "About GitHub Copilot coding agent",
-    "https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-coding-agent",
+    "About GitHub Copilot cloud agent",
+    "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent",
     "GitHub Docs",
   ],
   [
     "GH-DOC-03",
-    "Best practices for Copilot coding agent",
-    "https://docs.github.com/en/copilot/tutorials/coding-agent/get-the-best-results",
+    "Best practices for using GitHub Copilot to work on tasks",
+    "https://docs.github.com/en/copilot/tutorials/cloud-agent/get-the-best-results",
     "GitHub Docs",
   ],
   [
     "GH-DOC-04",
     "Adding repository custom instructions",
-    "https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions",
+    "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/add-custom-instructions/add-repository-instructions",
     "GitHub Docs",
   ],
   [
@@ -132,14 +132,14 @@ const sources = [
   ],
   [
     "GH-DOC-08",
-    "Extending Copilot coding agent with MCP",
-    "https://docs.github.com/en/copilot/customizing-copilot/extending-copilot-coding-agent-with-mcp",
+    "Configure MCP servers for your repository",
+    "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/configure-mcp-servers",
     "GitHub Docs",
   ],
   [
     "GH-DOC-09",
-    "Configuring access to MCP servers",
-    "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/extend-coding-agent-with-mcp",
+    "Configure an MCP registry for your organization or enterprise",
+    "https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-mcp-usage/configure-mcp-registry",
     "GitHub Docs",
   ],
   [
@@ -156,14 +156,14 @@ const sources = [
   ],
   [
     "GH-DOC-12",
-    "Customizing the development environment",
-    "https://docs.github.com/en/copilot/customizing-copilot/customizing-the-development-environment-for-copilot-coding-agent",
+    "Configure the development environment",
+    "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/customize-the-agent-environment",
     "GitHub Docs",
   ],
   [
     "GH-DOC-13",
     "About GitHub Actions",
-    "https://docs.github.com/en/actions/about-github-actions/understanding-github-actions",
+    "https://docs.github.com/en/actions/get-started/understand-github-actions",
     "GitHub Docs",
   ],
   [
@@ -181,43 +181,43 @@ const sources = [
   [
     "GH-DOC-16",
     "Reviewing pull requests",
-    "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews",
+    "https://docs.github.com/en/pull-requests/reference/pull-request-reviews",
     "GitHub Docs",
   ],
   [
     "GH-DOC-17",
     "About status checks",
-    "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/about-status-checks",
+    "https://docs.github.com/en/pull-requests/reference/status-checks",
     "GitHub Docs",
   ],
   [
     "GH-DOC-18",
     "About secret scanning",
-    "https://docs.github.com/en/code-security/secret-scanning/introduction/about-secret-scanning",
+    "https://docs.github.com/en/code-security/concepts/secret-security/secret-scanning",
     "GitHub Docs",
   ],
   [
     "GH-DOC-19",
     "About code scanning",
-    "https://docs.github.com/en/code-security/code-scanning/introduction-to-code-scanning/about-code-scanning",
+    "https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning",
     "GitHub Docs",
   ],
   [
     "GH-DOC-20",
     "About dependency review",
-    "https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/about-dependency-review",
+    "https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review",
     "GitHub Docs",
   ],
   [
     "GH-DOC-21",
-    "Responsible use of Copilot coding agent",
-    "https://docs.github.com/en/copilot/responsible-use/copilot-coding-agent",
+    "Application card: GitHub Copilot Agents",
+    "https://docs.github.com/en/copilot/responsible-use/agents",
     "GitHub Docs",
   ],
   [
     "GH-DOC-22",
-    "Troubleshooting Copilot coding agent",
-    "https://docs.github.com/en/copilot/troubleshooting-github-copilot/troubleshooting-copilot-coding-agent",
+    "Troubleshooting GitHub Copilot cloud agent",
+    "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent/troubleshoot-cloud-agent",
     "GitHub Docs",
   ],
   [
@@ -235,19 +235,19 @@ const sources = [
   [
     "GH-DOC-25",
     "About GitHub-hosted runners",
-    "https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners",
+    "https://docs.github.com/en/actions/concepts/runners/github-hosted-runners",
     "GitHub Docs",
   ],
   [
     "GH-DOC-26",
     "Using secrets in GitHub Actions",
-    "https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions",
+    "https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets",
     "GitHub Docs",
   ],
   [
     "GH-DOC-27",
     "Security hardening for GitHub Actions",
-    "https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions",
+    "https://docs.github.com/en/actions/reference/security/secure-use",
     "GitHub Docs",
   ],
   [
@@ -256,10 +256,28 @@ const sources = [
     "https://docs.github.com/en/copilot/reference/customization-cheat-sheet",
     "GitHub Docs",
   ],
+  [
+    "GH-DOC-29",
+    "Risks and mitigations for GitHub Copilot cloud agent",
+    "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/risks-and-mitigations",
+    "GitHub Docs",
+  ],
+  [
+    "GH-DOC-30",
+    "Building guardrails for GitHub Copilot cloud agent",
+    "https://docs.github.com/en/copilot/tutorials/cloud-agent/build-guardrails",
+    "GitHub Docs",
+  ],
+  [
+    "GH-DOC-31",
+    "Creating custom agents for Copilot cloud agent",
+    "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/create-custom-agents",
+    "GitHub Docs",
+  ],
 ].map(([id, title, url, publisher]) => ({ id, title, url, publisher }));
 
 const examMeta = {
-  lastVerified: "2026-08-04",
+  lastVerified: "2026-09-23",
   disclaimer:
     "本網站是繁體中文原創學習整理，並非 Microsoft 或 GitHub 官方出版品；不包含實際考題、考古題或外洩題庫。正式應考前請重新核對官方認證頁與 Study Guide。",
   exam: {
@@ -518,613 +536,1001 @@ const studyPlan = {
   ],
 };
 
-const domainSources = {
-  D1: ["GH600-SG", "GH-DOC-02", "GH-DOC-03", "GH-DOC-04"],
-  D2: ["GH600-SG", "GH-DOC-07", "GH-DOC-08", "GH-DOC-09", "GH-DOC-12"],
-  D3: ["GH600-SG", "GH-DOC-23", "GH-DOC-04"],
-  D4: ["GH600-SG", "GH-DOC-19", "GH-DOC-24", "GH-DOC-22"],
-  D5: ["GH600-SG", "GH-DOC-05", "GH-DOC-06", "GH-DOC-17"],
-  D6: ["GH600-SG", "GH-DOC-10", "GH-DOC-11", "GH-DOC-14", "GH-DOC-21"],
-};
 const o = (...texts) =>
   texts.map((text, index) => ({ id: String.fromCharCode(65 + index), text }));
 const questionSpecs = {
   D1: [
-    [
-      "multiple",
-      "一個團隊要讓代理處理 issue 到 PR 的流程。哪些定義應在執行前完成？",
-      o("輸入與輸出", "成功標準", "每次都使用最高權限", "失敗與升級路徑"),
-      ["A", "B", "D"],
-      "D1-O1",
-    ],
-    [
-      "multiple",
-      "哪些做法能清楚分離規劃與行動？",
-      o(
-        "先輸出結構化計畫",
-        "核准前禁止寫入",
-        "把計畫與執行混成一個不可中斷步驟",
-        "驗證計畫涵蓋限制",
+    {
+      type: "multiple",
+      objective: "D1-O1",
+      question:
+        "團隊要把 issue 指派給 Copilot cloud agent 產出 PR。指派前，issue 應寫清楚哪些內容？",
+      options: o(
+        "任務範圍與預期輸出",
+        "可以驗證的驗收條件",
+        "代理要使用的模型名稱",
+        "逐行指定要改的程式碼",
       ),
-      ["A", "B", "D"],
-      "D1-O2",
-    ],
-    [
-      "true-false",
-      "只要代理產生了可讀的計畫，就可以視為後續所有工具動作都已獲授權。",
-      null,
-      false,
-      "D1-O2",
-    ],
-    [
-      "single",
-      "哪一項最能讓代理工作在標準開發工具中接受審查？",
-      o(
-        "只回報口頭摘要",
-        "產生包含 diff、測試結果與來源 issue 的 PR",
-        "隱藏失敗 log",
-        "直接寫入受保護分支",
+      answer: ["A", "B"],
+      explanation:
+        "Study Guide 的 D1-O1 要求為代理定義輸入、輸出與成功標準，所以 issue 要寫清楚範圍、預期結果與可驗證的驗收條件。模型屬於代理設定層的選擇，不是任務定義；逐行指定程式碼等於自己寫完，代理只剩照抄，也失去讓它規劃與驗證的價值。",
+      trap: "「寫得越細越好」不等於逐行下指令。要寫清楚的是結果與邊界，不是實作步驟。",
+      sources: ["GH600-SG", "GH-DOC-03"],
+    },
+    {
+      type: "multiple",
+      objective: "D1-O2",
+      question: "哪些做法能把代理的規劃與執行確實分開？",
+      options: o(
+        "讓代理先輸出結構化計畫",
+        "計畫核准前只給唯讀工具",
+        "規劃與寫入在同一步驟內完成",
+        "由人檢查計畫是否涵蓋限制",
       ),
-      "B",
-      "D1-O3",
-    ],
-    [
-      "single",
-      "把模糊的大型需求直接交給代理、未定義完成條件，最接近哪種問題？",
-      o("良好委派", "代理反模式", "狀態連續性", "工具 allowlist"),
-      "B",
-      "D1-O1",
-    ],
-    [
-      "single",
-      "高風險資料刪除工作應採用哪種最小控制？",
-      o(
-        "提高 temperature",
-        "執行前人工核准並保留回滾",
-        "增加長期記憶",
-        "平行啟動更多代理",
+      answer: ["A", "B", "D"],
+      explanation:
+        "D1-O2 列出四件事：規劃與執行分開、輸出結構化計畫、驗證計畫、核准前阻止行動。核准前只給唯讀工具（例如 custom agent 的 tools 只列 read 與 search），讓規劃階段在技術上無法寫入。規劃與寫入在同一步完成，計畫就沒有被檢查的機會。",
+      trap: "只在提示裡要求「先寫計畫」卻保留寫入權限，代理仍可能邊規劃邊改檔。分離要靠權限，不能只靠提示。",
+      sources: ["GH600-SG", "GH-DOC-06"],
+    },
+    {
+      type: "true-false",
+      objective: "D1-O2",
+      question:
+        "只要代理產生了可讀的計畫，就可以視為後續所有工具動作都已獲授權。",
+      answer: false,
+      explanation:
+        "計畫是待審的產物，不是授權。D1-O2 要求先驗證計畫，並在計畫經檢查與核准前阻止代理行動；授權來自人的核准與權限設定，和計畫寫得清不清楚無關。",
+      trap: "「可讀」「結構化」描述的是計畫品質，不是授權狀態。題幹刻意把兩者混在一起。",
+      sources: ["GH600-SG", "GH-DOC-29"],
+    },
+    {
+      type: "single",
+      objective: "D1-O3",
+      question: "哪一項最能讓代理的工作在標準開發工具中接受審查？",
+      options: o(
+        "開 PR 附上 diff、測試與來源 issue",
+        "在聊天視窗逐步回報每一項修改與結果",
+        "把完整修改摘要寄到團隊信箱",
+        "先推送到 main 再補寫變更說明",
       ),
-      "B",
-      "D1-O3",
-    ],
-    [
-      "single",
-      "何者是可驗證的成功標準？",
-      o(
-        "結果看起來不錯",
-        "代理盡力完成",
-        "指定測試全數通過且只修改授權檔案",
-        "回覆內容很長",
+      answer: "A",
+      explanation:
+        "D1-O3 要求代理在標準開發工具中產出可檢查的產物。PR 讓 reviewer 用既有流程檢查 diff、跑 status checks、留言與核准，cloud agent 本身也以 draft PR 交付工作。聊天與信件不在版控與審查流程內；先推 main 則是跳過審查，而且 cloud agent 只能推送到自己的單一分支。",
+      trap: "「有回報」不等於「可審查」。可審查的產物要能在 GitHub 上被比對、跑檢查、留言與核准。",
+      sources: ["GH600-SG", "GH-DOC-29"],
+    },
+    {
+      type: "single",
+      objective: "D1-O1",
+      question:
+        "把模糊的大型需求直接交給代理，也沒有定義完成條件，這屬於哪一類問題？",
+      options: o(
+        "典型的代理反模式",
+        "合理的委派方式",
+        "脈絡漂移的現象",
+        "工具權限過大的問題",
       ),
-      "C",
-      "D1-O1",
-    ],
-    [
-      "single",
-      "要避免代理一邊規劃一邊進行未審查的部署，最直接的設計是什麼？",
-      o("增加提示長度", "建立 plan approval gate", "改用長期記憶", "移除 log"),
-      "B",
-      "D1-O2",
-    ],
-    [
-      "single",
-      "低風險且可回滾的格式修正，適合哪種自主程度？",
-      o(
+      answer: "A",
+      explanation:
+        "D1-O1 要求識別並緩解代理反模式。沒有完成條件，代理不知道何時該停，reviewer 也無從驗收；GitHub 的最佳實務建議把大需求拆成範圍明確、附驗收條件的 issue。脈絡漂移是執行途中偏離已核准的決策，工具權限過大是另一個控制面，都不是「一開始就沒定義」的問題。",
+      trap: "脈絡漂移也和「方向不清」有關，容易誤選。它指的是執行中偏離既定決策，不是任務一開始就沒有定義。",
+      sources: ["GH600-SG", "GH-DOC-03"],
+    },
+    {
+      type: "single",
+      objective: "D1-O3",
+      question: "代理要執行高風險的資料刪除工作，最基本的控制是什麼？",
+      options: o(
+        "執行前人工核准並保留回滾方式",
+        "事後由人抽查刪除紀錄是否合理",
+        "讓兩個代理先各自確認一次",
+        "降低模型溫度以減少出錯機率",
+      ),
+      answer: "A",
+      explanation:
+        "不可逆操作的風險在於做了就撤不回，所以控制點必須放在執行前，並準備好回滾方式（例如備份）。事後抽查只能發現損害；兩個代理互相確認仍是自動判斷，不是人工授權；溫度只影響輸出的隨機程度，不提供授權也不提供回滾。",
+      trap: "事前核准和事後稽核都會留下紀錄，差別在於能不能擋住不可逆的動作。",
+      sources: ["GH600-SG", "GH-DOC-30"],
+    },
+    {
+      type: "single",
+      objective: "D1-O1",
+      question: "下列哪一項是可以驗證的成功標準？",
+      options: o(
+        "指定測試全數通過且只改授權檔案",
+        "由 reviewer 判斷程式碼品質良好",
+        "代理回報已經完成全部修改項目",
+        "修改後的程式碼比原本容易維護",
+      ),
+      answer: "A",
+      explanation:
+        "可以驗證，代表任何人用同一方法都會得到同樣結論：測試結果可由 CI 判定，檔案範圍可由 diff 檢查。reviewer 的判斷是有價值的質性訊號，但不能單獨當成功標準；代理的自我回報與「比較好維護」都無法客觀判定。",
+      trap: "人工審查是有效的評估訊號（D4），但題目問的是能客觀重現的判準，兩者不要混用。",
+      sources: ["GH600-SG", "GH-DOC-17"],
+    },
+    {
+      type: "single",
+      objective: "D1-O2",
+      question:
+        "要避免代理一邊規劃一邊進行未經審查的部署，最直接的設計是什麼？",
+      options: o(
+        "在計畫與部署之間設核准關卡",
+        "在提示中要求代理部署前要謹慎",
+        "部署完成後自動產生完整報告",
+        "延長部署 workflow 的逾時",
+      ),
+      answer: "A",
+      explanation:
+        "核准關卡把「計畫」和「行動」切成兩段，沒有核准就進不了部署，例如受保護分支要求的審查或 status check。提示中的要求沒有強制力；事後報告擋不住部署；逾時設定和授權無關。",
+      trap: "在 instructions 寫「請先確認」只是軟性約束，代理可能不遵守。題目問的是在設計上能擋住的控制。",
+      sources: ["GH600-SG", "GH-DOC-14"],
+    },
+    {
+      type: "single",
+      objective: "D1-O3",
+      question: "低風險、可以回滾的格式修正，適合給代理哪種自主程度？",
+      options: o(
         "在明確範圍內自動執行並驗證",
-        "一律要求高階主管逐字核准",
-        "完全禁止代理",
-        "賦予組織管理權限",
+        "每一步都先請人核准再執行",
+        "只產生修改建議，由人手動套用",
+        "交給擁有管理權限的代理",
       ),
-      "A",
-      "D1-O3",
-    ],
-    [
-      "single",
-      "可觀測性資料最重要的用途是什麼？",
-      o(
-        "增加模型上下文直到無限",
-        "重建代理決策、工具動作與結果",
-        "取代所有測試",
-        "讓輸出更像人類",
+      answer: "A",
+      explanation:
+        "D1-O3 要求安排人工介入時不拖慢交付，D6-O2 也要求刪掉不降低實質風險的核准。低風險又能回滾的任務，限定範圍加上自動驗證（lint、測試）就夠了。逐步核准只增加等待；只給建議浪費了自動化；管理權限則違反最小權限。",
+      trap: "「核准越多越安全」在低風險任務上不成立。多餘的核准本身就是 GH-600 要你辨識的問題。",
+      sources: ["GH600-SG", "GH-DOC-30"],
+    },
+    {
+      type: "single",
+      objective: "D1-O3",
+      question: "代理的可觀測性資料，最重要的用途是什麼？",
+      options: o(
+        "重建代理的決策、工具動作與結果",
+        "統計代理每天消耗的 token 數",
+        "讓代理下次執行時自動讀取並沿用",
+        "向主管展示代理每週完成的工作量",
       ),
-      "B",
-      "D1-O3",
-    ],
+      answer: "A",
+      explanation:
+        "可觀測性讓人事後能回答三件事：代理為什麼這樣做、做了什麼、結果如何。這是除錯、歸責與調校的基礎，cloud agent 的 session log 與已簽章的 commit 就是這類資料。token 用量與工作量是成本和管理指標；讓代理自動讀取屬於記憶設計，不是可觀測性的主要目的。",
+      trap: "token 用量也來自 log，但它回答的是成本問題，不是決策對不對。",
+      sources: ["GH600-SG", "GH-DOC-29"],
+    },
   ],
   D2: [
-    [
-      "multiple",
-      "選擇代理工具時應同時評估哪些項目？",
-      o("任務必要性", "最小權限", "輸入輸出驗證", "圖示顏色"),
-      ["A", "B", "C"],
-      "D2-O1",
-    ],
-    [
-      "multiple",
-      "健全的代理錯誤處理通常包含哪些能力？",
-      o("有界重試", "取消與逾時", "升級路徑", "對所有錯誤無限重試"),
-      ["A", "B", "C"],
-      "D2-O4",
-    ],
-    [
-      "true-false",
-      "MCP server 已列入設定檔，就代表它提供的每個工具都應自動獲得完整權限。",
-      null,
-      false,
-      "D2-O2",
-    ],
-    [
-      "single",
-      "代理只需讀取 repository 內容時，最佳權限為何？",
-      o(
-        "組織擁有者",
-        "repository 唯讀",
-        "所有 repository 寫入",
-        "雲端帳戶管理員",
+    {
+      type: "multiple",
+      objective: "D2-O1",
+      question:
+        "你要建立一個只負責補測試的 custom agent，規定它不能上網查資料。agent profile 的 tools 應包含哪些？",
+      options: o(
+        "read（讀取檔案）",
+        "edit（修改檔案）",
+        "search（搜尋程式碼）",
+        "web（搜尋網路上的資料）",
       ),
-      "B",
-      "D2-O1",
-    ],
-    [
-      "single",
-      "MCP allowlist 的主要作用是什麼？",
-      o(
-        "控制允許連線或使用的 MCP 來源與工具",
-        "自動修正程式",
-        "保存長期記憶",
-        "提高題庫分數",
+      answer: ["A", "B", "C"],
+      explanation:
+        "custom agent 用 tools 的別名開關工具類別。補測試要讀取與搜尋既有程式碼，新增或修改測試檔也需要 edit；web 讓代理取得網路資料，題目禁止上網就不給。tools 無法把 edit 限制在測試檔，「不改正式程式碼」要靠 profile 的指示、review 與 CODEOWNERS 等控制。",
+      trap: "以為拿掉 edit 就能「只寫測試」。新增測試檔同樣需要 edit；tools 是整類工具的開關，不是檔案層級的權限。",
+      sources: ["GH-DOC-06", "GH-DOC-31"],
+    },
+    {
+      type: "multiple",
+      objective: "D2-O4",
+      question: "代理呼叫外部 API 時，哪些錯誤處理設計是正確的？",
+      options: o(
+        "暫時性錯誤以有上限的退避重試",
+        "權限錯誤直接停止並回報給人",
+        "每次失敗都自動換一組權杖重試",
+        "逾時後持續重試直到成功為止",
       ),
-      "A",
-      "D2-O2",
-    ],
-    [
-      "single",
-      "哪項資訊不應硬編碼在 repository 的 MCP 設定？",
-      o("server 名稱", "工具描述", "存取權杖", "允許的工具名稱"),
-      "C",
-      "D2-O2",
-    ],
-    [
-      "single",
-      "要讓代理從乾淨 runner 重現本機結果，應優先提供什麼？",
-      o(
-        "setup steps 與鎖定依賴",
-        "個人 shell history",
-        "未記錄的全域套件",
-        "本機快取",
+      answer: ["A", "B"],
+      explanation:
+        "暫時性錯誤（例如 503 或逾時）可能自行恢復，適合有上限的指數退避重試；權限錯誤不會因重試而改變，應停止並沿升級路徑回報。每次失敗就換權杖是在繞過授權控制；沒有上限的重試會耗盡資源，也掩蓋真正的問題。",
+      trap: "「重試」本身沒有錯，錯在沒有分辨錯誤類型，也沒有設定上限。",
+      sources: ["GH600-SG"],
+    },
+    {
+      type: "true-false",
+      objective: "D2-O2",
+      question:
+        '在 repository 的 MCP 設定中，每個 server 都必須用 tools 欄位列出允許的工具名稱，或用 ["*"] 允許全部工具。',
+      answer: true,
+      explanation:
+        'cloud agent 的 MCP JSON 中，tools 是必填欄位：列出工具名稱就是 allowlist，["*"] 則開放該 server 的全部工具。設定完成後，Copilot 會自主使用這些工具，不會逐次請你核准，所以應該只列出任務需要的工具。',
+      trap: "custom agent profile 省略 tools 時會開放全部工具，這個行為不適用於 repository 的 MCP 設定，兩者不要混淆。",
+      sources: ["GH-DOC-08", "GH-DOC-06"],
+    },
+    {
+      type: "single",
+      objective: "D2-O1",
+      question:
+        "某個 custom agent 只需要讀取 repository 內容來回答問題。哪個設定最符合最小權限？",
+      options: o(
+        'tools: ["read", "search"]',
+        "省略 tools 欄位，使用預設值",
+        'tools: ["*"] 並在指示中禁止修改',
+        'tools: ["read", "edit", "search"]',
       ),
-      "A",
-      "D2-O3",
-    ],
-    [
-      "single",
-      "限制代理只在指定 branch 工作，主要降低哪一種風險？",
-      o("脈絡視窗太短", "未授權範圍被修改", "測試執行太快", "題目太少"),
-      "B",
-      "D2-O3",
-    ],
-    [
-      "single",
-      "暫時性網路 503 適合什麼處理？",
-      o("有上限的指數退避重試", "永久忽略", "立即刪除資料", "無限快速重試"),
-      "A",
-      "D2-O4",
-    ],
-    [
-      "single",
-      "權限拒絕錯誤重試三次仍相同，下一步應是什麼？",
-      o("繼續重試", "停止並沿升級路徑回報", "提高權限且不記錄", "清除所有 log"),
-      "B",
-      "D2-O4",
-    ],
-    [
-      "single",
-      "哪個紀錄最能支援工具動作課責？",
-      o(
-        "只有最終自然語言摘要",
-        "時間、actor、工具、輸入摘要、結果與核准者",
-        "只有 CPU 使用率",
-        "只有模型名稱",
+      answer: "A",
+      explanation:
+        'read 與 search 就足以讀取和搜尋程式碼。省略 tools 或寫成 ["*"] 都代表開放全部可用工具，只在指示中禁止修改沒有強制力；加入 edit 則超出需求。',
+      trap: "C 看起來有防護，但指示是軟性約束，權限設定才是硬性控制。",
+      sources: ["GH-DOC-06"],
+    },
+    {
+      type: "single",
+      objective: "D2-O2",
+      question:
+        "企業希望開發者在 IDE 與 Copilot CLI 中，只能使用經過審核的 MCP server。應該設定什麼？",
+      options: o(
+        "MCP registry 搭配「Registry only」政策",
+        "在每個 repository 的 MCP 設定列出 server",
+        "在 copilot-instructions.md 列出禁用清單",
+        "把 server 權杖改放到 Actions secrets",
       ),
-      "B",
-      "D2-O4",
-    ],
-    [
-      "single",
-      "代理在 CI 建立 PR 時，哪個設計較安全？",
-      o(
-        "直接 push 到受保護 main",
-        "使用受限 token 建分支與 PR，再經 checks/review",
-        "關閉 branch protection",
-        "跳過所有 hooks",
+      answer: "A",
+      explanation:
+        "MCP registry 是一組列出核可 server 的 HTTPS 端點。「Restrict MCP access to registry servers」政策選擇 Registry only 後，受支援的 IDE 與 Copilot CLI 只能使用 registry 內的 server（此功能目前為公開預覽）。repository 的 MCP 設定只作用於該 repo 的 cloud agent；instructions 沒有強制力；權杖放在哪裡不會限制能用哪些 server。",
+      trap: "題目指定的是 IDE 與 CLI。repository 層級的 MCP 設定是給 cloud agent 用的，適用範圍對不上。",
+      sources: ["GH-DOC-09", "GH600-SG"],
+    },
+    {
+      type: "single",
+      objective: "D2-O2",
+      question:
+        "你要讓 cloud agent 使用一個需要 API 權杖的 MCP server。權杖應該放在哪裡？",
+      options: o(
+        "Agents secret，名稱以 COPILOT_MCP_ 開頭",
+        "直接寫在 MCP 設定 JSON 的 env 欄位",
+        "一般 Actions secret，名稱不限前綴",
+        "repository 根目錄 .env 並加入 .gitignore",
       ),
-      "B",
-      "D2-O3",
-    ],
-    [
-      "single",
-      "工具描述含糊最可能造成什麼問題？",
-      o(
-        "代理誤選或誤用工具",
-        "repository 自動封存",
-        "MCP transport 加密",
-        "測試自動變快",
+      answer: "A",
+      explanation:
+        "只有名稱以 COPILOT_MCP_ 開頭的 Agents secrets 或 variables（組織或 repository 層級）會提供給 MCP 設定，在 JSON 中用 $COPILOT_MCP_API_KEY 這類語法引用。直接寫進 JSON 等於把權杖放進設定檔；一般 Actions secrets 不會提供給 MCP 設定；.env 不在 cloud agent 的機密機制內，也容易被誤提交。",
+      trap: "Actions secrets 與 Agents secrets 是不同的存放位置。GitHub 建議把不該讓 Copilot 取得的資料放在 Actions secrets，代理需要的才放 Agents secrets。",
+      sources: ["GH-DOC-08", "GH-DOC-30"],
+    },
+    {
+      type: "single",
+      objective: "D2-O3",
+      question:
+        "cloud agent 每次開工都先花好幾分鐘摸索、安裝專案依賴。最佳的改善方式是什麼？",
+      options: o(
+        "在 copilot-setup-steps.yml 預先安裝依賴",
+        "在 copilot-instructions.md 寫出安裝指令",
+        "在 issue 內容附上本機的安裝紀錄",
+        "把 node_modules 一起提交到 repository",
       ),
-      "A",
-      "D2-O1",
-    ],
-    [
-      "single",
-      "取消訊號應如何處理？",
-      o(
-        "代理停止新動作、清理可安全清理的資源並記錄狀態",
-        "忽略直到任務完成",
-        "改寫 main",
-        "刪除稽核資料",
+      answer: "A",
+      explanation:
+        ".github/workflows/copilot-setup-steps.yml 的 copilot-setup-steps job 用來預先準備代理的開發環境，適合安裝依賴與工具，讓每次環境一致。寫在 instructions 只是讓代理自己去裝，每次都要花時間，也可能失敗；本機安裝紀錄不一定適用於 runner；提交 node_modules 會讓 repo 膨脹且綁定平台。",
+      trap: "instructions 告訴代理「怎麼做」，setup steps 則是「開工前就先做好」，兩者用途不同。",
+      sources: ["GH-DOC-12"],
+    },
+    {
+      type: "single",
+      objective: "D2-O3",
+      question: "關於 cloud agent 推送程式碼的範圍，下列敘述何者正確？",
+      options: o(
+        "只能推送到自己負責的單一分支",
+        "可推送到任何沒有保護規則的分支",
+        "經 repo 管理員同意後可推送到 main",
+        "可推送到觸發者有寫入權的所有分支",
       ),
-      "A",
-      "D2-O4",
-    ],
+      answer: "A",
+      explanation:
+        "依 GitHub 的風險與緩解說明，cloud agent 只能推送到單一分支：它自己建立的 copilot/ 分支，或被要求處理的 PR 分支。它不能直接推到預設分支，這和觸發者的權限無關，也不能靠管理員同意開放；變更要進 main，仍須經過 PR 並由人合併。",
+      trap: "觸發者必須有寫入權才能指派代理，但代理不會因此繼承觸發者的推送範圍。",
+      sources: ["GH-DOC-29"],
+    },
+    {
+      type: "single",
+      objective: "D2-O4",
+      question:
+        "代理呼叫的 MCP 工具回傳 503 Service Unavailable。較好的處理方式是什麼？",
+      options: o(
+        "以指數退避重試，並設定次數上限",
+        "立即改用另一個權限更高的工具",
+        "忽略錯誤，繼續執行後續步驟",
+        "以固定的短間隔持續重試直到成功為止",
+      ),
+      answer: "A",
+      explanation:
+        "503 通常是暫時狀況，重試合理，但要用退避拉長間隔並設定上限，避免壓垮服務或無限等待；到達上限就走升級路徑。改用權限更高的工具是擴權，不是錯誤處理；忽略錯誤會讓後續步驟建立在失敗的結果上；固定短間隔無上限重試會放大故障。",
+      trap: "A 和 D 都是重試，差別在有沒有退避與上限。",
+      sources: ["GH600-SG"],
+    },
+    {
+      type: "single",
+      objective: "D2-O4",
+      question: "代理連續三次遇到 403 權限不足。下一步應該是什麼？",
+      options: o(
+        "停止嘗試並沿升級路徑通知負責人",
+        "改用觸發者的個人存取權杖再試一次",
+        "把錯誤改記為警告後繼續執行",
+        "增加重試次數並延長等待時間",
+      ),
+      answer: "A",
+      explanation:
+        "權限錯誤是確定性的，重試不會改變結果。應停止，並把失敗內容、當下的上下文與所需權限交給有權決定的人。改用個人權杖是繞過授權設計；降為警告會隱藏失敗；延長重試只是浪費時間。",
+      trap: "D 看起來比較有耐心，但 403 與 503 的處理方式不同：前者重試無效。",
+      sources: ["GH600-SG"],
+    },
+    {
+      type: "single",
+      objective: "D2-O4",
+      question:
+        "事後要追查「代理在什麼時候、用了什麼工具、改了什麼」。哪一種紀錄最有用？",
+      options: o(
+        "逐筆記錄時間、工具、參數與結果",
+        "代理在任務最後輸出的自然語言總結",
+        "工作流程每次執行所花費的時間",
+        "模型名稱與當次使用的 token 數量",
+      ),
+      answer: "A",
+      explanation:
+        "課責需要能逐步重建事件：何時、由誰觸發、用了什麼工具與參數、結果如何。cloud agent 的 session log 與已簽章的 commit 就提供這類紀錄。最後的總結是代理自己的說法，可能遺漏重點；執行時間、模型與 token 是營運指標，回答不了「做了什麼」。",
+      trap: "總結讀起來最方便，但它是代理的自我陳述，不是證據。",
+      sources: ["GH-DOC-29", "GH600-SG"],
+    },
+    {
+      type: "single",
+      objective: "D2-O3",
+      question:
+        "你想讓 CI 每晚自動請代理修正 lint 錯誤並提出變更。哪一種設計最安全？",
+      options: o(
+        "用受限權杖開分支與 PR，檢查後由人合併",
+        "用管理員權杖直接推送所有修正到 main",
+        "暫時關閉分支保護，修正後再重新開啟",
+        "讓代理在 CI 內直接合併它自己建立的 PR",
+      ),
+      answer: "A",
+      explanation:
+        "CI 裡的代理也要遵守最小權限與既有審查流程：用受限權杖只建立分支與 PR，由 status checks 與人工審查決定是否合併。管理員權杖直推 main、暫停分支保護都等於拆掉護欄；讓代理合併自己的 PR 則沒有人把關。cloud agent 預設也不能推送到預設分支或合併 PR。",
+      trap: "「每晚自動」不代表要自動到合併為止。自動化的是產生變更，合併仍是控制點。",
+      sources: ["GH-DOC-30", "GH-DOC-14"],
+    },
+    {
+      type: "single",
+      objective: "D2-O1",
+      question:
+        "某個 custom agent 經常選錯工具。檢查後發現它能用 20 多個 MCP 工具，其中幾個描述很相似。最直接的改善是什麼？",
+      options: o(
+        "在 tools 只列出必要的 MCP 工具",
+        "在指示中逐一說明每個工具的使用時機",
+        "改用較大的模型以提升工具選擇能力",
+        "把所有工具合併成一個通用的萬用工具",
+      ),
+      answer: "A",
+      explanation:
+        "可用工具越多、描述越相近，代理越容易選錯。custom agent 的 tools 可以用 server-name/tool-name 只開放特定 MCP 工具（server-name/* 則開放整個 server），直接縮小選擇範圍，也符合最小權限。逐一寫說明有幫助，但擋不住誤用；換模型沒有處理根因；萬用工具讓每次呼叫更含糊。",
+      trap: "B 看起來很周到，但工具過多時，減少選項比增加說明更有效。",
+      sources: ["GH-DOC-06"],
+    },
+    {
+      type: "single",
+      objective: "D2-O4",
+      question: "使用者在代理執行途中取消任務。代理應該如何處理？",
+      options: o(
+        "停止新動作，清理暫存並記錄進度",
+        "先把目前步驟做完，再繼續後續步驟",
+        "立即停止，並把已修改的檔案全部刪除",
+        "忽略取消訊號，完成後再通知使用者",
+      ),
+      answer: "A",
+      explanation:
+        "取消代表不再授權新的動作，但已經做的事要能交代：清理可以安全清理的暫存資源，並記錄完成到哪一步，方便之後恢復或回滾。做完剩下的步驟等於忽略取消；刪掉所有已修改的檔案可能造成新的破壞，也失去可追查的狀態。",
+      trap: "「立即停止」聽起來最乾脆，但連帶刪除成果是未經授權的破壞性動作。",
+      sources: ["GH600-SG"],
+    },
   ],
   D3: [
-    [
-      "multiple",
-      "長期記憶治理應包含哪些規則？",
-      o("相關性範圍", "到期與裁剪", "重設條件", "永久保存所有提示"),
-      ["A", "B", "C"],
-      "D3-O1",
-    ],
-    [
-      "multiple",
-      "哪些產物有助於長時間任務恢復而不重做？",
-      o("checkpoint", "決策紀錄", "已完成步驟清單", "未保存的口頭假設"),
-      ["A", "B", "C"],
-      "D3-O2",
-    ],
-    [
-      "true-false",
-      "跨工具共享狀態時，來源越多越好，不需要指定權威來源。",
-      null,
-      false,
-      "D3-O3",
-    ],
-    [
-      "single",
-      "只供本次工具呼叫使用的中間結果，最適合哪種記憶？",
-      o("短期記憶", "永久組織記憶", "公開 wiki", "憑證庫"),
-      "A",
-      "D3-O1",
-    ],
-    [
-      "single",
-      "偵測到代理開始違反先前已核准決策，這稱為什麼？",
-      o("脈絡漂移", "有界重試", "工具 allowlist", "依賴掃描"),
-      "A",
-      "D3-O2",
-    ],
-    [
-      "single",
-      "跨 IDE 與 CI 出現矛盾任務狀態時，最佳處理為何？",
-      o(
-        "選最新但未驗證的訊息",
-        "依指定 source of truth 對帳並記錄解決結果",
-        "同時保留兩個矛盾狀態",
-        "刪除全部紀錄",
+    {
+      type: "multiple",
+      objective: "D3-O1",
+      question: "關於 Copilot Memory 儲存的 repository 事實，哪些敘述正確？",
+      options: o(
+        "事實附有指向支持程式碼的引用",
+        "使用前會對照目前分支重新驗證",
+        "所有事實都會永久保存直到手動刪除",
+        "只有建立該事實的使用者能看到",
       ),
-      "B",
-      "D3-O3",
-    ],
-    [
-      "single",
-      "敏感資料已不再與任務相關，記憶策略應如何處理？",
-      o(
-        "永久保留",
-        "依到期或重設規則移除",
-        "複製到更多工具",
-        "放進 prompt 範例",
+      answer: ["A", "B"],
+      explanation:
+        "Copilot Memory 的 repository 事實會附上指向支持程式碼的引用，並在使用前對照目前分支驗證，避免依據過時資訊行動。未被使用的事實 28 天後會自動刪除，不是永久保存；repository 事實提供給所有能使用該 repo 記憶的人，只有使用者偏好才是個人範圍。",
+      trap: "把「使用者偏好」的個人範圍套到 repository 事實上。兩者存放的內容與可見範圍不同。",
+      sources: ["GH-DOC-23"],
+    },
+    {
+      type: "multiple",
+      objective: "D3-O2",
+      question:
+        "一個跨好幾天的代理任務中途中斷。哪些產物能讓它恢復，而且不重做已完成的步驟？",
+      options: o(
+        "已完成步驟與目前進度的檢查點",
+        "記錄已核准決策與理由的文件",
+        "尚未完成的步驟與待決問題清單",
+        "只存在代理記憶中、未寫下的假設",
       ),
-      "B",
-      "D3-O1",
-    ],
-    [
-      "single",
-      "恢復中斷任務前最應先讀什麼？",
-      o(
-        "checkpoint、決策與剩餘工作",
-        "隨機另一個 repo",
-        "模型行銷頁",
-        "所有歷史聊天全文",
+      answer: ["A", "B", "C"],
+      explanation:
+        "D3-O2 要求把任務進度與決策保存成持久產物，讓代理恢復時不重複步驟，也不偏離先前的決策。檢查點、決策紀錄與剩餘工作清單都能留在 issue、PR 或檔案中並接受審查；沒有寫下的假設在工作階段結束後就消失了。",
+      trap: "「代理應該記得」不是保存狀態的方式。能用來恢復的，只有寫下來而且找得到的產物。",
+      sources: ["GH600-SG"],
+    },
+    {
+      type: "true-false",
+      objective: "D3-O3",
+      question:
+        "跨工具共享代理狀態時，應先指定單一權威來源，其他工具只從它讀取或回寫到它。",
+      answer: true,
+      explanation:
+        "D3-O3 要求避免互相衝突與過期的脈絡。多個工具各自保存狀態時，如果沒有權威來源（例如 issue、PR 或 repo 內的狀態檔），發生衝突就無從判斷哪份才對；指定單一來源，其他工具讀取或回寫到它，才能對帳。",
+      trap: "「多存幾份比較保險」會製造互相矛盾的狀態。備份不等於多個權威來源。",
+      sources: ["GH600-SG"],
+    },
+    {
+      type: "single",
+      objective: "D3-O1",
+      question:
+        "某個中間結果只在這次工具呼叫中有用，之後不再需要。它應該放在哪裡？",
+      options: o(
+        "只保留在當次任務的短期記憶",
+        "存入 repository 的長期記憶",
+        "寫入 copilot-instructions.md",
+        "寫入組織共用的外部知識庫",
       ),
-      "A",
-      "D3-O2",
-    ],
+      answer: "A",
+      explanation:
+        "只在當次有用的資料放短期記憶，任務結束就釋放。存入長期記憶或 instructions 會讓之後的任務讀到無關內容、稀釋脈絡；外部知識庫適合跨團隊、需要長期查閱的資料。D3-O1 的重點是依資料的有效期與範圍選擇記憶層。",
+      trap: "「多記一點比較好」會污染脈絡。記憶也要依相關性界定範圍。",
+      sources: ["GH600-SG", "GH-DOC-23"],
+    },
+    {
+      type: "single",
+      objective: "D3-O2",
+      question:
+        "長時間執行的代理，開始提出與已核准計畫相牴觸的修改。這種現象稱為什麼？",
+      options: o("脈絡漂移", "工具誤用", "記憶過期", "權限擴張"),
+      answer: "A",
+      explanation:
+        "脈絡漂移指長時間執行時，代理逐漸偏離先前已確認的目標或決策。D3-O2 要求偵測並修正漂移，例如定期對照持久化的決策紀錄。工具誤用是選錯工具或參數；記憶過期是依據已失效的資訊；權限擴張是取得超出需求的權限，都不是「偏離已核准的決策」。",
+      trap: "記憶過期也可能導致錯誤修改，但題幹強調「與已核准計畫相牴觸」，指的是偏離決策，不是資訊過時。",
+      sources: ["GH600-SG"],
+    },
+    {
+      type: "single",
+      objective: "D3-O3",
+      question:
+        "同一個任務先後在 VS Code 與 cloud agent 中處理，兩邊記錄的進度不一致。最好的處理方式是什麼？",
+      options: o(
+        "以指定的權威來源對帳並記錄結果",
+        "採用時間戳記最新的那一份紀錄",
+        "同時保留兩份紀錄讓代理自行判斷",
+        "刪除兩份紀錄後從頭重新開始任務",
+      ),
+      answer: "A",
+      explanation:
+        "發生衝突時，應回到事先指定的權威來源（例如 issue 或 PR 上的狀態）對帳，並記錄如何解決，避免下次再分歧。最新的不一定正確；保留兩份讓代理自行判斷會延續衝突；全部刪除會丟掉已完成的工作。",
+      trap: "「最新的就是對的」是常見直覺，但時間戳只說明誰最後寫入，不說明內容是否經過驗證。",
+      sources: ["GH600-SG"],
+    },
+    {
+      type: "single",
+      objective: "D3-O1",
+      question:
+        "Copilot Memory 裡的某條 repository 事實一直沒有被使用。它會怎樣？",
+      options: o(
+        "未使用滿 28 天後自動刪除",
+        "保留到 repo 擁有者手動刪除",
+        "未使用滿 7 天後自動刪除",
+        "轉存為觸發者的個人偏好",
+      ),
+      answer: "A",
+      explanation:
+        "Copilot Memory 中未被使用的事實與偏好，28 天後會自動刪除；只要事實被成功驗證並使用，計時就會重設。repository 擁有者也可以手動檢視與刪除事實，但不必等到手動刪除才會清掉。repository 事實不會轉成個人偏好，兩者範圍不同。",
+      trap: "「可以手動刪除」和「只能手動刪除」是兩回事，B 混淆了這一點。",
+      sources: ["GH-DOC-23"],
+    },
+    {
+      type: "single",
+      objective: "D3-O2",
+      question: "代理從中斷處恢復工作前，最應該先讀取什麼？",
+      options: o(
+        "檢查點、已核准決策與剩餘工作",
+        "先前所有聊天紀錄的完整全文",
+        "repository 中最近修改的所有檔案",
+        "代理上次執行時使用的系統提示詞",
+      ),
+      answer: "A",
+      explanation:
+        "恢復時需要知道三件事：做到哪裡、哪些決策已經定案、還剩什麼，這些應該寫在持久化的檢查點與決策紀錄中。完整聊天全文雜訊多，也可能包含已被推翻的想法；最近修改的檔案只顯示結果，不說明原因；系統提示詞裡沒有任務進度。",
+      trap: "「讀越多越完整」反而可能把已推翻的決策帶回來，造成漂移。",
+      sources: ["GH600-SG"],
+    },
   ],
   D4: [
-    [
-      "multiple",
-      "有效的代理評估可包含哪些訊號？",
-      o("測試通過率", "安全掃描結果", "人工品質評分", "回覆字數越多越好"),
-      ["A", "B", "C"],
-      "D4-O1",
-    ],
-    [
-      "multiple",
-      "分析代理失敗時應檢查哪些證據？",
-      o(
-        "plan 與 trace",
-        "工具呼叫與 log",
-        "輸出與 workflow artifacts",
-        "只看最終一句話",
+    {
+      type: "multiple",
+      objective: "D4-O1",
+      question: "評估代理產出的 PR 時，哪些是能自動產生的評估訊號？",
+      options: o(
+        "測試與建置的 status check 結果",
+        "code scanning 回報的新增警示",
+        "secret scanning 偵測到的外洩憑證",
+        "reviewer 對可讀性的主觀評分",
       ),
-      ["A", "B", "C"],
-      "D4-O2",
-    ],
-    [
-      "true-false",
-      "評估分數變差時，同時更換模型、工具、記憶與工作流程最容易找出根因。",
-      null,
-      false,
-      "D4-O3",
-    ],
-    [
-      "single",
-      "哪一項是定量評估訊號？",
-      o("reviewer 覺得合理", "測試通過 98/100", "語氣專業", "解釋清楚"),
-      "B",
-      "D4-O1",
-    ],
-    [
-      "single",
-      "代理呼叫正確工具但使用錯誤參數，根因類別最接近什麼？",
-      o("工具誤用", "記憶到期", "多代理生命週期", "自主程度"),
-      "A",
-      "D4-O2",
-    ],
-    [
-      "single",
-      "runner 缺少必要 SDK 造成 build 失敗，根因類別為何？",
-      o("推理錯誤", "環境問題", "護欄過強", "人工審查"),
-      "B",
-      "D4-O2",
-    ],
-    [
-      "single",
-      "評估顯示代理持續讀取不相關檔案，最小調校為何？",
-      o(
-        "收窄指令與工具範圍",
-        "加入更多長期記憶",
-        "移除所有限制",
-        "加倍平行代理",
+      answer: ["A", "B", "C"],
+      explanation:
+        "D4-O1 要求用自動掃描工具產生評估訊號。status checks、code scanning 與 secret scanning 都能在每個 PR 上自動、一致地產生結果，cloud agent 本身也會用 CodeQL 與 secret scanning 檢查自己的變更。reviewer 的主觀評分是有價值的質性訊號，但不是自動產生的。",
+      trap: "題目問的是「能自動產生」。人工評分再重要也不符合條件，讀題要看限定詞。",
+      sources: ["GH600-SG", "GH-DOC-19", "GH-DOC-29"],
+    },
+    {
+      type: "multiple",
+      objective: "D4-O2",
+      question: "代理產出的 PR 沒有通過測試。要找出根因，應優先查看哪些證據？",
+      options: o(
+        "代理的 session log 與工具呼叫紀錄",
+        "失敗 workflow 的日誌與 artifacts",
+        "代理在 PR 描述中自我評估的結論",
+        "同一 repo 其他 PR 的合併時間",
       ),
-      "A",
-      "D4-O3",
-    ],
-    [
-      "single",
-      "要判斷調校是否有效，應怎麼做？",
-      o(
-        "用同一評估集重新測量並比較",
-        "只看單一成功案例",
-        "改完立即宣告完成",
-        "刪除基準結果",
+      answer: ["A", "B"],
+      explanation:
+        "D4-O2 要求利用 log、計畫、trace、輸出與 workflow artifacts 找出失敗。session log 顯示代理做了什麼、用了哪些工具與參數；失敗 workflow 的日誌與 artifacts 顯示實際的錯誤。PR 描述中的自我評估是代理的陳述，不是證據；其他 PR 的合併時間與這次失敗無關。",
+      trap: "代理的自我評估讀起來像結論，但根因分析要以可重現的證據為準。",
+      sources: ["GH600-SG", "GH-DOC-22"],
+    },
+    {
+      type: "true-false",
+      objective: "D4-O3",
+      question:
+        "評估分數下降時，同時更換模型、工具、記憶與指示，最能快速找出根因。",
+      answer: false,
+      explanation:
+        "同時改多個變數，即使分數回升，也不知道是哪一項有效；某項改善也可能被另一項抵銷。D4-O3 的調校應一次調整一個因素，並用同一組評估重新測量。",
+      trap: "「一次全改比較快」只在你不在乎原因時成立，而調校的目的就是知道原因。",
+      sources: ["GH600-SG"],
+    },
+    {
+      type: "single",
+      objective: "D4-O1",
+      question: "下列哪一項是量化的評估訊號？",
+      options: o(
+        "100 個測試中通過 98 個",
+        "reviewer 認為修改方向合理",
+        "代理的說明文字語氣專業",
+        "PR 描述清楚交代了動機",
       ),
-      "A",
-      "D4-O3",
-    ],
-    [
-      "single",
-      "成功標準應與什麼對齊？",
-      o("開發意圖與操作限制", "模型偏好的格式", "最長輸出", "工具數量"),
-      "A",
-      "D4-O1",
-    ],
-    [
-      "single",
-      "code scanning 找到新增高風險弱點時，這是什麼類型訊號？",
-      o("自動評估與安全訊號", "短期記憶", "協調模式", "考試語言"),
-      "A",
-      "D4-O1",
-    ],
+      answer: "A",
+      explanation:
+        "量化訊號是可以計數與比較的數值，例如通過率、弱點數量或執行時間。reviewer 的判斷、語氣與說明是否清楚都是質性訊號，同樣有用，但無法直接比較數值。D4-O1 要求能辨識這兩類訊號。",
+      trap: "質性訊號並非不重要，這題只問哪一項屬於量化。",
+      sources: ["GH600-SG"],
+    },
+    {
+      type: "single",
+      objective: "D4-O2",
+      question:
+        "代理呼叫了正確的工具，卻傳入錯誤的參數，導致結果錯誤。根因應歸為哪一類？",
+      options: o("工具誤用", "推理錯誤", "環境問題", "脈絡不足"),
+      answer: "A",
+      explanation:
+        "Study Guide 把根因分成推理錯誤、工具誤用、脈絡或環境問題。選對工具但參數錯誤，是工具使用方式出錯，屬於工具誤用。推理錯誤是計畫或判斷本身錯；環境問題是執行環境缺件或設定錯；脈絡不足是缺少必要資訊。",
+      trap: "參數錯誤也可能源自資訊不足，但要題幹指出缺少資訊才歸為脈絡問題；這題只說參數錯。",
+      sources: ["GH600-SG"],
+    },
+    {
+      type: "single",
+      objective: "D4-O2",
+      question:
+        "cloud agent 建置失敗，log 顯示 runner 上缺少專案需要的 SDK。根因類別與修正方向為何？",
+      options: o(
+        "環境問題；在 setup steps 安裝 SDK",
+        "推理錯誤；改寫代理的指示內容",
+        "工具誤用；限制代理可用的工具",
+        "脈絡不足；把 SDK 文件貼進 issue",
+      ),
+      answer: "A",
+      explanation:
+        "缺少 SDK 是執行環境的問題，和代理的判斷無關。修正方向是在 copilot-setup-steps.yml 預先安裝，讓每次環境一致。改寫指示、限制工具或補文件，都不會讓 runner 多出一個 SDK。",
+      trap: "代理可能在 log 裡試著自己安裝卻失敗，看起來像行為問題，但根因仍在環境。",
+      sources: ["GH-DOC-12", "GH600-SG"],
+    },
+    {
+      type: "single",
+      objective: "D4-O3",
+      question:
+        "評估顯示代理常讀取大量與任務無關的檔案，拖慢速度也降低品質。最小的調校是什麼？",
+      options: o(
+        "在指示中界定相關目錄與工具範圍",
+        "在長期記憶加入整個 repo 的結構說明",
+        "改用脈絡視窗更大的模型來處理",
+        "增加平行代理來分擔讀取工作",
+      ),
+      answer: "A",
+      explanation:
+        "問題在於代理不知道範圍，最小的調校是直接在指示（例如 repository instructions 或 custom agent profile）界定相關目錄，並收窄可用工具。把整個 repo 結構放進長期記憶會增加更多無關脈絡；換更大的模型只是容納更多雜訊；增加代理則放大同一個問題。",
+      trap: "「給更多資訊」直覺上有幫助，但這題的問題正是資訊太多。",
+      sources: ["GH600-SG", "GH-DOC-04"],
+    },
+    {
+      type: "single",
+      objective: "D4-O3",
+      question: "你調整了代理的指示，想確認改善真的有效。應該怎麼做？",
+      options: o(
+        "用同一組評估任務重跑並比較結果",
+        "挑一個先前失敗的案例再重跑一次看看",
+        "請代理自行評估這次調整的效果",
+        "觀察接下來一週使用者的抱怨數",
+      ),
+      answer: "A",
+      explanation:
+        "要判斷調校是否有效，必須在相同條件下比較：同一組評估任務、同一套評分方式，對照調整前後的結果。單一案例可能剛好成功；代理自評不是獨立證據；使用者回饋會混入其他變因，只能當補充訊號。",
+      trap: "B 很常見。修好當初失敗的那個案例，不代表沒有讓其他案例變差。",
+      sources: ["GH600-SG"],
+    },
+    {
+      type: "single",
+      objective: "D4-O1",
+      question: "定義代理任務的成功標準時，應該以什麼為依據？",
+      options: o(
+        "開發意圖與操作限制",
+        "代理最擅長產出的格式",
+        "評估工具預設提供的指標",
+        "過去同類任務的平均耗時",
+      ),
+      answer: "A",
+      explanation:
+        "D4-O1 要求評估標準與開發意圖一致：這項變更要達成什麼、在什麼限制下完成（例如不得修改哪些檔案、要通過哪些檢查）。以代理擅長的格式為準是在遷就工具；工具預設的指標不一定反映這次的目標；耗時是營運指標，不代表結果正確。",
+      trap: "C 很誘人：現成指標很方便，但方便量測不等於量到你要的東西。",
+      sources: ["GH600-SG"],
+    },
+    {
+      type: "single",
+      objective: "D4-O1",
+      question:
+        "代理的 PR 讓 code scanning 出現一個新的高嚴重度警示。在評估上，這個結果屬於什麼？",
+      options: o(
+        "自動產生的安全評估訊號",
+        "代理記憶需要重設的訊號",
+        "多代理協調失敗的訊號",
+        "可以直接忽略的誤報訊號",
+      ),
+      answer: "A",
+      explanation:
+        "code scanning 會在 PR 上自動分析並回報弱點，正是 D4-O1 所說「用自動掃描工具產生評估訊號」的例子。它代表這次變更可能引入安全問題，應先查證再決定修正或排除；沒查證就當成誤報，會讓掃描失去意義。它和記憶或多代理協調沒有直接關係。",
+      trap: "掃描警示確實可能是誤報，但判定誤報需要查證並留下理由，不能預設忽略。",
+      sources: ["GH-DOC-19", "GH600-SG"],
+    },
   ],
   D5: [
-    [
-      "multiple",
-      "平行多代理隔離可使用哪些控制？",
-      o(
-        "獨立 worktree 或 branch",
-        "明確檔案所有權",
-        "避免重疊任務",
-        "共享同一未鎖定工作目錄",
+    {
+      type: "multiple",
+      objective: "D5-O1",
+      question:
+        "你同時把三個 issue 指派給 cloud agent 平行處理。哪些做法能降低它們彼此衝突？",
+      options: o(
+        "每個任務在自己的分支上進行",
+        "事先劃分每個任務負責的檔案",
+        "把彼此相依的任務改為依序執行",
+        "讓三個任務共用同一個工作分支",
       ),
-      ["A", "B", "C"],
-      "D5-O1",
-    ],
-    [
-      "multiple",
-      "多代理 audit artifact 應記錄哪些內容？",
-      o("任務交接", "關鍵決策", "各代理結果", "只記錄成功代理"),
-      ["A", "B", "C"],
-      "D5-O2",
-    ],
-    [
-      "true-false",
-      "替換失敗代理時，為了乾淨起見應丟棄先前全部決策與稽核紀錄。",
-      null,
-      false,
-      "D5-O4",
-    ],
-    [
-      "single",
-      "兩個代理修改同一檔案造成衝突，首先應做什麼？",
-      o(
-        "讓第三個代理也修改",
-        "停止重疊工作、比較意圖並指定單一整合者",
-        "直接選較長的 diff",
-        "刪除兩邊紀錄",
+      answer: ["A", "B", "C"],
+      explanation:
+        "D5-O1 要求為平行執行設定隔離，並偵測與化解重疊修改。cloud agent 的每個任務本來就在自己的分支上工作；再加上事先劃分檔案的負責範圍、把彼此相依的任務改成依序執行，就能降低衝突。共用同一個分支會讓任務互相覆蓋。",
+      trap: "分支隔離只能避免同時寫入，不保證合併時沒有衝突。劃分檔案與安排順序，才是從源頭降低衝突。",
+      sources: ["GH600-SG", "GH-DOC-29"],
+    },
+    {
+      type: "multiple",
+      objective: "D5-O2",
+      question:
+        "多代理工作流程要能在事後稽核，哪些內容應該寫進 PR 或交接紀錄？",
+      options: o(
+        "每次交接時傳遞的輸入與假設",
+        "關鍵決策以及做出決策的理由",
+        "只保留最後整合者的總結報告",
+        "只記錄成功完成的代理輸出",
       ),
-      "B",
-      "D5-O1",
-    ],
-    [
-      "single",
-      "多代理流程中某代理長時間無進度，屬於哪種狀態？",
-      o("stalled", "success", "pruned", "allowlisted"),
-      "A",
-      "D5-O3",
-    ],
-    [
-      "single",
-      "部分代理完成、部分失敗時，最合理的恢復起點是什麼？",
-      o(
-        "從可驗證 checkpoint 判定可保留產物，再重派失敗範圍",
-        "全部盲目重跑",
-        "直接合併所有輸出",
-        "關閉 log",
+      answer: ["A", "B"],
+      explanation:
+        "D5-O2 要求記錄代理之間的關鍵決策、交接與結果，讓事後能還原誰在什麼依據下做了什麼。只保留整合者的總結會失去中間的依據；只記錄成功的代理，會讓失敗與部分完成的情況無從分析，而事後分析最需要的正是這些。",
+      trap: "「精簡」聽起來合理，但刪掉失敗紀錄等於刪掉最有價值的證據。",
+      sources: ["GH600-SG"],
+    },
+    {
+      type: "true-false",
+      objective: "D5-O4",
+      question:
+        "在 custom agent 的 profile 設定 disable-model-invocation: true 後，Copilot 不會再自動選用它，但使用者仍可手動選擇。",
+      answer: true,
+      explanation:
+        "disable-model-invocation: true 會停止 Copilot 依任務內容自動選用這個 custom agent，改為只能由使用者手動選擇；若要讓使用者也無法手動選擇，則設定 user-invocable: false。這讓你能逐步停用代理，同時保留 profile 與 Git 歷史供稽核。",
+      trap: "兩個欄位名稱相近、方向不同：一個關掉自動選用，一個關掉手動選擇。",
+      sources: ["GH-DOC-06"],
+    },
+    {
+      type: "single",
+      objective: "D5-O1",
+      question:
+        "兩個代理的 PR 修改了同一個檔案的同一段程式碼。首先應該怎麼做？",
+      options: o(
+        "暫停重疊工作，比對意圖後指定一個整合者",
+        "先合併較早完成的 PR，另一個自動 rebase",
+        "請第三個代理同時修改兩個 PR 解決衝突",
+        "選改動行數較多、看起來較完整的那一個",
       ),
-      "A",
-      "D5-O3",
-    ],
-    [
-      "single",
-      "哪種模式適合先由多個專家各自分析，再由一個角色整合？",
-      o("主管／工作者模式", "無協調共享寫入", "永久重試", "單一工具 allowlist"),
-      "A",
-      "D5-O1",
-    ],
-    [
-      "single",
-      "post-hoc 分析需要哪種資料？",
-      o(
-        "代理 log、artifact、交接與操作訊號",
-        "只看最終 PR 標題",
-        "只看 token 數",
-        "只看執行時間",
+      answer: "A",
+      explanation:
+        "兩個代理改到同一段程式碼，代表任務切分出了問題。應先停下重疊的工作，比對兩邊的意圖與驗收條件，再指定一個整合者（人或單一代理）完成合併。先合併先完成的只是把問題丟給後者；再加入第三個代理會增加衝突來源；改動行數多不代表正確。",
+      trap: "B 是常見的 Git 習慣，但它處理的是文字衝突，沒有處理兩邊的意圖是否矛盾。",
+      sources: ["GH600-SG"],
+    },
+    {
+      type: "single",
+      objective: "D5-O3",
+      question:
+        "多代理流程中，某個代理的 session 已經很久沒有新的 commit 或 log 輸出。它最可能處於什麼狀態？",
+      options: o(
+        "停滯（stalled）",
+        "部分完成（partial）",
+        "已完成（completed）",
+        "已退役（retired）",
       ),
-      "A",
-      "D5-O2",
-    ],
-    [
-      "single",
-      "更新代理而不干擾進行中工作，應優先使用什麼策略？",
-      o(
-        "版本化設定、受控切換與狀態交接",
-        "直接覆寫執行中程序",
-        "刪除 checkpoint",
-        "取消全部 audit",
+      answer: "A",
+      explanation:
+        "D5-O3 要求辨識失敗、部分完成與停滯的執行。長時間沒有進度、也沒有結束訊號，就是停滯；部分完成是產出一部分結果後就結束；已完成有明確的結束與產物；退役則是生命週期上的主動移除。停滯需要逾時與監控才能發現，發現後應決定重試、重新指派或交給人處理。",
+      trap: "停滯的代理不會報錯，所以容易被當成「還在跑」，要靠時間門檻判斷。",
+      sources: ["GH600-SG"],
+    },
+    {
+      type: "single",
+      objective: "D5-O3",
+      question:
+        "五個代理平行工作，三個成功、兩個失敗。最合理的恢復方式是什麼？",
+      options: o(
+        "驗證並保留成功產物，只重派失敗部分",
+        "把五個代理全部重新執行一次以求一致",
+        "直接合併所有已產出的內容再修正",
+        "放棄這次結果，改由單一代理從頭做",
       ),
-      "A",
-      "D5-O4",
-    ],
-    [
-      "single",
-      "兩個代理回報互相矛盾的結論，整合者應怎麼做？",
-      o(
-        "隨機選一個",
-        "回到共享證據與驗收標準裁決並記錄原因",
-        "同時宣稱兩者正確",
-        "增加輸出字數",
+      answer: "A",
+      explanation:
+        "D5-O3 要求為多代理失敗設計恢復模式。成功的產物經驗證後可以保留，只重新指派失敗的範圍，並從最近一個可驗證的檢查點開始。全部重跑浪費已完成的工作，也可能產生新的差異；直接合併會把失敗的結果帶進主線；改由單一代理從頭做，等於放棄平行化的成果。",
+      trap: "「全部重跑比較乾淨」忽略了成本，也無法保證第二次的結果一致。",
+      sources: ["GH600-SG"],
+    },
+    {
+      type: "single",
+      objective: "D5-O1",
+      question:
+        "你讓多個專家代理分別檢查安全、效能與可讀性，最後由一個角色整合結論。這是哪一種協調模式？",
+      options: o(
+        "主管／工作者（orchestrator）",
+        "管線式（pipeline）依序傳遞",
+        "各自獨立執行、最後不整合",
+        "多個代理共同編輯同一份檔案",
       ),
-      "B",
-      "D5-O3",
-    ],
+      answer: "A",
+      explanation:
+        "由一個主管（orchestrator）分派工作給多個專長不同的工作者，再整合結果，就是主管／工作者模式；custom agent 可以透過 agent 工具別名委派其他 custom agent 執行任務。管線式是前一個的輸出成為下一個的輸入，沒有平行分析；不整合的平行執行少了最後的綜合；共同編輯同一份檔案則沒有協調機制。",
+      trap: "管線式也是多代理，但它是依序傳遞，不是平行分析後再整合。",
+      sources: ["GH600-SG", "GH-DOC-06"],
+    },
+    {
+      type: "single",
+      objective: "D5-O2",
+      question: "要事後分析某個多代理流程為什麼延遲了兩天，最需要哪些資料？",
+      options: o(
+        "各代理的 log、交接紀錄與時間軸",
+        "最終合併的 PR 標題與描述",
+        "每個代理使用的 token 總數",
+        "各代理當時使用的系統提示詞原文",
+      ),
+      answer: "A",
+      explanation:
+        "事後分析要能還原「什麼時候、誰在等誰、卡在哪裡」，需要各代理的 log、交接紀錄與時間軸等營運訊號。最終 PR 只呈現結果；token 用量說明的是成本，不是延遲；提示詞只能推測代理可能的行為，無法顯示實際發生了什麼。",
+      trap: "提示詞看起來能「解釋」行為，但延遲是執行面的問題，要看執行紀錄。",
+      sources: ["GH600-SG"],
+    },
+    {
+      type: "single",
+      objective: "D5-O4",
+      question:
+        "你要更新一個 custom agent 的 profile，但團隊每天都在預設分支上使用它。最穩妥的做法是什麼？",
+      options: o(
+        "先在分支上測試新版，再透過 PR 合併",
+        "直接在預設分支修改並推送新版本",
+        "刪除舊 profile 後建立同名新檔案",
+        "在組織層級建立同名 agent 覆蓋它",
+      ),
+      answer: "A",
+      explanation:
+        "custom agent 以 Git commit 做版本控管，並使用該 repository 與分支上最新的 profile。在分支上測試新版，不會影響在預設分支上使用舊版的人；確認後再透過 PR 審查合併，變更也留有紀錄。直接改預設分支會立刻影響所有人；刪除再重建會造成空窗並切斷歷史；組織層級的同名 agent 反而會被 repository 版本覆蓋。",
+      trap: "D 利用了層級覆蓋的概念，但方向相反：repository 層級優先於組織與企業層級。",
+      sources: ["GH-DOC-06", "GH-DOC-31"],
+    },
+    {
+      type: "single",
+      objective: "D5-O3",
+      question: "兩個代理對同一個問題給出互相矛盾的結論。整合者應該怎麼做？",
+      options: o(
+        "依共同證據與驗收標準裁決並記錄",
+        "採用信心分數較高的那個代理的結論",
+        "把兩個結論都寫進報告讓讀者判斷",
+        "再派第三個代理投票決定多數意見",
+      ),
+      answer: "A",
+      explanation:
+        "矛盾的結論要回到雙方都能檢驗的依據（測試結果、規格、驗收標準）來裁決，並記錄採用哪一方與原因。信心分數是代理的自評，不是證據；把矛盾原樣丟給讀者等於沒有整合；多數決可能是三個代理共用同一個錯誤前提。",
+      trap: "投票看起來客觀，但票數取代不了證據，尤其當代理使用相同的模型與脈絡時。",
+      sources: ["GH600-SG"],
+    },
   ],
   D6: [
-    [
-      "multiple",
-      "哪些動作通常需要較強人工介入？",
-      o(
-        "不可逆資料刪除",
-        "擴大正式環境權限",
-        "影響合規的政策變更",
-        "讀取公開文件",
+    {
+      type: "multiple",
+      objective: "D6-O1",
+      question:
+        "依作業、資安與合規風險分級後，下列哪些代理動作應保留人工核准？",
+      options: o(
+        "刪除正式環境資料庫中的資料",
+        "擴大服務帳號在正式環境的權限",
+        "修改會影響稽核的資料保留政策",
+        "讀取公開文件並整理成摘要",
       ),
-      ["A", "B", "C"],
-      "D6-O1",
-    ],
-    [
-      "multiple",
-      "有效護欄可包含哪些控制？",
-      o("最小權限", "policy block", "明確核准路徑", "隱藏稽核紀錄"),
-      ["A", "B", "C"],
-      "D6-O2",
-    ],
-    [
-      "true-false",
-      "為了維持速度，任何人工核准都應移除，即使它能降低不可逆變更風險。",
-      null,
-      false,
-      "D6-O2",
-    ],
-    [
-      "single",
-      "自主程度最應依什麼調整？",
-      o("操作、資安與合規風險", "模型名稱長度", "代理頭像", "輸出語言"),
-      "A",
-      "D6-O1",
-    ],
-    [
-      "single",
-      "哪一種核准最可能是無效摩擦？",
-      o(
-        "不降低實質風險卻對每個唯讀動作逐次核准",
-        "部署正式環境前核准",
-        "刪除資料前核准",
-        "提高權限前核准",
+      answer: ["A", "B", "C"],
+      explanation:
+        "D6-O1 要求依作業、資安與合規風險分類代理的動作，決定人工介入的程度。刪除正式資料不可逆；擴大正式環境權限是資安風險；修改資料保留政策影響合規，這三項都值得保留人工核准。讀取公開文件並整理，風險低且可以重做，強制核准只會拖慢交付。",
+      trap: "不要把「重要」與「高風險」畫上等號。摘要可能很重要，但出錯可以重做，風險仍然低。",
+      sources: ["GH600-SG", "GH-DOC-30"],
+    },
+    {
+      type: "multiple",
+      objective: "D6-O2",
+      question:
+        "你想在 cloud agent 執行 shell 指令前，自動擋下危險指令（例如 rm -rf）。關於 preToolUse hook，哪些敘述正確？",
+      options: o(
+        "可回傳 deny 並附上拒絕理由",
+        "腳本崩潰時會拒絕該次工具呼叫",
+        "腳本逾時時也一律拒絕該次呼叫",
+        "改用 postToolUse 也能事前阻擋",
       ),
-      "A",
-      "D6-O2",
-    ],
-    [
-      "single",
-      "代理嘗試執行政策禁止的命令時，護欄應如何反應？",
-      o("阻擋並留下可稽核原因", "靜默放行", "改寫政策", "刪除 log"),
-      "A",
-      "D6-O2",
-    ],
-    [
-      "single",
-      "最低權限的核心是什麼？",
-      o(
-        "只授予完成明確任務所需的最小存取",
-        "預先給全部權限",
-        "每次都用管理員",
-        "把 token 寫入設定",
+      answer: ["A", "B"],
+      explanation:
+        "hooks 設定放在 repository 的 .github/hooks/*.json，只有 preToolUse 能核准或拒絕工具呼叫：輸出 permissionDecision 為 deny，並附上 permissionDecisionReason（拒絕時必填）。preToolUse 採 fail-closed，腳本崩潰或以非零代碼結束都會拒絕該次呼叫；但逾時是例外，會 fail-open 讓工具繼續執行。postToolUse 在工具執行後才觸發，無法阻擋。",
+      trap: "fail-closed 有例外：逾時會放行。高風險檢查要控制執行時間，不能假設逾時就安全。",
+      sources: ["GH-DOC-11", "GH-DOC-10"],
+    },
+    {
+      type: "true-false",
+      objective: "D6-O2",
+      question:
+        "為了維持交付速度，應移除所有人工核准，即使某個核准能攔下不可逆的變更。",
+      answer: false,
+      explanation:
+        "D6-O2 要求刪除「不實質降低風險」的核准，不是刪除所有核准。能攔下不可逆變更的核准，正好實質降低了風險，應該保留；要提升速度，應找出那些只增加等待、卻不改變結果的核准。",
+      trap: "題幹的「為了速度」與「所有」是兩個訊號。GH-600 要的是依風險調整核准，不是全刪或全留。",
+      sources: ["GH600-SG"],
+    },
+    {
+      type: "single",
+      objective: "D6-O1",
+      question: "決定代理在某類動作上的自主程度時，最主要的依據是什麼？",
+      options: o(
+        "動作的作業、資安與合規風險",
+        "代理過去一個月的任務成功率",
+        "團隊對代理的整體信任程度",
+        "該動作平均需要的人工時間",
       ),
-      "A",
-      "D6-O2",
-    ],
-    [
-      "single",
-      "受控路徑對敏感變更的價值是什麼？",
-      o(
-        "把授權、執行、驗證與稽核串成可追溯流程",
-        "保證模型永不出錯",
-        "取代所有測試",
-        "取消責任歸屬",
+      answer: "A",
+      explanation:
+        "D6-O1 要求依作業、資安與合規風險分類代理的動作，再決定自主程度。成功率高，不代表失敗時的影響可以接受：成功率 99%、但失敗就不可逆的動作，仍然需要控制。信任程度與節省的時間是考量，但不能取代風險評估。",
+      trap: "B 最有說服力，但成功率回答的是「多常出錯」；風險還要看出錯時有多嚴重、能不能撤回。",
+      sources: ["GH600-SG"],
+    },
+    {
+      type: "single",
+      objective: "D6-O2",
+      question: "下列哪一種核准，最可能是「不降低實質風險的多餘摩擦」？",
+      options: o(
+        "代理每次讀取檔案前都要人按確認",
+        "部署到正式環境前需要人工核准",
+        "刪除正式環境資料前需要人工確認",
+        "提升服務帳號權限前需要主管核准",
       ),
-      "A",
-      "D6-O1",
-    ],
+      answer: "A",
+      explanation:
+        "讀取檔案不會改變任何狀態，逐次確認只會拖慢流程，還會讓人養成不看就按的習慣，削弱真正重要的核准。部署正式環境、刪除資料、提升權限都可能造成難以撤回的影響，核准能實質降低風險。D6-O2 要求保留後者、移除前者。",
+      trap: "核准次數太多會造成「核准疲勞」，讓人連重要的核准也不細看，這本身就是風險。",
+      sources: ["GH600-SG"],
+    },
+    {
+      type: "single",
+      objective: "D6-O2",
+      question: "代理嘗試執行組織政策禁止的指令。護欄應該如何反應？",
+      options: o(
+        "阻擋該動作並留下可稽核的原因",
+        "放行但在事後寄送警告通知",
+        "讓代理自行改寫指令後再試一次",
+        "暫時停用該政策直到任務完成",
+      ),
+      answer: "A",
+      explanation:
+        "D6-O2 要求阻擋違反安全、合規或 Responsible AI 政策的動作。阻擋並記錄原因，讓代理與人都知道為什麼被擋，也留下稽核證據，例如 preToolUse hook 回傳 deny 並附上拒絕理由。事後通知擋不住損害；讓代理自行改寫可能只是換個方式繞過政策；停用政策等於拆掉護欄。",
+      trap: "C 看起來像讓代理自我修正，但被政策擋下的動作不該由代理自己找替代路徑，應該回報給人。",
+      sources: ["GH600-SG", "GH-DOC-11"],
+    },
+    {
+      type: "single",
+      objective: "D6-O2",
+      question:
+        "你要防止任何人或代理在未經審查下修改 .github/agents/ 與 copilot-setup-steps.yml。最直接的控制是什麼？",
+      options: o(
+        "CODEOWNERS 搭配要求程式碼擁有者審查",
+        "在 copilot-instructions.md 禁止修改",
+        "把這些檔案移到另一個私有 repository",
+        "關閉 cloud agent 的網路存取權限",
+      ),
+      answer: "A",
+      explanation:
+        "GitHub 建議用 CODEOWNERS 搭配 ruleset 的「Require review from Code Owners」保護 Copilot 與 MCP 設定檔，讓這些檔案的任何變更都必須經指定擁有者審查。instructions 沒有強制力；把設定檔移到別的 repo，cloud agent 就讀不到；關閉網路存取和修改設定檔無關。",
+      trap: "B 也許能約束代理，但約束不了人和其他自動化，而且代理不一定遵守。",
+      sources: ["GH-DOC-30", "GH-DOC-15"],
+    },
+    {
+      type: "single",
+      objective: "D6-O1",
+      question: "為什麼敏感變更（例如調整正式環境權限）應該走受控路徑？",
+      options: o(
+        "讓授權、執行、驗證與稽核可以追溯",
+        "能保證代理這次的修改不會出錯",
+        "可以取代測試與程式碼審查的需要",
+        "讓出錯時的責任自動轉由代理承擔",
+      ),
+      answer: "A",
+      explanation:
+        "受控路徑把「誰核准、誰執行、如何驗證、留下什麼紀錄」串成可追溯的流程，出錯時能快速定位與回滾。它無法保證不出錯，也不能取代測試與審查，反而依賴它們；責任仍在核准與觸發的人身上，不會轉給代理。",
+      trap: "受控路徑的價值在於可追溯、可撤回，不是讓出錯機率歸零。",
+      sources: ["GH600-SG", "GH-DOC-30"],
+    },
   ],
 };
 
 const questions = [];
 for (const domain of domains) {
   const specs = questionSpecs[domain.id];
-  specs.forEach(([type, question, options, answer, objectiveId], index) => {
+  specs.forEach((spec, index) => {
+    const {
+      type,
+      question,
+      options,
+      answer,
+      objective: objectiveId,
+      explanation,
+      trap,
+      sources,
+    } = spec;
     questions.push({
       id: `GH600-${String(questions.length + 1).padStart(3, "0")}`,
       exam: "GH-600",
       number: questions.length + 1,
       domainId: domain.id,
       objectiveIds: [objectiveId],
-      sourceIds: domainSources[domain.id].slice(0, 2),
+      sourceIds: sources,
       type,
       ...(options ? { options } : {}),
       answer,
       question,
-      explanation: `本題對應 ${objectiveId}。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。`,
-      trap: "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+      explanation,
+      trap,
       domain: domain.name,
       difficulty: index < 3 ? "中等" : index < 7 ? "基礎" : "進階",
       keywords: [domain.id, objectiveId],
@@ -1660,13 +2066,13 @@ const chapterBodies = {
 
 本指南以 **GH-600: Developing in Agentic AI Systems** 的技能範圍組織內容，對應 **GitHub Certified: Agentic AI Developer** 認證。讀者應已熟悉 repository、branch、PR 與基本 CI 操作；本書把重點放在如何讓代理在開發流程中可靠地工作，以及何時需要人做決定。
 
-教材於 2026-09-22 擴寫，核對官方 Study Guide 與本次引用的 GitHub 功能文件。站內題庫與考試 metadata 仍保留 2026-08-04 的資料基準；本次沒有宣稱全部 30 項來源與題庫已重新審訂。考試時間、語言、預約條件與最新範圍，請在報名前查閱[認證頁](https://learn.microsoft.com/en-us/credentials/certifications/agentic-ai-developer/)與[Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-600)（GH600-CERT、GH600-SG）。
+教材於 2026-09-22 擴寫，核對官方 Study Guide 與本次引用的 GitHub 功能文件。題庫於 2026-09-23 逐題重寫解析、陷阱與選項，並重新核對 33 項來源的網址與標題；這仍是本站自行整理，不代表經過官方或專家審訂。考試時間、語言、預約條件與最新範圍，請在報名前查閱[認證頁](https://learn.microsoft.com/en-us/credentials/certifications/agentic-ai-developer/)與[Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-600)（GH600-CERT、GH600-SG）。
 
 ### 分清三種內容
 
 **官方技能範圍**說明需要掌握的能力；**產品文件**描述特定環境與版本的功能；**本書案例與練習**用來訓練判斷，不是官方固定程序，也不是實際考題。章內附日期的產品敘述，只代表該次核對範圍，不代表所有 IDE、CLI 與雲端環境行為相同。
 
-近期 GitHub 文件使用 cloud agent 名稱，部分來源連結與站內既有題目仍使用 coding agent。閱讀時應確認文件談的是哪個執行環境，尤其是 MCP、hooks、記憶與工具設定，不能只憑名稱相近就套用相同限制。
+GitHub 文件已把 coding agent 改名為 cloud agent，本站來源標題與連結已於 2026-09-23 更新。閱讀時應確認文件談的是哪個執行環境，尤其是 MCP、hooks、記憶與工具設定，不能只憑名稱相近就套用相同限制。
 
 ## 使用方式
 
@@ -2243,7 +2649,7 @@ writeJson("data/review.json", review);
 writeJson("data/content-summary.json", {
   studyDays: 28,
   glossaryTerms: 120,
-  officialSources: 30,
+  officialSources: sources.length,
   faqItems: 24,
   scenarioItems: 24,
   mustRemember: 36,

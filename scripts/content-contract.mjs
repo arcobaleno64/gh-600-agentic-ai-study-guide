@@ -143,6 +143,54 @@ export function validateContentData(data) {
     }
   }
 
+  // Surface-cue rules: every question explains itself, and answer patterns
+  // (option length, true/false split, multi-select count) are balanced. These
+  // remove surface cues only; semantic cues need a stemless blind test.
+  ok(
+    unique(questions.map((question) => question.explanation)) &&
+      unique(questions.map((question) => question.trap)),
+    "每題解析與陷阱必須逐題撰寫，不得重複。",
+  );
+  // Visual width: ASCII is about half a CJK character wide.
+  const width = (text) =>
+    [...text].reduce(
+      (sum, char) => sum + (char.charCodeAt(0) < 128 ? 0.5 : 1),
+      0,
+    );
+  const withOptions = questions.filter((question) => question.options);
+  for (const question of withOptions) {
+    const lengths = question.options.map((option) => width(option.text));
+    ok(
+      Math.max(...lengths) <= Math.min(...lengths) * 1.5,
+      `${question.id} 選項長度差距超過 1.5 倍，容易猜題。`,
+    );
+  }
+  const longestIsCorrect = withOptions.filter((question) => {
+    const correct = [question.answer].flat();
+    const length = (option) => width(option.text);
+    const max = Math.max(...question.options.map(length));
+    const longest = question.options.filter((option) => length(option) === max);
+    return longest.length === 1 && correct.includes(longest[0].id);
+  }).length;
+  ok(
+    longestIsCorrect <= withOptions.length * 0.35,
+    `最長選項即正解的題目有 ${longestIsCorrect} 題，超過 35%。`,
+  );
+  const trueFalse = questions.filter(
+    (question) => question.type === "true-false",
+  );
+  ok(
+    trueFalse.filter((question) => question.answer === true).length >= 2 &&
+      trueFalse.filter((question) => question.answer === false).length >= 2,
+    "是非題的「是」與「否」各至少 2 題。",
+  );
+  const multipleCounts = new Set(
+    questions
+      .filter((question) => question.type === "multiple")
+      .map((question) => question.answer.length),
+  );
+  ok(multipleCounts.size >= 2, "複選題的正解數量至少要有兩種。");
+
   for (const domain of domains) {
     const count = questions.filter(
       (question) => question.domainId === domain.id,
@@ -172,9 +220,9 @@ export function validateContentData(data) {
   );
   ok(
     Array.isArray(sources) &&
-      sources.length === 30 &&
+      sources.length === 33 &&
       unique(sources.map((source) => source.id)),
-    "官方來源必須正好 30 項且 ID 不重複。",
+    "官方來源必須正好 33 項且 ID 不重複。",
   );
   for (const source of sources) {
     let host = "";
