@@ -411,18 +411,27 @@ onBeforeUnmount(stopTimer);
               ><span>{{ option.text }}</span>
             </button>
           </div>
-          <button
+          <div
             v-if="
               mode === '練習模式' &&
               active.question.type === 'multiple' &&
               !revealed.includes(active.question.id)
             "
-            class="button button--primary"
-            :disabled="!isAnswered(selected)"
-            @click="confirmMultiple"
+            class="confirm-row"
           >
-            確認複選答案
-          </button>
+            <span class="muted" aria-live="polite">{{
+              isAnswered(selected)
+                ? `已選 ${(selected as string[]).length} 項，確認後顯示解析`
+                : "選完所有正確選項後再確認"
+            }}</span
+            ><button
+              class="button button--primary"
+              :disabled="!isAnswered(selected)"
+              @click="confirmMultiple"
+            >
+              確認複選答案
+            </button>
+          </div>
           <div
             v-if="mode === '練習模式' && revealed.includes(active.question.id)"
             class="answer-feedback"

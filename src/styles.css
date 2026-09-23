@@ -1393,6 +1393,14 @@ kbd {
   background: var(--surface);
   font-weight: 850;
 }
+.confirm-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
 .answer-feedback {
   margin-top: 1rem;
   border-left: 4px solid var(--success);
