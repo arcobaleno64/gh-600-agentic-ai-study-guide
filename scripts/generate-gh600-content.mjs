@@ -286,6 +286,12 @@ const sources = [
     "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
     "GitHub Docs",
   ],
+  [
+    "GH-DOC-34",
+    "Restrict MCP server access to a custom registry",
+    "https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-mcp-usage/restrict-based-on-registry",
+    "GitHub Docs",
+  ],
 ].map(([id, title, url, publisher]) => ({ id, title, url, publisher }));
 
 const examMeta = {
@@ -748,9 +754,9 @@ const questionSpecs = {
       ),
       answer: ["A", "B"],
       explanation:
-        "D2-O4 要求依錯誤類型設計處理方式。503 與 429 都是暫時性狀況：服務暫時無法處理，或呼叫頻率超過限制，等一段時間後可能成功，適合有上限的指數退避重試。403 是權限不足、400 是請求本身有誤，重試多少次結果都一樣，應停止並修正請求或沿升級路徑回報。",
+        "D2-O4 要求依錯誤類型設計處理方式。503 與 429 都是暫時性狀況：服務暫時無法處理，或呼叫頻率超過限制，等一段時間後可能成功，適合有上限的指數退避重試。這裡的 403 指權限不足、400 指請求本身有誤，重試多少次結果都一樣，應停止並修正請求或沿升級路徑回報。注意 GitHub 超過次要速率限制時也可能回傳 403，這時要依 retry-after 等待後重試，所以要先讀回應訊息再判斷。",
       trap: "判斷能不能重試，要問「等一下結果會不會不同」。權限與參數錯誤不會自己變好。",
-      sources: ["GH600-SG"],
+      sources: ["GH600-SG", "GH-DOC-33"],
     },
     {
       type: "true-false",
@@ -793,9 +799,9 @@ const questionSpecs = {
       ),
       answer: "A",
       explanation:
-        "MCP registry 是一組列出核可 server 的 HTTPS 端點。「Restrict MCP access to registry servers」政策選擇 Registry only 後，受支援的 IDE 與 Copilot CLI 只能使用 registry 內的 server（此功能目前為公開預覽）。選 Allow all 時，registry 只是清單，不會限制使用；repository 的 MCP 設定只作用於 cloud agent；custom agent 的 mcp-servers 只設定該 agent 能用的 server，不會限制開發者在 IDE 裡加入其他 server。",
+        "MCP registry 是一組列出核可 server 的 HTTPS 端點。「Restrict MCP access to registry servers」政策選擇 Registry only 後，受支援的 IDE 與 Copilot CLI 只能執行 registry 內的 server；選 Allow all 則沒有限制，所有 MCP server 都能使用。這項政策目前為公開預覽，GitHub 文件指出更安全、已正式推出的做法是 enterprise allowlist（managed-settings.json），但它不在本題選項中。repository 的 MCP 設定只作用於 cloud agent；custom agent 的 mcp-servers 只設定該 agent 能用的 server，不會限制開發者在 IDE 裡加入其他 server。",
       trap: "registry 本身只是清單，真正產生限制的是政策設定為 Registry only。",
-      sources: ["GH-DOC-09", "GH600-SG"],
+      sources: ["GH-DOC-34", "GH-DOC-09", "GH600-SG"],
     },
     {
       type: "single",
@@ -2100,7 +2106,7 @@ const chapterBodies = {
 
 本指南以 **GH-600: Developing in Agentic AI Systems** 的技能範圍組織內容，對應 **GitHub Certified: Agentic AI Developer** 認證。讀者應已熟悉 repository、branch、PR 與基本 CI 操作；本書把重點放在如何讓代理在開發流程中可靠地工作，以及何時需要人做決定。
 
-教材於 2026-09-22 擴寫，核對官方 Study Guide 與本次引用的 GitHub 功能文件。題庫於 2026-09-23 逐題重寫解析、陷阱與選項，並重新核對 35 項來源的網址與標題；這仍是本站自行整理，不代表經過官方或專家審訂。考試時間、語言、預約條件與最新範圍，請在報名前查閱[認證頁](https://learn.microsoft.com/en-us/credentials/certifications/agentic-ai-developer/)與[Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-600)（GH600-CERT、GH600-SG）。
+教材於 2026-09-22 擴寫，核對官方 Study Guide 與本次引用的 GitHub 功能文件。題庫於 2026-09-23 逐題重寫解析、陷阱與選項，並重新核對 36 項來源的網址與標題；這仍是本站自行整理，不代表經過官方或專家審訂。考試時間、語言、預約條件與最新範圍，請在報名前查閱[認證頁](https://learn.microsoft.com/en-us/credentials/certifications/agentic-ai-developer/)與[Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-600)（GH600-CERT、GH600-SG）。
 
 ### 分清三種內容
 

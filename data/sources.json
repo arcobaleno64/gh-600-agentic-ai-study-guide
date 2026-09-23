@@ -208,5 +208,11 @@
     "title": "Rate limits for the REST API",
     "url": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
     "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-34",
+    "title": "Restrict MCP server access to a custom registry",
+    "url": "https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-mcp-usage/restrict-based-on-registry",
+    "publisher": "GitHub Docs"
   }
 ]

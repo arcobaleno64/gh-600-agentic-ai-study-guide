@@ -361,7 +361,7 @@
     "number": 12,
     "domainId": "D2",
     "objectiveIds": ["D2-O4"],
-    "sourceIds": ["GH600-SG"],
+    "sourceIds": ["GH600-SG", "GH-DOC-33"],
     "type": "multiple",
     "options": [
       {
@@ -383,7 +383,7 @@
     ],
     "answer": ["A", "B"],
     "question": "代理呼叫外部 API 時遇到下列錯誤。哪些適合用有上限的指數退避重試？",
-    "explanation": "D2-O4 要求依錯誤類型設計處理方式。503 與 429 都是暫時性狀況：服務暫時無法處理，或呼叫頻率超過限制，等一段時間後可能成功，適合有上限的指數退避重試。403 是權限不足、400 是請求本身有誤，重試多少次結果都一樣，應停止並修正請求或沿升級路徑回報。",
+    "explanation": "D2-O4 要求依錯誤類型設計處理方式。503 與 429 都是暫時性狀況：服務暫時無法處理，或呼叫頻率超過限制，等一段時間後可能成功，適合有上限的指數退避重試。這裡的 403 指權限不足、400 指請求本身有誤，重試多少次結果都一樣，應停止並修正請求或沿升級路徑回報。注意 GitHub 超過次要速率限制時也可能回傳 403，這時要依 retry-after 等待後重試，所以要先讀回應訊息再判斷。",
     "trap": "判斷能不能重試，要問「等一下結果會不會不同」。權限與參數錯誤不會自己變好。",
     "domain": "實作工具使用與環境互動",
     "difficulty": "中等",
@@ -445,7 +445,7 @@
     "number": 15,
     "domainId": "D2",
     "objectiveIds": ["D2-O2"],
-    "sourceIds": ["GH-DOC-09", "GH600-SG"],
+    "sourceIds": ["GH-DOC-34", "GH-DOC-09", "GH600-SG"],
     "type": "single",
     "options": [
       {
@@ -467,7 +467,7 @@
     ],
     "answer": "A",
     "question": "企業希望開發者在 IDE 與 Copilot CLI 中，只能使用經過審核的 MCP server。應該設定什麼？",
-    "explanation": "MCP registry 是一組列出核可 server 的 HTTPS 端點。「Restrict MCP access to registry servers」政策選擇 Registry only 後，受支援的 IDE 與 Copilot CLI 只能使用 registry 內的 server（此功能目前為公開預覽）。選 Allow all 時，registry 只是清單，不會限制使用；repository 的 MCP 設定只作用於 cloud agent；custom agent 的 mcp-servers 只設定該 agent 能用的 server，不會限制開發者在 IDE 裡加入其他 server。",
+    "explanation": "MCP registry 是一組列出核可 server 的 HTTPS 端點。「Restrict MCP access to registry servers」政策選擇 Registry only 後，受支援的 IDE 與 Copilot CLI 只能執行 registry 內的 server；選 Allow all 則沒有限制，所有 MCP server 都能使用。這項政策目前為公開預覽，GitHub 文件指出更安全、已正式推出的做法是 enterprise allowlist（managed-settings.json），但它不在本題選項中。repository 的 MCP 設定只作用於 cloud agent；custom agent 的 mcp-servers 只設定該 agent 能用的 server，不會限制開發者在 IDE 裡加入其他 server。",
     "trap": "registry 本身只是清單，真正產生限制的是政策設定為 Registry only。",
     "domain": "實作工具使用與環境互動",
     "difficulty": "基礎",

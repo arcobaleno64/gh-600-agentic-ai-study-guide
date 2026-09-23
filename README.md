@@ -8,7 +8,7 @@
 - 六個官方領域、19 個 objectives 的結構化教材。
 - 60 題原創情境題：42 單選、12 複選、6 是非。
 - 120 個術語、24 題 FAQ、24 題情境 Q&A、36 條必背句。
-- 35 個 Microsoft Learn／GitHub Docs 官方來源。
+- 36 個 Microsoft Learn／GitHub Docs 官方來源。
 - 錯題重練、全站搜尋、列印、JSON 匯入匯出與 PWA 離線站殼。
 
 本站不含實際考題、考古題或 exam dump，亦非 Microsoft 或 GitHub 官方出版品。
