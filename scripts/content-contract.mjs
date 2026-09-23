@@ -151,6 +151,15 @@ export function validateContentData(data) {
       unique(questions.map((question) => question.trap)),
     "每題解析與陷阱必須逐題撰寫，不得重複。",
   );
+  // Options are shuffled per session, so option letters never match the screen.
+  for (const question of questions) {
+    ok(
+      ![question.explanation, question.trap].some((text) =>
+        /(^|[^A-Za-z])[A-D](?=[ 、，和與或是看很也利混最的])/.test(text),
+      ),
+      `${question.id} 解析或陷阱以選項字母指稱選項；選項會洗牌，請改寫為選項內容。`,
+    );
+  }
   // Visual width: ASCII is about half a CJK character wide.
   const width = (text) =>
     [...text].reduce(
