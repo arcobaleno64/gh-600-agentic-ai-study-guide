@@ -1328,7 +1328,7 @@ kbd {
 }
 .quiz-card__meta,
 .quiz-card__footer,
-.review-card header,
+.review-card__head,
 .question-map header {
   display: flex;
   align-items: center;
@@ -1493,11 +1493,52 @@ kbd {
   justify-content: space-between;
   gap: 1rem;
 }
+.result-grid {
+  align-items: start;
+}
+/* One gap token spaces every row of a review card, summary included. */
 .review-card {
+  --review-gap: 0.75rem;
   border-left: 5px solid var(--danger);
 }
-.review-card[data-correct="true"] {
+.review-card__body {
+  display: grid;
+  gap: var(--review-gap);
+  margin-top: var(--review-gap);
+}
+.review-card[data-status="unanswered"] {
+  border-left-color: var(--warning);
+}
+.review-card[data-status="correct"] {
   border-left-color: var(--success);
+}
+.review-card > summary {
+  display: grid;
+  gap: var(--review-gap);
+  cursor: pointer;
+  list-style: none;
+}
+.review-card > summary::-webkit-details-marker {
+  display: none;
+}
+.review-card h3,
+.review-card__body > p {
+  margin: 0;
+}
+.badge--correct {
+  border-color: transparent;
+  background: var(--success-soft);
+  color: var(--success);
+}
+.badge--wrong {
+  border-color: transparent;
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+.badge--unanswered {
+  border-color: transparent;
+  background: var(--warning-soft);
+  color: var(--warning);
 }
 .answer-explanation,
 .trap-note {
@@ -1506,7 +1547,6 @@ kbd {
   padding: 0.75rem;
 }
 .trap-note {
-  margin-top: 0.55rem;
   background: var(--warning-soft);
 }
 .answer-explanation p,

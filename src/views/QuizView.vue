@@ -145,6 +145,25 @@ function confirmMultiple() {
   if (!revealed.value.includes(active.value.question.id))
     revealed.value.push(active.value.question.id);
 }
+// Review order: wrong and unanswered first; each keeps its original number.
+const reviewEntries = computed(() =>
+  session.value
+    .map((item, index) => {
+      const answer = answers.value[item.question.id];
+      const status = !isAnswered(answer)
+        ? "unanswered"
+        : isQuestionCorrect(item.question, answer)
+          ? "correct"
+          : "wrong";
+      return { item, number: index + 1, answer, status };
+    })
+    .sort(
+      (a, b) =>
+        Number(a.status === "correct") - Number(b.status === "correct") ||
+        a.number - b.number,
+    ),
+);
+const reviewLabel = { correct: "答對", wrong: "答錯", unanswered: "未作答" };
 function questionSources(question: Question) {
   const ids = new Set(question.sourceIds);
   return sources.filter((source) => ids.has(source.id));
@@ -555,10 +574,19 @@ onBeforeUnmount(stopTimer);
           </div>
         </section>
         <section class="panel">
-          <div class="panel__header"><h2>本輪摘要</h2></div>
+          <div class="panel__header">
+            <h2>本輪摘要</h2>
+            <span class="badge">{{ mode }}</span>
+          </div>
           <div class="cheat-grid">
             <div class="cheat-item">
-              <strong>{{ result.total - result.correct }}</strong
+              <strong>{{ result.correct }}</strong
+              ><span>答對</span>
+            </div>
+            <div class="cheat-item">
+              <strong>{{
+                result.total - result.correct - (session.length - answeredCount)
+              }}</strong
               ><span>答錯</span>
             </div>
             <div class="cheat-item">
@@ -569,66 +597,71 @@ onBeforeUnmount(stopTimer);
               <strong>{{ flagged.length }}</strong
               ><span>曾標記</span>
             </div>
-            <div class="cheat-item">
-              <strong>{{ mode }}</strong
-              ><span>作答模式</span>
-            </div>
           </div>
         </section>
       </div>
       <div class="review-list">
-        <article
-          v-for="(item, index) in session"
+        <p class="muted">
+          需複習 {{ result.total - result.correct }} 題在前；答對
+          {{ result.correct }} 題已收合，點題目展開。
+        </p>
+        <details
+          v-for="{ item, number, answer, status } in reviewEntries"
           :key="item.question.id"
           class="panel review-card"
-          :data-correct="
-            isQuestionCorrect(item.question, answers[item.question.id])
-          "
+          :data-status="status"
+          :open="status !== 'correct'"
         >
-          <header>
-            <span class="badge"
-              >{{ item.question.exam }} 第 {{ index + 1 }} 題</span
-            ><strong>{{
-              isQuestionCorrect(item.question, answers[item.question.id])
-                ? "正確"
-                : "需複習"
-            }}</strong>
-          </header>
-          <h3>{{ item.question.question }}</h3>
-          <p>
-            <b>你的答案：</b
-            >{{ answerText(item.question, answers[item.question.id]) }}
-          </p>
-          <p>
-            <b>正確答案：</b
-            >{{ answerText(item.question, item.question.answer) }}
-          </p>
-          <div class="answer-explanation">
-            <strong>解析</strong>
-            <p>{{ item.question.explanation }}</p>
-          </div>
-          <div class="trap-note">
-            <strong>陷阱</strong>
-            <p>{{ item.question.trap }}</p>
-          </div>
-          <div class="answer-explanation">
-            <strong>官方來源</strong>
-            <p>
-              <span
-                v-for="(source, sourceIndex) in questionSources(item.question)"
-                :key="source.id"
-                ><a :href="source.url" target="_blank" rel="noopener">{{
-                  source.title
-                }}</a
-                >{{
-                  sourceIndex < questionSources(item.question).length - 1
-                    ? "、"
-                    : ""
-                }}</span
-              >
+          <summary>
+            <div class="review-card__head">
+              <span class="badge"
+                >{{ item.question.exam }} 第 {{ number }} 題</span
+              ><span :class="`badge badge--${status}`">{{
+                reviewLabel[status]
+              }}</span>
+            </div>
+            <h3>{{ item.question.question }}</h3>
+          </summary>
+          <div class="review-card__body">
+            <p v-if="status === 'correct'">
+              <b>你的答案：</b>{{ answerText(item.question, answer) }}
             </p>
+            <template v-else>
+              <p><b>你的答案：</b>{{ answerText(item.question, answer) }}</p>
+              <p>
+                <b>正確答案：</b
+                >{{ answerText(item.question, item.question.answer) }}
+              </p>
+            </template>
+            <div class="answer-explanation">
+              <strong>解析</strong>
+              <p>{{ item.question.explanation }}</p>
+            </div>
+            <div class="trap-note">
+              <strong>陷阱</strong>
+              <p>{{ item.question.trap }}</p>
+            </div>
+            <div class="answer-explanation">
+              <strong>官方來源</strong>
+              <p>
+                <span
+                  v-for="(source, sourceIndex) in questionSources(
+                    item.question,
+                  )"
+                  :key="source.id"
+                  ><a :href="source.url" target="_blank" rel="noopener">{{
+                    source.title
+                  }}</a
+                  >{{
+                    sourceIndex < questionSources(item.question).length - 1
+                      ? "、"
+                      : ""
+                  }}</span
+                >
+              </p>
+            </div>
           </div>
-        </article>
+        </details>
       </div></template
     >
   </section>
