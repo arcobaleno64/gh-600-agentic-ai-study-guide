@@ -274,6 +274,12 @@ const sources = [
     "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/create-custom-agents",
     "GitHub Docs",
   ],
+  [
+    "GH-DOC-32",
+    "About code owners",
+    "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners",
+    "GitHub Docs",
+  ],
 ].map(([id, title, url, publisher]) => ({ id, title, url, publisher }));
 
 const examMeta = {
@@ -1484,9 +1490,9 @@ const questionSpecs = {
       ),
       answer: "A",
       explanation:
-        "CODEOWNERS 會在 PR 修改到對應路徑時，自動請擁有者審查；只有再搭配 ruleset 的「Require review from Code Owners」，擁有者的核准才會成為合併條件。題幹要的是通知而不阻擋，所以只設定 CODEOWNERS 即可。要求 Code Owners 審查與要求一位核准都會擋住合併；hook 直接禁止代理修改，也不會請任何人審查。",
+        "CODEOWNERS 會在 PR 修改到對應路徑時，自動請擁有者審查；只有再搭配 ruleset 的「Require review from Code Owners」，擁有者的核准才會成為合併條件。題幹要的是通知而不阻擋，所以只設定 CODEOWNERS 即可。注意 draft PR 不會自動請擁有者審查，要等標記為 ready for review 才會通知；cloud agent 開的是 draft PR，所以審查請求會在它轉為 ready 時送出。要求 Code Owners 審查與要求一位核准都會擋住合併；hook 直接禁止代理修改，也不會請任何人審查。",
       trap: "GitHub 建議用 CODEOWNERS 加上審查規則保護代理設定檔，但這題的條件是「不能擋住合併」。先看題幹限制，再選控制強度。",
-      sources: ["GH-DOC-30", "GH-DOC-15"],
+      sources: ["GH-DOC-32", "GH-DOC-30", "GH-DOC-15"],
     },
     {
       type: "single",
@@ -2070,7 +2076,7 @@ const chapterBodies = {
 
 本指南以 **GH-600: Developing in Agentic AI Systems** 的技能範圍組織內容，對應 **GitHub Certified: Agentic AI Developer** 認證。讀者應已熟悉 repository、branch、PR 與基本 CI 操作；本書把重點放在如何讓代理在開發流程中可靠地工作，以及何時需要人做決定。
 
-教材於 2026-09-22 擴寫，核對官方 Study Guide 與本次引用的 GitHub 功能文件。題庫於 2026-09-23 逐題重寫解析、陷阱與選項，並重新核對 33 項來源的網址與標題；這仍是本站自行整理，不代表經過官方或專家審訂。考試時間、語言、預約條件與最新範圍，請在報名前查閱[認證頁](https://learn.microsoft.com/en-us/credentials/certifications/agentic-ai-developer/)與[Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-600)（GH600-CERT、GH600-SG）。
+教材於 2026-09-22 擴寫，核對官方 Study Guide 與本次引用的 GitHub 功能文件。題庫於 2026-09-23 逐題重寫解析、陷阱與選項，並重新核對 34 項來源的網址與標題；這仍是本站自行整理，不代表經過官方或專家審訂。考試時間、語言、預約條件與最新範圍，請在報名前查閱[認證頁](https://learn.microsoft.com/en-us/credentials/certifications/agentic-ai-developer/)與[Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-600)（GH600-CERT、GH600-SG）。
 
 ### 分清三種內容
 

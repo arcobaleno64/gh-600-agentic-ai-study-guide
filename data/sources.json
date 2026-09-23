@@ -196,5 +196,11 @@
     "title": "Creating custom agents for Copilot cloud agent",
     "url": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/create-custom-agents",
     "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH-DOC-32",
+    "title": "About code owners",
+    "url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners",
+    "publisher": "GitHub Docs"
   }
 ]

@@ -1869,7 +1869,7 @@
     "number": 59,
     "domainId": "D6",
     "objectiveIds": ["D6-O2"],
-    "sourceIds": ["GH-DOC-30", "GH-DOC-15"],
+    "sourceIds": ["GH-DOC-32", "GH-DOC-30", "GH-DOC-15"],
     "type": "single",
     "options": [
       {
@@ -1891,7 +1891,7 @@
     ],
     "answer": "A",
     "question": "你希望 .github/agents/ 被修改時，自動請平台團隊審查，但團隊人力有限，不能因此擋住合併。應該設定什麼？",
-    "explanation": "CODEOWNERS 會在 PR 修改到對應路徑時，自動請擁有者審查；只有再搭配 ruleset 的「Require review from Code Owners」，擁有者的核准才會成為合併條件。題幹要的是通知而不阻擋，所以只設定 CODEOWNERS 即可。要求 Code Owners 審查與要求一位核准都會擋住合併；hook 直接禁止代理修改，也不會請任何人審查。",
+    "explanation": "CODEOWNERS 會在 PR 修改到對應路徑時，自動請擁有者審查；只有再搭配 ruleset 的「Require review from Code Owners」，擁有者的核准才會成為合併條件。題幹要的是通知而不阻擋，所以只設定 CODEOWNERS 即可。注意 draft PR 不會自動請擁有者審查，要等標記為 ready for review 才會通知；cloud agent 開的是 draft PR，所以審查請求會在它轉為 ready 時送出。要求 Code Owners 審查與要求一位核准都會擋住合併；hook 直接禁止代理修改，也不會請任何人審查。",
     "trap": "GitHub 建議用 CODEOWNERS 加上審查規則保護代理設定檔，但這題的條件是「不能擋住合併」。先看題幹限制，再選控制強度。",
     "domain": "實作護欄與課責",
     "difficulty": "基礎",
