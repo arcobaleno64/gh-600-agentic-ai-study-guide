@@ -31,6 +31,16 @@ self.addEventListener("fetch", (e) => {
   if (r.method !== "GET") return;
   const u = new URL(r.url);
   if (u.origin !== self.location.origin) return;
+  // Only the app shell is a navigation this worker answers. Other paths are
+  // the read-only pages from scripts/static-pages.mjs; serving the shell there
+  // would resolve ./assets/ under that path and render a blank page.
+  const scope = new URL("./", self.location.href).pathname;
+  if (
+    r.mode === "navigate" &&
+    u.pathname !== scope &&
+    u.pathname !== `${scope}index.html`
+  )
+    return;
   // Keep HTML and bundles from the same installed release. A new worker waits
   // for existing tabs to close before activation; do not force skipWaiting.
   // This cache contains only public static build files. Match the URL used
@@ -42,8 +52,7 @@ self.addEventListener("fetch", (e) => {
       .open(CACHE)
       .then(
         async (cache) =>
-          (await cache.match(r.mode === "navigate" ? "./" : r.url)) ||
-          fetch(r),
+          (await cache.match(r.mode === "navigate" ? "./" : r.url)) || fetch(r),
       ),
   );
 });

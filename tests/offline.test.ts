@@ -52,7 +52,7 @@ test("正式產物預存完整資源，離線可讀；安裝失敗不強制接�
       throw new Error("offline");
     },
     self: {
-      location: { origin: new URL(base).origin },
+      location: { origin: new URL(base).origin, href: `${base}sw.js` },
       addEventListener: (name: string, fn: any) => {
         events[name] = fn;
       },
@@ -101,6 +101,20 @@ test("正式產物預存完整資源，離線可讀；安裝失敗不強制接�
   const page = await pending!;
   assert.ok(page, "離線導覽須有快取頁面");
   assert.equal(page.redirected, false, "導覽不得回應重新導向過的快取");
+  // Read-only pages under the scope must reach the network: the cached shell
+  // resolves ./assets/ relative to the page and would render blank there.
+  let answered = false;
+  events.fetch({
+    request: {
+      method: "GET",
+      mode: "navigate",
+      url: `${base}knowledge/d1/`,
+    },
+    respondWith: () => {
+      answered = true;
+    },
+  });
+  assert.equal(answered, false, "靜態頁的導覽不得回應快取的 app shell");
   failInstall = true;
   events.install({
     waitUntil: (p: Promise<any>) => {
