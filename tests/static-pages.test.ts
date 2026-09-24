@@ -125,3 +125,14 @@ test("首頁、robots.txt 與產生器使用同一個正式網址", () => {
   );
   assert.ok(robots.includes(`Sitemap: ${SITE_URL}/sitemap.xml`));
 });
+
+test("IndexNow 金鑰檔的內容等於檔名，搜尋引擎才會接受提交", async () => {
+  const { readdirSync } = await import("node:fs");
+  const dir = new URL("../public/", import.meta.url);
+  const keys = readdirSync(dir).filter((name) =>
+    /^[0-9a-f]{32}\.txt$/.test(name),
+  );
+  assert.equal(keys.length, 1, "public/ 要剛好有一個 IndexNow 金鑰檔");
+  const text = readFileSync(new URL(keys[0], dir), "utf8");
+  assert.equal(text, keys[0].replace(/\.txt$/, ""));
+});
