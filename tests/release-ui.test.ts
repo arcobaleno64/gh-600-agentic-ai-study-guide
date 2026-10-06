@@ -62,6 +62,73 @@ test("進度寫入失敗保留記憶體資料，恢復寫入後才解除警告",
   assert.deepEqual(JSON.parse(saved).completedDays, [1, 2]);
 });
 
+test("名詞抽卡遵守篩選，零筆不另抽全庫；下一張收起解釋並聚焦卡片", async () => {
+  const source = readFileSync(
+    new URL("../src/views/GlossaryView.vue", import.meta.url),
+    "utf8",
+  );
+  const terms = [
+    {
+      id: "a",
+      term: "MCP",
+      explanation: "工具介面",
+      category: "工具",
+      exams: ["GH-600"],
+    },
+    {
+      id: "b",
+      term: "Checkpoint",
+      explanation: "恢復紀錄",
+      category: "恢復",
+      exams: ["GH-600"],
+    },
+  ];
+  const script = compileScript(parse(source).descriptor, {
+    id: "glossary-test",
+  });
+  const module = execute(script.content, {
+    vue,
+    "../content": { terms, glossary: { categories: [] } },
+    "../store": { progress: { familiarTerms: [], favoriteTerms: [] } },
+    "../router": { route: { param: "" } },
+    "../utils": {
+      normalize: (s: string) => s.toLowerCase(),
+      shuffled: (items: unknown[]) => [...items],
+    },
+  });
+  const scope = vue.effectScope();
+  const state = vue.proxyRefs(
+    scope.run(() => module.default.setup({}, { expose() {} })),
+  );
+  let opened = 0;
+  let focused = 0;
+  state.flashDialog = { showModal: () => opened++ };
+  state.flashFace = { focus: () => focused++ };
+  try {
+    state.query = "missing";
+    state.openDeck();
+    assert.equal(opened, 0);
+    state.query = "MCP";
+    state.openDeck();
+    assert.equal(opened, 1);
+    assert.deepEqual(
+      Array.from(state.deck, (t: { id: string }) => t.id),
+      ["a"],
+    );
+    state.reveal = true;
+    state.next();
+    await vue.nextTick();
+    assert.equal(state.reveal, false);
+    assert.equal(focused, 1);
+    state.query = "";
+    state.category = "恢復";
+    state.openDeck();
+    assert.equal(state.card.id, "b");
+  } finally {
+    scope.stop();
+  }
+});
+
 function readerHarness(id: string, section: string) {
   const chapters = ["start-here", "d1", "d2", "d3", "integration"].map(
     (id) => ({
@@ -139,6 +206,8 @@ function readerHarness(id: string, section: string) {
         navigate: (...args: unknown[]) => calls.push(args),
       },
       "../reading": { readingSections },
+      "../components/CaseWalkthrough.vue": {},
+      "../components/DeliveryTrace.vue": {},
     },
     {
       document: doc,
@@ -191,6 +260,158 @@ function readerHarness(id: string, section: string) {
     },
   };
 }
+
+test("教材解析可展開，原文、來源與程式碼內容維持完整", () => {
+  const h = readerHarness("d2", "d2-o1");
+  try {
+    const html = h.state.render(
+      "**情境：** 該重試嗎？\n\n**解析：** 先查副作用。[來源](https://docs.github.com/)\n\n```text\n**解析：** 這是資料。\n```",
+    );
+    assert.equal((html.match(/class="reading-answer"/g) ?? []).length, 1);
+    assert.match(html, /<summary>查看解析<\/summary>/);
+    assert.doesNotMatch(html, /<details[^>]*\bopen\b/);
+    assert.match(html, /先查副作用/);
+    assert.match(html, /href="https:\/\/docs.github.com\/"/);
+    assert.match(html, /<pre[^>]*tabindex="0"/);
+    assert.match(html, /<pre[^>]*><code[^>]*>\*\*解析：\*\* 這是資料。/);
+    assert.match(html, /<p><strong>情境：<\/strong> 該重試嗎？<\/p>/);
+  } finally {
+    h.dispose();
+  }
+});
+
+test("同章的表格與程式碼區域名稱唯一，重新渲染保持一致", () => {
+  const h = readerHarness("d2", "d2-o1");
+  try {
+    const renderChapter = () =>
+      h.state.parsed.sections
+        .map((section: { id: string; raw: string }) =>
+          h.state.render(section.raw, section.id),
+        )
+        .join("");
+    const html = renderChapter();
+    const names = [...html.matchAll(/role="region" aria-label="([^"]+)"/g)].map(
+      (match) => match[1],
+    );
+    assert.ok(names.some((name) => name.includes("程式碼範例")));
+    assert.ok(names.some((name) => name.includes("教材表格")));
+    assert.equal(new Set(names).size, names.length);
+    assert.equal(renderChapter(), html);
+  } finally {
+    h.dispose();
+  }
+});
+
+test("交付推演區分同版驗收、未測情境及發布授權，不讓綠燈代替三者", () => {
+  const source = readFileSync(
+    new URL("../src/components/DeliveryTrace.vue", import.meta.url),
+    "utf8",
+  );
+  const script = compileScript(parse(source).descriptor, {
+    id: "delivery-trace-test",
+  });
+  const module = execute(script.content, { vue });
+  const scope = vue.effectScope();
+  const state = vue.proxyRefs(
+    scope.run(() => module.default.setup({}, { expose() {} })),
+  );
+  try {
+    for (const version of ["A", "B"]) {
+      for (const newline of [false, true]) {
+        state.testedVersion = version;
+        state.newlineChecked = newline;
+        const missing = Number(version !== "B") + Number(!newline);
+        assert.equal(state.gaps.length, missing);
+        state.action = "review";
+        assert.equal(
+          state.conclusion,
+          missing ? "交付差異，明列缺口" : "交付已核對的差異",
+        );
+        state.action = "publish";
+        assert.equal(state.conclusion, "暫停發布");
+        assert.match(state.explanation, /授權|核准/);
+      }
+    }
+    state.reset();
+    assert.equal(state.testedVersion, "A");
+    assert.equal(state.newlineChecked, false);
+    assert.equal(state.action, "review");
+    assert.equal(state.gaps.length, 2);
+  } finally {
+    scope.stop();
+  }
+});
+
+function walkthroughHarness() {
+  const source = readFileSync(
+    new URL("../src/components/CaseWalkthrough.vue", import.meta.url),
+    "utf8",
+  );
+  const script = compileScript(parse(source).descriptor, { id: "case-test" });
+  const module = execute(script.content, { vue });
+  const scope = vue.effectScope();
+  const state = vue.proxyRefs(
+    scope.run(() => module.default.setup({}, { expose() {} })),
+  );
+  return { state, dispose: () => scope.stop() };
+}
+
+test("案例須先選行動才核對；改選與換段清除舊回饋，重試不重複計數", () => {
+  const h = walkthroughHarness();
+  try {
+    h.state.check();
+    assert.equal(h.state.feedback, undefined);
+    assert.equal(h.state.reviewed.length, 0);
+    h.state.chooseAction(0);
+    h.state.check();
+    assert.match(h.state.feedback.reason, /超出這次授權/);
+    assert.equal(h.state.reviewed.length, 1);
+    h.state.chooseAction(1);
+    assert.equal(h.state.feedback, undefined);
+    h.state.check();
+    assert.equal(h.state.feedback.sound, true);
+    assert.equal(h.state.reviewed.length, 1);
+    h.state.chooseStage(2);
+    assert.equal(h.state.stage.id, "d3");
+    assert.equal(h.state.selected, null);
+    assert.equal(h.state.feedback, undefined);
+    h.state.check();
+    assert.equal(h.state.reviewed.length, 1);
+  } finally {
+    h.dispose();
+  }
+});
+
+test("六段案例的教材連結都對應真實 objective，且各選項回饋可取得", () => {
+  const h = walkthroughHarness();
+  try {
+    assert.deepEqual(
+      Array.from(h.state.stages, (stage: { id: string }) => stage.id),
+      ["d1", "d2", "d3", "d4", "d5", "d6"],
+    );
+    for (const stage of h.state.stages) {
+      const chapter = readFileSync(
+        new URL(`../content/chapters/${stage.id}.md`, import.meta.url),
+        "utf8",
+      );
+      assert.ok(
+        readingSections(chapter).sections.some((s) => s.id === stage.section),
+      );
+      assert.equal(
+        stage.choices.filter((choice: { sound?: boolean }) => choice.sound)
+          .length,
+        1,
+      );
+      assert.ok(
+        stage.choices.every(
+          (choice: { reason: string }) => choice.reason.trim() !== "",
+        ),
+      );
+    }
+  } finally {
+    h.dispose();
+  }
+});
 
 test("章末前往下一章，不受目前小節影響；最後一章不回跳", async () => {
   for (const [id, section, expected] of [

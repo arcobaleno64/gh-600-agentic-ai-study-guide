@@ -58,6 +58,7 @@ const pairs: [string, string, string][] = [
   ["soft", "surface", "次要說明"],
   ["faint", "surface", "eyebrow 與小字"],
   ["faint", "bg", "頁面小字"],
+  ["faint", "alt", "灰底上的說明與案例階段"],
   ["primary", "bg", "連結"],
   ["primary", "surface", "卡片內連結"],
   ["on-primary", "primary", "主要按鈕"],
@@ -92,6 +93,15 @@ for (const [name, set] of Object.entries(themes)) {
     const fg = mix(rgb(set.accent), rgb(set.text), Number(rule[1]) / 100);
     const value = ratio(fg, rgb(set["accent-soft"]));
     assert.ok(value >= 4.5, `強調 badge ${value.toFixed(2)}:1`);
+  });
+  test(`${name} 主題的收藏星號符合非文字控制項 3:1 對比`, () => {
+    const rule = block(".favorite-button.active").match(
+      /(?:^|[;{])\s*color:\s*color-mix\(in srgb, var\(--accent\) (\d+)%, var\(--text\)\)/,
+    );
+    assert.ok(rule, "收藏星號須有可計算的前景色");
+    const fg = mix(rgb(set.accent), rgb(set.text), Number(rule[1]) / 100);
+    const value = ratio(fg, rgb(set["accent-soft"]));
+    assert.ok(value >= 3, `收藏星號 ${value.toFixed(2)}:1`);
   });
 }
 

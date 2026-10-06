@@ -11,6 +11,8 @@ import { marked, Renderer } from "marked";
 import { chapters, examMeta, questions, sources, terms } from "../content";
 import { navigate, route } from "../router";
 import { readingSections } from "../reading";
+import CaseWalkthrough from "../components/CaseWalkthrough.vue";
+import DeliveryTrace from "../components/DeliveryTrace.vue";
 
 const active = computed(
   () => chapters.find((chapter) => chapter.id === route.param) ?? chapters[0]!,
@@ -153,11 +155,35 @@ const chapterSources = computed(() =>
   sources.filter((source) => active.value.raw.includes(source.id)),
 );
 const renderer = new Renderer();
+let regionPrefix = "章節導言";
+let regionIndex = 0;
+const renderCode = renderer.code;
+renderer.code = function (token) {
+  return renderCode
+    .call(this, token)
+    .replace(
+      "<pre>",
+      `<pre tabindex="0" role="region" aria-label="${regionPrefix}程式碼範例 ${++regionIndex}，可左右捲動">`,
+    );
+};
 renderer.link = ({ href, title, text }) =>
   `<a href="${href}" ${title ? `title="${title}"` : ""} target="_blank" rel="noopener">${text}</a>`;
 renderer.table = ({ header, rows }) =>
-  `<div class="markdown-table" tabindex="0" role="region" aria-label="教材表格，可左右捲動"><table><thead>${renderer.tablerow({ text: header.map((cell) => renderer.tablecell(cell)).join("") })}</thead><tbody>${rows.map((row) => renderer.tablerow({ text: row.map((cell) => renderer.tablecell(cell)).join("") })).join("")}</tbody></table></div>`;
-function render(raw: string) {
+  `<div class="markdown-table" tabindex="0" role="region" aria-label="${regionPrefix}教材表格 ${++regionIndex}，可左右捲動"><table><thead>${renderer.tablerow({ text: header.map((cell) => renderer.tablecell(cell)).join("") })}</thead><tbody>${rows.map((row) => renderer.tablerow({ text: row.map((cell) => renderer.tablecell(cell)).join("") })).join("")}</tbody></table></div>`;
+renderer.paragraph = function ({ tokens }) {
+  const text = this.parser.parseInline(tokens);
+  const first = tokens[0];
+  if (first?.type === "strong" && first.text === "解析：") {
+    return `<details class="reading-answer"><summary>查看解析</summary><div class="reading-answer__body"><p>${text}</p></div></details>`;
+  }
+  return `<p>${text}</p>`;
+};
+function render(raw: string, sectionId = "") {
+  const index = parsed.value.sections.findIndex(
+    (section) => section.id === sectionId,
+  );
+  regionPrefix = index < 0 ? "章節導言" : `第 ${index + 1} 節`;
+  regionIndex = 0;
   return marked.parse(raw, { renderer });
 }
 function continueReading() {
@@ -222,18 +248,13 @@ watch(
         >{{ section.title }}
       </a>
     </nav>
+    <CaseWalkthrough v-show="chapterIndex === 0" />
     <div class="reading-layout">
       <article class="reading-article">
-        <header class="reading-title">
+        <header v-if="chapterIndex !== 0" class="reading-title">
           <p>{{ chapterLabel }}<span>AGENTIC AI DEVELOPER</span></p>
           <h1>{{ active.title }}</h1>
-          <p class="reading-deck">
-            {{
-              chapterIndex === 0
-                ? "從 GitHub 與 Copilot，走向代理系統的設計與實作。"
-                : "本章內容與考試目標對照"
-            }}
-          </p>
+          <p class="reading-deck">本章內容與考試目標對照</p>
         </header>
         <div
           v-if="parsed.introduction.trim()"
@@ -249,7 +270,13 @@ watch(
           tabindex="-1"
         >
           <h2>{{ section.title }}</h2>
-          <div class="markdown-body" v-html="render(section.raw)"></div>
+          <DeliveryTrace
+            v-if="active.id === 'integration' && section === parsed.sections[0]"
+          />
+          <div
+            class="markdown-body"
+            v-html="render(section.raw, section.id)"
+          ></div>
           <a
             v-if="practiceQuestions[section.id]"
             class="reading-practice"
