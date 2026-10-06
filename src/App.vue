@@ -7,8 +7,8 @@ import {
   watch,
   type Component,
 } from "vue";
-import { cycleTheme, progress } from "./store";
-import { navigate, route, routeTitles } from "./router";
+import { cycleTheme, progress, storageStatus } from "./store";
+import { route, routeTitles } from "./router";
 import DashboardView from "./views/DashboardView.vue";
 import PlanView from "./views/PlanView.vue";
 import KnowledgeView from "./views/KnowledgeView.vue";
@@ -21,10 +21,10 @@ import SettingsView from "./views/SettingsView.vue";
 import SearchOverlay from "./components/SearchOverlay.vue";
 import ToastHost from "./components/ToastHost.vue";
 import { showToast } from "./toast";
-import { examMeta } from "./content";
+import { chapters, examMeta } from "./content";
 import type { RouteName } from "./types";
 
-const mobileOpen = ref(false);
+const menu = ref<HTMLDialogElement | null>(null);
 const searchOpen = ref(false);
 const online = ref(navigator.onLine);
 const installPrompt = ref<Event | null>(null);
@@ -61,9 +61,9 @@ const nav = [
   { name: "settings" as RouteName, label: "設定", icon: "設" },
 ];
 watch(
-  () => route.name,
+  () => [route.name, route.param],
   () => {
-    mobileOpen.value = false;
+    menu.value?.close();
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   },
 );
@@ -74,11 +74,25 @@ function onKey(event: KeyboardEvent) {
   }
   if (event.key === "Escape") {
     searchOpen.value = false;
-    mobileOpen.value = false;
+    menu.value?.close();
   }
 }
 function updateOnline() {
   online.value = navigator.onLine;
+}
+function closeMenuBackdrop(event: MouseEvent) {
+  if (event.target !== menu.value) return;
+  const box = menu.value!.getBoundingClientRect();
+  if (
+    event.clientX < box.left ||
+    event.clientX > box.right ||
+    event.clientY < box.top ||
+    event.clientY > box.bottom
+  )
+    menu.value?.close();
+}
+function focusReading() {
+  document.getElementById("main-content")?.focus();
 }
 function captureInstall(event: Event) {
   event.preventDefault();
@@ -115,134 +129,125 @@ onBeforeUnmount(() => {
 });
 </script>
 <template>
-  <a class="skip-link" href="#main-content">跳到主要內容</a>
-  <div class="app-shell">
-    <aside class="sidebar" :class="{ 'sidebar--open': mobileOpen }">
-      <div class="brand">
-        <div class="brand-mark" aria-hidden="true">
-          <span>GH</span><span>600</span>
-        </div>
-        <div>
-          <strong>GH-600 四週備考</strong><small>Agentic AI 學習指南</small>
-        </div>
-      </div>
-      <nav class="primary-nav" aria-label="主要導覽">
-        <button
-          v-for="item in nav"
-          :key="item.name"
-          class="nav-item"
-          :class="{ 'nav-item--active': route.name === item.name }"
-          :aria-current="route.name === item.name ? 'page' : undefined"
-          @click="navigate(item.name)"
+  <a class="skip-link" href="#main-content" @click.prevent="focusReading"
+    >跳到主要內容</a
+  >
+  <div class="app-shell textbook-shell">
+    <header class="book-header">
+      <div class="book-header__inner">
+        <a class="book-brand" href="#/knowledge/start-here"
+          >GH-600 數位教科書</a
         >
-          <span class="nav-item__icon" aria-hidden="true">{{ item.icon }}</span
-          ><span>{{ item.label }}</span>
+        <button class="book-menu-button" @click="menu?.showModal()">
+          目錄
         </button>
-      </nav>
-      <footer class="sidebar-footer">
-        <div class="status-line">
-          <span
-            class="status-dot"
-            :class="{ 'status-dot--offline': !online }"
-          ></span
-          >{{ online ? "已連線" : "離線模式" }}
-        </div>
-        <small>資料基準：{{ examMeta.lastVerified }}</small>
-      </footer>
-    </aside>
-    <button
-      v-if="mobileOpen"
-      class="mobile-backdrop"
-      aria-label="關閉導覽"
-      @click="mobileOpen = false"
-    ></button>
-    <div class="app-main">
-      <header class="topbar">
-        <div class="topbar__leading">
-          <button
-            class="icon-button mobile-menu"
-            aria-label="開啟導覽"
-            @click="mobileOpen = true"
+        <button
+          class="book-search"
+          aria-label="開啟全站搜尋"
+          @click="searchOpen = true"
+        >
+          <span>搜尋章節、概念或關鍵字</span
+          ><span class="book-search__mobile">搜尋</span><kbd>Ctrl K</kbd>
+        </button>
+        <nav class="book-quick-nav" aria-label="常用功能">
+          <a
+            href="#/glossary"
+            :aria-current="route.name === 'glossary' ? 'page' : undefined"
+            >詞彙表</a
           >
-            ☰
-          </button>
-          <div>
-            <p class="eyebrow">GH-600 · AGENTIC AI DEVELOPER</p>
-            <h1>{{ title }}</h1>
-          </div>
-        </div>
-        <div class="topbar__actions">
-          <button
-            v-if="installPrompt"
-            class="button button--soft"
-            @click="install"
+          <a
+            href="#/quiz"
+            :aria-current="route.name === 'quiz' ? 'page' : undefined"
+            >測驗</a
           >
-            安裝
-          </button>
-          <button
-            class="search-trigger"
-            aria-label="開啟全站搜尋"
-            @click="searchOpen = true"
+          <a
+            href="#/dashboard"
+            :aria-current="route.name === 'dashboard' ? 'page' : undefined"
+            >我的進度</a
           >
-            <span>搜尋教材與題庫</span><kbd>Ctrl K</kbd>
-          </button>
-          <button
-            class="icon-button theme-button"
-            :aria-label="`切換顯示主題，目前為${themeLabel}`"
-            :title="themeLabel"
-            @click="cycleTheme"
-          >
-            <svg
-              v-if="progress.theme === 'light'"
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <circle cx="12" cy="12" r="4" />
-              <path
-                d="M12 3v2M12 19v2M5.64 5.64l1.42 1.42M16.94 16.94l1.42 1.42M3 12h2M19 12h2M5.64 18.36l1.42-1.42M16.94 7.06l1.42-1.42"
-              />
-            </svg>
-            <svg
-              v-else-if="progress.theme === 'dark'"
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z" />
-            </svg>
-            <svg
-              v-else
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <rect x="3" y="4" width="18" height="13" rx="2" />
-              <path d="M8 21h8M12 17v4" />
-            </svg>
-          </button>
-        </div>
-      </header>
-      <main id="main-content" class="content-area">
-        <component :is="currentView" />
-      </main>
-    </div>
+        </nav>
+      </div>
+    </header>
+    <main id="main-content" class="content-area" tabindex="-1">
+      <p v-if="storageStatus === 'error'" class="notice" role="alert">
+        最新進度尚未保存，關閉或重新整理可能會遺失。
+        <a href="#/settings">前往設定匯出學習紀錄</a>。
+      </p>
+      <h1 v-if="route.name !== 'knowledge'" class="sr-only">
+        {{ title }}
+      </h1>
+      <component :is="currentView" />
+    </main>
+    <footer class="book-footer">
+      <span>GH-600 · Agentic AI 學習指南</span>
+      <span
+        >{{ online ? "已連線" : "目前離線" }} ·
+        {{
+          storageStatus === "saved"
+            ? "進度已保存在此瀏覽器"
+            : storageStatus === "error"
+              ? "最新進度尚未保存"
+              : "進度僅存於此瀏覽器"
+        }}</span
+      >
+      <button
+        class="text-button"
+        :aria-label="`切換顯示主題，目前為${themeLabel}`"
+        @click="cycleTheme"
+      >
+        {{ themeLabel }}
+      </button>
+      <button v-if="installPrompt" class="text-button" @click="install">
+        安裝離線版
+      </button>
+    </footer>
   </div>
+  <dialog
+    ref="menu"
+    class="book-menu"
+    aria-labelledby="book-menu-title"
+    @click="closeMenuBackdrop"
+  >
+    <header>
+      <div>
+        <p class="eyebrow">GH-600</p>
+        <h2 id="book-menu-title">全書目錄</h2>
+      </div>
+      <button class="book-menu-button" @click="menu?.close()">關閉</button>
+    </header>
+    <nav aria-label="全書章節">
+      <a
+        v-for="(chapter, index) in chapters"
+        :key="chapter.id"
+        :href="`#/knowledge/${chapter.id}`"
+        :aria-current="
+          route.name === 'knowledge' && route.param === chapter.id
+            ? 'page'
+            : undefined
+        "
+        @click="menu?.close()"
+      >
+        <span>{{
+          index === 0
+            ? "導讀"
+            : index === chapters.length - 1
+              ? "附錄"
+              : String(index).padStart(2, "0")
+        }}</span>
+        <strong>{{ chapter.title }}</strong>
+      </a>
+    </nav>
+    <nav class="book-menu__resources" aria-label="學習工具">
+      <a
+        v-for="item in nav.filter((item) => item.name !== 'knowledge')"
+        :key="item.name"
+        :href="`#/${item.name}`"
+        @click="menu?.close()"
+        >{{ item.label }}</a
+      >
+    </nav>
+    <p class="muted">資料基準：{{ examMeta.lastVerified }}</p>
+  </dialog>
   <SearchOverlay :open="searchOpen" @close="searchOpen = false" />
   <ToastHost />
 </template>

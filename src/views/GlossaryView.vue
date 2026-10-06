@@ -7,7 +7,8 @@ import { normalize, shuffled } from "../utils";
 const query = ref("");
 const category = ref("全部");
 const status = ref("全部");
-const flashOpen = ref(false);
+const flashDialog = ref<HTMLDialogElement | null>(null);
+const flashFace = ref<HTMLButtonElement | null>(null);
 const flashIndex = ref(0);
 const reveal = ref(false);
 const deck = ref([...terms]);
@@ -26,14 +27,27 @@ const filtered = computed(() =>
 );
 const card = computed(() => deck.value[flashIndex.value] ?? terms[0]);
 function openDeck() {
-  deck.value = shuffled(filtered.value.length ? filtered.value : terms);
+  if (!filtered.value.length) return;
+  deck.value = shuffled(filtered.value);
   flashIndex.value = 0;
   reveal.value = false;
-  flashOpen.value = true;
+  flashDialog.value?.showModal();
 }
 function next() {
   flashIndex.value = (flashIndex.value + 1) % deck.value.length;
   reveal.value = false;
+  nextTick(() => flashFace.value?.focus({ preventScroll: true }));
+}
+function closeBackdrop(event: MouseEvent) {
+  if (event.target !== flashDialog.value) return;
+  const box = flashDialog.value.getBoundingClientRect();
+  if (
+    event.clientX < box.left ||
+    event.clientX > box.right ||
+    event.clientY < box.top ||
+    event.clientY > box.bottom
+  )
+    flashDialog.value.close();
 }
 async function focusRoute() {
   if (!route.param) return;
@@ -41,9 +55,11 @@ async function focusRoute() {
   category.value = "全部";
   status.value = "全部";
   await nextTick();
-  document
-    .querySelector(`[data-term-id="${CSS.escape(route.param)}"]`)
-    ?.scrollIntoView({ behavior: "smooth", block: "center" });
+  const target = document.querySelector<HTMLElement>(
+    `[data-term-id="${CSS.escape(route.param)}"]`,
+  );
+  target?.scrollIntoView({ behavior: "smooth", block: "center" });
+  target?.focus({ preventScroll: true });
 }
 watch(() => route.param, focusRoute, { immediate: true });
 </script>
@@ -59,7 +75,13 @@ watch(() => route.param, focusRoute, { immediate: true });
           即時搜尋、考科與分類篩選、收藏、熟悉度標記及隨機抽卡。產品名稱再相似，也不必全部擠進同一個記憶抽屜。
         </p>
       </div>
-      <button class="button button--primary" @click="openDeck">隨機抽卡</button>
+      <button
+        class="button button--primary"
+        :disabled="!filtered.length"
+        @click="openDeck"
+      >
+        隨機抽卡
+      </button>
     </div>
     <div class="panel filter-bar">
       <label class="filter-bar__search search-field"
@@ -100,6 +122,8 @@ watch(() => route.param, focusRoute, { immediate: true });
         class="term-card"
         :data-term-id="term.id"
         :data-familiar="progress.familiarTerms.includes(term.id)"
+        tabindex="-1"
+        :aria-labelledby="`term-${term.id}`"
       >
         <div class="term-card__top">
           <div class="term-card__tags">
@@ -108,6 +132,7 @@ watch(() => route.param, focusRoute, { immediate: true });
           <button
             class="favorite-button"
             :class="{ active: progress.favoriteTerms.includes(term.id) }"
+            :aria-pressed="progress.favoriteTerms.includes(term.id)"
             :aria-label="
               progress.favoriteTerms.includes(term.id) ? '取消收藏' : '加入收藏'
             "
@@ -116,7 +141,7 @@ watch(() => route.param, focusRoute, { immediate: true });
             ★
           </button>
         </div>
-        <h3>{{ term.term }}</h3>
+        <h3 :id="`term-${term.id}`">{{ term.term }}</h3>
         <p>{{ term.explanation }}</p>
         <footer class="term-card__footer">
           <span class="muted">{{ term.category }}</span
@@ -140,42 +165,51 @@ watch(() => route.param, focusRoute, { immediate: true });
     </div>
     <div v-if="!filtered.length" class="empty-card">
       <strong>沒有符合的名詞</strong
-      ><span>請放寬篩選條件，名詞沒有消失，只是被人類的條件藏起來了。</span>
+      ><span>請更換關鍵字或放寬分類、狀態篩選；抽卡使用目前的搜尋結果。</span>
     </div>
-    <div
-      v-if="flashOpen"
-      class="overlay"
-      role="dialog"
-      aria-modal="true"
-      aria-label="名詞抽卡"
+    <dialog
+      ref="flashDialog"
+      class="flashcard-modal"
+      aria-labelledby="flashcard-title"
+      @click="closeBackdrop"
     >
-      <button
-        class="overlay-backdrop"
-        aria-label="關閉名詞抽卡"
-        @click="flashOpen = false"
-      ></button>
       <section class="flashcard-dialog">
         <header class="search-dialog__header">
           <div>
             <p class="eyebrow">
               FLASHCARD {{ flashIndex + 1 }}／{{ deck.length }}
             </p>
-            <h2>隨機名詞卡</h2>
+            <h2 id="flashcard-title">隨機名詞卡</h2>
           </div>
           <button
             class="icon-button"
             aria-label="關閉名詞抽卡"
-            @click="flashOpen = false"
+            @click="flashDialog?.close()"
           >
             ×
           </button>
         </header>
-        <button class="flashcard-face" @click="reveal = !reveal">
+        <button
+          ref="flashFace"
+          autofocus
+          class="flashcard-face"
+          :aria-label="`${card.term}：${reveal ? '隱藏解釋' : '顯示解釋'}`"
+          :aria-expanded="reveal"
+          aria-controls="flashcard-explanation"
+          :aria-describedby="reveal ? 'flashcard-explanation' : undefined"
+          @click="reveal = !reveal"
+        >
           <div>
             <span class="badge">{{ card.exams.join("／") }}</span>
             <h2>{{ card.term }}</h2>
-            <p v-if="reveal" class="flashcard-answer">{{ card.explanation }}</p>
-            <p v-else class="muted">點選卡片顯示解釋</p>
+            <p
+              v-show="reveal"
+              id="flashcard-explanation"
+              class="flashcard-answer"
+            >
+              {{ card.explanation }}
+            </p>
+            <p v-if="!reveal" class="muted">點選卡片顯示解釋</p>
           </div>
         </button>
         <div class="settings-actions">
@@ -191,6 +225,6 @@ watch(() => route.param, focusRoute, { immediate: true });
           ><button class="button button--primary" @click="next">下一張</button>
         </div>
       </section>
-    </div>
+    </dialog>
   </section>
 </template>

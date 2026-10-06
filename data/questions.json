@@ -5,30 +5,30 @@
     "number": 1,
     "domainId": "D1",
     "objectiveIds": ["D1-O1"],
-    "sourceIds": ["GH600-SG", "GH-DOC-02"],
+    "sourceIds": ["GH600-SG", "GH-DOC-03"],
     "type": "multiple",
     "options": [
       {
         "id": "A",
-        "text": "輸入與輸出"
+        "text": "可以驗證的驗收條件"
       },
       {
         "id": "B",
-        "text": "成功標準"
+        "text": "不得修改的檔案與行為"
       },
       {
         "id": "C",
-        "text": "每次都使用最高權限"
+        "text": "代理要使用的模型名稱"
       },
       {
         "id": "D",
-        "text": "失敗與升級路徑"
+        "text": "建議的逐步實作順序"
       }
     ],
-    "answer": ["A", "B", "D"],
-    "question": "一個團隊要讓代理處理 issue 到 PR 的流程。哪些定義應在執行前完成？",
-    "explanation": "本題對應 D1-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": ["A", "B"],
+    "question": "你要把 issue 指派給 cloud agent，issue 已寫明任務範圍。還要補上哪些內容，代理才能判斷何時算完成、reviewer 才能驗收？",
+    "explanation": "D1-O1 要求為代理定義輸入、輸出與成功標準。可驗證的驗收條件告訴代理什麼時候完成；不得修改的檔案與行為則是完成時必須同時滿足的限制，reviewer 可以用 diff 檢查。模型屬於代理設定層的選擇，不影響何時算完成；建議的實作順序可能有幫助，但不是判斷完成與驗收的依據。",
+    "trap": "實作順序看起來很周到，但題幹問的是「判斷完成與驗收」。先對準題目要的用途，再判斷內容是否必要。",
     "domain": "準備代理架構與 SDLC 流程",
     "difficulty": "中等",
     "keywords": ["D1", "D1-O1"]
@@ -39,30 +39,30 @@
     "number": 2,
     "domainId": "D1",
     "objectiveIds": ["D1-O2"],
-    "sourceIds": ["GH600-SG", "GH-DOC-02"],
+    "sourceIds": ["GH600-SG", "GH-DOC-06"],
     "type": "multiple",
     "options": [
       {
         "id": "A",
-        "text": "先輸出結構化計畫"
+        "text": "規劃用的 custom agent 只給 read 與 search"
       },
       {
         "id": "B",
-        "text": "核准前禁止寫入"
+        "text": "計畫核准後，才指派有 edit 權限的 agent"
       },
       {
         "id": "C",
-        "text": "把計畫與執行混成一個不可中斷步驟"
+        "text": "在指示中要求代理先輸出計畫再動手修改"
       },
       {
         "id": "D",
-        "text": "驗證計畫涵蓋限制"
+        "text": "讓同一個 agent 在一次工作中規劃並修改"
       }
     ],
-    "answer": ["A", "B", "D"],
-    "question": "哪些做法能清楚分離規劃與行動？",
-    "explanation": "本題對應 D1-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": ["A", "B"],
+    "question": "你要讓代理的規劃與執行在技術上分開，不能只靠代理自己遵守。哪些做法符合？",
+    "explanation": "D1-O2 要求規劃與執行分開，並在計畫核准前阻止行動。規劃用的 custom agent 只有 read 與 search，技術上無法寫入；計畫經人核准後，才把任務交給有 edit 權限的 agent，核准就成為執行的前提。在指示中要求先規劃是好習慣，但沒有強制力；同一個 agent 在一次工作中規劃並修改，兩者沒有分開。",
+    "trap": "指示中的要求與權限設定的差別，在於代理「不遵守」時會發生什麼。題幹要求的是不靠自律。",
     "domain": "準備代理架構與 SDLC 流程",
     "difficulty": "中等",
     "keywords": ["D1", "D1-O2"]
@@ -73,12 +73,12 @@
     "number": 3,
     "domainId": "D1",
     "objectiveIds": ["D1-O2"],
-    "sourceIds": ["GH600-SG", "GH-DOC-02"],
+    "sourceIds": ["GH600-SG", "GH-DOC-29"],
     "type": "true-false",
-    "answer": false,
-    "question": "只要代理產生了可讀的計畫，就可以視為後續所有工具動作都已獲授權。",
-    "explanation": "本題對應 D1-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": true,
+    "question": "代理的計畫經人審查並核准後，執行時若需要計畫中沒有列出的工具動作，仍應另外取得授權。",
+    "explanation": "核准的範圍就是計畫的內容。D1-O2 要求驗證計畫，並在核准前阻止行動；計畫之外的動作沒有經過驗證，等同未經核准，應停下來說明原因並重新取得授權。授權來自人的核准與權限設定，不會因為先前核准過一份計畫就自動延伸。",
+    "trap": "核准一份計畫，不等於核准代理之後想做的所有事。計畫外的動作要重新走一次核准。",
     "domain": "準備代理架構與 SDLC 流程",
     "difficulty": "中等",
     "keywords": ["D1", "D1-O2"]
@@ -89,30 +89,30 @@
     "number": 4,
     "domainId": "D1",
     "objectiveIds": ["D1-O3"],
-    "sourceIds": ["GH600-SG", "GH-DOC-02"],
+    "sourceIds": ["GH600-SG", "GH-DOC-29"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "只回報口頭摘要"
+        "text": "PR 附 diff 與測試，並連結來源 issue"
       },
       {
         "id": "B",
-        "text": "產生包含 diff、測試結果與來源 issue 的 PR"
+        "text": "PR 附 diff 與測試，並連結 session log"
       },
       {
         "id": "C",
-        "text": "隱藏失敗 log"
+        "text": "PR 附 diff 與測試，並指定兩位 reviewer"
       },
       {
         "id": "D",
-        "text": "直接寫入受保護分支"
+        "text": "issue 留言附 diff 與測試，並連結分支"
       }
     ],
-    "answer": "B",
-    "question": "哪一項最能讓代理工作在標準開發工具中接受審查？",
-    "explanation": "本題對應 D1-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": "A",
+    "question": "代理的工作要在標準開發工具中接受審查，而且 reviewer 要能直接看出這次變更對應哪一個需求。cloud agent 完成後應交付什麼？",
+    "explanation": "D1-O3 要求代理在標準開發工具中產出可檢查的產物。PR 讓 reviewer 用既有流程檢查 diff、跑 status checks、留言與核准；連結來源 issue，reviewer 才能直接對照需求。連結 session log 能看到代理的過程，但看不出對應哪個需求；指定 reviewer 決定的是誰來審，不是審什麼；在 issue 留言附 diff，則不在 PR 的審查流程中。",
+    "trap": "三個 PR 選項都能審查，差別只在最後附上的東西。題幹的第二個條件是「對應哪一個需求」。",
     "domain": "準備代理架構與 SDLC 流程",
     "difficulty": "基礎",
     "keywords": ["D1", "D1-O3"]
@@ -123,30 +123,30 @@
     "number": 5,
     "domainId": "D1",
     "objectiveIds": ["D1-O1"],
-    "sourceIds": ["GH600-SG", "GH-DOC-02"],
+    "sourceIds": ["GH600-SG", "GH-DOC-03"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "良好委派"
+        "text": "任務定義不清的反模式"
       },
       {
         "id": "B",
-        "text": "代理反模式"
+        "text": "工具權限過大的反模式"
       },
       {
         "id": "C",
-        "text": "狀態連續性"
+        "text": "規劃與執行未分離的問題"
       },
       {
         "id": "D",
-        "text": "工具 allowlist"
+        "text": "長時間執行的脈絡漂移"
       }
     ],
-    "answer": "B",
-    "question": "把模糊的大型需求直接交給代理、未定義完成條件，最接近哪種問題？",
-    "explanation": "本題對應 D1-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": "A",
+    "question": "團隊把「改善整個網站的效能」直接指派給代理，沒有指標，也沒有完成條件。這屬於哪一類問題？",
+    "explanation": "D1-O1 要求識別並緩解代理反模式。沒有指標與完成條件，代理不知道何時該停，reviewer 也無從驗收，這是任務定義不清；GitHub 的最佳實務建議把大需求拆成範圍明確、附驗收條件的 issue。題幹沒有提到權限、規劃流程或長時間執行，其他三個選項都缺乏依據。",
+    "trap": "四個選項都是真實存在的問題。要選題幹描述的那一個，而不是「也可能發生」的那一個。",
     "domain": "準備代理架構與 SDLC 流程",
     "difficulty": "基礎",
     "keywords": ["D1", "D1-O1"]
@@ -157,30 +157,30 @@
     "number": 6,
     "domainId": "D1",
     "objectiveIds": ["D1-O3"],
-    "sourceIds": ["GH600-SG", "GH-DOC-02"],
+    "sourceIds": ["GH600-SG", "GH-DOC-30"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "提高 temperature"
+        "text": "限定刪除範圍後自動執行，並記錄筆數"
       },
       {
         "id": "B",
-        "text": "執行前人工核准並保留回滾"
+        "text": "每次執行前都由人工核准刪除清單"
       },
       {
         "id": "C",
-        "text": "增加長期記憶"
+        "text": "執行前先完整備份 staging 資料庫"
       },
       {
         "id": "D",
-        "text": "平行啟動更多代理"
+        "text": "只產生刪除清單，由人手動執行刪除"
       }
     ],
-    "answer": "B",
-    "question": "高風險資料刪除工作應採用哪種最小控制？",
-    "explanation": "本題對應 D1-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": "A",
+    "question": "代理要刪除 staging 資料庫中 30 天前的測試資料。這些資料每晚都會從範本重新產生，刪錯隔天就會恢復。最合適的控制是什麼？",
+    "explanation": "D1-O3 要求安排人工介入時不拖慢交付。題幹說明資料每晚重新產生，刪錯隔天就會恢復，這次刪除是低風險、可自然回復的操作；限定範圍並記錄筆數，就足以控制與追查。逐次人工核准、額外備份、改由人手動刪除，都在為一個本來就能恢復的操作增加成本。",
+    "trap": "看到「刪除」就加上最重的控制，是常見的反射。控制強度要依能不能恢復決定，而不是動作的名稱。",
     "domain": "準備代理架構與 SDLC 流程",
     "difficulty": "基礎",
     "keywords": ["D1", "D1-O3"]
@@ -191,30 +191,30 @@
     "number": 7,
     "domainId": "D1",
     "objectiveIds": ["D1-O1"],
-    "sourceIds": ["GH600-SG", "GH-DOC-02"],
+    "sourceIds": ["GH600-SG", "GH-DOC-17"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "結果看起來不錯"
+        "text": "新的逗號跳脫測試與既有匯出測試都通過"
       },
       {
         "id": "B",
-        "text": "代理盡力完成"
+        "text": "新的逗號跳脫測試與既有匯入測試都通過"
       },
       {
         "id": "C",
-        "text": "指定測試全數通過且只修改授權檔案"
+        "text": "新的引號跳脫測試與既有匯出測試都通過"
       },
       {
         "id": "D",
-        "text": "回覆內容很長"
+        "text": "新的逗號跳脫測試與既有 CSV 解析測試都通過"
       }
     ],
-    "answer": "C",
-    "question": "何者是可驗證的成功標準？",
-    "explanation": "本題對應 D1-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": "A",
+    "question": "任務是修正 CSV 匯出時逗號沒有跳脫的錯誤，而且不得改變其他匯出格式。下列哪一項最適合作為成功標準？",
+    "explanation": "D1-O1 要求成功標準可以驗證，而且涵蓋任務的目標與限制。新的逗號跳脫測試驗證錯誤已修正，既有的匯出測試驗證其他匯出格式沒有改變，兩者合起來才完整。匯入測試與 CSV 解析測試檢查的是讀取，不是匯出；引號跳脫測試驗證的不是這次要修的逗號。",
+    "trap": "四個選項長得幾乎一樣，差別在「逗號或引號」與「匯出、匯入或解析」。成功標準要逐字對照題幹。",
     "domain": "準備代理架構與 SDLC 流程",
     "difficulty": "基礎",
     "keywords": ["D1", "D1-O1"]
@@ -225,30 +225,30 @@
     "number": 8,
     "domainId": "D1",
     "objectiveIds": ["D1-O2"],
-    "sourceIds": ["GH600-SG", "GH-DOC-02"],
+    "sourceIds": ["GH600-SG", "GH-DOC-15", "GH-DOC-29"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "增加提示長度"
+        "text": "ruleset 要求合併到 main 前需要核准"
       },
       {
         "id": "B",
-        "text": "建立 plan approval gate"
+        "text": "保留 Copilot PR 的 workflow 核准設定"
       },
       {
         "id": "C",
-        "text": "改用長期記憶"
+        "text": "在 copilot-instructions.md 要求先確認"
       },
       {
         "id": "D",
-        "text": "移除 log"
+        "text": "在 setup steps 加入部署前的檢查腳本"
       }
     ],
-    "answer": "B",
-    "question": "要避免代理一邊規劃一邊進行未審查的部署，最直接的設計是什麼？",
-    "explanation": "本題對應 D1-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": "A",
+    "question": "cloud agent 的 PR 合併到 main 後會自動部署。你要確保每次部署前，一定有人看過代理的變更。最直接的設定是什麼？",
+    "explanation": "部署發生在合併之後，所以控制點要放在合併：ruleset 要求合併前需要核准，沒有人審查就進不了 main，也就不會部署。Copilot PR 的 workflow 核准控制的是 PR 上的 CI 何時執行，不控制合併；instructions 沒有強制力；setup steps 只負責準備代理的開發環境，與合併和部署無關。",
+    "trap": "workflow 核准也是一道「人工核准」，但它把關的是 PR 上的 CI，不是合併。先找出風險實際發生的位置。",
     "domain": "準備代理架構與 SDLC 流程",
     "difficulty": "進階",
     "keywords": ["D1", "D1-O2"]
@@ -259,30 +259,30 @@
     "number": 9,
     "domainId": "D1",
     "objectiveIds": ["D1-O3"],
-    "sourceIds": ["GH600-SG", "GH-DOC-02"],
+    "sourceIds": ["GH600-SG", "GH-DOC-30"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "在明確範圍內自動執行並驗證"
+        "text": "其餘自動修正；3 個 API 檔另開 PR 待確認"
       },
       {
         "id": "B",
-        "text": "一律要求高階主管逐字核准"
+        "text": "其餘另開 PR 待確認；3 個 API 檔自動修正"
       },
       {
         "id": "C",
-        "text": "完全禁止代理"
+        "text": "全部自動修正；3 個 API 檔合併後再補確認"
       },
       {
         "id": "D",
-        "text": "賦予組織管理權限"
+        "text": "全部另開 PR；200 個檔案都先請法務確認"
       }
     ],
     "answer": "A",
-    "question": "低風險且可回滾的格式修正，適合哪種自主程度？",
-    "explanation": "本題對應 D1-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "代理要用 formatter 修正 200 個檔案的格式，CI 會跑測試。其中 3 個檔案是對外公開的 API 定義，任何變更都要先經法務確認。最合適的安排是什麼？",
+    "explanation": "D1-O3 要求安排人工介入時不拖慢交付。格式修正本身低風險，CI 會驗證，197 個一般檔案可以自動修正；3 個 API 定義檔有「先經法務確認」的要求，應分開處理，另開 PR 等待確認。把兩組的處理方式對調，會讓需要確認的檔案跳過確認；合併後再補確認違反「先確認」；200 個檔案都請法務確認，讓低風險檔案承擔不必要的等待。",
+    "trap": "自主程度不必整批決定。先找出題幹中真正需要人工確認的那一部分，再把控制放在那裡。",
     "domain": "準備代理架構與 SDLC 流程",
     "difficulty": "進階",
     "keywords": ["D1", "D1-O3"]
@@ -293,30 +293,30 @@
     "number": 10,
     "domainId": "D1",
     "objectiveIds": ["D1-O3"],
-    "sourceIds": ["GH600-SG", "GH-DOC-02"],
+    "sourceIds": ["GH600-SG", "GH-DOC-29"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "增加模型上下文直到無限"
+        "text": "cloud agent 該次工作的 session log"
       },
       {
         "id": "B",
-        "text": "重建代理決策、工具動作與結果"
+        "text": "PR 的 commit 歷史與每個 commit 的 diff"
       },
       {
         "id": "C",
-        "text": "取代所有測試"
+        "text": "PR 上所有 workflow 執行的日誌"
       },
       {
         "id": "D",
-        "text": "讓輸出更像人類"
+        "text": "組織層級的 audit log 事件紀錄"
       }
     ],
-    "answer": "B",
-    "question": "可觀測性資料最重要的用途是什麼？",
-    "explanation": "本題對應 D1-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": "A",
+    "question": "一次事故後，你要說明 cloud agent 為什麼刪除了某個設定檔，以及它刪除前做了哪些檢查。最需要的是哪一類資料？",
+    "explanation": "可觀測性資料要能重建代理的決策、工具動作與結果。session log 逐步記錄代理在該次工作中做了什麼、呼叫了哪些工具，能回答「為什麼刪除」與「刪除前檢查了什麼」。commit 與 diff 只顯示檔案被刪除；workflow 日誌記錄的是 CI 的執行；audit log 記錄組織中的事件，都看不到代理在工作中的判斷過程。",
+    "trap": "四個選項都是「紀錄」，但只有一個記錄代理自己的過程。其他紀錄能證明「刪了」，不能說明「為什麼」。",
     "domain": "準備代理架構與 SDLC 流程",
     "difficulty": "進階",
     "keywords": ["D1", "D1-O3"]
@@ -327,30 +327,30 @@
     "number": 11,
     "domainId": "D2",
     "objectiveIds": ["D2-O1"],
-    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "sourceIds": ["GH-DOC-06", "GH-DOC-31"],
     "type": "multiple",
     "options": [
       {
         "id": "A",
-        "text": "任務必要性"
+        "text": "read（讀取檔案）"
       },
       {
         "id": "B",
-        "text": "最小權限"
+        "text": "edit（修改檔案）"
       },
       {
         "id": "C",
-        "text": "輸入輸出驗證"
+        "text": "search（搜尋程式碼）"
       },
       {
         "id": "D",
-        "text": "圖示顏色"
+        "text": "web（搜尋網路上的資料）"
       }
     ],
     "answer": ["A", "B", "C"],
-    "question": "選擇代理工具時應同時評估哪些項目？",
-    "explanation": "本題對應 D2-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "你要建立一個只負責補測試的 custom agent，規定它不能上網查資料。agent profile 的 tools 應包含哪些？",
+    "explanation": "custom agent 用 tools 的別名開關工具類別。補測試要讀取與搜尋既有程式碼，新增或修改測試檔也需要 edit；web 讓代理取得網路資料，題目禁止上網就不給。tools 無法把 edit 限制在測試檔，「不改正式程式碼」要靠 profile 的指示、review 與 CODEOWNERS 等控制。",
+    "trap": "以為拿掉 edit 就能「只寫測試」。新增測試檔同樣需要 edit；tools 是整類工具的開關，不是檔案層級的權限。",
     "domain": "實作工具使用與環境互動",
     "difficulty": "中等",
     "keywords": ["D2", "D2-O1"]
@@ -361,30 +361,30 @@
     "number": 12,
     "domainId": "D2",
     "objectiveIds": ["D2-O4"],
-    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "sourceIds": ["GH600-SG", "GH-DOC-33"],
     "type": "multiple",
     "options": [
       {
         "id": "A",
-        "text": "有界重試"
+        "text": "503 Service Unavailable"
       },
       {
         "id": "B",
-        "text": "取消與逾時"
+        "text": "429 Too Many Requests"
       },
       {
         "id": "C",
-        "text": "升級路徑"
+        "text": "403 Forbidden 權限不足"
       },
       {
         "id": "D",
-        "text": "對所有錯誤無限重試"
+        "text": "400 Bad Request 參數錯誤"
       }
     ],
-    "answer": ["A", "B", "C"],
-    "question": "健全的代理錯誤處理通常包含哪些能力？",
-    "explanation": "本題對應 D2-O4。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": ["A", "B"],
+    "question": "代理呼叫外部 API 時遇到下列錯誤。哪些適合用有上限的指數退避重試？",
+    "explanation": "D2-O4 要求依錯誤類型設計處理方式。503 與 429 都是暫時性狀況：服務暫時無法處理，或呼叫頻率超過限制，等一段時間後可能成功，適合有上限的指數退避重試。這裡的 403 指權限不足、400 指請求本身有誤，重試多少次結果都一樣，應停止並修正請求或沿升級路徑回報。注意 GitHub 超過次要速率限制時也可能回傳 403，這時要依 retry-after 等待後重試，所以要先讀回應訊息再判斷。",
+    "trap": "判斷能不能重試，要問「等一下結果會不會不同」。權限與參數錯誤不會自己變好。",
     "domain": "實作工具使用與環境互動",
     "difficulty": "中等",
     "keywords": ["D2", "D2-O4"]
@@ -395,12 +395,12 @@
     "number": 13,
     "domainId": "D2",
     "objectiveIds": ["D2-O2"],
-    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "sourceIds": ["GH-DOC-08", "GH-DOC-06"],
     "type": "true-false",
-    "answer": false,
-    "question": "MCP server 已列入設定檔，就代表它提供的每個工具都應自動獲得完整權限。",
-    "explanation": "本題對應 D2-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": true,
+    "question": "在 repository 的 MCP 設定中，每個 server 都必須用 tools 欄位列出允許的工具名稱，或用 [\"*\"] 允許全部工具。",
+    "explanation": "cloud agent 的 MCP JSON 中，tools 是必填欄位：列出工具名稱就是 allowlist，[\"*\"] 則開放該 server 的全部工具。設定完成後，Copilot 會自主使用這些工具，不會逐次請你核准，所以應該只列出任務需要的工具。",
+    "trap": "custom agent profile 省略 tools 時會開放全部工具，這個行為不適用於 repository 的 MCP 設定，兩者不要混淆。",
     "domain": "實作工具使用與環境互動",
     "difficulty": "中等",
     "keywords": ["D2", "D2-O2"]
@@ -411,30 +411,30 @@
     "number": 14,
     "domainId": "D2",
     "objectiveIds": ["D2-O1"],
-    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "sourceIds": ["GH-DOC-06"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "組織擁有者"
+        "text": "tools: [\"read\", \"search\", \"edit\", \"execute\"]"
       },
       {
         "id": "B",
-        "text": "repository 唯讀"
+        "text": "tools: [\"read\", \"search\", \"edit\"]"
       },
       {
         "id": "C",
-        "text": "所有 repository 寫入"
+        "text": "tools: [\"read\", \"edit\", \"execute\", \"web\"]"
       },
       {
         "id": "D",
-        "text": "雲端帳戶管理員"
+        "text": "tools: [\"read\", \"search\", \"execute\", \"agent\"]"
       }
     ],
-    "answer": "B",
-    "question": "代理只需讀取 repository 內容時，最佳權限為何？",
-    "explanation": "本題對應 D2-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": "A",
+    "question": "某個 custom agent 要搜尋與讀取程式碼、修改測試檔，並執行測試指令確認通過；它不需要上網，也不委派其他 agent。哪個 tools 設定最符合最小權限？",
+    "explanation": "最小權限是「剛好夠用」，不是「越少越好」。這個 agent 要搜尋與讀取（read、search）、修改測試檔（edit），還要執行測試指令（execute），四者缺一不可。少了 execute 就無法確認測試通過；以 web 取代 search，少了搜尋程式碼的能力，還多了不需要的上網權限；以 agent 取代 edit，既無法修改測試檔，又多了委派其他 agent 的能力。",
+    "trap": "最短的清單不一定正確。少給一個必要工具，代理就無法完成任務，或會想辦法繞過限制。",
     "domain": "實作工具使用與環境互動",
     "difficulty": "基礎",
     "keywords": ["D2", "D2-O1"]
@@ -445,30 +445,30 @@
     "number": 15,
     "domainId": "D2",
     "objectiveIds": ["D2-O2"],
-    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "sourceIds": ["GH-DOC-34", "GH-DOC-09", "GH600-SG"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "控制允許連線或使用的 MCP 來源與工具"
+        "text": "MCP registry 搭配「Registry only」政策"
       },
       {
         "id": "B",
-        "text": "自動修正程式"
+        "text": "MCP registry 搭配「Allow all」政策"
       },
       {
         "id": "C",
-        "text": "保存長期記憶"
+        "text": "在各 repo 的 cloud agent MCP 設定列出 server"
       },
       {
         "id": "D",
-        "text": "提高題庫分數"
+        "text": "在 custom agent 的 mcp-servers 列出 server"
       }
     ],
     "answer": "A",
-    "question": "MCP allowlist 的主要作用是什麼？",
-    "explanation": "本題對應 D2-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "企業希望開發者在 IDE 與 Copilot CLI 中，只能使用經過審核的 MCP server。應該設定什麼？",
+    "explanation": "MCP registry 是一組列出核可 server 的 HTTPS 端點。「Restrict MCP access to registry servers」政策選擇 Registry only 後，受支援的 IDE 與 Copilot CLI 只能執行 registry 內的 server；選 Allow all 則沒有限制，所有 MCP server 都能使用。這項政策目前為公開預覽，GitHub 文件指出更安全、已正式推出的做法是 enterprise allowlist（managed-settings.json），但它不在本題選項中。repository 的 MCP 設定只作用於 cloud agent；custom agent 的 mcp-servers 只設定該 agent 能用的 server，不會限制開發者在 IDE 裡加入其他 server。",
+    "trap": "registry 本身只是清單，真正產生限制的是政策設定為 Registry only。",
     "domain": "實作工具使用與環境互動",
     "difficulty": "基礎",
     "keywords": ["D2", "D2-O2"]
@@ -479,30 +479,30 @@
     "number": 16,
     "domainId": "D2",
     "objectiveIds": ["D2-O2"],
-    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "sourceIds": ["GH-DOC-08", "GH-DOC-30"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "server 名稱"
+        "text": "Agents secret，名稱以 COPILOT_MCP_ 開頭"
       },
       {
         "id": "B",
-        "text": "工具描述"
+        "text": "Agents secret，名稱不加任何前綴"
       },
       {
         "id": "C",
-        "text": "存取權杖"
+        "text": "Actions secret，名稱以 COPILOT_MCP_ 開頭"
       },
       {
         "id": "D",
-        "text": "允許的工具名稱"
+        "text": "Codespaces secret，名稱以 COPILOT_MCP_ 開頭"
       }
     ],
-    "answer": "C",
-    "question": "哪項資訊不應硬編碼在 repository 的 MCP 設定？",
-    "explanation": "本題對應 D2-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": "A",
+    "question": "你要讓 cloud agent 使用一個需要 API 權杖的 MCP server。權杖應該存放在哪裡？",
+    "explanation": "MCP server 需要的金鑰或權杖，要存成名稱以 COPILOT_MCP_ 開頭的 Agents secret 或 variable（組織或 repository 層級），只有這些才會提供給 MCP 設定，並在 JSON 中以 $COPILOT_MCP_API_KEY 這類語法引用。名稱沒有前綴的 Agents secret 不會提供給 MCP；Actions 與 Codespaces 的 secrets 屬於其他功能，即使加上前綴也不會用在這裡。",
+    "trap": "兩個條件要同時成立：存放在 Agents secrets 或 variables，而且名稱以 COPILOT_MCP_ 開頭。",
     "domain": "實作工具使用與環境互動",
     "difficulty": "基礎",
     "keywords": ["D2", "D2-O2"]
@@ -513,30 +513,30 @@
     "number": 17,
     "domainId": "D2",
     "objectiveIds": ["D2-O3"],
-    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "sourceIds": ["GH-DOC-12", "GH-DOC-06"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "setup steps 與鎖定依賴"
+        "text": "在該 custom agent 的指示中寫明需要時再安裝"
       },
       {
         "id": "B",
-        "text": "個人 shell history"
+        "text": "在 copilot-setup-steps.yml 預先安裝這個工具"
       },
       {
         "id": "C",
-        "text": "未記錄的全域套件"
+        "text": "把這個工具的安裝檔一起提交到 repository"
       },
       {
         "id": "D",
-        "text": "本機快取"
+        "text": "把 setup steps 的 timeout-minutes 調到 59"
       }
     ],
     "answer": "A",
-    "question": "要讓代理從乾淨 runner 重現本機結果，應優先提供什麼？",
-    "explanation": "本題對應 D2-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "某個工具只有一個很少使用的 custom agent 需要，安裝要 8 分鐘；repository 裡其他 cloud agent 任務都用不到。要讓那個 agent 能使用這個工具，最合適的做法是什麼？",
+    "explanation": "copilot-setup-steps.yml 會在 Copilot 每次開始工作時執行，整個 repository 只有一份，無法只套用在某個 custom agent。把 8 分鐘的安裝放進去，所有 cloud agent 任務都要多等 8 分鐘。只有一個少用的 agent 需要時，在它的指示中寫明需要時再安裝，成本只由它負擔。把安裝檔提交到 repository 會讓 repo 變大且難以更新；調高逾時上限不會讓工具出現。",
+    "trap": "setup steps 是一般情況下的最佳做法，但它的成本由每個任務分擔。先看需求的範圍，再決定放在哪一層。",
     "domain": "實作工具使用與環境互動",
     "difficulty": "基礎",
     "keywords": ["D2", "D2-O3"]
@@ -547,30 +547,30 @@
     "number": 18,
     "domainId": "D2",
     "objectiveIds": ["D2-O3"],
-    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "sourceIds": ["GH-DOC-29"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "脈絡視窗太短"
+        "text": "只能推送到這個 PR 的分支"
       },
       {
         "id": "B",
-        "text": "未授權範圍被修改"
+        "text": "只能推送到新建立的 copilot/ 分支"
       },
       {
         "id": "C",
-        "text": "測試執行太快"
+        "text": "這個 PR 的分支與新的 copilot/ 分支"
       },
       {
         "id": "D",
-        "text": "題目太少"
+        "text": "觸發者有寫入權的任何一個分支"
       }
     ],
-    "answer": "B",
-    "question": "限制代理只在指定 branch 工作，主要降低哪一種風險？",
-    "explanation": "本題對應 D2-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": "A",
+    "question": "你在一個既有的 PR 上提及 @copilot，請它修正 review 意見。cloud agent 可以把變更推送到哪裡？",
+    "explanation": "cloud agent 只能推送到單一分支。在既有 PR 上提及 @copilot 時，它取得的是該 PR 分支的寫入權；其他情況下才會建立新的 copilot/ 分支，並只能推送到那個分支。它的推送範圍與觸發者的權限無關，也仍受分支保護與必要檢查約束。",
+    "trap": "「copilot/ 分支」是最常見的情況，但不是唯一的情況。從既有 PR 觸發時，目標是那個 PR 的分支。",
     "domain": "實作工具使用與環境互動",
     "difficulty": "進階",
     "keywords": ["D2", "D2-O3"]
@@ -581,30 +581,30 @@
     "number": 19,
     "domainId": "D2",
     "objectiveIds": ["D2-O4"],
-    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "sourceIds": ["GH600-SG"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "有上限的指數退避重試"
+        "text": "記錄失敗後繼續其他步驟，報表稍後重跑"
       },
       {
         "id": "B",
-        "text": "永久忽略"
+        "text": "停止整個任務，並沿升級路徑交給負責人"
       },
       {
         "id": "C",
-        "text": "立即刪除資料"
+        "text": "取消重試上限，持續重試直到服務恢復"
       },
       {
         "id": "D",
-        "text": "無限快速重試"
+        "text": "改用另一個權限更高的工具產生報表"
       }
     ],
     "answer": "A",
-    "question": "暫時性網路 503 適合什麼處理？",
-    "explanation": "本題對應 D2-O4。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "代理呼叫的 MCP 工具持續回傳 503，已用指數退避重試到上限仍失敗。這一步只是產生一份可以稍後重跑的報表，其他步驟都不依賴它。下一步最合適的是什麼？",
+    "explanation": "D2-O4 要求依失敗的影響範圍設計處理方式。重試已到上限，表示短時間內不會恢復；但這一步可以稍後重跑，其他步驟也不依賴它，記錄失敗並繼續其他工作，影響最小。停止整個任務會讓不相關的步驟一起停擺；取消上限會無限等待；改用權限更高的工具是擴權，不是錯誤處理。",
+    "trap": "升級給人是重要的後備手段，但不是每個失敗都要讓整個任務停下。先看失敗會影響哪些步驟。",
     "domain": "實作工具使用與環境互動",
     "difficulty": "進階",
     "keywords": ["D2", "D2-O4"]
@@ -615,30 +615,30 @@
     "number": 20,
     "domainId": "D2",
     "objectiveIds": ["D2-O4"],
-    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "sourceIds": ["GH-DOC-33", "GH600-SG"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "繼續重試"
+        "text": "等待 60 秒後再重試這個請求"
       },
       {
         "id": "B",
-        "text": "停止並沿升級路徑回報"
+        "text": "停止並回報權杖的權限不足"
       },
       {
         "id": "C",
-        "text": "提高權限且不記錄"
+        "text": "改用觸發者的個人權杖立即重試"
       },
       {
         "id": "D",
-        "text": "清除所有 log"
+        "text": "立即重試，直到請求成功為止"
       }
     ],
-    "answer": "B",
-    "question": "權限拒絕錯誤重試三次仍相同，下一步應是什麼？",
-    "explanation": "本題對應 D2-O4。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": "A",
+    "question": "代理大量呼叫 GitHub REST API 時收到 403，回應訊息指出觸發了次要速率限制（secondary rate limit），標頭帶有 retry-after: 60。下一步應該是什麼？",
+    "explanation": "GitHub 超過次要速率限制時會回傳 403 或 429；若有 retry-after 標頭，應等待指定的秒數後才重試，持續失敗時再以指數退避並設定次數上限。這個 403 來自速率限制，不是權限不足，停止並回報權限問題會誤判原因；改用個人權杖是繞過控制；限制期間持續發送請求，可能讓整合被封鎖。",
+    "trap": "403 不一定是權限問題。先讀回應訊息與標頭，再決定是重試還是停止。",
     "domain": "實作工具使用與環境互動",
     "difficulty": "進階",
     "keywords": ["D2", "D2-O4"]
@@ -649,30 +649,30 @@
     "number": 21,
     "domainId": "D2",
     "objectiveIds": ["D2-O4"],
-    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "sourceIds": ["GH-DOC-29", "GH-DOC-22"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "只有最終自然語言摘要"
+        "text": "cloud agent 的 session log"
       },
       {
         "id": "B",
-        "text": "時間、actor、工具、輸入摘要、結果與核准者"
+        "text": "PR 上的 commit 歷史與 diff"
       },
       {
         "id": "C",
-        "text": "只有 CPU 使用率"
+        "text": "PR 上 CI workflow 的執行紀錄"
       },
       {
         "id": "D",
-        "text": "只有模型名稱"
+        "text": "代理在 PR 描述中寫的摘要"
       }
     ],
-    "answer": "B",
-    "question": "哪個紀錄最能支援工具動作課責？",
-    "explanation": "本題對應 D2-O4。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": "A",
+    "question": "事後要追查 cloud agent「在什麼時候、用了哪些工具與參數、得到什麼結果」。最直接的紀錄是什麼？",
+    "explanation": "session log 逐步記錄 cloud agent 在工作階段中的操作，包括呼叫的工具、參數與結果，正是題幹要追查的內容。commit 與 diff 只顯示最後留下的變更，看不到過程中的工具呼叫；CI 的執行紀錄記錄的是 workflow，不是代理的操作；PR 描述是代理自己的摘要，可能遺漏重點。",
+    "trap": "commit 歷史也有時間與內容，但它記錄的是結果。題幹問的是工具與參數，那是過程。",
     "domain": "實作工具使用與環境互動",
     "difficulty": "進階",
     "keywords": ["D2", "D2-O4"]
@@ -683,30 +683,30 @@
     "number": 22,
     "domainId": "D2",
     "objectiveIds": ["D2-O3"],
-    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "sourceIds": ["GH-DOC-30", "GH-DOC-15"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "直接 push 到受保護 main"
+        "text": "用受限權杖開 PR，必要檢查通過後自動合併"
       },
       {
         "id": "B",
-        "text": "使用受限 token 建分支與 PR，再經 checks/review"
+        "text": "用受限權杖開 PR，並要求一位 reviewer 核准"
       },
       {
         "id": "C",
-        "text": "關閉 branch protection"
+        "text": "用管理員權杖直接把修正推送到 main"
       },
       {
         "id": "D",
-        "text": "跳過所有 hooks"
+        "text": "修正前暫停分支保護，推送後再恢復"
       }
     ],
-    "answer": "B",
-    "question": "代理在 CI 建立 PR 時，哪個設計較安全？",
-    "explanation": "本題對應 D2-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": "A",
+    "question": "CI 每晚請代理修正 lint 錯誤，這些修正只改格式。團隊希望通過檢查後就能合併、不需要人工審查，但主線的保護規則不能拿掉。哪一種設計最合適？",
+    "explanation": "題幹要求保留主線保護、但不增加人工審查。用受限權杖開 PR，讓 ruleset 要求的 status checks 決定能否合併，檢查通過後自動合併，既不繞過保護，也沒有多一道人工關卡。要求 reviewer 核准違反「不需人工審查」；管理員權杖直推與暫停分支保護，都是拆掉護欄。",
+    "trap": "要求人工審查是常見的安全預設，但題幹已說明這類變更不需要。保護規則與人工審查是兩件事，可以分開決定。",
     "domain": "實作工具使用與環境互動",
     "difficulty": "進階",
     "keywords": ["D2", "D2-O3"]
@@ -717,30 +717,30 @@
     "number": 23,
     "domainId": "D2",
     "objectiveIds": ["D2-O1"],
-    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "sourceIds": ["GH-DOC-06"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "代理誤選或誤用工具"
+        "text": "使用 github/* 開放這個 server 的工具"
       },
       {
         "id": "B",
-        "text": "repository 自動封存"
+        "text": "逐一列出 github/工具名稱，需要時再補"
       },
       {
         "id": "C",
-        "text": "MCP transport 加密"
+        "text": "使用 [\"*\"] 開放所有 server 的全部工具"
       },
       {
         "id": "D",
-        "text": "測試自動變快"
+        "text": "不設定 github server，改由指示描述"
       }
     ],
     "answer": "A",
-    "question": "工具描述含糊最可能造成什麼問題？",
-    "explanation": "本題對應 D2-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "某個 custom agent 的任務會用到 github MCP server 大部分的工具，而且這個 server 經常新增工具，團隊希望新工具不需修改 profile 就能使用。tools 應該怎麼設定？",
+    "explanation": "custom agent 的 tools 可以用 server-name/* 開放某個 MCP server 的全部工具，也可以用 server-name/tool-name 只開放特定工具。任務會用到大部分工具、又希望新工具自動可用時，github/* 最符合需求，範圍也只限這個 server。逐一列出需要每次新增時修改 profile；[\"*\"] 會開放所有 server 與內建工具，超出需求；不設定 server，代理就無法使用這些工具。",
+    "trap": "最小權限不代表每次都要逐一列出工具。範圍限定在需要的 server，已經比開放全部小得多。",
     "domain": "實作工具使用與環境互動",
     "difficulty": "進階",
     "keywords": ["D2", "D2-O1"]
@@ -751,30 +751,30 @@
     "number": 24,
     "domainId": "D2",
     "objectiveIds": ["D2-O4"],
-    "sourceIds": ["GH600-SG", "GH-DOC-07"],
+    "sourceIds": ["GH600-SG"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "代理停止新動作、清理可安全清理的資源並記錄狀態"
+        "text": "立即停止新動作，清理暫存並記錄進度"
       },
       {
         "id": "B",
-        "text": "忽略直到任務完成"
+        "text": "做完這個 20 分鐘的步驟後再記錄進度"
       },
       {
         "id": "C",
-        "text": "改寫 main"
+        "text": "立即停止新動作，並回滾兩個 commit"
       },
       {
         "id": "D",
-        "text": "刪除稽核資料"
+        "text": "立即停止新動作，並刪除暫存與紀錄"
       }
     ],
     "answer": "A",
-    "question": "取消訊號應如何處理？",
-    "explanation": "本題對應 D2-O4。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "代理已推送兩個 commit，正在執行一個還要 20 分鐘的檔案產生步驟。使用者此時取消了任務。代理應該怎麼處理？",
+    "explanation": "取消代表不再授權新的動作，但已經做的事要能交代：清理可以安全清理的暫存資源，並記錄完成到哪一步，方便之後恢復或由人決定是否回滾。把 20 分鐘的步驟做完等於忽略取消；自行回滾已推送的 commit 是未經授權的新動作；連紀錄一起刪除，就沒有人知道任務停在哪裡。",
+    "trap": "三個「立即停止」的選項差在後半句。取消之後該留下的是紀錄，該清掉的是暫存，已推送的變更留給人決定。",
     "domain": "實作工具使用與環境互動",
     "difficulty": "進階",
     "keywords": ["D2", "D2-O4"]
@@ -785,30 +785,30 @@
     "number": 25,
     "domainId": "D3",
     "objectiveIds": ["D3-O1"],
-    "sourceIds": ["GH600-SG", "GH-DOC-23"],
+    "sourceIds": ["GH-DOC-23"],
     "type": "multiple",
     "options": [
       {
         "id": "A",
-        "text": "相關性範圍"
+        "text": "事實附有指向支持程式碼的引用"
       },
       {
         "id": "B",
-        "text": "到期與裁剪"
+        "text": "使用前會對照目前分支驗證引用"
       },
       {
         "id": "C",
-        "text": "重設條件"
+        "text": "成功驗證並使用後計時可能重設"
       },
       {
         "id": "D",
-        "text": "永久保存所有提示"
+        "text": "可在同一使用者的其他 repo 使用"
       }
     ],
     "answer": ["A", "B", "C"],
-    "question": "長期記憶治理應包含哪些規則？",
-    "explanation": "本題對應 D3-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "關於 Copilot Memory 中的 repository 層級事實（不是使用者偏好），哪些敘述正確？",
+    "explanation": "repository 事實會附上指向支持程式碼的引用；Copilot 使用前會對照目前分支檢查引用，只使用驗證通過的事實。未被使用的事實 28 天後自動刪除，而事實被成功驗證並使用時，這個計時可能重設。repository 事實只能用在同一個 repository 的操作中；能跨 repository 沿用的是使用者偏好。",
+    "trap": "repository 事實與使用者偏好的範圍剛好相反：前者給同一 repo 的所有使用者，後者只給同一位使用者、但可跨 repo。",
     "domain": "管理記憶、狀態與執行",
     "difficulty": "中等",
     "keywords": ["D3", "D3-O1"]
@@ -819,30 +819,30 @@
     "number": 26,
     "domainId": "D3",
     "objectiveIds": ["D3-O2"],
-    "sourceIds": ["GH600-SG", "GH-DOC-23"],
+    "sourceIds": ["GH600-SG"],
     "type": "multiple",
     "options": [
       {
         "id": "A",
-        "text": "checkpoint"
+        "text": "已完成步驟與目前進度的檢查點"
       },
       {
         "id": "B",
-        "text": "決策紀錄"
+        "text": "已否決的方案與否決的理由"
       },
       {
         "id": "C",
-        "text": "已完成步驟清單"
+        "text": "剩餘的步驟與待決問題清單"
       },
       {
         "id": "D",
-        "text": "未保存的口頭假設"
+        "text": "先前所有 session 的完整對話"
       }
     ],
     "answer": ["A", "B", "C"],
-    "question": "哪些產物有助於長時間任務恢復而不重做？",
-    "explanation": "本題對應 D3-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "一個跨好幾天的代理任務中途中斷。恢復時要避免重做已完成的步驟，也不能重新採用已被否決的方案。哪些產物是恢復所需的？",
+    "explanation": "D3-O2 要求把進度與決策保存成持久產物，讓代理恢復時不重做、不偏離。檢查點避免重做；已否決的方案與理由避免重新採用；剩餘步驟與待決問題讓代理知道從哪裡接著做。完整對話雖然包含所有資訊，但也混著已被推翻的想法，雜訊多，反而可能把否決過的方案帶回來。",
+    "trap": "「完整對話什麼都有」是陷阱。恢復需要的是整理過、可審查的結論，不是原始過程。",
     "domain": "管理記憶、狀態與執行",
     "difficulty": "中等",
     "keywords": ["D3", "D3-O2"]
@@ -853,12 +853,12 @@
     "number": 27,
     "domainId": "D3",
     "objectiveIds": ["D3-O3"],
-    "sourceIds": ["GH600-SG", "GH-DOC-23"],
+    "sourceIds": ["GH600-SG"],
     "type": "true-false",
-    "answer": false,
-    "question": "跨工具共享狀態時，來源越多越好，不需要指定權威來源。",
-    "explanation": "本題對應 D3-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": true,
+    "question": "跨工具共享代理狀態時，應先指定單一權威來源，其他工具只從它讀取或回寫到它。",
+    "explanation": "D3-O3 要求避免互相衝突與過期的脈絡。多個工具各自保存狀態時，如果沒有權威來源（例如 issue、PR 或 repo 內的狀態檔），發生衝突就無從判斷哪份才對；指定單一來源，其他工具讀取或回寫到它，才能對帳。",
+    "trap": "「多存幾份比較保險」會製造互相矛盾的狀態。備份不等於多個權威來源。",
     "domain": "管理記憶、狀態與執行",
     "difficulty": "中等",
     "keywords": ["D3", "D3-O3"]
@@ -874,25 +874,25 @@
     "options": [
       {
         "id": "A",
-        "text": "短期記憶"
+        "text": "只保留在當次任務的短期記憶"
       },
       {
         "id": "B",
-        "text": "永久組織記憶"
+        "text": "存入 repository 的長期記憶"
       },
       {
         "id": "C",
-        "text": "公開 wiki"
+        "text": "寫入 copilot-instructions.md"
       },
       {
         "id": "D",
-        "text": "憑證庫"
+        "text": "寫入組織共用的外部知識庫"
       }
     ],
     "answer": "A",
-    "question": "只供本次工具呼叫使用的中間結果，最適合哪種記憶？",
-    "explanation": "本題對應 D3-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "某個中間結果只在這次工具呼叫中有用，之後不再需要。它應該放在哪裡？",
+    "explanation": "只在當次有用的資料放短期記憶，任務結束就釋放。存入長期記憶或 instructions 會讓之後的任務讀到無關內容、稀釋脈絡；外部知識庫適合跨團隊、需要長期查閱的資料。D3-O1 的重點是依資料的有效期與範圍選擇記憶層。",
+    "trap": "「多記一點比較好」會污染脈絡。記憶也要依相關性界定範圍。",
     "domain": "管理記憶、狀態與執行",
     "difficulty": "基礎",
     "keywords": ["D3", "D3-O1"]
@@ -903,7 +903,7 @@
     "number": 29,
     "domainId": "D3",
     "objectiveIds": ["D3-O2"],
-    "sourceIds": ["GH600-SG", "GH-DOC-23"],
+    "sourceIds": ["GH600-SG"],
     "type": "single",
     "options": [
       {
@@ -912,21 +912,21 @@
       },
       {
         "id": "B",
-        "text": "有界重試"
+        "text": "工具誤用"
       },
       {
         "id": "C",
-        "text": "工具 allowlist"
+        "text": "記憶過期"
       },
       {
         "id": "D",
-        "text": "依賴掃描"
+        "text": "權限擴張"
       }
     ],
     "answer": "A",
-    "question": "偵測到代理開始違反先前已核准決策，這稱為什麼？",
-    "explanation": "本題對應 D3-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "長時間執行的代理，開始提出與已核准計畫相牴觸的修改。這種現象稱為什麼？",
+    "explanation": "脈絡漂移指長時間執行時，代理逐漸偏離先前已確認的目標或決策。D3-O2 要求偵測並修正漂移，例如定期對照持久化的決策紀錄。工具誤用是選錯工具或參數；記憶過期是依據已失效的資訊；權限擴張是取得超出需求的權限，都不是「偏離已核准的決策」。",
+    "trap": "記憶過期也可能導致錯誤修改，但題幹強調「與已核准計畫相牴觸」，指的是偏離決策，不是資訊過時。",
     "domain": "管理記憶、狀態與執行",
     "difficulty": "基礎",
     "keywords": ["D3", "D3-O2"]
@@ -937,30 +937,30 @@
     "number": 30,
     "domainId": "D3",
     "objectiveIds": ["D3-O3"],
-    "sourceIds": ["GH600-SG", "GH-DOC-23"],
+    "sourceIds": ["GH600-SG"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "選最新但未驗證的訊息"
+        "text": "以 issue 為準，把步驟 3 視為未完成"
       },
       {
         "id": "B",
-        "text": "依指定 source of truth 對帳並記錄解決結果"
+        "text": "以本地筆記為準，並把 issue 補勾選"
       },
       {
         "id": "C",
-        "text": "同時保留兩個矛盾狀態"
+        "text": "以最後更新時間較新的那份紀錄為準"
       },
       {
         "id": "D",
-        "text": "刪除全部紀錄"
+        "text": "交給代理比對兩份紀錄後自行決定"
       }
     ],
-    "answer": "B",
-    "question": "跨 IDE 與 CI 出現矛盾任務狀態時，最佳處理為何？",
-    "explanation": "本題對應 D3-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": "A",
+    "question": "團隊約定 issue 上的勾選清單是任務進度的權威來源。你在 VS Code 的本地筆記寫著步驟 3 已完成，但 issue 上步驟 3 沒有勾選，cloud agent 的 PR 裡也沒有步驟 3 的變更。應該怎麼處理？",
+    "explanation": "D3-O3 要求跨工具共享狀態時避免衝突與過期的脈絡。團隊已指定 issue 為權威來源，而且 PR 裡也找不到步驟 3 的變更，兩項證據一致：步驟 3 尚未完成。依本地筆記補勾選，會讓權威來源記錄一件沒發生的事；時間較新不代表內容正確；交給代理自行判斷，等於沒有權威來源。",
+    "trap": "本地筆記可能記的是計畫而不是結果。對帳時要看權威來源與實際產物，不看誰寫得比較肯定。",
     "domain": "管理記憶、狀態與執行",
     "difficulty": "基礎",
     "keywords": ["D3", "D3-O3"]
@@ -971,30 +971,30 @@
     "number": 31,
     "domainId": "D3",
     "objectiveIds": ["D3-O1"],
-    "sourceIds": ["GH600-SG", "GH-DOC-23"],
+    "sourceIds": ["GH-DOC-23"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "永久保留"
+        "text": "未使用滿 28 天後自動刪除"
       },
       {
         "id": "B",
-        "text": "依到期或重設規則移除"
+        "text": "保留到 repo 擁有者手動刪除"
       },
       {
         "id": "C",
-        "text": "複製到更多工具"
+        "text": "未使用滿 7 天後自動刪除"
       },
       {
         "id": "D",
-        "text": "放進 prompt 範例"
+        "text": "轉存為觸發者的個人偏好"
       }
     ],
-    "answer": "B",
-    "question": "敏感資料已不再與任務相關，記憶策略應如何處理？",
-    "explanation": "本題對應 D3-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": "A",
+    "question": "Copilot Memory 裡的某條 repository 事實一直沒有被使用。它會怎樣？",
+    "explanation": "Copilot Memory 中未被使用的事實與偏好，28 天後會自動刪除；只要事實被成功驗證並使用，計時就會重設。repository 擁有者也可以手動檢視與刪除事實，但不必等到手動刪除才會清掉。repository 事實不會轉成個人偏好，兩者範圍不同。",
+    "trap": "「可以手動刪除」和「只能手動刪除」是兩回事，「保留到擁有者手動刪除」混淆了這一點。",
     "domain": "管理記憶、狀態與執行",
     "difficulty": "基礎",
     "keywords": ["D3", "D3-O1"]
@@ -1005,30 +1005,30 @@
     "number": 32,
     "domainId": "D3",
     "objectiveIds": ["D3-O2"],
-    "sourceIds": ["GH600-SG", "GH-DOC-23"],
+    "sourceIds": ["GH600-SG"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "checkpoint、決策與剩餘工作"
+        "text": "讀取檢查點後，從剩餘步驟繼續執行"
       },
       {
         "id": "B",
-        "text": "隨機另一個 repo"
+        "text": "先請負責人重新核准所有既有決策"
       },
       {
         "id": "C",
-        "text": "模型行銷頁"
+        "text": "從頭重新執行整個任務以確保一致"
       },
       {
         "id": "D",
-        "text": "所有歷史聊天全文"
+        "text": "先讀完所有 session 的完整對話"
       }
     ],
     "answer": "A",
-    "question": "恢復中斷任務前最應先讀什麼？",
-    "explanation": "本題對應 D3-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "代理要恢復一個中斷的任務。檢查點完整，決策紀錄中的每項決策都已核准，剩餘步驟也列得很清楚。恢復時最合適的第一步是什麼？",
+    "explanation": "D3-O2 的持久產物就是為了讓代理能直接恢復。題幹已說明檢查點完整、決策都已核准、剩餘步驟清楚，代理讀取檢查點後就能從剩餘步驟繼續。重新核准已核准的決策是不降低風險的摩擦；從頭重跑浪費已完成的工作；完整對話雜訊多，還可能帶回已被推翻的想法。",
+    "trap": "持久產物齊全時，再加一道確認或重讀全部歷史都不會更安全，只會更慢。",
     "domain": "管理記憶、狀態與執行",
     "difficulty": "進階",
     "keywords": ["D3", "D3-O2"]
@@ -1039,30 +1039,30 @@
     "number": 33,
     "domainId": "D4",
     "objectiveIds": ["D4-O1"],
-    "sourceIds": ["GH600-SG", "GH-DOC-19"],
+    "sourceIds": ["GH600-SG", "GH-DOC-19", "GH-DOC-24"],
     "type": "multiple",
     "options": [
       {
         "id": "A",
-        "text": "測試通過率"
+        "text": "測試與建置的 status check 結果"
       },
       {
         "id": "B",
-        "text": "安全掃描結果"
+        "text": "code scanning 新增警示的數量"
       },
       {
         "id": "C",
-        "text": "人工品質評分"
+        "text": "Copilot code review 留下的評論"
       },
       {
         "id": "D",
-        "text": "回覆字數越多越好"
+        "text": "reviewer 在 PR 上核准的人數"
       }
     ],
-    "answer": ["A", "B", "C"],
-    "question": "有效的代理評估可包含哪些訊號？",
-    "explanation": "本題對應 D4-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": ["A", "B"],
+    "question": "團隊要求代理 PR 的評估訊號必須在每個 PR 上自動產生，而且不需要人工判讀就能跨 PR 比較。哪些訊號符合？",
+    "explanation": "D4-O1 要求用自動掃描工具產生評估訊號。status check 的通過與否、code scanning 新增的警示數，都會在每個 PR 上自動產生，而且是可以直接比較的結果。Copilot code review 雖然自動產生，但評論是文字建議，仍需要人判讀；reviewer 的核准人數要靠人工審查，不是自動產生。",
+    "trap": "題幹有兩個條件：自動產生、不需人工判讀。Copilot code review 只符合前者。",
     "domain": "執行評估、錯誤分析與調校",
     "difficulty": "中等",
     "keywords": ["D4", "D4-O1"]
@@ -1073,30 +1073,30 @@
     "number": 34,
     "domainId": "D4",
     "objectiveIds": ["D4-O2"],
-    "sourceIds": ["GH600-SG", "GH-DOC-19"],
+    "sourceIds": ["GH600-SG", "GH-DOC-22"],
     "type": "multiple",
     "options": [
       {
         "id": "A",
-        "text": "plan 與 trace"
+        "text": "session log 中的工具呼叫紀錄"
       },
       {
         "id": "B",
-        "text": "工具呼叫與 log"
+        "text": "代理推送的 commit 與 diff"
       },
       {
         "id": "C",
-        "text": "輸出與 workflow artifacts"
+        "text": "PR 描述中代理對步驟的說明"
       },
       {
         "id": "D",
-        "text": "只看最終一句話"
+        "text": "custom agent profile 的指示"
       }
     ],
-    "answer": ["A", "B", "C"],
-    "question": "分析代理失敗時應檢查哪些證據？",
-    "explanation": "本題對應 D4-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": ["A", "B"],
+    "question": "代理的 PR 沒有通過 CI，你懷疑代理在 session 中跳過了某個步驟。哪些證據能直接確認代理實際做了什麼？",
+    "explanation": "D4-O2 要求利用 log、trace、輸出與 artifacts 找出失敗。session log 記錄代理實際呼叫了哪些工具與參數；commit 與 diff 是它實際留下的變更，兩者都是可查證的紀錄。PR 描述是代理自己的陳述，可能與實際不符；profile 的指示說明代理「應該」怎麼做，不能證明它「實際」怎麼做。",
+    "trap": "要分清楚「代理說了什麼」與「代理做了什麼」。懷疑跳過步驟時，只有執行紀錄能回答。",
     "domain": "執行評估、錯誤分析與調校",
     "difficulty": "中等",
     "keywords": ["D4", "D4-O2"]
@@ -1107,12 +1107,12 @@
     "number": 35,
     "domainId": "D4",
     "objectiveIds": ["D4-O3"],
-    "sourceIds": ["GH600-SG", "GH-DOC-19"],
+    "sourceIds": ["GH600-SG"],
     "type": "true-false",
-    "answer": false,
-    "question": "評估分數變差時，同時更換模型、工具、記憶與工作流程最容易找出根因。",
-    "explanation": "本題對應 D4-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": true,
+    "question": "評估分數下降後，每次只調整一個因素並用同一組評估重測，比一次調整多個因素更容易確認哪一項改動有效。",
+    "explanation": "一次調整一個因素，分數的變化才能歸因到那一項改動；一次調整多個因素，即使分數回升，也不知道是哪一項有效，某項改善還可能被另一項抵銷。D4-O3 的調校應搭配同一組評估，前後結果才能比較。",
+    "trap": "一次只改一項比較慢，但調校的目的是知道原因。只追求分數回升，下次退步時仍然不知道該改哪裡。",
     "domain": "執行評估、錯誤分析與調校",
     "difficulty": "中等",
     "keywords": ["D4", "D4-O3"]
@@ -1123,30 +1123,30 @@
     "number": 36,
     "domainId": "D4",
     "objectiveIds": ["D4-O1"],
-    "sourceIds": ["GH600-SG", "GH-DOC-19"],
+    "sourceIds": ["GH600-SG"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "reviewer 覺得合理"
+        "text": "100 個測試中通過 98 個"
       },
       {
         "id": "B",
-        "text": "測試通過 98/100"
+        "text": "reviewer 認為修改方向合理"
       },
       {
         "id": "C",
-        "text": "語氣專業"
+        "text": "代理的說明文字語氣專業"
       },
       {
         "id": "D",
-        "text": "解釋清楚"
+        "text": "PR 描述清楚交代了動機"
       }
     ],
-    "answer": "B",
-    "question": "哪一項是定量評估訊號？",
-    "explanation": "本題對應 D4-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": "A",
+    "question": "下列哪一項是量化的評估訊號？",
+    "explanation": "量化訊號是可以計數與比較的數值，例如通過率、弱點數量或執行時間。reviewer 的判斷、語氣與說明是否清楚都是質性訊號，同樣有用，但無法直接比較數值。D4-O1 要求能辨識這兩類訊號。",
+    "trap": "質性訊號並非不重要，這題只問哪一項屬於量化。",
     "domain": "執行評估、錯誤分析與調校",
     "difficulty": "基礎",
     "keywords": ["D4", "D4-O1"]
@@ -1157,7 +1157,7 @@
     "number": 37,
     "domainId": "D4",
     "objectiveIds": ["D4-O2"],
-    "sourceIds": ["GH600-SG", "GH-DOC-19"],
+    "sourceIds": ["GH600-SG"],
     "type": "single",
     "options": [
       {
@@ -1166,21 +1166,21 @@
       },
       {
         "id": "B",
-        "text": "記憶到期"
+        "text": "推理錯誤"
       },
       {
         "id": "C",
-        "text": "多代理生命週期"
+        "text": "環境問題"
       },
       {
         "id": "D",
-        "text": "自主程度"
+        "text": "脈絡不足"
       }
     ],
     "answer": "A",
-    "question": "代理呼叫正確工具但使用錯誤參數，根因類別最接近什麼？",
-    "explanation": "本題對應 D4-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "代理呼叫了正確的工具，卻傳入錯誤的參數，導致結果錯誤。根因應歸為哪一類？",
+    "explanation": "Study Guide 把根因分成推理錯誤、工具誤用、脈絡或環境問題。選對工具但參數錯誤，是工具使用方式出錯，屬於工具誤用。推理錯誤是計畫或判斷本身錯；環境問題是執行環境缺件或設定錯；脈絡不足是缺少必要資訊。",
+    "trap": "參數錯誤也可能源自資訊不足，但要題幹指出缺少資訊才歸為脈絡問題；這題只說參數錯。",
     "domain": "執行評估、錯誤分析與調校",
     "difficulty": "基礎",
     "keywords": ["D4", "D4-O2"]
@@ -1191,30 +1191,30 @@
     "number": 38,
     "domainId": "D4",
     "objectiveIds": ["D4-O2"],
-    "sourceIds": ["GH600-SG", "GH-DOC-19"],
+    "sourceIds": ["GH-DOC-12", "GH600-SG"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "推理錯誤"
+        "text": "環境問題；在 setup steps 安裝 SDK"
       },
       {
         "id": "B",
-        "text": "環境問題"
+        "text": "推理錯誤；改寫代理的指示內容"
       },
       {
         "id": "C",
-        "text": "護欄過強"
+        "text": "工具誤用；限制代理可用的工具"
       },
       {
         "id": "D",
-        "text": "人工審查"
+        "text": "脈絡不足；把 SDK 文件貼進 issue"
       }
     ],
-    "answer": "B",
-    "question": "runner 缺少必要 SDK 造成 build 失敗，根因類別為何？",
-    "explanation": "本題對應 D4-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": "A",
+    "question": "cloud agent 建置失敗，log 顯示 runner 上缺少專案需要的 SDK。根因類別與修正方向為何？",
+    "explanation": "缺少 SDK 是執行環境的問題，和代理的判斷無關。修正方向是在 copilot-setup-steps.yml 預先安裝，讓每次環境一致。改寫指示、限制工具或補文件，都不會讓 runner 多出一個 SDK。",
+    "trap": "代理可能在 log 裡試著自己安裝卻失敗，看起來像行為問題，但根因仍在環境。",
     "domain": "執行評估、錯誤分析與調校",
     "difficulty": "基礎",
     "keywords": ["D4", "D4-O2"]
@@ -1225,30 +1225,30 @@
     "number": 39,
     "domainId": "D4",
     "objectiveIds": ["D4-O3"],
-    "sourceIds": ["GH600-SG", "GH-DOC-19"],
+    "sourceIds": ["GH600-SG", "GH-DOC-06"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "收窄指令與工具範圍"
+        "text": "在 profile 的指示中界定只處理 docs/"
       },
       {
         "id": "B",
-        "text": "加入更多長期記憶"
+        "text": "在 profile 的 tools 中移除 execute"
       },
       {
         "id": "C",
-        "text": "移除所有限制"
+        "text": "在 profile 的 model 改用更大的模型"
       },
       {
         "id": "D",
-        "text": "加倍平行代理"
+        "text": "在 Copilot Memory 加入 repo 結構說明"
       }
     ],
     "answer": "A",
-    "question": "評估顯示代理持續讀取不相關檔案，最小調校為何？",
-    "explanation": "本題對應 D4-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "一個只負責修改 docs/ 文件的 custom agent，評估顯示它常讀取大量與任務無關的程式碼檔案。最小的調校是什麼？",
+    "explanation": "問題在於代理不知道任務範圍，最小的調校是在 custom agent profile 的指示中界定只處理 docs/ 目錄。移除 execute 會禁止執行指令，但讀取檔案走的是 read 與 search，不受影響；換更大的模型只是容納更多無關內容；在記憶中加入整個 repo 的結構，反而提供更多無關脈絡。",
+    "trap": "tools 能限制代理「能做什麼」，但這題的問題是代理「讀了什麼」。先確認控制項作用在哪一層。",
     "domain": "執行評估、錯誤分析與調校",
     "difficulty": "基礎",
     "keywords": ["D4", "D4-O3"]
@@ -1259,30 +1259,30 @@
     "number": 40,
     "domainId": "D4",
     "objectiveIds": ["D4-O3"],
-    "sourceIds": ["GH600-SG", "GH-DOC-19"],
+    "sourceIds": ["GH600-SG"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "用同一評估集重新測量並比較"
+        "text": "只重跑使用者回報的那個失敗案例"
       },
       {
         "id": "B",
-        "text": "只看單一成功案例"
+        "text": "立刻手動執行完整的回歸評估一次"
       },
       {
         "id": "C",
-        "text": "改完立即宣告完成"
+        "text": "請代理自行評估這次修改的效果"
       },
       {
         "id": "D",
-        "text": "刪除基準結果"
+        "text": "等一週後比較使用者的抱怨數量"
       }
     ],
     "answer": "A",
-    "question": "要判斷調校是否有效，應怎麼做？",
-    "explanation": "本題對應 D4-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "你修改了代理的指示，想快速確認是否解決了使用者回報的那個失敗案例；完整的回歸評估已排定在今晚自動執行。現在最合適的做法是什麼？",
+    "explanation": "題幹要的是快速確認特定案例，而完整回歸已排定當晚執行，會負責檢查其他案例有沒有變差。現在只要重跑那個失敗案例即可。立刻手動再跑一次完整評估，和今晚的排程重複；代理自評不是獨立證據；等一週的抱怨數太慢，也混入其他變因。",
+    "trap": "單一案例不能證明沒有讓其他案例變差，但題幹已經安排了回歸評估。判斷時要把題幹給的條件一起算進去。",
     "domain": "執行評估、錯誤分析與調校",
     "difficulty": "進階",
     "keywords": ["D4", "D4-O3"]
@@ -1293,30 +1293,30 @@
     "number": 41,
     "domainId": "D4",
     "objectiveIds": ["D4-O1"],
-    "sourceIds": ["GH600-SG", "GH-DOC-19"],
+    "sourceIds": ["GH600-SG"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "開發意圖與操作限制"
+        "text": "時區測試通過，且公開函式的簽章未變"
       },
       {
         "id": "B",
-        "text": "模型偏好的格式"
+        "text": "時區測試通過，且內部函式的簽章未變"
       },
       {
         "id": "C",
-        "text": "最長輸出"
+        "text": "時區測試通過，且公開函式的名稱未變"
       },
       {
         "id": "D",
-        "text": "工具數量"
+        "text": "時區測試通過，且公開函式的註解未變"
       }
     ],
     "answer": "A",
-    "question": "成功標準應與什麼對齊？",
-    "explanation": "本題對應 D4-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "代理的任務是讓日期格式化函式支援時區，限制是不得變更公開 API 的簽章。下列哪一項最適合作為成功標準？",
+    "explanation": "D4-O1 要求評估標準對齊開發意圖與操作限制。意圖是支援時區，限制是公開 API 的簽章不得變更，成功標準要同時涵蓋兩者。內部函式本來就可以調整；只檢查名稱，參數或回傳型別改了也不會被發現；註解與 API 的相容性無關。",
+    "trap": "四個選項前半句都一樣。差別在限制條件檢查的對象：公開或內部、簽章或只有名稱。",
     "domain": "執行評估、錯誤分析與調校",
     "difficulty": "進階",
     "keywords": ["D4", "D4-O1"]
@@ -1327,30 +1327,30 @@
     "number": 42,
     "domainId": "D4",
     "objectiveIds": ["D4-O1"],
-    "sourceIds": ["GH600-SG", "GH-DOC-19"],
+    "sourceIds": ["GH-DOC-19", "GH600-SG"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "自動評估與安全訊號"
+        "text": "自動產生的安全評估訊號"
       },
       {
         "id": "B",
-        "text": "短期記憶"
+        "text": "代理記憶需要重設的訊號"
       },
       {
         "id": "C",
-        "text": "協調模式"
+        "text": "多代理協調失敗的訊號"
       },
       {
         "id": "D",
-        "text": "考試語言"
+        "text": "可以直接忽略的誤報訊號"
       }
     ],
     "answer": "A",
-    "question": "code scanning 找到新增高風險弱點時，這是什麼類型訊號？",
-    "explanation": "本題對應 D4-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "代理的 PR 讓 code scanning 出現一個新的高嚴重度警示。在評估上，這個結果屬於什麼？",
+    "explanation": "code scanning 會在 PR 上自動分析並回報弱點，正是 D4-O1 所說「用自動掃描工具產生評估訊號」的例子。它代表這次變更可能引入安全問題，應先查證再決定修正或排除；沒查證就當成誤報，會讓掃描失去意義。它和記憶或多代理協調沒有直接關係。",
+    "trap": "掃描警示確實可能是誤報，但判定誤報需要查證並留下理由，不能預設忽略。",
     "domain": "執行評估、錯誤分析與調校",
     "difficulty": "進階",
     "keywords": ["D4", "D4-O1"]
@@ -1361,30 +1361,30 @@
     "number": 43,
     "domainId": "D5",
     "objectiveIds": ["D5-O1"],
-    "sourceIds": ["GH600-SG", "GH-DOC-05"],
+    "sourceIds": ["GH600-SG", "GH-DOC-29"],
     "type": "multiple",
     "options": [
       {
         "id": "A",
-        "text": "獨立 worktree 或 branch"
+        "text": "讓丙與甲同時開始各自執行"
       },
       {
         "id": "B",
-        "text": "明確檔案所有權"
+        "text": "讓乙等甲的 PR 合併後再開始"
       },
       {
         "id": "C",
-        "text": "避免重疊任務"
+        "text": "三個任務一律依序逐一執行"
       },
       {
         "id": "D",
-        "text": "共享同一未鎖定工作目錄"
+        "text": "讓乙與甲同時開始各自執行"
       }
     ],
-    "answer": ["A", "B", "C"],
-    "question": "平行多代理隔離可使用哪些控制？",
-    "explanation": "本題對應 D5-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": ["A", "B"],
+    "question": "你要指派三個 cloud agent 任務：甲改 API 路由，乙為甲新增的路由補測試，丙改 README。要避免衝突，又要保留能平行的部分。哪些安排正確？",
+    "explanation": "D5-O1 要求為平行執行設定隔離，並安排彼此相依的工作。丙只改 README，和甲沒有重疊，可以同時執行；乙要測試甲新增的路由，必須等甲的變更合併後才有東西可測，應該排在甲之後。三個任務全部依序執行雖然安全，卻白白放棄了甲與丙的平行度；乙與甲同時開始，乙會對著還不存在的路由寫測試。",
+    "trap": "「全部依序」看起來最保險，但題幹要求保留能平行的部分。先找出真正的相依關係，再決定哪些要排隊。",
     "domain": "協調多代理協作",
     "difficulty": "中等",
     "keywords": ["D5", "D5-O1"]
@@ -1395,30 +1395,30 @@
     "number": 44,
     "domainId": "D5",
     "objectiveIds": ["D5-O2"],
-    "sourceIds": ["GH600-SG", "GH-DOC-05"],
+    "sourceIds": ["GH600-SG", "GH-DOC-22"],
     "type": "multiple",
     "options": [
       {
         "id": "A",
-        "text": "任務交接"
+        "text": "每次交接時傳遞的輸入與假設"
       },
       {
         "id": "B",
-        "text": "關鍵決策"
+        "text": "關鍵決策以及做出決策的理由"
       },
       {
         "id": "C",
-        "text": "各代理結果"
+        "text": "每一次工具呼叫的完整輸出內容"
       },
       {
         "id": "D",
-        "text": "只記錄成功代理"
+        "text": "失敗或只部分完成的代理結果"
       }
     ],
-    "answer": ["A", "B", "C"],
-    "question": "多代理 audit artifact 應記錄哪些內容？",
-    "explanation": "本題對應 D5-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": ["A", "B", "D"],
+    "question": "多代理流程要能在事後稽核，但 PR 描述有長度限制，團隊只想寫入還原決策與分析失敗所需的最少內容，其餘留在各自的 session log。哪些應寫進 PR 描述？",
+    "explanation": "D5-O2 要求記錄代理之間的關鍵決策、交接與結果，讓事後能還原誰在什麼依據下做了什麼。交接的輸入與假設、關鍵決策與理由、失敗或部分完成的結果，都是還原決策的必要內容；失敗紀錄尤其是事後分析最需要的證據。每次工具呼叫的完整輸出已經在 session log 中，題幹也要求其餘內容留在那裡，不必重複寫入 PR。",
+    "trap": "失敗的結果不是雜訊。只記錄成功的部分，事後就無法分析哪裡出了問題。",
     "domain": "協調多代理協作",
     "difficulty": "中等",
     "keywords": ["D5", "D5-O2"]
@@ -1429,12 +1429,12 @@
     "number": 45,
     "domainId": "D5",
     "objectiveIds": ["D5-O4"],
-    "sourceIds": ["GH600-SG", "GH-DOC-05"],
+    "sourceIds": ["GH-DOC-06"],
     "type": "true-false",
     "answer": false,
-    "question": "替換失敗代理時，為了乾淨起見應丟棄先前全部決策與稽核紀錄。",
-    "explanation": "本題對應 D5-O4。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "在 custom agent 的 profile 設定 user-invocable: false 後，Copilot 不會再依任務自動選用它，但使用者仍可手動選擇。",
+    "explanation": "這句描述的是 disable-model-invocation: true：停止 Copilot 依任務內容自動選用，改為只能手動選擇。user-invocable: false 的效果相反，使用者無法再手動選擇這個 agent，只能以程式方式存取。兩者可以組合使用，逐步停用代理，同時保留 profile 與 Git 歷史供稽核。",
+    "trap": "兩個欄位名稱相近、方向不同：disable-model-invocation 關掉自動選用，user-invocable 關掉手動選擇。",
     "domain": "協調多代理協作",
     "difficulty": "中等",
     "keywords": ["D5", "D5-O4"]
@@ -1445,30 +1445,30 @@
     "number": 46,
     "domainId": "D5",
     "objectiveIds": ["D5-O1"],
-    "sourceIds": ["GH600-SG", "GH-DOC-05"],
+    "sourceIds": ["GH600-SG"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "讓第三個代理也修改"
+        "text": "先合併其中一個，另一個 rebase 後重跑測試"
       },
       {
         "id": "B",
-        "text": "停止重疊工作、比較意圖並指定單一整合者"
+        "text": "暫停兩個 PR，指定一位整合者重新合併"
       },
       {
         "id": "C",
-        "text": "直接選較長的 diff"
+        "text": "關閉其中一個，改由單一代理重做兩邊修改"
       },
       {
         "id": "D",
-        "text": "刪除兩邊紀錄"
+        "text": "請第三個代理同時修改兩個 PR 化解衝突"
       }
     ],
-    "answer": "B",
-    "question": "兩個代理修改同一檔案造成衝突，首先應做什麼？",
-    "explanation": "本題對應 D5-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": "A",
+    "question": "兩個代理的 PR 改到同一個檔案，但改的是不同函式；兩邊的意圖不衝突，測試也都通過。最合適的處理是什麼？",
+    "explanation": "D5-O1 要求偵測並化解重疊的修改，處置強度要看重疊的性質。兩個 PR 改的是不同函式、意圖不衝突，只是同一個檔案，依序合併並在 rebase 後重跑測試即可。若兩邊改到同一段程式碼或意圖矛盾，才需要暫停並指定整合者；關閉重做會浪費已通過測試的成果；再加入第三個代理只會多一個衝突來源。",
+    "trap": "指定整合者是處理意圖衝突的做法。題幹已排除意圖衝突，套用最重的流程只會拖慢交付。",
     "domain": "協調多代理協作",
     "difficulty": "基礎",
     "keywords": ["D5", "D5-O1"]
@@ -1479,30 +1479,30 @@
     "number": 47,
     "domainId": "D5",
     "objectiveIds": ["D5-O3"],
-    "sourceIds": ["GH600-SG", "GH-DOC-05"],
+    "sourceIds": ["GH600-SG"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "stalled"
+        "text": "停滯（stalled）"
       },
       {
         "id": "B",
-        "text": "success"
+        "text": "部分完成（partial）"
       },
       {
         "id": "C",
-        "text": "pruned"
+        "text": "已完成（completed）"
       },
       {
         "id": "D",
-        "text": "allowlisted"
+        "text": "已退役（retired）"
       }
     ],
     "answer": "A",
-    "question": "多代理流程中某代理長時間無進度，屬於哪種狀態？",
-    "explanation": "本題對應 D5-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "多代理流程中，某個代理的 session 已經很久沒有新的 commit 或 log 輸出。它最可能處於什麼狀態？",
+    "explanation": "D5-O3 要求辨識失敗、部分完成與停滯的執行。長時間沒有進度、也沒有結束訊號，就是停滯；部分完成是產出一部分結果後就結束；已完成有明確的結束與產物；退役則是生命週期上的主動移除。停滯需要逾時與監控才能發現，發現後應決定重試、重新指派或交給人處理。",
+    "trap": "停滯的代理不會報錯，所以容易被當成「還在跑」，要靠時間門檻判斷。",
     "domain": "協調多代理協作",
     "difficulty": "基礎",
     "keywords": ["D5", "D5-O3"]
@@ -1513,30 +1513,30 @@
     "number": 48,
     "domainId": "D5",
     "objectiveIds": ["D5-O3"],
-    "sourceIds": ["GH600-SG", "GH-DOC-05"],
+    "sourceIds": ["GH600-SG"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "從可驗證 checkpoint 判定可保留產物，再重派失敗範圍"
+        "text": "保留三個成功的產物，只重跑中斷的兩個"
       },
       {
         "id": "B",
-        "text": "全部盲目重跑"
+        "text": "五個全部重跑一次，確保結果來自同一輪"
       },
       {
         "id": "C",
-        "text": "直接合併所有輸出"
+        "text": "把中斷的兩個模組改交給人手動完成"
       },
       {
         "id": "D",
-        "text": "關閉 log"
+        "text": "先查明中斷原因，再決定是否合併成功的三個"
       }
     ],
     "answer": "A",
-    "question": "部分代理完成、部分失敗時，最合理的恢復起點是什麼？",
-    "explanation": "本題對應 D5-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "五個代理平行修改五個互不相依的模組：三個成功並通過驗證，兩個因暫時性的網路錯誤中斷。最合理的恢復方式是什麼？",
+    "explanation": "D5-O3 要求為多代理失敗設計恢復模式。五個模組互不相依，成功的三個已通過驗證，不受另外兩個影響，可以保留；中斷原因是暫時性網路錯誤，直接重跑那兩個即可。全部重跑浪費已完成的工作；改由人手動完成，對暫時性錯誤而言是過度反應；模組互不相依，也不必等查明原因才合併成功的部分。",
+    "trap": "如果模組彼此相依，或失敗原因來自共同的錯誤前提，答案就會不同。恢復方式要依題幹給的相依性與失敗原因決定。",
     "domain": "協調多代理協作",
     "difficulty": "基礎",
     "keywords": ["D5", "D5-O3"]
@@ -1547,30 +1547,30 @@
     "number": 49,
     "domainId": "D5",
     "objectiveIds": ["D5-O1"],
-    "sourceIds": ["GH600-SG", "GH-DOC-05"],
+    "sourceIds": ["GH600-SG", "GH-DOC-06"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "主管／工作者模式"
+        "text": "主管／工作者（orchestrator）"
       },
       {
         "id": "B",
-        "text": "無協調共享寫入"
+        "text": "管線式（pipeline）依序傳遞"
       },
       {
         "id": "C",
-        "text": "永久重試"
+        "text": "各自獨立執行、最後不整合"
       },
       {
         "id": "D",
-        "text": "單一工具 allowlist"
+        "text": "多個代理共同編輯同一份檔案"
       }
     ],
     "answer": "A",
-    "question": "哪種模式適合先由多個專家各自分析，再由一個角色整合？",
-    "explanation": "本題對應 D5-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "你讓多個專家代理分別檢查安全、效能與可讀性，最後由一個角色整合結論。這是哪一種協調模式？",
+    "explanation": "由一個主管（orchestrator）分派工作給多個專長不同的工作者，再整合結果，就是主管／工作者模式；custom agent 可以透過 agent 工具別名委派其他 custom agent 執行任務。管線式是前一個的輸出成為下一個的輸入，沒有平行分析；不整合的平行執行少了最後的綜合；共同編輯同一份檔案則沒有協調機制。",
+    "trap": "管線式也是多代理，但它是依序傳遞，不是平行分析後再整合。",
     "domain": "協調多代理協作",
     "difficulty": "基礎",
     "keywords": ["D5", "D5-O1"]
@@ -1581,30 +1581,30 @@
     "number": 50,
     "domainId": "D5",
     "objectiveIds": ["D5-O2"],
-    "sourceIds": ["GH600-SG", "GH-DOC-05"],
+    "sourceIds": ["GH600-SG"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "代理 log、artifact、交接與操作訊號"
+        "text": "每個代理各自的 token 與執行用量"
       },
       {
         "id": "B",
-        "text": "只看最終 PR 標題"
+        "text": "各代理的交接紀錄與時間軸"
       },
       {
         "id": "C",
-        "text": "只看 token 數"
+        "text": "最終合併 PR 的標題與描述"
       },
       {
         "id": "D",
-        "text": "只看執行時間"
+        "text": "各代理當時使用的系統提示詞"
       }
     ],
     "answer": "A",
-    "question": "post-hoc 分析需要哪種資料？",
-    "explanation": "本題對應 D5-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "某個多代理流程的費用超出預算兩倍，你要找出是哪個代理造成的。最直接的資料是什麼？",
+    "explanation": "D5-O2 要求用營運訊號分析多代理流程。題幹問的是費用來自哪個代理，最直接的訊號是每個代理各自的 token 與執行用量。交接紀錄與時間軸適合分析延遲與卡點，不能直接換算成本；最終 PR 只呈現結果；提示詞只能推測行為，無法顯示實際用量。",
+    "trap": "交接紀錄與時間軸是事後分析最常用的資料，但要先看題幹問的是哪一種問題：延遲看時間軸，成本看用量。",
     "domain": "協調多代理協作",
     "difficulty": "進階",
     "keywords": ["D5", "D5-O2"]
@@ -1615,30 +1615,30 @@
     "number": 51,
     "domainId": "D5",
     "objectiveIds": ["D5-O4"],
-    "sourceIds": ["GH600-SG", "GH-DOC-05"],
+    "sourceIds": ["GH-DOC-06"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "版本化設定、受控切換與狀態交接"
+        "text": "設定 disable-model-invocation: true"
       },
       {
         "id": "B",
-        "text": "直接覆寫執行中程序"
+        "text": "設定 user-invocable: false"
       },
       {
         "id": "C",
-        "text": "刪除 checkpoint"
+        "text": "設定 tools: [] 停用所有工具"
       },
       {
         "id": "D",
-        "text": "取消全部 audit"
+        "text": "把 profile 從 .github/agents/ 刪除"
       }
     ],
     "answer": "A",
-    "question": "更新代理而不干擾進行中工作，應優先使用什麼策略？",
-    "explanation": "本題對應 D5-O4。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "你要讓某個 custom agent 暫時不被 Copilot 自動選用，但使用者仍可在需要時手動選它，而且要保留 profile 與歷史。應該怎麼設定？",
+    "explanation": "disable-model-invocation: true 讓 Copilot 不再依任務內容自動選用這個 agent，但使用者仍可手動選擇，profile 與 Git 歷史都保留。user-invocable: false 會讓使用者無法手動選擇；tools: [] 只會停用這個 agent 的所有工具，不會改變它能否被選用；刪除 profile 則無法再手動選用。",
+    "trap": "D5-O4 的退役是分階段的：先停自動選用、再停手動選擇，最後才考慮刪除。每一步都保留在 Git 歷史中。",
     "domain": "協調多代理協作",
     "difficulty": "進階",
     "keywords": ["D5", "D5-O4"]
@@ -1649,30 +1649,30 @@
     "number": 52,
     "domainId": "D5",
     "objectiveIds": ["D5-O3"],
-    "sourceIds": ["GH600-SG", "GH-DOC-05"],
+    "sourceIds": ["GH600-SG"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "隨機選一個"
+        "text": "採用乙的結論，並記錄採用的依據"
       },
       {
         "id": "B",
-        "text": "回到共享證據與驗收標準裁決並記錄原因"
+        "text": "採用甲的結論，並記錄採用的依據"
       },
       {
         "id": "C",
-        "text": "同時宣稱兩者正確"
+        "text": "兩個結論都寫進報告，由讀者判斷"
       },
       {
         "id": "D",
-        "text": "增加輸出字數"
+        "text": "請第三個代理投票，採用多數結論"
       }
     ],
-    "answer": "B",
-    "question": "兩個代理回報互相矛盾的結論，整合者應怎麼做？",
-    "explanation": "本題對應 D5-O3。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": "A",
+    "question": "代理甲與代理乙對某個函式有沒有 race condition 給出相反的結論：乙附上可重現的失敗測試，甲只有閱讀程式碼後的推論。整合者應該怎麼做？",
+    "explanation": "D5-O3 要求依證據化解代理之間的矛盾。乙的可重現失敗測試直接證明 race condition 存在；甲的推論再完整，也推翻不了一個能重現的失敗。把矛盾原樣寫進報告等於沒有整合；投票可能讓共用錯誤前提的代理形成多數，票數取代不了證據。",
+    "trap": "甲、乙的順序不代表誰先誰後或誰比較可信。依據是題幹描述的證據，不是選項的位置。",
     "domain": "協調多代理協作",
     "difficulty": "進階",
     "keywords": ["D5", "D5-O3"]
@@ -1683,30 +1683,30 @@
     "number": 53,
     "domainId": "D6",
     "objectiveIds": ["D6-O1"],
-    "sourceIds": ["GH600-SG", "GH-DOC-10"],
+    "sourceIds": ["GH600-SG", "GH-DOC-30"],
     "type": "multiple",
     "options": [
       {
         "id": "A",
-        "text": "不可逆資料刪除"
+        "text": "執行會刪除正式資料列的資料遷移"
       },
       {
         "id": "B",
-        "text": "擴大正式環境權限"
+        "text": "修改正式環境 workflow 的排程時間"
       },
       {
         "id": "C",
-        "text": "影響合規的政策變更"
+        "text": "寄送通知信給全部的正式環境客戶"
       },
       {
         "id": "D",
-        "text": "讀取公開文件"
+        "text": "調整正式站的樣式表並重新部署"
       }
     ],
-    "answer": ["A", "B", "C"],
-    "question": "哪些動作通常需要較強人工介入？",
-    "explanation": "本題對應 D6-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": ["B", "D"],
+    "question": "團隊的分級規則是：出錯後無法靠 revert PR 還原的動作才需要人工核准，其餘交給 CI 與 review。下列哪些動作可以不設人工核准？",
+    "explanation": "D6-O1 要求依風險分類代理的動作，決定人工介入的程度；這題的分級規則是「能不能用 revert 還原」。workflow 排程與樣式表都存在 repository 中，出錯時 revert PR 再部署即可還原，交給 CI 與 review 把關就夠了，不需要人工核准。刪除的資料列不會因為 revert 遷移檔而回來，寄出的信也收不回，這兩項仍需人工核准。",
+    "trap": "題目問的是「可以不設」核准的動作。「正式環境」四個字不等於高風險，依題幹規則只看出錯後能不能還原。",
     "domain": "實作護欄與課責",
     "difficulty": "中等",
     "keywords": ["D6", "D6-O1"]
@@ -1717,30 +1717,30 @@
     "number": 54,
     "domainId": "D6",
     "objectiveIds": ["D6-O2"],
-    "sourceIds": ["GH600-SG", "GH-DOC-10"],
+    "sourceIds": ["GH-DOC-11", "GH-DOC-10"],
     "type": "multiple",
     "options": [
       {
         "id": "A",
-        "text": "最小權限"
+        "text": "可回傳 deny 並附上拒絕理由"
       },
       {
         "id": "B",
-        "text": "policy block"
+        "text": "腳本崩潰時會拒絕該次工具呼叫"
       },
       {
         "id": "C",
-        "text": "明確核准路徑"
+        "text": "腳本逾時時也一律拒絕該次呼叫"
       },
       {
         "id": "D",
-        "text": "隱藏稽核紀錄"
+        "text": "改用 postToolUse 也能事前阻擋"
       }
     ],
-    "answer": ["A", "B", "C"],
-    "question": "有效護欄可包含哪些控制？",
-    "explanation": "本題對應 D6-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "answer": ["A", "B"],
+    "question": "你想在 cloud agent 執行 shell 指令前，自動擋下危險指令（例如 rm -rf）。關於 preToolUse hook，哪些敘述正確？",
+    "explanation": "hooks 設定放在 repository 的 .github/hooks/*.json，只有 preToolUse 能核准或拒絕工具呼叫：輸出 permissionDecision 為 deny，並附上 permissionDecisionReason（拒絕時必填）。preToolUse 採 fail-closed，腳本崩潰或以非零代碼結束都會拒絕該次呼叫；但逾時是例外，會 fail-open 讓工具繼續執行。postToolUse 在工具執行後才觸發，無法阻擋。",
+    "trap": "fail-closed 有例外：逾時會放行。高風險檢查要控制執行時間，不能假設逾時就安全。",
     "domain": "實作護欄與課責",
     "difficulty": "中等",
     "keywords": ["D6", "D6-O2"]
@@ -1751,12 +1751,12 @@
     "number": 55,
     "domainId": "D6",
     "objectiveIds": ["D6-O2"],
-    "sourceIds": ["GH600-SG", "GH-DOC-10"],
+    "sourceIds": ["GH600-SG"],
     "type": "true-false",
     "answer": false,
-    "question": "為了維持速度，任何人工核准都應移除，即使它能降低不可逆變更風險。",
-    "explanation": "本題對應 D6-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "某個人工核准關卡過去一年從未攔下任何變更，但它把關的是正式資料的刪除。依 D6-O2，它屬於應該移除的多餘摩擦。",
+    "explanation": "D6-O2 要求移除「不實質降低風險」的核准。這個關卡擋的是不可逆的資料刪除，一旦出錯就無法撤回，它降低的是嚴重度，不是出錯頻率；一年沒攔下任何變更，只代表那一年沒有發生錯誤，不代表風險不存在。應該移除的是那些只增加等待、卻不改變結果的核准。",
+    "trap": "攔截次數是頻率，不是風險。很少觸發、但觸發時代價極高的關卡，正是該保留的那一種。",
     "domain": "實作護欄與課責",
     "difficulty": "中等",
     "keywords": ["D6", "D6-O2"]
@@ -1767,30 +1767,30 @@
     "number": 56,
     "domainId": "D6",
     "objectiveIds": ["D6-O1"],
-    "sourceIds": ["GH600-SG", "GH-DOC-10"],
+    "sourceIds": ["GH600-SG"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "操作、資安與合規風險"
+        "text": "X 保留人工核准，Y 可以自動執行"
       },
       {
         "id": "B",
-        "text": "模型名稱長度"
+        "text": "X 可以自動執行，Y 保留人工核准"
       },
       {
         "id": "C",
-        "text": "代理頭像"
+        "text": "兩者都自動執行，只監控成功率"
       },
       {
         "id": "D",
-        "text": "輸出語言"
+        "text": "兩者都先核准，直到成功率達標"
       }
     ],
     "answer": "A",
-    "question": "自主程度最應依什麼調整？",
-    "explanation": "本題對應 D6-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "動作 X 的成功率是 99%，但失敗時會刪除正式資料；動作 Y 的成功率是 80%，失敗時只會留下一個需要重跑的 draft PR。依 D6-O1，應該如何設定？",
+    "explanation": "D6-O1 依作業、資安與合規風險決定自主程度，風險要同時看出錯的機率與出錯的後果。X 很少出錯，但一出錯就不可逆，需要人工核准；Y 常出錯，但後果只是重跑一個 draft PR，可以自動執行。只看成功率會把兩者的處置顛倒；等成功率達標再放行，對 X 沒有意義，因為它的問題不在成功率。",
+    "trap": "成功率回答的是「多常出錯」。決定要不要核准，還要看出錯時能不能撤回。",
     "domain": "實作護欄與課責",
     "difficulty": "基礎",
     "keywords": ["D6", "D6-O1"]
@@ -1801,30 +1801,30 @@
     "number": 57,
     "domainId": "D6",
     "objectiveIds": ["D6-O2"],
-    "sourceIds": ["GH600-SG", "GH-DOC-10"],
+    "sourceIds": ["GH-DOC-29", "GH600-SG"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "不降低實質風險卻對每個唯讀動作逐次核准"
+        "text": "代理推送到自己的 copilot/ 分支前需確認"
       },
       {
         "id": "B",
-        "text": "部署正式環境前核准"
+        "text": "Copilot PR 的 workflow 執行前需要核准"
       },
       {
         "id": "C",
-        "text": "刪除資料前核准"
+        "text": ".github/agents/ 的變更需 Code Owners 審查"
       },
       {
         "id": "D",
-        "text": "提高權限前核准"
+        "text": "執行刪除正式資料的遷移前需要人工核准"
       }
     ],
     "answer": "A",
-    "question": "哪一種核准最可能是無效摩擦？",
-    "explanation": "本題對應 D6-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "cloud agent 的流程中有四個人工關卡。依 D6-O2，哪一個不實質降低風險、最適合移除？",
+    "explanation": "cloud agent 只能推送到自己的 copilot/ 分支，分支上的變更在合併前本來就要經過 PR 審查，推送前再確認一次不會改變任何結果，只增加等待。其餘三項都實質降低風險：cloud agent 開的 PR 上，workflow 預設要等有寫入權的使用者按下 Approve and run workflows 才執行，避免未經審查的程式碼使用 secrets 與權限；Code Owners 審查保護代理設定檔；資料刪除不可逆。",
+    "trap": "每個關卡看起來都在「多一道確認」。判斷標準是：拿掉它之後，會不會有未經審查的東西真的被執行或合併。",
     "domain": "實作護欄與課責",
     "difficulty": "基礎",
     "keywords": ["D6", "D6-O2"]
@@ -1835,30 +1835,30 @@
     "number": 58,
     "domainId": "D6",
     "objectiveIds": ["D6-O2"],
-    "sourceIds": ["GH600-SG", "GH-DOC-10"],
+    "sourceIds": ["GH-DOC-11", "GH-DOC-10"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "阻擋並留下可稽核原因"
+        "text": "postToolUse hook，送出指令與執行結果"
       },
       {
         "id": "B",
-        "text": "靜默放行"
+        "text": "preToolUse hook，送出指令後回傳 allow"
       },
       {
         "id": "C",
-        "text": "改寫政策"
+        "text": "在 custom agent 的 tools 移除 execute"
       },
       {
         "id": "D",
-        "text": "刪除 log"
+        "text": "在指示中要求代理每次執行後自行回報"
       }
     ],
     "answer": "A",
-    "question": "代理嘗試執行政策禁止的命令時，護欄應如何反應？",
-    "explanation": "本題對應 D6-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "合規要求：cloud agent 每執行一個 shell 指令，都要自動把指令內容與執行結果送到稽核系統；不需要阻擋任何指令。應該設定什麼？",
+    "explanation": "postToolUse 在工具執行後觸發，輸入包含工具名稱、參數與執行結果，適合自動送出稽核紀錄；它不能阻擋，而題幹也不需要阻擋。preToolUse 在執行前觸發，拿不到執行結果；移除 execute 會讓代理無法執行任何 shell 指令；要求代理自行回報沒有強制力，也可能遺漏。",
+    "trap": "preToolUse 是擋指令的正確選擇，但這題要的是記錄結果。先看需求是「阻擋」還是「記錄」，再選觸發時間。",
     "domain": "實作護欄與課責",
     "difficulty": "基礎",
     "keywords": ["D6", "D6-O2"]
@@ -1869,30 +1869,30 @@
     "number": 59,
     "domainId": "D6",
     "objectiveIds": ["D6-O2"],
-    "sourceIds": ["GH600-SG", "GH-DOC-10"],
+    "sourceIds": ["GH-DOC-32", "GH-DOC-30", "GH-DOC-15"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "只授予完成明確任務所需的最小存取"
+        "text": "只用 CODEOWNERS 指定平台團隊，不啟用審查規則"
       },
       {
         "id": "B",
-        "text": "預先給全部權限"
+        "text": "CODEOWNERS 指定平台團隊，並要求 Code Owners 審查"
       },
       {
         "id": "C",
-        "text": "每次都用管理員"
+        "text": "preToolUse hook 拒絕代理編輯這個目錄"
       },
       {
         "id": "D",
-        "text": "把 token 寫入設定"
+        "text": "ruleset 要求合併前至少取得一位 reviewer 核准"
       }
     ],
     "answer": "A",
-    "question": "最低權限的核心是什麼？",
-    "explanation": "本題對應 D6-O2。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "你希望 .github/agents/ 被修改時，自動請平台團隊審查，但團隊人力有限，不能因此擋住合併。應該設定什麼？",
+    "explanation": "CODEOWNERS 會在 PR 修改到對應路徑時，自動請擁有者審查；只有再搭配 ruleset 的「Require review from Code Owners」，擁有者的核准才會成為合併條件。題幹要的是通知而不阻擋，所以只設定 CODEOWNERS 即可。注意 draft PR 不會自動請擁有者審查，要等標記為 ready for review 才會通知；cloud agent 開的是 draft PR，所以審查請求會在它轉為 ready 時送出。要求 Code Owners 審查與要求一位核准都會擋住合併；hook 直接禁止代理修改，也不會請任何人審查。",
+    "trap": "GitHub 建議用 CODEOWNERS 加上審查規則保護代理設定檔，但這題的條件是「不能擋住合併」。先看題幹限制，再選控制強度。",
     "domain": "實作護欄與課責",
     "difficulty": "基礎",
     "keywords": ["D6", "D6-O2"]
@@ -1903,30 +1903,30 @@
     "number": 60,
     "domainId": "D6",
     "objectiveIds": ["D6-O1"],
-    "sourceIds": ["GH600-SG", "GH-DOC-10"],
+    "sourceIds": ["GH600-SG", "GH-DOC-30"],
     "type": "single",
     "options": [
       {
         "id": "A",
-        "text": "把授權、執行、驗證與稽核串成可追溯流程"
+        "text": "代理直接以受限權杖套用，保留 session log"
       },
       {
         "id": "B",
-        "text": "保證模型永不出錯"
+        "text": "代理開 PR 修改設定檔，核准後由 workflow 套用"
       },
       {
         "id": "C",
-        "text": "取代所有測試"
+        "text": "reviewer 在聊天中同意後，代理以管理員權杖套用"
       },
       {
         "id": "D",
-        "text": "取消責任歸屬"
+        "text": "代理產生指令，由 reviewer 在主控台手動套用"
       }
     ],
     "answer": "A",
-    "question": "受控路徑對敏感變更的價值是什麼？",
-    "explanation": "本題對應 D6-O1。應先辨識題幹的控制目標，再選擇能直接滿足需求且保留驗證與課責的做法。",
-    "trap": "不要因代理能自動化就推定它已獲得更大範圍或更高權限。",
+    "question": "代理要調整 staging 一個 feature flag 的預設值：隨時可改回，不涉及權限與資料。團隊只要求事後查得到代理做了什麼，不增加人工關卡。哪一種做法最合適？",
+    "explanation": "D6-O1 要求依風險決定自主程度。這個變更可隨時撤回、不涉及權限與資料，屬於低風險，可以讓代理自動執行；session log 已能說明代理做了什麼，符合「事後查得到」。PR 核准與主控台手動套用都增加了人工關卡；以管理員權杖套用則給了超出需求的權限，還多了一道聊天中的核准。",
+    "trap": "受控路徑是給敏感變更用的。低風險、可撤回的變更也套上完整核准，就是 D6-O2 所說的多餘摩擦。",
     "domain": "實作護欄與課責",
     "difficulty": "進階",
     "keywords": ["D6", "D6-O1"]

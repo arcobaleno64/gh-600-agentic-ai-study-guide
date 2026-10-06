@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref, watch } from "vue";
+import { computed, nextTick, onBeforeUnmount, ref, watch } from "vue";
 import { questions, sources } from "../content";
 import {
   addAttempt,
@@ -16,6 +16,14 @@ import {
   isQuestionCorrect,
   questionOptions,
 } from "../quiz";
+import {
+  clearSession,
+  loadSession,
+  saveSession,
+  secondsLeft,
+  type QuizMode,
+  type RestoredSession,
+} from "../quizSession";
 import { makeId, percent, shuffled } from "../utils";
 import { showToast } from "../toast";
 import type {
@@ -32,7 +40,7 @@ interface DisplayQuestion {
 const screen = ref<Screen>("setup");
 const domain = ref("全部");
 const count = ref(10);
-const mode = ref<"練習模式" | "模擬考模式">("練習模式");
+const mode = ref<QuizMode>("練習模式");
 const wrongOnly = ref(false);
 const current = ref(0);
 const session = ref<DisplayQuestion[]>([]);
@@ -40,8 +48,17 @@ const answers = ref<Record<string, QuestionAnswer>>({});
 const flagged = ref<string[]>([]);
 const revealed = ref<string[]>([]);
 const submitted = ref(false);
-const remainingSeconds = ref(120 * 60);
+const EXAM_MS = 120 * 60 * 1000;
+const remainingSeconds = ref(EXAM_MS / 1000);
+// The deadline, not a countdown, is the source of truth: background tabs
+// throttle setInterval, and a reload must resume the same clock.
+const deadline = ref<number | null>(null);
 const result = ref<QuizAttempt | null>(null);
+// Single questions opened from a link are one-off practice; they must not
+// overwrite a saved round.
+const persistable = ref(false);
+const resumable = ref<RestoredSession | null>(null);
+const questionHeading = ref<HTMLElement | null>(null);
 let timer: number | undefined;
 const domains = computed(() => [
   "全部",
@@ -77,17 +94,46 @@ function stopTimer() {
     clearInterval(timer);
     timer = undefined;
   }
+  document.removeEventListener("visibilitychange", tick);
+}
+function tick() {
+  if (deadline.value === null) return;
+  remainingSeconds.value = secondsLeft(deadline.value, Date.now());
+  if (remainingSeconds.value <= 0) {
+    stopTimer();
+    finish(true);
+  }
 }
 function startTimer() {
   stopTimer();
-  remainingSeconds.value = 120 * 60;
-  timer = window.setInterval(() => {
-    remainingSeconds.value -= 1;
-    if (remainingSeconds.value <= 0) {
-      stopTimer();
-      finish(true);
-    }
-  }, 1000);
+  if (deadline.value === null) return;
+  tick();
+  if (submitted.value) return;
+  timer = window.setInterval(tick, 1000);
+  document.addEventListener("visibilitychange", tick);
+}
+function persist() {
+  if (!persistable.value || screen.value !== "quiz" || submitted.value) return;
+  saveSession(localStorage, {
+    version: 1,
+    mode: mode.value,
+    items: session.value.map((item) => ({
+      id: item.question.id,
+      optionIds: item.options.map((option) => option.id),
+    })),
+    answers: answers.value,
+    flagged: flagged.value,
+    revealed: revealed.value,
+    current: current.value,
+    deadline: deadline.value,
+    savedAt: Date.now(),
+  });
+}
+watch([answers, flagged, revealed, current], persist, { deep: true });
+// Move focus to the new question so screen readers announce it, without
+// letting focus() scroll past the sticky toolbar.
+function focusQuestion() {
+  nextTick(() => questionHeading.value?.focus({ preventScroll: true }));
 }
 function startQuiz(specific?: Question[]) {
   let pool = specific ?? available.value;
@@ -114,10 +160,54 @@ function startQuiz(specific?: Question[]) {
   submitted.value = false;
   result.value = null;
   screen.value = "quiz";
-  if (mode.value === "模擬考模式") startTimer();
-  else stopTimer();
+  persistable.value = !specific;
+  resumable.value = null;
+  deadline.value = mode.value === "模擬考模式" ? Date.now() + EXAM_MS : null;
+  startTimer();
+  persist();
   window.scrollTo({ top: 0, left: 0 });
+  focusQuestion();
 }
+function resume() {
+  const saved = resumable.value;
+  if (!saved) return;
+  mode.value = saved.mode;
+  session.value = saved.items;
+  answers.value = saved.answers;
+  flagged.value = saved.flagged;
+  revealed.value = saved.revealed;
+  current.value = saved.current;
+  deadline.value = saved.deadline;
+  submitted.value = false;
+  result.value = null;
+  persistable.value = true;
+  resumable.value = null;
+  screen.value = "quiz";
+  startTimer();
+  if (submitted.value) {
+    showToast("模擬考時間已到，已依離開前的作答自動交卷。", "warning");
+    return;
+  }
+  window.scrollTo({ top: 0, left: 0 });
+  focusQuestion();
+}
+function discardSaved() {
+  clearSession(localStorage);
+  resumable.value = null;
+}
+const resumeSummary = computed(() => {
+  const saved = resumable.value;
+  if (!saved) return "";
+  const answered = saved.items.filter((item) =>
+    isAnswered(saved.answers[item.question.id]),
+  ).length;
+  const base = `${saved.mode}，已作答 ${answered}／${saved.items.length} 題`;
+  if (saved.deadline === null) return `${base}。`;
+  const left = secondsLeft(saved.deadline, Date.now());
+  return left
+    ? `${base}，計時仍在進行，約剩 ${Math.ceil(left / 60)} 分鐘。`
+    : `${base}，時間已到；繼續後會直接交卷。`;
+});
 function choose(id: string) {
   if (!active.value) return;
   const question = active.value.question;
@@ -139,12 +229,39 @@ function choose(id: string) {
   };
   if (mode.value === "練習模式") revealed.value.push(questionId);
 }
+// 複選題尚未確認時，把「下一題」降為次要按鈕，讓「確認複選答案」成為主要動作。
+const awaitingConfirm = computed(
+  () =>
+    mode.value === "練習模式" &&
+    active.value?.question.type === "multiple" &&
+    !revealed.value.includes(active.value.question.id),
+);
+
 function confirmMultiple() {
   if (!active.value || !isAnswered(answers.value[active.value.question.id]))
     return;
   if (!revealed.value.includes(active.value.question.id))
     revealed.value.push(active.value.question.id);
 }
+// Review order: wrong and unanswered first; each keeps its original number.
+const reviewEntries = computed(() =>
+  session.value
+    .map((item, index) => {
+      const answer = answers.value[item.question.id];
+      const status = !isAnswered(answer)
+        ? "unanswered"
+        : isQuestionCorrect(item.question, answer)
+          ? "correct"
+          : "wrong";
+      return { item, number: index + 1, answer, status };
+    })
+    .sort(
+      (a, b) =>
+        Number(a.status === "correct") - Number(b.status === "correct") ||
+        a.number - b.number,
+    ),
+);
+const reviewLabel = { correct: "答對", wrong: "答錯", unanswered: "未作答" };
 function questionSources(question: Question) {
   const ids = new Set(question.sourceIds);
   return sources.filter((source) => ids.has(source.id));
@@ -157,7 +274,9 @@ function toggleFlag() {
 }
 function jump(index: number) {
   current.value = index;
-  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  // Smoothness comes from CSS scroll-behavior, which honours reduced motion.
+  window.scrollTo({ top: 0, left: 0 });
+  focusQuestion();
 }
 function next() {
   if (current.value < session.value.length - 1) jump(current.value + 1);
@@ -198,6 +317,7 @@ function finish(force = false) {
     domains: domainStats,
   };
   addAttempt(attempt);
+  if (persistable.value) clearSession(localStorage);
   result.value = attempt;
   submitted.value = true;
   screen.value = "result";
@@ -205,6 +325,9 @@ function finish(force = false) {
 }
 function reset() {
   stopTimer();
+  if (persistable.value) clearSession(localStorage);
+  persistable.value = false;
+  deadline.value = null;
   screen.value = "setup";
   session.value = [];
   answers.value = {};
@@ -218,6 +341,8 @@ function specificFromRoute() {
     startQuiz([q]);
   }
 }
+if (!route.param)
+  resumable.value = loadSession(localStorage, questions, questionOptions);
 watch(() => route.param, specificFromRoute, { immediate: true });
 watch(
   countOptions,
@@ -230,7 +355,7 @@ onBeforeUnmount(stopTimer);
 </script>
 <template>
   <section class="page-stack">
-    <div class="page-intro">
+    <div v-if="screen !== 'quiz'" class="page-intro">
       <div>
         <span class="badge badge--accent"
           >{{ questions.length }} 題原創情境題</span
@@ -255,6 +380,23 @@ onBeforeUnmount(stopTimer);
         </button>
       </div>
     </div>
+    <section
+      v-if="screen === 'setup' && resumable"
+      class="panel resume-card"
+      aria-labelledby="resume-title"
+    >
+      <div>
+        <h2 id="resume-title">有一輪未完成的作答</h2>
+        <p>{{ resumeSummary }}</p>
+      </div>
+      <div class="resume-card__actions">
+        <button class="button button--ghost" @click="discardSaved">
+          放棄這一輪</button
+        ><button class="button button--primary" @click="resume">
+          繼續作答
+        </button>
+      </div>
+    </section>
     <div v-if="screen === 'setup'" class="quiz-setup-grid">
       <section class="panel quiz-setup-card">
         <div class="panel__header">
@@ -365,7 +507,9 @@ onBeforeUnmount(stopTimer);
               }}
             </button>
           </div>
-          <h2>{{ active.question.question }}</h2>
+          <h2 ref="questionHeading" tabindex="-1">
+            {{ active.question.question }}
+          </h2>
           <p v-if="active.question.type === 'multiple'" class="muted">
             複選題：請選出所有正確答案。
           </p>
@@ -411,18 +555,27 @@ onBeforeUnmount(stopTimer);
               ><span>{{ option.text }}</span>
             </button>
           </div>
-          <button
+          <div
             v-if="
               mode === '練習模式' &&
               active.question.type === 'multiple' &&
               !revealed.includes(active.question.id)
             "
-            class="button button--primary"
-            :disabled="!isAnswered(selected)"
-            @click="confirmMultiple"
+            class="confirm-row"
           >
-            確認複選答案
-          </button>
+            <span class="muted" aria-live="polite">{{
+              isAnswered(selected)
+                ? `已選 ${(selected as string[]).length} 項，確認後顯示解析`
+                : "選完所有正確選項後再確認"
+            }}</span
+            ><button
+              class="button button--primary"
+              :disabled="!isAnswered(selected)"
+              @click="confirmMultiple"
+            >
+              確認複選答案
+            </button>
+          </div>
           <div
             v-if="mode === '練習模式' && revealed.includes(active.question.id)"
             class="answer-feedback"
@@ -464,7 +617,8 @@ onBeforeUnmount(stopTimer);
               上一題</button
             ><button
               v-if="current < session.length - 1"
-              class="button button--primary"
+              class="button"
+              :class="awaitingConfirm ? 'button--soft' : 'button--primary'"
               @click="next"
             >
               下一題</button
@@ -546,10 +700,19 @@ onBeforeUnmount(stopTimer);
           </div>
         </section>
         <section class="panel">
-          <div class="panel__header"><h2>本輪摘要</h2></div>
+          <div class="panel__header">
+            <h2>本輪摘要</h2>
+            <span class="badge">{{ mode }}</span>
+          </div>
           <div class="cheat-grid">
             <div class="cheat-item">
-              <strong>{{ result.total - result.correct }}</strong
+              <strong>{{ result.correct }}</strong
+              ><span>答對</span>
+            </div>
+            <div class="cheat-item">
+              <strong>{{
+                result.total - result.correct - (session.length - answeredCount)
+              }}</strong
               ><span>答錯</span>
             </div>
             <div class="cheat-item">
@@ -560,66 +723,71 @@ onBeforeUnmount(stopTimer);
               <strong>{{ flagged.length }}</strong
               ><span>曾標記</span>
             </div>
-            <div class="cheat-item">
-              <strong>{{ mode }}</strong
-              ><span>作答模式</span>
-            </div>
           </div>
         </section>
       </div>
       <div class="review-list">
-        <article
-          v-for="(item, index) in session"
+        <p class="muted">
+          需複習 {{ result.total - result.correct }} 題在前；答對
+          {{ result.correct }} 題已收合，點題目展開。
+        </p>
+        <details
+          v-for="{ item, number, answer, status } in reviewEntries"
           :key="item.question.id"
           class="panel review-card"
-          :data-correct="
-            isQuestionCorrect(item.question, answers[item.question.id])
-          "
+          :data-status="status"
+          :open="status !== 'correct'"
         >
-          <header>
-            <span class="badge"
-              >{{ item.question.exam }} 第 {{ index + 1 }} 題</span
-            ><strong>{{
-              isQuestionCorrect(item.question, answers[item.question.id])
-                ? "正確"
-                : "需複習"
-            }}</strong>
-          </header>
-          <h3>{{ item.question.question }}</h3>
-          <p>
-            <b>你的答案：</b
-            >{{ answerText(item.question, answers[item.question.id]) }}
-          </p>
-          <p>
-            <b>正確答案：</b
-            >{{ answerText(item.question, item.question.answer) }}
-          </p>
-          <div class="answer-explanation">
-            <strong>解析</strong>
-            <p>{{ item.question.explanation }}</p>
-          </div>
-          <div class="trap-note">
-            <strong>陷阱</strong>
-            <p>{{ item.question.trap }}</p>
-          </div>
-          <div class="answer-explanation">
-            <strong>官方來源</strong>
-            <p>
-              <span
-                v-for="(source, sourceIndex) in questionSources(item.question)"
-                :key="source.id"
-                ><a :href="source.url" target="_blank" rel="noopener">{{
-                  source.title
-                }}</a
-                >{{
-                  sourceIndex < questionSources(item.question).length - 1
-                    ? "、"
-                    : ""
-                }}</span
-              >
+          <summary>
+            <div class="review-card__head">
+              <span class="badge"
+                >{{ item.question.exam }} 第 {{ number }} 題</span
+              ><span :class="`badge badge--${status}`">{{
+                reviewLabel[status]
+              }}</span>
+            </div>
+            <h3>{{ item.question.question }}</h3>
+          </summary>
+          <div class="review-card__body">
+            <p v-if="status === 'correct'">
+              <b>你的答案：</b>{{ answerText(item.question, answer) }}
             </p>
+            <template v-else>
+              <p><b>你的答案：</b>{{ answerText(item.question, answer) }}</p>
+              <p>
+                <b>正確答案：</b
+                >{{ answerText(item.question, item.question.answer) }}
+              </p>
+            </template>
+            <div class="answer-explanation">
+              <strong>解析</strong>
+              <p>{{ item.question.explanation }}</p>
+            </div>
+            <div class="trap-note">
+              <strong>陷阱</strong>
+              <p>{{ item.question.trap }}</p>
+            </div>
+            <div class="answer-explanation">
+              <strong>官方來源</strong>
+              <p>
+                <span
+                  v-for="(source, sourceIndex) in questionSources(
+                    item.question,
+                  )"
+                  :key="source.id"
+                  ><a :href="source.url" target="_blank" rel="noopener">{{
+                    source.title
+                  }}</a
+                  >{{
+                    sourceIndex < questionSources(item.question).length - 1
+                      ? "、"
+                      : ""
+                  }}</span
+                >
+              </p>
+            </div>
           </div>
-        </article>
+        </details>
       </div></template
     >
   </section>

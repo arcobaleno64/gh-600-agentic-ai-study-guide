@@ -124,7 +124,8 @@ function reset() {
             匯入學習紀錄</button
           ><input
             ref="fileInput"
-            class="sr-only"
+            hidden
+            aria-label="選擇學習紀錄 JSON 檔案"
             type="file"
             accept="application/json,.json"
             @change="importData"

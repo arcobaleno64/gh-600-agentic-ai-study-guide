@@ -153,7 +153,12 @@ watch(() => route.param, focusRoute, { immediate: true });
           <h2>錯題分類法</h2>
         </div>
       </div>
-      <div class="responsive-table">
+      <div
+        class="responsive-table"
+        tabindex="0"
+        role="region"
+        aria-label="錯題分類表，可左右捲動"
+      >
         <table>
           <thead>
             <tr>
