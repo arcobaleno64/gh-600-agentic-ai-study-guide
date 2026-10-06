@@ -47,7 +47,7 @@ final result: passed
 - Console 出現數筆「A listener indicated an asynchronous response…message channel closed」訊息。專案 `src` 與 `public` 未找到 Chrome message API，推測與瀏覽器擴充功能有關，但未以乾淨瀏覽器隔離確認；不宣稱 console 零錯誤。
 - 手機為桌面 Chrome 尺寸模擬；尚未在 iOS／Android 真機或 Safari 測試。列印與離線安裝未重跑。
 - 教材仍是原有摘要，未完成逐章補寫、正式來源更新或專家審訂。測試通過不能證明教材深度或學習成效。
-- `content/`、`data/`、題庫邏輯、進度儲存、CI/CD、部署設定與依賴均未修改。次要頁面沿用既有內容布局。
+- 2026-09-15 該輪：`content/`、`data/`、題庫邏輯、進度儲存、CI/CD、部署設定與依賴均未修改。其後 `content/chapters/d2.md`、`d4.md` 已另行擴充，見該次 commit。次要頁面沿用既有內容布局。
 
 ## 本次教訓
 
