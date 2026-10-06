@@ -2685,8 +2685,13 @@ kbd {
     align-items: center;
     min-height: 44px;
   }
-  .case-actions .button {
+  .case-actions .button,
+  .case-feedback__links a {
     min-height: 44px;
+  }
+  .case-feedback__links a {
+    display: inline-flex;
+    align-items: center;
   }
   .case-feedback:not(:empty) {
     margin-top: 20px;
