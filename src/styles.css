@@ -2680,6 +2680,21 @@ kbd {
   .case-observation p {
     font-size: 18px;
   }
+  .case-intro__description a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .case-actions .button {
+    min-height: 44px;
+  }
+  .case-feedback:not(:empty) {
+    margin-top: 20px;
+    padding-top: 16px;
+  }
+  .case-feedback p {
+    margin: 8px 0 16px;
+  }
 }
 @media print {
   .case-workbench,
