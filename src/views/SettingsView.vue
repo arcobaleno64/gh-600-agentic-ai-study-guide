@@ -64,7 +64,6 @@ function reset() {
       <section class="panel">
         <div class="panel__header">
           <div>
-            <p class="eyebrow">EXAM DATES</p>
             <h2>考試日期</h2>
           </div>
         </div>
@@ -84,7 +83,6 @@ function reset() {
       <section class="panel">
         <div class="panel__header">
           <div>
-            <p class="eyebrow">APPEARANCE</p>
             <h2>顯示主題</h2>
           </div>
         </div>
@@ -109,7 +107,6 @@ function reset() {
       <section class="panel panel--span-2">
         <div class="panel__header">
           <div>
-            <p class="eyebrow">BACKUP</p>
             <h2>匯出與匯入</h2>
           </div>
         </div>

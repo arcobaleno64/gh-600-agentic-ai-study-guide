@@ -56,7 +56,6 @@ function countdown(date: string) {
   <section class="page-stack">
     <div class="page-intro">
       <div>
-        <span class="badge badge--accent">4 週／1 科／6 領域</span>
         <h2>總覽</h2>
         <p>查看學習進度與作答紀錄。無須註冊，資料保存在目前使用的瀏覽器。</p>
       </div>
@@ -64,7 +63,6 @@ function countdown(date: string) {
     <div class="dashboard-grid">
       <section class="hero-card">
         <div class="hero-card__content">
-          <p class="eyebrow">NEXT MISSION</p>
           <h2>第 {{ nextDay.day }} 天：{{ nextDay.title }}</h2>
           <p>{{ nextDay.reading }}</p>
           <div class="hero-card__actions">
@@ -109,7 +107,6 @@ function countdown(date: string) {
       <section class="panel panel--span-2">
         <div class="panel__header">
           <div>
-            <p class="eyebrow">EXAM MAP</p>
             <h2>GH-600 考試地圖</h2>
           </div>
           <span class="muted">最後核對：{{ examMeta.lastVerified }}</span>
@@ -147,7 +144,6 @@ function countdown(date: string) {
       <section class="panel">
         <div class="panel__header">
           <div>
-            <p class="eyebrow">WEAK SPOTS</p>
             <h2>目前弱項</h2>
           </div>
           <button class="text-button" @click="navigate('quiz')">去練習</button>
@@ -175,7 +171,6 @@ function countdown(date: string) {
       <section class="panel">
         <div class="panel__header">
           <div>
-            <p class="eyebrow">COUNTDOWN</p>
             <h2>考試倒數</h2>
           </div>
           <button class="text-button" @click="navigate('settings')">
@@ -199,7 +194,6 @@ function countdown(date: string) {
       <section class="panel panel--span-2">
         <div class="panel__header">
           <div>
-            <p class="eyebrow">RECENT</p>
             <h2>最近模擬紀錄</h2>
           </div>
           <button class="text-button" @click="navigate('quiz')">

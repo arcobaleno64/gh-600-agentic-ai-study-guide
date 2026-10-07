@@ -26,7 +26,6 @@ function printPage() {
     <section class="panel">
       <div class="panel__header">
         <div>
-          <p class="eyebrow">CHEATSHEET</p>
           <h2>一眼辨析</h2>
         </div>
         <button class="button button--ghost" @click="printPage">列印</button>
@@ -45,7 +44,6 @@ function printPage() {
     <section class="panel">
       <div class="panel__header">
         <div>
-          <p class="eyebrow">MUST REMEMBER</p>
           <h2>必背句</h2>
         </div>
         <span class="badge">GH-600</span>
@@ -57,7 +55,6 @@ function printPage() {
     <section class="panel checklist-panel">
       <div class="panel__header">
         <div>
-          <p class="eyebrow">EXAM DAY</p>
           <h2>應考日清單</h2>
         </div>
         <span class="muted"

@@ -149,7 +149,6 @@ watch(() => route.param, focusRoute, { immediate: true });
     <section class="panel">
       <div class="panel__header">
         <div>
-          <p class="eyebrow">ERROR TAXONOMY</p>
           <h2>錯題分類法</h2>
         </div>
       </div>

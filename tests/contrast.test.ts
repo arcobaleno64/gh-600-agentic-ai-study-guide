@@ -56,7 +56,7 @@ const pairs: [string, string, string][] = [
   ["text", "bg", "內文"],
   ["text", "surface", "卡片內文"],
   ["soft", "surface", "次要說明"],
-  ["faint", "surface", "eyebrow 與小字"],
+  ["faint", "surface", "小字"],
   ["faint", "bg", "頁面小字"],
   ["faint", "alt", "灰底上的說明與案例階段"],
   ["primary", "bg", "連結"],

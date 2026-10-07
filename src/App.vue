@@ -143,7 +143,7 @@ onBeforeUnmount(() => {
         </button>
         <button
           class="book-search"
-          aria-label="開啟全站搜尋"
+          aria-label="搜尋章節、概念或關鍵字"
           @click="searchOpen = true"
         >
           <span>搜尋章節、概念或關鍵字</span
@@ -210,7 +210,6 @@ onBeforeUnmount(() => {
   >
     <header>
       <div>
-        <p class="eyebrow">GH-600</p>
         <h2 id="book-menu-title">全書目錄</h2>
       </div>
       <button class="book-menu-button" @click="menu?.close()">關閉</button>
