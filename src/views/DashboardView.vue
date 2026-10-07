@@ -166,7 +166,9 @@ function countdown(date: string) {
                   :style="{ '--i': d.day }"
                   :title="`第 ${d.day} 天：${d.title}`"
                   :tabindex="d.day === nextDay.day ? 0 : -1"
-                  :aria-current="d.day === nextDay.day ? 'step' : undefined"
+                  :aria-current="
+                    dayState(d.day) === 'next' ? 'step' : undefined
+                  "
                   :aria-label="`第 ${d.day} 天，${d.title}，${dayStateLabel[dayState(d.day)]}`"
                   ><span aria-hidden="true">{{
                     dayState(d.day) === "done" ? "✓" : d.day
