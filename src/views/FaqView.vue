@@ -50,7 +50,6 @@ watch(mode, () => {
   <section class="page-stack">
     <div class="page-intro">
       <div>
-        <span class="badge badge--accent">經審稿固定問答</span>
         <h2>FAQ／Q&A</h2>
         <p>
           FAQ 處理考試與操作問題；Q&A
@@ -79,7 +78,7 @@ watch(mode, () => {
         觀念情境 Q&A（{{ qas.length }}）
       </button>
     </div>
-    <div class="panel filter-bar filter-bar--two">
+    <div class="panel filter-bar filter-bar--two filter-bar--flat">
       <label class="filter-bar__search search-field"
         ><span class="sr-only">搜尋問題</span
         ><input

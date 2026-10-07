@@ -1259,6 +1259,13 @@ kbd {
   padding-inline: 0;
   box-shadow: none;
 }
+.filter-bar--flat {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding-inline: 0;
+  box-shadow: none;
+}
 .filter-bar--two {
   grid-template-columns: minmax(260px, 1fr) minmax(170px, 0.35fr);
 }
@@ -1439,13 +1446,22 @@ kbd {
 }
 .faq-list {
   display: grid;
-  gap: 0.65rem;
+  border-top: 2px solid var(--text);
 }
 .faq-item {
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
-  box-shadow: var(--shadow);
+  border-bottom: 1px solid var(--line);
+}
+.faq-item .badge {
+  min-width: 5.5em;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: var(--faint);
+  font-weight: 600;
+}
+.faq-item strong {
+  font-family: var(--font-book);
+  font-size: 1.05rem;
 }
 .faq-item > button {
   display: grid;
