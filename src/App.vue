@@ -143,7 +143,7 @@ onBeforeUnmount(() => {
         </button>
         <button
           class="book-search"
-          aria-label="搜尋章節、概念或關鍵字"
+          aria-keyshortcuts="Control+K Meta+K"
           @click="searchOpen = true"
         >
           <span>搜尋章節、概念或關鍵字</span
