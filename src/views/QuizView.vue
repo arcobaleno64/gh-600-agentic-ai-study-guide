@@ -59,6 +59,7 @@ const result = ref<QuizAttempt | null>(null);
 const persistable = ref(false);
 const resumable = ref<RestoredSession | null>(null);
 const questionHeading = ref<HTMLElement | null>(null);
+const mapDialog = ref<HTMLDialogElement | null>(null);
 let timer: number | undefined;
 const domains = computed(() => [
   "全部",
@@ -272,6 +273,22 @@ function toggleFlag() {
     ? flagged.value.filter((x) => x !== id)
     : [...flagged.value, id];
 }
+function closeMapBackdrop(event: MouseEvent) {
+  const dialog = mapDialog.value;
+  if (!dialog || event.target !== dialog) return;
+  const box = dialog.getBoundingClientRect();
+  if (
+    event.clientX < box.left ||
+    event.clientX > box.right ||
+    event.clientY < box.top ||
+    event.clientY > box.bottom
+  )
+    dialog.close();
+}
+function jumpFromMap(index: number) {
+  mapDialog.value?.close();
+  jump(index);
+}
 function jump(index: number) {
   current.value = index;
   // Smoothness comes from CSS scroll-behavior, which honours reduced motion.
@@ -483,6 +500,12 @@ onBeforeUnmount(stopTimer);
             :class="{ 'timer--warning': remainingSeconds < 300 }"
             >{{ timerText }}</span
           ><span>{{ answeredCount }}／{{ session.length }} 已作答</span
+          ><button
+            class="button button--ghost"
+            aria-haspopup="dialog"
+            @click="mapDialog?.showModal()"
+          >
+            題目導覽</button
           ><button class="button button--primary" @click="finish()">
             交卷
           </button>
@@ -623,28 +646,38 @@ onBeforeUnmount(stopTimer);
             </button>
           </footer>
         </article>
-        <aside class="panel question-map">
-          <header>
-            <strong>題目導覽</strong
-            ><span>{{ answeredCount }}/{{ session.length }}</span>
-          </header>
-          <div>
-            <button
-              v-for="(item, index) in session"
-              :key="item.question.id"
-              :class="{
-                active: index === current,
-                answered: isAnswered(answers[item.question.id]),
-                flagged: flagged.includes(item.question.id),
-              }"
-              :aria-label="`前往第 ${index + 1} 題`"
-              @click="jump(index)"
-            >
-              {{ index + 1 }}
-            </button>
-          </div>
-          <small>實心框代表已作答；右上點代表已標記。</small>
-        </aside>
+        <dialog
+          ref="mapDialog"
+          class="map-modal"
+          aria-labelledby="map-title"
+          @click="closeMapBackdrop"
+        >
+          <section class="question-map">
+            <header>
+              <strong id="map-title">題目導覽</strong
+              ><span>{{ answeredCount }}/{{ session.length }}</span
+              ><button class="button button--ghost" @click="mapDialog?.close()">
+                關閉
+              </button>
+            </header>
+            <div>
+              <button
+                v-for="(item, index) in session"
+                :key="item.question.id"
+                :class="{
+                  active: index === current,
+                  answered: isAnswered(answers[item.question.id]),
+                  flagged: flagged.includes(item.question.id),
+                }"
+                :aria-label="`前往第 ${index + 1} 題`"
+                @click="jumpFromMap(index)"
+              >
+                {{ index + 1 }}
+              </button>
+            </div>
+            <small>實心框代表已作答；右上點代表已標記。</small>
+          </section>
+        </dialog>
       </div></template
     >
     <template v-else-if="screen === 'result' && result"
