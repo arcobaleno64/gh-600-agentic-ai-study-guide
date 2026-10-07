@@ -1560,7 +1560,10 @@ kbd {
 }
 .quiz-card h2 {
   margin: 1rem 0 1.15rem;
+  font-family: var(--font-book);
   font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  line-height: 1.5;
+  text-wrap: pretty;
 }
 .flag-button {
   border: 1px solid var(--line);
@@ -1634,6 +1637,14 @@ kbd {
 .answer-feedback[data-correct="false"] {
   border-left-color: var(--danger);
   background: var(--danger-soft);
+}
+.answer-feedback[data-correct="true"] strong::before {
+  margin-right: 0.4em;
+  content: "✓";
+}
+.answer-feedback[data-correct="false"] strong::before {
+  margin-right: 0.4em;
+  content: "✕";
 }
 .answer-feedback p {
   margin: 0.35rem 0 0;
