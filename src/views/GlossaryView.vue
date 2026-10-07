@@ -83,7 +83,7 @@ watch(() => route.param, focusRoute, { immediate: true });
         隨機抽卡
       </button>
     </div>
-    <div class="panel filter-bar">
+    <div class="panel filter-bar filter-bar--three">
       <label class="filter-bar__search search-field"
         ><span class="sr-only">搜尋名詞</span
         ><input
