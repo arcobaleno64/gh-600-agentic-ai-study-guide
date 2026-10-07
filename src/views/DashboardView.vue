@@ -163,6 +163,7 @@ function countdown(date: string) {
                   class="calendar__day"
                   :href="`#/plan/${d.day}`"
                   :data-state="dayState(d.day)"
+                  :style="{ '--i': d.day }"
                   :title="`第 ${d.day} 天：${d.title}`"
                   :tabindex="d.day === nextDay.day ? 0 : -1"
                   :aria-current="d.day === nextDay.day ? 'step' : undefined"
