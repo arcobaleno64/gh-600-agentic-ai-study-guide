@@ -26,6 +26,8 @@ const filtered = computed(() =>
   }),
 );
 const card = computed(() => deck.value[flashIndex.value] ?? terms[0]);
+// 所有名詞都屬於同一個考試時，逐張重複考試代號沒有資訊量。
+const mixedExams = new Set(terms.flatMap((t) => t.exams)).size > 1;
 function openDeck() {
   if (!filtered.value.length) return;
   deck.value = shuffled(filtered.value);
@@ -67,12 +69,10 @@ watch(() => route.param, focusRoute, { immediate: true });
   <section class="page-stack">
     <div class="page-intro">
       <div>
-        <span class="badge badge--accent"
-          >{{ terms.length }} 個名詞／關鍵字</span
-        >
         <h2>名詞庫</h2>
         <p>
-          即時搜尋、考科與分類篩選、收藏、熟悉度標記及隨機抽卡。產品名稱再相似，也不必全部擠進同一個記憶抽屜。
+          {{ terms.length }}
+          個名詞。即時搜尋、考科與分類篩選、收藏、熟悉度標記及隨機抽卡。產品名稱再相似，也不必全部擠進同一個記憶抽屜。
         </p>
       </div>
       <button
@@ -83,7 +83,7 @@ watch(() => route.param, focusRoute, { immediate: true });
         隨機抽卡
       </button>
     </div>
-    <div class="panel filter-bar">
+    <div class="panel filter-bar filter-bar--three">
       <label class="filter-bar__search search-field"
         ><span class="sr-only">搜尋名詞</span
         ><input
@@ -127,7 +127,12 @@ watch(() => route.param, focusRoute, { immediate: true });
       >
         <div class="term-card__top">
           <div class="term-card__tags">
-            <span v-for="e in term.exams" :key="e" class="badge">{{ e }}</span>
+            <span
+              v-for="e in mixedExams ? term.exams : []"
+              :key="e"
+              class="badge"
+              >{{ e }}</span
+            >
           </div>
           <button
             class="favorite-button"
@@ -176,8 +181,8 @@ watch(() => route.param, focusRoute, { immediate: true });
       <section class="flashcard-dialog">
         <header class="search-dialog__header">
           <div>
-            <p class="eyebrow">
-              FLASHCARD {{ flashIndex + 1 }}／{{ deck.length }}
+            <p class="flashcard-count">
+              第 {{ flashIndex + 1 }} 張／共 {{ deck.length }} 張
             </p>
             <h2 id="flashcard-title">隨機名詞卡</h2>
           </div>
@@ -200,7 +205,9 @@ watch(() => route.param, focusRoute, { immediate: true });
           @click="reveal = !reveal"
         >
           <div>
-            <span class="badge">{{ card.exams.join("／") }}</span>
+            <span v-if="mixedExams" class="badge">{{
+              card.exams.join("／")
+            }}</span>
             <h2>{{ card.term }}</h2>
             <p
               v-show="reveal"

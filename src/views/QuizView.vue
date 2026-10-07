@@ -357,12 +357,10 @@ onBeforeUnmount(stopTimer);
   <section class="page-stack">
     <div v-if="screen !== 'quiz'" class="page-intro">
       <div>
-        <span class="badge badge--accent"
-          >{{ questions.length }} 題原創情境題</span
-        >
         <h2>模擬題</h2>
         <p>
-          可依技能領域與錯題篩選。練習模式立即解析，模擬考模式在交卷後統一檢討。
+          {{ questions.length }}
+          題原創情境題，可依技能領域與錯題篩選。練習模式立即解析，模擬考模式在交卷後統一檢討。
         </p>
       </div>
       <div class="compact-progress">
@@ -401,7 +399,6 @@ onBeforeUnmount(stopTimer);
       <section class="panel quiz-setup-card">
         <div class="panel__header">
           <div>
-            <p class="eyebrow">SETUP</p>
             <h2>建立一輪練習</h2>
           </div>
           <span class="badge">可用 {{ available.length }} 題</span>
@@ -456,7 +453,6 @@ onBeforeUnmount(stopTimer);
       <section class="panel">
         <div class="panel__header">
           <div>
-            <p class="eyebrow">STRATEGY</p>
             <h2>答題策略</h2>
           </div>
         </div>
@@ -659,7 +655,6 @@ onBeforeUnmount(stopTimer);
         "
       >
         <div>
-          <p class="eyebrow">RESULT</p>
           <h2>{{ result.score }}%</h2>
           <p>
             {{ result.correct }}／{{ result.total }} 題正確。{{
