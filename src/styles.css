@@ -1803,35 +1803,52 @@ kbd {
   margin: 0.25rem 0 0;
   color: var(--soft);
 }
+.review-block {
+  border: 0;
+  border-top: 2px solid var(--text);
+  border-radius: 0;
+  background: transparent;
+  padding-inline: 0;
+  box-shadow: none;
+}
 .cheat-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.7rem;
+  column-gap: clamp(1.5rem, 4vw, 3.5rem);
 }
 .cheat-item {
   display: grid;
-  gap: 0.22rem;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--alt);
-  padding: 0.75rem;
+  gap: 0.3rem;
+  border-bottom: 1px solid var(--line);
+  padding: 1rem 0;
+}
+.cheat-item strong {
+  font-family: var(--font-book);
+  font-size: 1.15rem;
 }
 .cheat-item span {
   color: var(--soft);
 }
 .memory-list {
-  display: grid;
-  gap: 0.45rem;
-  padding-left: 1.6rem;
+  columns: 2 22rem;
+  column-gap: clamp(1.5rem, 4vw, 3.5rem);
+  margin: 0;
+  padding-left: 2.2rem;
 }
 .memory-list li {
-  border-bottom: 1px dashed var(--line);
-  padding: 0.3rem 0 0.55rem;
-  color: var(--soft);
+  break-inside: avoid;
+  border-bottom: 1px solid var(--line);
+  padding: 0.75rem 0;
+  color: var(--text);
+}
+.memory-list li::marker {
+  color: var(--primary2);
+  font-family: var(--font-book);
+  font-weight: 700;
 }
 .checklist {
   display: grid;
-  gap: 0.45rem;
+  gap: 0;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1840,11 +1857,9 @@ kbd {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   align-items: start;
-  gap: 0.6rem;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--alt);
-  padding: 0.7rem;
+  gap: 0.8rem;
+  border-bottom: 1px solid var(--line);
+  padding: 0.9rem 0;
 }
 .checklist input {
   width: 18px;
@@ -2174,7 +2189,9 @@ kbd {
     width: 44px;
     height: 44px;
   }
-  .day-check {
+  .day-check,
+  .toggle-control,
+  .review-block .button {
     min-height: 44px;
   }
   .plan-summary .week-tabs {

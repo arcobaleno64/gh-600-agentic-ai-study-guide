@@ -12,7 +12,6 @@ function printPage() {
   <section class="page-stack" :class="{ 'compact-review': compact }">
     <div class="page-intro">
       <div>
-        <span class="badge badge--accent">考前 15 分鐘模式</span>
         <h2>考前速查</h2>
         <p>
           濃縮比較、必背句與應考清單。這一頁用於喚醒已學過的內容，不是考前十五分鐘才開始認識
@@ -23,7 +22,7 @@ function printPage() {
         ><input v-model="compact" type="checkbox" />極簡速查</label
       >
     </div>
-    <section class="panel">
+    <section class="panel review-block">
       <div class="panel__header">
         <div>
           <h2>一眼辨析</h2>
@@ -41,18 +40,17 @@ function printPage() {
         </div>
       </div>
     </section>
-    <section class="panel">
+    <section class="panel review-block">
       <div class="panel__header">
         <div>
           <h2>必背句</h2>
         </div>
-        <span class="badge">GH-600</span>
       </div>
       <ol class="memory-list">
         <li v-for="(line, index) in memories" :key="index">{{ line }}</li>
       </ol>
     </section>
-    <section class="panel checklist-panel">
+    <section class="panel review-block checklist-panel">
       <div class="panel__header">
         <div>
           <h2>應考日清單</h2>
