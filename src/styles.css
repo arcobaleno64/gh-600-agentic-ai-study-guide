@@ -1932,12 +1932,16 @@ kbd {
   min-height: 18px;
   accent-color: var(--primary);
 }
-.danger-panel {
-  border-color: color-mix(in srgb, var(--danger) 35%, var(--line));
-  background: color-mix(in srgb, var(--danger-soft) 30%, var(--surface));
+.settings-grid .panel {
+  border: 0;
+  border-top: 2px solid var(--text);
+  border-radius: 0;
+  background: transparent;
+  padding-inline: 0;
+  box-shadow: none;
 }
-.privacy-panel {
-  background: var(--alt);
+.settings-grid .danger-panel {
+  border-top-color: var(--danger);
 }
 .two-column-text {
   display: grid;

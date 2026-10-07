@@ -53,7 +53,6 @@ function reset() {
   <section class="page-stack">
     <div class="page-intro">
       <div>
-        <span class="badge badge--accent">本機資料控制</span>
         <h2>設定</h2>
         <p>
           管理考試日期、顯示主題與學習紀錄。此版本沒有帳號與後端資料庫，進度不會離開你的瀏覽器。
