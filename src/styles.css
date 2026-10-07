@@ -1761,7 +1761,11 @@ kbd {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  border: 0;
   border-left: 6px solid var(--primary);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 .result-hero[data-level="good"] {
   border-left-color: var(--success);
@@ -1774,6 +1778,7 @@ kbd {
 }
 .result-hero h2 {
   margin: 0.15rem 0;
+  font-family: var(--font-book);
   font-size: clamp(2.4rem, 5vw, 4rem);
 }
 .domain-result-list > div {
@@ -1788,10 +1793,24 @@ kbd {
 .result-grid {
   align-items: start;
 }
+.result-grid .panel {
+  border: 0;
+  border-top: 2px solid var(--text);
+  border-radius: 0;
+  background: transparent;
+  padding-inline: 0;
+  box-shadow: none;
+}
 /* One gap token spaces every row of a review card, summary included. */
 .review-card {
   --review-gap: 0.75rem;
-  border-left: 5px solid var(--danger);
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-left: 4px solid var(--danger);
+  border-radius: 0;
+  background: transparent;
+  padding-block: 1.3rem;
+  box-shadow: none;
 }
 .review-card__body {
   display: grid;
