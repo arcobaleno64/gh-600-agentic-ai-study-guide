@@ -912,11 +912,6 @@ kbd {
 }
 .compact-progress {
   min-width: 180px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
-  padding: 0.9rem;
-  box-shadow: var(--shadow);
 }
 .compact-progress strong,
 .compact-progress span {
@@ -964,6 +959,28 @@ kbd {
 .segmented-control > button.active {
   font-weight: 800;
 }
+.plan-summary .week-tabs {
+  gap: 1.6rem;
+}
+.plan-summary .week-tabs > button {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  padding: 0.55rem 0.1rem;
+  box-shadow: none;
+}
+.plan-summary .week-tabs > button small {
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+}
+.plan-summary .week-tabs > button.active {
+  border-bottom-color: var(--primary);
+  background: transparent;
+}
 .document-tabs > button {
   display: grid;
   min-width: 150px;
@@ -991,35 +1008,43 @@ kbd {
 }
 .day-list {
   display: grid;
-  gap: 0.85rem;
+  border-top: 2px solid var(--text);
 }
 .day-card {
+  position: relative;
   scroll-margin-top: calc(var(--topbar) + 1rem);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
-  box-shadow: var(--shadow);
+  border-bottom: 1px solid var(--line);
 }
-.day-card[data-completed="true"] {
-  border-color: color-mix(in srgb, var(--success) 45%, var(--line));
-  background: color-mix(in srgb, var(--success-soft) 30%, var(--surface));
+.day-card[data-completed="true"]::before {
+  position: absolute;
+  top: 0.9rem;
+  bottom: 0.9rem;
+  left: 0;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--success);
+  content: "";
+}
+.day-card[data-completed="true"] .day-number {
+  color: var(--success);
 }
 .day-card__summary {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 0.8rem;
-  padding: 0.85rem 1rem;
+  padding: 1.1rem 0.5rem 1.1rem 1.1rem;
 }
 .day-number {
   display: grid;
-  width: 48px;
-  height: 48px;
+  min-width: 3.2rem;
   place-items: center;
-  border-radius: 13px;
-  background: var(--primary-soft);
   color: var(--primary2);
-  font-weight: 850;
+  font-family: var(--font-book);
+  font-size: 2rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 1;
 }
 .day-card__top {
   display: flex;
@@ -1047,22 +1072,20 @@ kbd {
   width: 36px;
   height: 36px;
   place-items: center;
-  border: 0;
-  border-radius: 10px;
-  background: var(--alt);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
   color: var(--soft);
 }
 .day-card__details {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.85rem;
-  border-top: 1px solid var(--line);
-  padding: 1rem;
+  padding: 0.2rem 1rem 1.3rem 4.3rem;
 }
 .day-card__details section {
-  border-radius: 10px;
-  background: var(--alt);
-  padding: 0.82rem;
+  border-left: 2px solid var(--line2);
+  padding: 0.2rem 0 0.2rem 0.9rem;
 }
 .detail-label {
   display: block;
@@ -2145,6 +2168,26 @@ kbd {
   }
   .day-card__details {
     grid-template-columns: minmax(0, 1fr);
+    padding: 0.2rem 0.5rem 1.2rem 1.1rem;
+  }
+  .day-card .chevron {
+    width: 44px;
+    height: 44px;
+  }
+  .day-check {
+    min-height: 44px;
+  }
+  .plan-summary .week-tabs {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.25rem;
+    overflow: visible;
+  }
+  .plan-summary .week-tabs > button {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    min-height: 44px;
   }
   .note-field {
     grid-column: auto;

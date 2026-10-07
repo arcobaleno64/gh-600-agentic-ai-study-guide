@@ -49,7 +49,6 @@ watch(() => route.param, focusRoute, { immediate: true });
   <section class="page-stack">
     <div class="page-intro">
       <div>
-        <span class="badge badge--accent">28 天密集節奏</span>
         <h2>四週計畫</h2>
         <p>
           每一天都包含必讀內容、當日輸出與通關標準。勾選完成不是裝飾，下一次開啟仍會保留。
@@ -63,7 +62,7 @@ watch(() => route.param, focusRoute, { immediate: true });
         </div>
       </div>
     </div>
-    <div class="panel plan-summary">
+    <div class="plan-summary">
       <div class="week-tabs" role="tablist" aria-label="週次">
         <button
           v-for="week in studyPlan.weeks"
@@ -77,6 +76,12 @@ watch(() => route.param, focusRoute, { immediate: true });
           "
         >
           第 {{ week.week }} 週
+          <small
+            >{{
+              week.days.filter((d) => progress.completedDays.includes(d.day))
+                .length
+            }}／{{ week.days.length }}</small
+          >
         </button>
       </div>
       <label class="toggle-control"
