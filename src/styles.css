@@ -3478,7 +3478,8 @@ kbd {
   }
 }
 @media print {
-  :root {
+  :root,
+  :root[data-theme="dark"] {
     --bg: #fff;
     --surface: #fff;
     --alt: #f5f5f5;
