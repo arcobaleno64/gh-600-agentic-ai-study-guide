@@ -2773,15 +2773,57 @@ kbd {
   font-variant-numeric: tabular-nums;
 }
 .case-feedback:not(:empty) {
+  position: relative;
   margin-top: 28px;
-  padding-top: 24px;
-  border-top: 1px solid var(--line);
+  padding: 4px 0 4px 22px;
   color: var(--text);
   font-size: 15px;
   line-height: 1.9;
 }
+.case-feedback:not(:empty)::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--line2);
+  content: "";
+  transform-origin: top;
+  animation: case-gutter 0.38s ease-out;
+}
+.case-feedback[data-verdict="sound"]::before {
+  background: var(--success);
+}
+.case-feedback[data-verdict="gap"]::before {
+  background: var(--warning);
+}
 .case-feedback strong {
   color: var(--primary2);
+}
+.case-feedback[data-verdict="sound"] strong {
+  color: var(--success);
+}
+.case-feedback[data-verdict="gap"] strong {
+  color: var(--warning);
+}
+.case-feedback[data-verdict] strong::before {
+  margin-right: 0.4em;
+  font-weight: 800;
+}
+.case-feedback[data-verdict="sound"] strong::before {
+  content: "✓";
+}
+.case-feedback[data-verdict="gap"] strong::before {
+  content: "!";
+}
+@keyframes case-gutter {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
 }
 .case-feedback p {
   margin: 10px 0 20px;

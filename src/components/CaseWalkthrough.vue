@@ -173,6 +173,14 @@ const feedback = computed(() =>
     ? stage.value.choices[selected.value]
     : undefined,
 );
+// 狀態線與符號依判斷結果決定；文字標題仍是唯一的語意來源，顏色與符號只是加強。
+const verdict = computed(() =>
+  feedback.value
+    ? "sound" in feedback.value && feedback.value.sound
+      ? "sound"
+      : "gap"
+    : undefined,
+);
 function chooseStage(next: number, focusPrompt = false) {
   index.value = next;
   selected.value = null;
@@ -265,15 +273,14 @@ function chooseAction(choice: number) {
         </div>
         <div
           class="case-feedback"
+          :data-verdict="verdict"
           role="status"
           aria-live="polite"
           aria-atomic="true"
         >
           <template v-if="feedback">
             <strong>{{
-              "sound" in feedback && feedback.sound
-                ? "這一步有依據"
-                : "先查清這個缺口"
+              verdict === "sound" ? "這一步有依據" : "先查清這個缺口"
             }}</strong>
             <p>{{ feedback.reason }}</p>
             <div class="case-evidence">
