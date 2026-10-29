@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref, watch } from "vue";
-import { questions, sources } from "../content";
+import { examPart1, questions, sources } from "../content";
 import {
   addAttempt,
   clearWrongAnswers,
@@ -26,6 +26,14 @@ import {
 } from "../quizSession";
 import { makeId, percent, shuffled } from "../utils";
 import { showToast } from "../toast";
+import {
+  buildExamQuestions,
+  canVisit,
+  EXAM_MINUTES,
+  EXAM_MODE,
+  EXAM_PART1_COUNT,
+  EXAM_PART2_COUNT,
+} from "../examMode";
 import type {
   Question,
   QuestionAnswer,
@@ -49,6 +57,13 @@ const flagged = ref<string[]>([]);
 const revealed = ref<string[]>([]);
 const submitted = ref(false);
 const EXAM_MS = 120 * 60 * 1000;
+const SIMULATION_MS = EXAM_MINUTES * 60 * 1000;
+// 仿真考模式: Part 1 stays editable until it is submitted, then it is read-only.
+const part1Locked = ref(false);
+const isExam = computed(() => mode.value === EXAM_MODE);
+const examPart1Ids = new Set(
+  examPart1.questions.map((question) => question.id),
+);
 const remainingSeconds = ref(EXAM_MS / 1000);
 // The deadline, not a countdown, is the source of truth: background tabs
 // throttle setInterval, and a reload must resume the same clock.
@@ -127,17 +142,20 @@ function persist() {
     revealed: revealed.value,
     current: current.value,
     deadline: deadline.value,
+    part1Locked: part1Locked.value,
     savedAt: Date.now(),
   });
 }
-watch([answers, flagged, revealed, current], persist, { deep: true });
+watch([answers, flagged, revealed, current, part1Locked], persist, {
+  deep: true,
+});
 // Move focus to the new question so screen readers announce it, without
 // letting focus() scroll past the sticky toolbar.
 function focusQuestion() {
   nextTick(() => questionHeading.value?.focus({ preventScroll: true }));
 }
 function startQuiz(specific?: Question[]) {
-  let pool = specific ?? available.value;
+  let pool = specific ?? (isExam.value ? questions : available.value);
   if (!pool.length) {
     showToast(
       wrongOnly.value ? "目前沒有符合條件的錯題。" : "目前沒有符合條件的題目。",
@@ -146,7 +164,10 @@ function startQuiz(specific?: Question[]) {
     return;
   }
   const picked =
-    specific ?? shuffled(pool).slice(0, Math.min(count.value, pool.length));
+    specific ??
+    (isExam.value
+      ? buildExamQuestions(examPart1.questions, questions, shuffled)
+      : shuffled(pool).slice(0, Math.min(count.value, pool.length)));
   session.value = picked.map((q) => ({
     question: q,
     options:
@@ -163,7 +184,12 @@ function startQuiz(specific?: Question[]) {
   screen.value = "quiz";
   persistable.value = !specific;
   resumable.value = null;
-  deadline.value = mode.value === "模擬考模式" ? Date.now() + EXAM_MS : null;
+  part1Locked.value = false;
+  deadline.value = isExam.value
+    ? Date.now() + SIMULATION_MS
+    : mode.value === "模擬考模式"
+      ? Date.now() + EXAM_MS
+      : null;
   startTimer();
   persist();
   window.scrollTo({ top: 0, left: 0 });
@@ -179,6 +205,7 @@ function resume() {
   revealed.value = saved.revealed;
   current.value = saved.current;
   deadline.value = saved.deadline;
+  part1Locked.value = saved.part1Locked;
   submitted.value = false;
   result.value = null;
   persistable.value = true;
@@ -211,6 +238,7 @@ const resumeSummary = computed(() => {
 });
 function choose(id: string) {
   if (!active.value) return;
+  if (isExam.value && !canVisit(current.value, part1Locked.value)) return;
   const question = active.value.question;
   const questionId = question.id;
   if (mode.value === "練習模式" && revealed.value.includes(questionId)) return;
@@ -290,13 +318,59 @@ function jumpFromMap(index: number) {
   jump(index);
 }
 function jump(index: number) {
+  if (isExam.value && !canVisit(index, part1Locked.value)) {
+    showToast(
+      part1Locked.value
+        ? "第一部分已送出，無法回頭修改。"
+        : "請先在答案清單送出第一部分。",
+      "warning",
+    );
+    return;
+  }
   current.value = index;
   // Smoothness comes from CSS scroll-behavior, which honours reduced motion.
   window.scrollTo({ top: 0, left: 0 });
   focusQuestion();
 }
 function next() {
+  if (
+    isExam.value &&
+    !part1Locked.value &&
+    current.value === EXAM_PART1_COUNT - 1
+  ) {
+    openReview();
+    return;
+  }
   if (current.value < session.value.length - 1) jump(current.value + 1);
+}
+const reviewDialog = ref<HTMLDialogElement | null>(null);
+const inPart1 = computed(
+  () => isExam.value && current.value < EXAM_PART1_COUNT,
+);
+const minIndex = computed(() =>
+  isExam.value && part1Locked.value ? EXAM_PART1_COUNT : 0,
+);
+// The answer list covers only the part being worked on.
+const examList = computed(() =>
+  session.value
+    .map((item, index) => ({ item, index }))
+    .filter(({ index }) => canVisit(index, part1Locked.value)),
+);
+function openReview() {
+  reviewDialog.value?.showModal();
+}
+function submitPart1() {
+  const left = session.value
+    .slice(0, EXAM_PART1_COUNT)
+    .filter((item) => !isAnswered(answers.value[item.question.id])).length;
+  const message = left
+    ? `第一部分尚有 ${left} 題未作答，送出後無法修改，仍要送出嗎？`
+    : "送出第一部分後無法再修改，確定要送出嗎？";
+  if (!window.confirm(message)) return;
+  part1Locked.value = true;
+  reviewDialog.value?.close();
+  showToast("第一部分已送出，進入第二部分。", "info");
+  jump(EXAM_PART1_COUNT);
 }
 function previous() {
   if (current.value > 0) jump(current.value - 1);
@@ -321,7 +395,8 @@ function finish(force = false) {
     d.total += 1;
     if (ok) d.correct += 1;
     domainStats[q.domain] = d;
-    recordQuestion(q.id, ok);
+    // Part 1 questions are exam-only: they are not in the bank the review views read.
+    if (!examPart1Ids.has(q.id)) recordQuestion(q.id, ok);
   }
   const attempt: QuizAttempt = {
     id: makeId("attempt"),
@@ -359,7 +434,11 @@ function specificFromRoute() {
   }
 }
 if (!route.param)
-  resumable.value = loadSession(localStorage, questions, questionOptions);
+  resumable.value = loadSession(
+    localStorage,
+    [...questions, ...examPart1.questions],
+    questionOptions,
+  );
 watch(() => route.param, specificFromRoute, { immediate: true });
 watch(
   countOptions,
@@ -425,7 +504,10 @@ onBeforeUnmount(stopTimer);
             <option v-for="item in domains" :key="item">{{ item }}</option>
           </select></label
         ><label
-          >題數<select v-model.number="count" :disabled="!available.length">
+          >題數<select
+            v-model.number="count"
+            :disabled="!available.length || isExam"
+          >
             <option
               v-for="option in countOptions"
               :key="option"
@@ -454,17 +536,39 @@ onBeforeUnmount(stopTimer);
                 ><strong>模擬考模式</strong
                 ><small>120 分鐘，交卷後解析</small></span
               ></label
+            ><label
+              ><input v-model="mode" type="radio" value="仿真考模式" /><span
+                ><strong>仿真考模式</strong
+                ><small
+                  >52 題，100 分鐘；第一部分 10 題情境題，送出後鎖定</small
+                ></span
+              ></label
             >
           </div>
         </div>
+        <p v-if="isExam" class="muted">
+          第一部分 {{ EXAM_PART1_COUNT }} 題共用一個情境，第二部分
+          {{ EXAM_PART2_COUNT }} 題；兩部分送出前都能回頭改答案，並有答案清單。
+          領域、題數與錯題篩選在此模式不適用。
+        </p>
         <label class="toggle-control"
-          ><input v-model="wrongOnly" type="checkbox" />只練目前錯題</label
+          ><input
+            v-model="wrongOnly"
+            type="checkbox"
+            :disabled="isExam"
+          />只練目前錯題</label
         ><button
           class="button button--primary button--full"
           :disabled="!available.length"
           @click="startQuiz()"
         >
-          開始 {{ Math.min(count, available.length) }} 題
+          開始
+          {{
+            isExam
+              ? EXAM_PART1_COUNT + EXAM_PART2_COUNT
+              : Math.min(count, available.length)
+          }}
+          題
         </button>
       </section>
       <section class="panel">
@@ -495,7 +599,7 @@ onBeforeUnmount(stopTimer);
         </div>
         <div class="quiz-toolbar__right">
           <span
-            v-if="mode === '模擬考模式'"
+            v-if="mode !== '練習模式'"
             class="timer"
             :class="{ 'timer--warning': remainingSeconds < 300 }"
             >{{ timerText }}</span
@@ -506,7 +610,17 @@ onBeforeUnmount(stopTimer);
             @click="mapDialog?.showModal()"
           >
             題目導覽</button
-          ><button class="button button--primary" @click="finish()">
+          ><button
+            v-if="isExam"
+            class="button button--ghost"
+            aria-haspopup="dialog"
+            @click="openReview"
+          >
+            答案清單</button
+          ><button
+            class="button button--primary"
+            @click="isExam ? openReview() : finish()"
+          >
             交卷
           </button>
         </div>
@@ -515,7 +629,8 @@ onBeforeUnmount(stopTimer);
         <article class="panel quiz-card">
           <div class="quiz-card__meta">
             <span class="badge"
-              >第 {{ current + 1 }}／{{ session.length }} 題</span
+              >{{ isExam ? (inPart1 ? "第一部分・" : "第二部分・") : "" }}第
+              {{ current + 1 }}／{{ session.length }} 題</span
             ><button
               class="flag-button"
               :class="{ active: flagged.includes(active.question.id) }"
@@ -526,6 +641,21 @@ onBeforeUnmount(stopTimer);
               }}
             </button>
           </div>
+          <details v-if="inPart1" class="exam-scenario" open>
+            <summary>{{ examPart1.scenario.title }}</summary>
+            <p>{{ examPart1.scenario.intro }}</p>
+            <ul>
+              <li v-for="fact in examPart1.scenario.facts" :key="fact">
+                {{ fact }}
+              </li>
+            </ul>
+            <p>{{ examPart1.scenario.context }}</p>
+            <ul>
+              <li v-for="line in examPart1.scenario.observations" :key="line">
+                {{ line }}
+              </li>
+            </ul>
+          </details>
           <h2 ref="questionHeading" tabindex="-1">
             {{ active.question.question }}
           </h2>
@@ -630,7 +760,7 @@ onBeforeUnmount(stopTimer);
           <footer class="quiz-card__footer">
             <button
               class="button button--ghost"
-              :disabled="current === 0"
+              :disabled="current === minIndex"
               @click="previous"
             >
               上一題</button
@@ -641,7 +771,11 @@ onBeforeUnmount(stopTimer);
               @click="next"
             >
               下一題</button
-            ><button v-else class="button button--primary" @click="finish()">
+            ><button
+              v-else
+              class="button button--primary"
+              @click="isExam ? openReview() : finish()"
+            >
               完成並交卷
             </button>
           </footer>
@@ -676,6 +810,73 @@ onBeforeUnmount(stopTimer);
               </button>
             </div>
             <small>實心框代表已作答；右上點代表已標記。</small>
+          </section>
+        </dialog>
+        <dialog
+          v-if="isExam"
+          ref="reviewDialog"
+          class="map-modal"
+          aria-labelledby="review-title"
+        >
+          <section class="exam-review">
+            <header>
+              <strong id="review-title">{{
+                part1Locked ? "第二部分答案清單" : "第一部分答案清單"
+              }}</strong
+              ><span
+                >{{
+                  examList.filter(({ item }) =>
+                    isAnswered(answers[item.question.id]),
+                  ).length
+                }}／{{ examList.length }} 已作答</span
+              >
+            </header>
+            <ol>
+              <li
+                v-for="entry in examList"
+                :key="entry.item.question.id"
+                :class="{
+                  missing: !isAnswered(answers[entry.item.question.id]),
+                  flagged: flagged.includes(entry.item.question.id),
+                }"
+              >
+                <button
+                  @click="
+                    reviewDialog?.close();
+                    jump(entry.index);
+                  "
+                >
+                  <span class="exam-review__num">{{ entry.index + 1 }}</span
+                  ><span class="exam-review__stem"
+                    >{{ entry.item.question.question.slice(0, 40) }}…</span
+                  ><strong>{{
+                    answerText(
+                      entry.item.question,
+                      answers[entry.item.question.id],
+                    )
+                  }}</strong
+                  ><em>{{
+                    flagged.includes(entry.item.question.id) ? "已標記" : ""
+                  }}</em>
+                </button>
+              </li>
+            </ol>
+            <footer>
+              <button
+                class="button button--ghost"
+                @click="reviewDialog?.close()"
+              >
+                返回作答
+              </button>
+              <button
+                class="button button--primary"
+                @click="part1Locked ? finish() : submitPart1()"
+              >
+                {{
+                  part1Locked ? "送出並交卷" : "送出第一部分（送出後無法修改）"
+                }}
+              </button>
+            </footer>
           </section>
         </dialog>
       </div></template
