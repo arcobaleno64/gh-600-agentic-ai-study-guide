@@ -18,148 +18,308 @@
   },
   "questions": [
     {
-      "id": "GH600-P1-01", "exam": "GH-600", "number": 901, "domainId": "D2", "objectiveIds": ["D2-O3"], "sourceIds": ["GH-DOC-10", "GH-DOC-11"],
+      "id": "GH600-P1-01",
+      "exam": "GH-600",
+      "number": 901,
+      "domainId": "D2",
+      "objectiveIds": ["D2-O3"],
+      "sourceIds": ["GH-DOC-10", "GH-DOC-11"],
       "type": "single",
       "question": "現象 (b)：雲端代理的 sessionStart 環境檢查從未執行。最可能的原因是什麼？",
       "options": [
-        { "id": "A", "text": "雲端代理只在 job 結束時才觸發 sessionStart 事件" },
-        { "id": "B", "text": "雲端代理只採用 bash 欄位，而該 hook 只設了 powershell 欄位" },
-        { "id": "C", "text": "雲端代理只接受 version 為 2 的 hooks 設定檔格式" },
+        {
+          "id": "A",
+          "text": "雲端代理只在 job 結束時才觸發 sessionStart 事件"
+        },
+        {
+          "id": "B",
+          "text": "雲端代理只採用 bash 欄位，而該 hook 只設了 powershell 欄位"
+        },
+        {
+          "id": "C",
+          "text": "雲端代理只接受 version 為 2 的 hooks 設定檔格式"
+        },
         { "id": "D", "text": "雲端代理只在 Copilot CLI 重新啟動後才載入設定檔" }
       ],
       "answer": "B",
       "explanation": "雲端代理預設只載入複製下來的儲存庫中的 .github/hooks/*.json，且 command hook 只採用 bash 欄位，powershell 欄位會被忽略。sessionStart 在雲端每個 job 觸發一次，所以不是事件沒有觸發，而是這個 hook 沒有可執行的欄位。",
       "trap": "把 Windows 開發機能跑的 hook 當成雲端也能跑。",
-      "domain": "實作工具使用與環境互動", "difficulty": "中等", "keywords": ["D2", "D2-O3", "hooks", "powershell"]
+      "domain": "實作工具使用與環境互動",
+      "difficulty": "中等",
+      "keywords": ["D2", "D2-O3", "hooks", "powershell"]
     },
     {
-      "id": "GH600-P1-02", "exam": "GH-600", "number": 902, "domainId": "D3", "objectiveIds": ["D3-O3"], "sourceIds": ["GH-DOC-10", "GH-DOC-11"],
+      "id": "GH600-P1-02",
+      "exam": "GH-600",
+      "number": 902,
+      "domainId": "D3",
+      "objectiveIds": ["D3-O3"],
+      "sourceIds": ["GH-DOC-10", "GH-DOC-11"],
       "type": "single",
       "question": "現象 (a)：雲端代理工作階段結束後，/tmp/audit.log 消失。要讓稽核紀錄可以保存，哪個做法最符合官方文件的限制？",
       "options": [
         { "id": "A", "text": "改把紀錄寫到使用者家目錄下的 .copilot 資料夾內" },
-        { "id": "B", "text": "改把 timeoutSec 調大，讓暫存檔在 job 內多保留一段時間" },
-        { "id": "C", "text": "改用 http hook 把紀錄送到外部端點，並請管理員放行該主機" },
-        { "id": "D", "text": "改在 postToolUseFailure 事件寫入同一個 /tmp 檔案" }
+        {
+          "id": "B",
+          "text": "改把 timeoutSec 調大，讓暫存檔在 job 內多保留一段時間"
+        },
+        {
+          "id": "C",
+          "text": "改用 http hook 把紀錄送到外部端點，並請管理員放行該主機"
+        },
+        {
+          "id": "D",
+          "text": "改在 postToolUseFailure 事件寫入同一個 /tmp 檔案"
+        }
       ],
       "answer": "C",
       "explanation": "雲端代理的檔案系統是暫時性的，hook 寫出的紀錄在 job 結束時會被丟棄。要保留輸出，需用 http hook 送出；雲端代理的對外連線受防火牆限制，目標主機要被放行。",
       "trap": "以為寫到本機檔案就等於有稽核紀錄。",
-      "domain": "管理記憶、狀態與執行", "difficulty": "進階", "keywords": ["D3", "D3-O3", "hooks", "audit"]
+      "domain": "管理記憶、狀態與執行",
+      "difficulty": "進階",
+      "keywords": ["D3", "D3-O3", "hooks", "audit"]
     },
     {
-      "id": "GH600-P1-03", "exam": "GH-600", "number": 903, "domainId": "D2", "objectiveIds": ["D2-O4"], "sourceIds": ["GH-DOC-11"],
+      "id": "GH600-P1-03",
+      "exam": "GH-600",
+      "number": 903,
+      "domainId": "D2",
+      "objectiveIds": ["D2-O4"],
+      "sourceIds": ["GH-DOC-11"],
       "type": "single",
       "question": "現象 (c)：deny-destructive.sh 以結束碼 1 結束，該次工具呼叫被拒絕。下列哪項說明符合官方行為？",
       "options": [
-        { "id": "A", "text": "preToolUse 只有結束碼 2 才拒絕，其他非零結束碼會放行工具呼叫" },
-        { "id": "B", "text": "preToolUse 的結束碼會被忽略，只看 stdout 的 permissionDecision" },
-        { "id": "C", "text": "preToolUse 遇到非零結束碼時，改由雲端代理詢問開發者是否放行" },
-        { "id": "D", "text": "preToolUse 遇到結束碼 2 以外的非零結束碼時，同樣拒絕工具呼叫" }
+        {
+          "id": "A",
+          "text": "preToolUse 只有結束碼 2 才拒絕，其他非零結束碼會放行工具呼叫"
+        },
+        {
+          "id": "B",
+          "text": "preToolUse 的結束碼會被忽略，只看 stdout 的 permissionDecision"
+        },
+        {
+          "id": "C",
+          "text": "preToolUse 遇到非零結束碼時，改由雲端代理詢問開發者是否放行"
+        },
+        {
+          "id": "D",
+          "text": "preToolUse 遇到結束碼 2 以外的非零結束碼時，同樣拒絕工具呼叫"
+        }
       ],
       "answer": "D",
       "explanation": "preToolUse 的結束碼 2 視為拒絕；其他非零結束碼同樣拒絕工具呼叫，也就是 fail-closed，因此腳本壞掉時偏向安全。",
       "trap": "把所有 hook 的失敗行為都當成同一種。",
-      "domain": "實作工具使用與環境互動", "difficulty": "中等", "keywords": ["D2", "D2-O4", "hooks", "exit code"]
+      "domain": "實作工具使用與環境互動",
+      "difficulty": "中等",
+      "keywords": ["D2", "D2-O4", "hooks", "exit code"]
     },
     {
-      "id": "GH600-P1-04", "exam": "GH-600", "number": 904, "domainId": "D6", "objectiveIds": ["D6-O2"], "sourceIds": ["GH-DOC-11", "GH-DOC-15"],
+      "id": "GH600-P1-04",
+      "exam": "GH-600",
+      "number": 904,
+      "domainId": "D6",
+      "objectiveIds": ["D6-O2"],
+      "sourceIds": ["GH-DOC-11", "GH-DOC-15"],
       "type": "single",
       "question": "現象 (d)：檢查腳本超過 timeoutSec（預設 30 秒）後，工具呼叫仍照常執行。依官方文件，哪個結論與後續處置正確？",
       "options": [
-        { "id": "A", "text": "逾時會終止程序並拒絕，因此腳本只要比 30 秒慢就一定擋得住，不需其他控制" },
-        { "id": "B", "text": "逾時等同結束碼 2，工具呼叫會被拒絕，並在 PR 留下拒絕原因的說明" },
-        { "id": "C", "text": "逾時只會記錄警告，腳本會繼續在背景執行，直到跑完並寫出決定為止" },
-        { "id": "D", "text": "逾時會終止程序並放行，因此護欄要另以 rulesets 等不依賴 hook 的控制補強" }
+        {
+          "id": "A",
+          "text": "逾時會終止程序並拒絕，因此腳本只要比 30 秒慢就一定擋得住，不需其他控制"
+        },
+        {
+          "id": "B",
+          "text": "逾時等同結束碼 2，工具呼叫會被拒絕，並在 PR 留下拒絕原因的說明"
+        },
+        {
+          "id": "C",
+          "text": "逾時只會記錄警告，腳本會繼續在背景執行，直到跑完並寫出決定為止"
+        },
+        {
+          "id": "D",
+          "text": "逾時會終止程序並放行，因此護欄要另以 rulesets 等不依賴 hook 的控制補強"
+        }
       ],
       "answer": "D",
       "explanation": "逾時會殺掉程序並記錄，執行繼續；官方文件指出逾時對每個事件都是 fail-open，包含 preToolUse。因此 hook 是縱深防禦的一層，要搭配 rulesets 等不依賴 hook 的控制。",
       "trap": "假設護欄 hook 在任何失敗情況下都會擋住動作。",
-      "domain": "實作護欄與課責", "difficulty": "進階", "keywords": ["D6", "D6-O2", "hooks", "timeout"]
+      "domain": "實作護欄與課責",
+      "difficulty": "進階",
+      "keywords": ["D6", "D6-O2", "hooks", "timeout"]
     },
     {
-      "id": "GH600-P1-05", "exam": "GH-600", "number": 905, "domainId": "D6", "objectiveIds": ["D6-O2"], "sourceIds": ["GH-DOC-11"],
+      "id": "GH600-P1-05",
+      "exam": "GH-600",
+      "number": 905,
+      "domainId": "D6",
+      "objectiveIds": ["D6-O2"],
+      "sourceIds": ["GH-DOC-11"],
       "type": "single",
       "question": "要讓 deny-destructive.sh 在雲端代理明確拒絕 git push --force，並符合官方輸出格式，stdout 應該是哪一個？",
       "options": [
-        { "id": "A", "text": "{\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"禁止強制推送\"}" },
-        { "id": "B", "text": "{\"permissionDecision\":\"deny\"}，不附任何原因欄位" },
-        { "id": "C", "text": "{\"permissionDecision\":\"block\",\"permissionDecisionReason\":\"禁止強制推送\"}" },
+        {
+          "id": "A",
+          "text": "{\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"禁止強制推送\"}"
+        },
+        {
+          "id": "B",
+          "text": "{\"permissionDecision\":\"deny\"}，不附任何原因欄位"
+        },
+        {
+          "id": "C",
+          "text": "{\"permissionDecision\":\"block\",\"permissionDecisionReason\":\"禁止強制推送\"}"
+        },
         { "id": "D", "text": "結束碼為 0，stdout 為空，交由預設行為處理" }
       ],
       "answer": "A",
       "explanation": "permissionDecision 的值是 allow、deny 或 ask；拒絕時 permissionDecisionReason 為必填。輸出空白會走預設行為，不等於拒絕。",
       "trap": "漏掉必填的拒絕原因，或把 agentStop 才有的 block 用在 preToolUse。",
-      "domain": "實作護欄與課責", "difficulty": "中等", "keywords": ["D6", "D6-O2", "hooks", "permissionDecision"]
+      "domain": "實作護欄與課責",
+      "difficulty": "中等",
+      "keywords": ["D6", "D6-O2", "hooks", "permissionDecision"]
     },
     {
-      "id": "GH600-P1-06", "exam": "GH-600", "number": 906, "domainId": "D6", "objectiveIds": ["D6-O2"], "sourceIds": ["GH-DOC-11", "GH-DOC-32"],
+      "id": "GH600-P1-06",
+      "exam": "GH-600",
+      "number": 906,
+      "domainId": "D6",
+      "objectiveIds": ["D6-O2"],
+      "sourceIds": ["GH-DOC-11", "GH-DOC-32"],
       "type": "multiple",
       "question": "團隊要補強護欄。請選出兩個最合適的做法。",
       "options": [
-        { "id": "A", "text": "把 .github/hooks/ 納入 CODEOWNERS 與 rulesets，避免代理自行修改護欄" },
-        { "id": "B", "text": "改在 permissionRequest hook 實作拒絕邏輯，作為雲端的主要護欄" },
-        { "id": "C", "text": "讓 preToolUse 輸出 ask，由開發者在雲端執行途中即時核准" },
-        { "id": "D", "text": "改在 preToolUse 實作拒絕邏輯，因為雲端的工具呼叫已預先核准" }
+        {
+          "id": "A",
+          "text": "把 .github/hooks/ 納入 CODEOWNERS 與 rulesets，避免代理自行修改護欄"
+        },
+        {
+          "id": "B",
+          "text": "改在 permissionRequest hook 實作拒絕邏輯，作為雲端的主要護欄"
+        },
+        {
+          "id": "C",
+          "text": "讓 preToolUse 輸出 ask，由開發者在雲端執行途中即時核准"
+        },
+        {
+          "id": "D",
+          "text": "改在 preToolUse 實作拒絕邏輯，因為雲端的工具呼叫已預先核准"
+        }
       ],
       "answer": ["A", "D"],
       "explanation": "雲端代理的工具呼叫已預先核准，permissionRequest 不會觸發或沒有作用，權限決定要放在 preToolUse；ask 在雲端會被當成 deny，不會有人工核准。護欄設定檔本身也要用 CODEOWNERS 與 rulesets 保護。",
       "trap": "把 CLI 的互動核准機制套用到雲端代理。",
-      "domain": "實作護欄與課責", "difficulty": "進階", "keywords": ["D6", "D6-O2", "hooks", "CODEOWNERS"]
+      "domain": "實作護欄與課責",
+      "difficulty": "進階",
+      "keywords": ["D6", "D6-O2", "hooks", "CODEOWNERS"]
     },
     {
-      "id": "GH600-P1-07", "exam": "GH-600", "number": 907, "domainId": "D2", "objectiveIds": ["D2-O1"], "sourceIds": ["GH-DOC-11"],
+      "id": "GH600-P1-07",
+      "exam": "GH-600",
+      "number": 907,
+      "domainId": "D2",
+      "objectiveIds": ["D2-O1"],
+      "sourceIds": ["GH-DOC-11"],
       "type": "true-false",
       "question": "成員放在 ~/.copilot/hooks/ 的個人 hooks，也會在團隊的雲端代理工作階段中執行。",
       "answer": false,
       "explanation": "雲端代理預設只有複製下來的儲存庫中的 .github/hooks/*.json 會被載入，使用者層級的檔案不會跟著進入雲端環境。",
       "trap": "以為個人設定會跟著人進入雲端環境。",
-      "domain": "實作工具使用與環境互動", "difficulty": "基礎", "keywords": ["D2", "D2-O1", "hooks"]
+      "domain": "實作工具使用與環境互動",
+      "difficulty": "基礎",
+      "keywords": ["D2", "D2-O1", "hooks"]
     },
     {
-      "id": "GH600-P1-08", "exam": "GH-600", "number": 908, "domainId": "D1", "objectiveIds": ["D1-O3"], "sourceIds": ["GH-DOC-10", "GH-DOC-11"],
+      "id": "GH600-P1-08",
+      "exam": "GH-600",
+      "number": 908,
+      "domainId": "D1",
+      "objectiveIds": ["D1-O3"],
+      "sourceIds": ["GH-DOC-10", "GH-DOC-11"],
       "type": "single",
       "question": "在雲端代理的一個 job 中，從開始、一次工具呼叫到主代理完成一回合，這四個 hook 事件的典型觸發順序是？",
       "options": [
-        { "id": "A", "text": "preToolUse → sessionStart → postToolUse → agentStop" },
-        { "id": "B", "text": "sessionStart → postToolUse → preToolUse → agentStop" },
-        { "id": "C", "text": "sessionStart → preToolUse → agentStop → postToolUse" },
-        { "id": "D", "text": "sessionStart → preToolUse → postToolUse → agentStop" }
+        {
+          "id": "A",
+          "text": "preToolUse → sessionStart → postToolUse → agentStop"
+        },
+        {
+          "id": "B",
+          "text": "sessionStart → postToolUse → preToolUse → agentStop"
+        },
+        {
+          "id": "C",
+          "text": "sessionStart → preToolUse → agentStop → postToolUse"
+        },
+        {
+          "id": "D",
+          "text": "sessionStart → preToolUse → postToolUse → agentStop"
+        }
       ],
       "answer": "D",
       "explanation": "sessionStart 在雲端每個 job 開始時觸發一次；preToolUse 在每次工具執行前；postToolUse 在工具成功完成後；agentStop 在主代理完成一回合時。",
       "trap": "把 postToolUse 放在 preToolUse 之前，或忘記 sessionStart 只在 job 開始時觸發一次。",
-      "domain": "準備代理架構與 SDLC 流程", "difficulty": "基礎", "keywords": ["D1", "D1-O3", "hooks", "lifecycle"]
+      "domain": "準備代理架構與 SDLC 流程",
+      "difficulty": "基礎",
+      "keywords": ["D1", "D1-O3", "hooks", "lifecycle"]
     },
     {
-      "id": "GH600-P1-09", "exam": "GH-600", "number": 909, "domainId": "D4", "objectiveIds": ["D4-O3"], "sourceIds": ["GH-DOC-11"],
+      "id": "GH600-P1-09",
+      "exam": "GH-600",
+      "number": 909,
+      "domainId": "D4",
+      "objectiveIds": ["D4-O3"],
+      "sourceIds": ["GH-DOC-11"],
       "type": "single",
       "question": "現象 (e)：團隊在 agentStop hook 輸出 block，強制代理結束前先跑測試，但偶爾連續被擋。依官方文件的設計，怎麼讓腳本自我限制最合適？",
       "options": [
-        { "id": "A", "text": "改把 timeoutSec 調到極大，讓腳本有足夠時間確認測試結果並重新判斷" },
-        { "id": "B", "text": "改在 postToolUse 輸出 block，讓測試在每次工具呼叫之後都重新執行" },
-        { "id": "C", "text": "改讀取輸入的 stop_hook_active，已因本 hook 繼續過就輸出 allow" },
-        { "id": "D", "text": "改移除 agentStop，由開發者在 PR 審查時人工確認測試是否都已通過" }
+        {
+          "id": "A",
+          "text": "改把 timeoutSec 調到極大，讓腳本有足夠時間確認測試結果並重新判斷"
+        },
+        {
+          "id": "B",
+          "text": "改在 postToolUse 輸出 block，讓測試在每次工具呼叫之後都重新執行"
+        },
+        {
+          "id": "C",
+          "text": "改讀取輸入的 stop_hook_active，已因本 hook 繼續過就輸出 allow"
+        },
+        {
+          "id": "D",
+          "text": "改移除 agentStop，由開發者在 PR 審查時人工確認測試是否都已通過"
+        }
       ],
       "answer": "C",
       "explanation": "agentStop 可用 decision 的 block 與 reason 強制代理再跑一回合。stop_hook_active 讓腳本偵測這回合已被強制繼續過；連續 block 到第 8 次時，系統會覆寫 hook 並結束該回合。",
       "trap": "用逾時或移除檢查來處理阻擋迴圈，而不是讓腳本知道自己已經擋過一次。",
-      "domain": "執行評估、錯誤分析與調校", "difficulty": "進階", "keywords": ["D4", "D4-O3", "hooks", "agentStop"]
+      "domain": "執行評估、錯誤分析與調校",
+      "difficulty": "進階",
+      "keywords": ["D4", "D4-O3", "hooks", "agentStop"]
     },
     {
-      "id": "GH600-P1-10", "exam": "GH-600", "number": 910, "domainId": "D5", "objectiveIds": ["D5-O2"], "sourceIds": ["GH-DOC-11", "GH-DOC-31"],
+      "id": "GH600-P1-10",
+      "exam": "GH-600",
+      "number": 910,
+      "domainId": "D5",
+      "objectiveIds": ["D5-O2"],
+      "sourceIds": ["GH-DOC-11", "GH-DOC-31"],
       "type": "single",
       "question": "團隊想記錄主代理何時派出子代理、子代理何時完成，並包含代理名稱。應使用哪組事件？",
       "options": [
         { "id": "A", "text": "sessionStart 與 sessionEnd，輸入含工作階段編號" },
-        { "id": "B", "text": "subagentStart 與 subagentStop，輸入含 agentName" },
+        {
+          "id": "B",
+          "text": "subagentStart 與 subagentStop，輸入含 agentName"
+        },
         { "id": "C", "text": "agentStop 與 errorOccurred，輸入含停止原因" },
         { "id": "D", "text": "notification 與 preCompact，輸入含通知訊息" }
       ],
       "answer": "B",
       "explanation": "subagentStart 在子代理執行前觸發，subagentStop 在子代理正常完成時觸發，輸入都帶有 agentName。notification 在雲端不會觸發；內建的 general-purpose 代理不會發出這兩個事件。",
       "trap": "用主代理的事件去推測子代理的行為。",
-      "domain": "協調多代理協作", "difficulty": "中等", "keywords": ["D5", "D5-O2", "hooks", "subagent"]
+      "domain": "協調多代理協作",
+      "difficulty": "中等",
+      "keywords": ["D5", "D5-O2", "hooks", "subagent"]
     }
   ]
 }
