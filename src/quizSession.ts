@@ -4,7 +4,7 @@ import type { Question, QuestionAnswer, QuestionOption } from "./types.ts";
 // throw away a 120-minute mock exam. Only ids are stored; question text always
 // comes from the current bank, and a session that no longer matches it is dropped.
 export const SESSION_KEY = "gh600-quiz-session-v1";
-export type QuizMode = "練習模式" | "模擬考模式";
+export type QuizMode = "練習模式" | "模擬考模式" | "仿真考模式";
 
 export interface SavedSession {
   version: 1;
@@ -15,6 +15,7 @@ export interface SavedSession {
   revealed: string[];
   current: number;
   deadline: number | null; // epoch ms; null outside mock-exam mode
+  part1Locked?: boolean; // 仿真考模式 only: Part 1 was submitted and is read-only
   savedAt: number;
 }
 
@@ -26,6 +27,7 @@ export interface RestoredSession {
   revealed: string[];
   current: number;
   deadline: number | null;
+  part1Locked: boolean;
 }
 
 type Store = Pick<Storage, "getItem" | "setItem" | "removeItem">;
@@ -62,7 +64,9 @@ export function loadSession(
   if (
     !data ||
     data.version !== 1 ||
-    (data.mode !== "練習模式" && data.mode !== "模擬考模式") ||
+    (data.mode !== "練習模式" &&
+      data.mode !== "模擬考模式" &&
+      data.mode !== "仿真考模式") ||
     !Array.isArray(data.items) ||
     !data.items.length
   )
@@ -98,9 +102,10 @@ export function loadSession(
     revealed: keep(data.revealed),
     current: Math.min(Math.max(current, 0), items.length - 1),
     deadline:
-      data.mode === "模擬考模式" && typeof data.deadline === "number"
+      data.mode !== "練習模式" && typeof data.deadline === "number"
         ? data.deadline
         : null,
+    part1Locked: data.mode === "仿真考模式" && data.part1Locked === true,
   };
 }
 

@@ -1,5 +1,6 @@
 import planData from "../data/study-plan.json";
 import questionData from "../data/questions.json";
+import examPart1Data from "../data/exam-part1.json";
 import glossaryData from "../data/glossary.json";
 import sourcesData from "../data/sources.json";
 import faqData from "../data/faq.json";
@@ -25,6 +26,7 @@ import type {
   StudyDay,
   StudyWeek,
 } from "./types";
+import type { ExamScenario } from "./examMode";
 import { rankSearch, type SearchFilter, type SearchEntry } from "./search";
 import { readingSections, readingExcerpt } from "./reading";
 export const studyPlan = planData as {
@@ -34,6 +36,10 @@ export const studyPlan = planData as {
 };
 export const studyDays = studyPlan.weeks.flatMap((w) => w.days) as StudyDay[];
 export const questions = questionData as Question[];
+export const examPart1 = examPart1Data as unknown as {
+  scenario: ExamScenario;
+  questions: Question[];
+};
 export const glossary = glossaryData as {
   version: string;
   categories: { id: string; title: string; terms: GlossaryTerm[] }[];
