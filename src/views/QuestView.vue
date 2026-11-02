@@ -8,6 +8,7 @@ import {
   buildPath,
   isUnlocked,
   levelQuestions,
+  resolveNode,
   starsFor,
   textbookLink,
   worlds,
@@ -23,7 +24,14 @@ import {
 import type { QuestionAnswer } from "../types";
 
 const path = buildPath();
-const node = computed(() => path.find((item) => item.id === route.param));
+const node = computed(() =>
+  resolveNode(
+    path,
+    route.param,
+    progress.quest.cleared,
+    progress.quest.freeRoam,
+  ),
+);
 const nodeIndex = computed(() =>
   path.findIndex((item) => item.id === route.param),
 );

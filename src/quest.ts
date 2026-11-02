@@ -546,6 +546,9 @@ export function buildPath(): PathNode[] {
   return path;
 }
 
+// 每關最多出 3 題，取題庫檔案中的前三題（依檔案順序，不隨機）。
+// 目前 D1-O3、D4-O1 各有 4 題，D2-O4、D6-O2 各有 5 題，超出的題目不會
+// 出現在闖關裡，但仍可在模擬題使用。調整題庫順序會改變該關實際題目。
 export const MAX_LEVEL_QUESTIONS = 3;
 
 export function levelQuestions(
@@ -571,6 +574,20 @@ export function isUnlocked(
 ): boolean {
   if (freeRoam || index <= 0) return true;
   return (cleared[path[index - 1]!.id] ?? 0) >= 1;
+}
+
+// 網址指向的關卡；網址不存在或尚未解鎖時回傳 undefined（回到地圖），
+// 避免直接輸入網址就繞過依序解鎖。
+export function resolveNode(
+  path: PathNode[],
+  id: string,
+  cleared: Record<string, number>,
+  freeRoam: boolean,
+): PathNode | undefined {
+  const index = path.findIndex((item) => item.id === id);
+  return index >= 0 && isUnlocked(path, index, cleared, freeRoam)
+    ? path[index]
+    : undefined;
 }
 
 // 讀教材的連結：與 reading.ts 的 section 錨點一致（d1-o1）。
