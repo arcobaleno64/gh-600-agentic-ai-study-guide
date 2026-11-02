@@ -84,7 +84,7 @@
         {
           "id": "D2-T03",
           "term": "Partner patterns",
-          "explanation": "偵測服務供應商發行憑證的樣式，預設啟用；偵測到的 secret 會送給供應商處理，不會列在 repository 警示中。",
+          "explanation": "偵測服務供應商發行憑證的樣式，屬於預設的偵測；偵測到的 secret 會直接回報給供應商處理，不會顯示在 repository 警示中。",
           "exams": ["GH-500"],
           "category": "設定與使用 Secret Protection"
         },
