@@ -1666,7 +1666,7 @@
     "sourceIds": ["GH500-DOC-35"],
     "type": "single",
     "answer": "A",
-    "question": "管理員發現某個 repository 的 code scanning 沒有如預期產生警示，想先確認各語言的檔案涵蓋率與最近掃描時間。應該看哪裡？",
+    "question": "管理員發現單一 repository 的 code scanning 沒有如預期產生警示，想先看這個 repository 內各語言的檔案涵蓋率與最近掃描時間。應該看哪裡？",
     "options": [
       {
         "id": "A",
@@ -1674,7 +1674,7 @@
       },
       {
         "id": "B",
-        "text": "Security overview 的 Coverage"
+        "text": "Security overview 的 Coverage，看各 repository 是否啟用功能"
       },
       {
         "id": "C",
@@ -1686,7 +1686,7 @@
       }
     ],
     "explanation": "Tool status page 顯示各 code scanning 工具的設定狀態、最近掃描時間、各語言檔案涵蓋率與錯誤訊息，是除錯的起點；它只顯示 repository 預設分支，不在組織層級。",
-    "trap": "Coverage 檢視看的是安全功能啟用範圍，不是單一工具的檔案涵蓋率。",
+    "trap": "Coverage 檢視看的是各 repository 有沒有啟用安全功能，不是單一工具對各語言的檔案涵蓋率。",
     "domain": "設定與使用 Code Security",
     "difficulty": "中等",
     "keywords": ["D4", "D4-O4"]
