@@ -2,6 +2,152 @@
   "version": "0.1.0-d2-sample",
   "categories": [
     {
+      "id": "D1",
+      "title": "GitHub 安全套件、功能與生態系",
+      "terms": [
+        {
+          "id": "D1-T01",
+          "term": "GitHub Secret Protection",
+          "explanation": "需購買的安全套件，包含 secret scanning 使用者警示、push protection、delegated bypass、custom patterns 與 AI 偵測的 secret。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T02",
+          "term": "GitHub Code Security",
+          "explanation": "需購買的安全套件，包含 code scanning、CodeQL CLI、Copilot Autofix、AI Scan、dependency review 與 security campaigns。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T03",
+          "term": "Security overview",
+          "explanation": "位於組織 Security and quality 頁籤，檢視整個組織的安全趨勢與風險，資料以各 repository 的預設分支為準。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T04",
+          "term": "Security campaign",
+          "explanation": "把一批警示分組分享給開發者的修復活動，有具名聯絡人，code scanning 警示會觸發 Copilot Autofix。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T05",
+          "term": "Security manager",
+          "explanation": "組織層級角色，擁有所有 repository 的讀取權限與所有安全警示的寫入權限，並能設定安全功能。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T06",
+          "term": "Delegated alert dismissal",
+          "explanation": "限制誰能直接關閉警示：有寫入權限的使用者須提出請求，由擁有者或 security manager 核准或拒絕。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T07",
+          "term": "Dependency graph",
+          "explanation": "列出 repository 的直接與間接相依性，是 dependency review 與 Dependabot 的資料基礎，可匯出為 SPDX 相容的 SBOM。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T08",
+          "term": "Artifact attestation",
+          "explanation": "經密碼學簽署的聲明，說明建置的來源與工作流程，或相關的 SBOM；不保證軟體安全。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T10",
+          "term": "Supply chain attack",
+          "explanation": "攻擊者利用相依性的弱點插入惡意程式碼或竊取資料。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T11",
+          "term": "Immutable releases",
+          "explanation": "發布後禁止更動 release 的資產與 Git tag；預設不啟用，發布時自動產生 attestation。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T12",
+          "term": "直接相依性",
+          "explanation": "直接寫在 manifest 或 lockfile 中的相依性。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T13",
+          "term": "間接（transitive）相依性",
+          "explanation": "專案不直接指定、但被其他相依性使用的相依性。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T14",
+          "term": "Risk 檢視",
+          "explanation": "Security overview 的檢視之一，用來找出風險最高的 repository。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T15",
+          "term": "Coverage 檢視",
+          "explanation": "Security overview 的檢視之一，用來確認各 repository 是否啟用安全功能；解讀「沒有警示」前要先看它。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T16",
+          "term": "Enablement 檢視",
+          "explanation": "Security overview 的檢視之一，呈現各團隊採用安全功能的速度。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T17",
+          "term": "Assessments 檢視",
+          "explanation": "Security overview 的檢視之一；免費的 secret risk assessment 讓 GitHub Team 組織在未購買套件時也能評估外洩風險。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T18",
+          "term": "稽核日誌（合規資料）",
+          "explanation": "Security overview 儀表板的指標會隨時間變動；需要一致資料做合規或稽核時，官方建議改用稽核日誌。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T19",
+          "term": "預防導向功能",
+          "explanation": "在變更進入預設分支或 repository 之前運作的功能：push protection、pull request 上的 code scanning 與 dependency review。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T20",
+          "term": "Dependency submission API",
+          "explanation": "生態系不被 manifest 分析支援時，用來提交相依性的 API；建置階段提交的資訊可補足間接相依性。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T21",
+          "term": "自訂安全角色",
+          "explanation": "需要比 security manager 更窄或更寬的權限時建立，例如只管理 secret scanning 結果與繞過請求。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        }
+      ]
+    },
+    {
       "id": "D2",
       "title": "設定與使用 Secret Protection",
       "terms": [
@@ -22,7 +168,7 @@
         {
           "id": "D2-T03",
           "term": "Partner patterns",
-          "explanation": "偵測服務供應商發行憑證的樣式，預設啟用；偵測到的 secret 會送給供應商處理，不會列在 repository 警示中。",
+          "explanation": "偵測服務供應商發行憑證的樣式，屬於預設的偵測；偵測到的 secret 會直接回報給供應商處理，不會顯示在 repository 警示中。",
           "exams": ["GH-500"],
           "category": "設定與使用 Secret Protection"
         },
@@ -53,6 +199,681 @@
           "explanation": "以規則運算式自訂的 secret 樣式，可定義在 repository、組織或企業層級；先 dry run 檢視誤判，發佈後才能啟用 push protection。",
           "exams": ["GH-500"],
           "category": "設定與使用 Secret Protection"
+        },
+        {
+          "id": "D2-T10",
+          "term": "Non-provider patterns",
+          "explanation": "偵測不屬於特定供應商的 secret，例如私密金鑰、連線字串與一般 API 金鑰。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Secret Protection"
+        },
+        {
+          "id": "D2-T11",
+          "term": "Generic patterns",
+          "explanation": "push protection 支援的樣式之一，涵蓋私密金鑰、資料庫連線字串等結構化 secret。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Secret Protection"
+        },
+        {
+          "id": "D2-T12",
+          "term": "AI 偵測的 secret",
+          "explanation": "公開預覽，針對密碼這類沒有固定格式的 secret；push protection 的 REST API 途徑不含這一類。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Secret Protection"
+        },
+        {
+          "id": "D2-T13",
+          "term": "使用者層級的 push protection",
+          "explanation": "只在 GitHub.com、綁定個人帳號、預設啟用，阻止你把 secret 推到公開 repository；除非 repository 層級也啟用，繞過時不產生警示。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Secret Protection"
+        },
+        {
+          "id": "D2-T14",
+          "term": "Bypass privileges",
+          "explanation": "被授權者在被阻擋時可自行繞過 push protection，並能審查、核准他人的繞過請求。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Secret Protection"
+        },
+        {
+          "id": "D2-T15",
+          "term": "繞過 push protection 的三個理由",
+          "explanation": "It's used in tests、It's a false positive 與 I'll fix it later；前兩者建立已關閉的警示，最後一個建立開啟中的警示。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Secret Protection"
+        },
+        {
+          "id": "D2-T16",
+          "term": "Dry run（自訂樣式）",
+          "explanation": "Save and dry run 找出符合項但不建立警示；結果最多顯示 1,000 筆，用來檢視誤判後再發佈。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Secret Protection"
+        },
+        {
+          "id": "D2-T17",
+          "term": "Secret format",
+          "explanation": "自訂樣式表單的必填欄位，以規則運算式描述 secret 的格式。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Secret Protection"
+        },
+        {
+          "id": "D2-T18",
+          "term": "Publish 與 Enable（自訂樣式）",
+          "explanation": "樣式發佈後，才能按 Enable 對它啟用 push protection；組織層級只對已啟用 push protection 的 repository 生效。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Secret Protection"
+        },
+        {
+          "id": "D2-T19",
+          "term": "先撤銷後清歷史",
+          "explanation": "外洩的 secret 應視為已外洩並先撤銷或輪替；憑證失效後改寫 Git 歷史通常不必要，而且耗時。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Secret Protection"
+        },
+        {
+          "id": "D2-T20",
+          "term": "通報 GitHub 撤銷 PAT",
+          "explanation": "私有 repository 中外洩的 GitHub personal access token 可通報 GitHub 撤銷（公開預覽）；通報前宜先輪替憑證。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Secret Protection"
+        },
+        {
+          "id": "D2-T21",
+          "term": "繞過請求 7 天過期",
+          "explanation": "委派繞過中，不在名單上的貢獻者提出的繞過請求進入審查流程，7 天後過期。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Secret Protection"
+        }
+      ]
+    },
+    {
+      "id": "D3",
+      "title": "設定與使用供應鏈安全",
+      "terms": [
+        {
+          "id": "D3-T02",
+          "term": "SBOM",
+          "explanation": "專案相依性的正式、機器可讀清單；GitHub 可從 dependency graph 匯出 SPDX 格式，內容不含 dependents。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T03",
+          "term": "Dependabot alerts",
+          "explanation": "在 GitHub Advisory Database 新增 advisory，或 dependency graph 改變時，針對預設分支發出的有弱點相依性警示；只有經 GitHub 審查的 advisory 會觸發。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T04",
+          "term": "EPSS",
+          "explanation": "Exploit Prediction Scoring System，弱點被利用機率的分數；官方建議與嚴重度、範圍、關係一併用來排定警示優先順序。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T05",
+          "term": "Dependabot security updates",
+          "explanation": "為有可用修補的 Dependabot 警示自動開 pull request，更新到包含修補的最低版本；合併後關閉對應警示。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T06",
+          "term": "Dependabot version updates",
+          "explanation": "依 dependabot.yml 讓相依性保持最新版本，不論有無弱點；預設有 3 天的 cooldown，security updates 不受影響。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T07",
+          "term": "Auto-triage 規則",
+          "explanation": "在通知寄出前自動關閉、延後或重新開啟 Dependabot 警示的規則，分為 GitHub 預設規則與自訂規則。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T08",
+          "term": "Dependency review",
+          "explanation": "在 pull request 顯示相依性變動與弱點資料，於引入前攔下問題；要先啟用 dependency graph。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T09",
+          "term": "Dependency review action",
+          "explanation": "在 pull request 比較相依性差異的 GitHub Action；預設發現有弱點的套件就失敗，allow-licenses 與 deny-licenses 只能擇一。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T10",
+          "term": "Dependents",
+          "explanation": "依賴你的 repository 與套件；只在公開 repository 列出，私有 repository 不回報。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T11",
+          "term": "Show paths",
+          "explanation": "dependency graph 中展開間接相依性，查看是哪條路徑把它帶進來。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T12",
+          "term": "GitHub Advisory Database",
+          "explanation": "Dependabot 警示的弱點資料來源；只有經 GitHub 審查的 advisory 會觸發警示。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T13",
+          "term": "SPDX",
+          "explanation": "SBOM 匯出採用的業界標準格式；內容不包含 dependents。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T14",
+          "term": "Grouped security updates",
+          "explanation": "在同一個生態系內把多個相依性的 security updates 合成一個 pull request；不跨生態系，也不與 version updates 合併。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T15",
+          "term": "Cooldown",
+          "explanation": "Dependabot version updates 預設 3 天，新版本發布後 3 天才會被考慮；不適用於 security updates。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T16",
+          "term": "Reachability analysis",
+          "explanation": "選用功能（公開預覽），判斷應用程式能否到達有弱點的相依性程式碼；目前支援 npm、pnpm、Yarn 的 JavaScript 與 TypeScript repository。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T17",
+          "term": "resolution:auto-dismiss",
+          "explanation": "被 auto-triage 規則自動關閉的警示的關閉原因；仍可查詢與重新開啟。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T18",
+          "term": "Dependabot 警示指派",
+          "explanation": "有寫入權限者可把警示指派給協作者、團隊或 AI agent；需要 Code Security 或 Advanced Security 授權，公開 repository 也一樣。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T19",
+          "term": "fail-on-severity",
+          "explanation": "dependency review action 的選項，設定達到哪個嚴重度（critical、high、moderate、low）就失敗。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T20",
+          "term": "allow-licenses 與 deny-licenses",
+          "explanation": "dependency review action 的授權選項；兩者只能擇一使用。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T21",
+          "term": "Enterprise Open-Source License Manager",
+          "explanation": "企業層級角色，可接收並回應授權合規的關閉請求；授權合規限 Enterprise Cloud 且啟用 Code Security。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T22",
+          "term": "Compatibility score",
+          "explanation": "Dependabot security updates 可能附帶的分數，是同一更新在其他公開 repository CI 通過的百分比。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        }
+      ]
+    },
+    {
+      "id": "D4",
+      "title": "設定與使用 Code Security",
+      "terms": [
+        {
+          "id": "D4-T01",
+          "term": "CodeQL",
+          "explanation": "GitHub 開發的程式碼分析引擎；先建立 CodeQL database，再對資料庫執行查詢，結果顯示為 code scanning 警示。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T02",
+          "term": "Default setup",
+          "explanation": "最快、最省維護的 code scanning 設定；自動選語言、query suite 與觸發事件，不需維護 workflow 檔。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T03",
+          "term": "Advanced setup",
+          "explanation": "需要自訂 Actions workflow（建置、matrix、排程）或使用外部 CI 時採用的 code scanning 設定。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T04",
+          "term": "Query suite",
+          "explanation": "一次選入多個 CodeQL 查詢的集合；內建 default、security-extended 與 security-and-quality。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T05",
+          "term": "SARIF",
+          "explanation": "Static Analysis Results Interchange Format，以 JSON 為基礎的開放標準；code scanning 支援 2.1.0 的子集。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T06",
+          "term": "Security severity",
+          "explanation": "CodeQL 安全警示的 Critical、High、Medium、Low 等級，依 CVSS；有此等級時優先於 severity。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T07",
+          "term": "Copilot Autofix",
+          "explanation": "為單一 code scanning 警示產生一個建議修復，由你審查後自行建立 pull request；不消耗 AI credits。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T08",
+          "term": "Agentic autofix",
+          "explanation": "把警示指派給 Copilot，由 agent 探索程式碼、產生並驗證修復並開 draft pull request；會消耗 AI Credits 與 Actions 分鐘數。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T09",
+          "term": "Tool status page",
+          "explanation": "顯示預設分支上各 code scanning 工具的狀態、檔案涵蓋率與錯誤訊息，是除錯的起點。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T10",
+          "term": "CodeQL database",
+          "explanation": "為程式碼建立的資料庫表示；CodeQL 對它執行查詢，結果顯示為 code scanning 警示。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T11",
+          "term": "security-extended",
+          "explanation": "default 加上精確度與嚴重度稍低的查詢，可能有較多誤報；可用於 default setup，介面上稱為 Extended。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T12",
+          "term": "security-and-quality",
+          "explanation": "security-extended 加上找出可維護性與可靠性問題的查詢；只能用於 advanced setup。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T13",
+          "term": "自訂 query suite（.qls）",
+          "explanation": "以 YAML 定義的查詢集，副檔名 .qls；使用自訂 suite 需要 advanced setup。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T14",
+          "term": "Build mode",
+          "explanation": "none（不建置）、autobuild（偵測並嘗試建置）、manual（自行定義建置步驟）；C/C++、C#、Java、Rust 預設用 none。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T15",
+          "term": "Data-flow 警示",
+          "explanation": "顯示資料從來源到使用處每一步的警示；同一弱點的多條路徑歸在同一則警示下。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T16",
+          "term": "Affected branches",
+          "explanation": "警示頁面右側顯示警示在其他分支的狀態；警示頁面本身只反映預設分支。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T17",
+          "term": "github-codeql-config-file",
+          "explanation": "repository property，指定 CodeQL 設定檔路徑；套用到所有 setup 類型，advanced workflow 明確指定的 config-file 優先於它。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T18",
+          "term": "github-codeql-extra-queries",
+          "explanation": "repository property，為組織內相關分析加入額外查詢，不必修改個別 workflow。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T19",
+          "term": "Threat model",
+          "explanation": "決定哪些污染資料來源被視為風險；公開預覽，目前只支援 Java/Kotlin 與 C#。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T20",
+          "term": "Code scanning merge protection",
+          "explanation": "在 ruleset 加入 code scanning 規則，必要工具發現指定嚴重度警示、分析進行中或未設定時阻擋合併；不會自動啟用 code scanning。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T21",
+          "term": "SARIF category",
+          "explanation": "同一 commit 上傳多組結果時，必須為每組指定的唯一識別；CodeQL action 會依 workflow 名稱與 matrix 變數自動設定。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T22",
+          "term": "Code scanning results 檢查",
+          "explanation": "pull request 上顯示 code scanning 結果的檢查名稱；error、critical 或 high 嚴重度會使檢查失敗。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        }
+      ]
+    },
+    {
+      "id": "D5",
+      "title": "安全營運：最佳做法、優先順序與修復",
+      "terms": [
+        {
+          "id": "D5-T01",
+          "term": "GHSA ID",
+          "explanation": "GitHub 每則 advisory 的唯一識別碼，格式 GHSA-xxxx-xxxx-xxxx，字元取自 23456789cfghjmpqrvwx，字母全小寫。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        },
+        {
+          "id": "D5-T02",
+          "term": "GitHub-reviewed advisory",
+          "explanation": "對應到支援生態系套件、經 GitHub 審查有效性的 advisory；會產生 Dependabot 警示，未審查與惡意軟體 advisory 不會。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        },
+        {
+          "id": "D5-T03",
+          "term": "Malware advisory",
+          "explanation": "關於惡意開源套件的 advisory，沒有修復版本，要從專案移除並找替代；多為替換攻擊。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        },
+        {
+          "id": "D5-T06",
+          "term": "Campaign manager",
+          "explanation": "Security campaign 的主要聯絡人，必須是組織擁有者或 security manager 的使用者或團隊。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        },
+        {
+          "id": "D5-T10",
+          "term": "CVE",
+          "explanation": "弱點的公開編號；來自 National Vulnerability Database 的 advisory 附有 CVE 連結。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        },
+        {
+          "id": "D5-T11",
+          "term": "CWE",
+          "explanation": "弱點類型標籤；計算安全嚴重度時，取相關 CWE 所有 CVE 的 CVSS 第 75 百分位。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        },
+        {
+          "id": "D5-T12",
+          "term": "OSV 格式",
+          "explanation": "GitHub Advisory Database 的 advisory 以 Open Source Vulnerability 格式的 JSON 檔發布。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        },
+        {
+          "id": "D5-T13",
+          "term": "Unreviewed advisory",
+          "explanation": "直接從 National Vulnerability Database feed 自動發布、未檢查有效性的 advisory；Dependabot 不為它產生警示。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        },
+        {
+          "id": "D5-T14",
+          "term": "CVSS",
+          "explanation": "弱點嚴重度評分；Advisory Database 支援 CVSS 3.1 與 4.0，分為 Low、Medium/Moderate、High、Critical。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        },
+        {
+          "id": "D5-T15",
+          "term": "EPSS 百分位",
+          "explanation": "與相同或較低 EPSS 分數的已評分弱點所占的比例；95 百分位表示 95% 的已模型化弱點比它更不可能被利用。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        },
+        {
+          "id": "D5-T16",
+          "term": "社群貢獻（Analyst）",
+          "explanation": "對 github/advisory-database 提交的 pull request，經 GitHub Security Lab 策展團隊審查；被接受者獲得 Analyst credit。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        },
+        {
+          "id": "D5-T17",
+          "term": "替換攻擊（substitution attack）",
+          "explanation": "攻擊者在公開 registry 發布與你依賴的第三方或私有套件同名的套件；多數 malware advisory 屬於這類。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        },
+        {
+          "id": "D5-T18",
+          "term": "Campaign 範本",
+          "explanation": "預先定義的篩選條件，選出一群密切相關的警示；agentic autofix 停用時會加上 autofix:supported。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        },
+        {
+          "id": "D5-T19",
+          "term": "Campaign 警示上限",
+          "explanation": "一個 security campaign 納入的警示不得超過 1000 則。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        },
+        {
+          "id": "D5-T20",
+          "term": "Require code scanning results",
+          "explanation": "branch ruleset 規則，為每個必要工具設定警示等級與安全警示等級作為合併條件。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        },
+        {
+          "id": "D5-T21",
+          "term": "左移（預防性安全）",
+          "explanation": "在變更進入預設分支或 repository 之前就攔下問題，例如 push protection、dependency review 與合併保護。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        }
+      ]
+    },
+    {
+      "id": "D6",
+      "title": "GitHub 安全套件管理",
+      "terms": [
+        {
+          "id": "D6-T01",
+          "term": "Security configuration",
+          "explanation": "一組安全功能的啟用設定，可套用到組織內的 repository；控制 repository 層級的功能。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T02",
+          "term": "Global settings",
+          "explanation": "控制組織層級的安全設定，由所有 repository 繼承。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T03",
+          "term": "Enforced configuration",
+          "explanation": "強制的 security configuration；repository 擁有者不能改變它已啟用或已停用的功能，未設定的功能不強制。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T04",
+          "term": "removed 狀態",
+          "explanation": "repository 管理員改了與未強制 configuration 衝突的設定；仍關聯但不再繼承全部設定，也不計入涵蓋指標。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T05",
+          "term": "detached 狀態",
+          "explanation": "configuration 與 repository 完全斷開；現有安全設定不變，顯示為 No configuration。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T06",
+          "term": "Enabled with advanced setup allowed",
+          "explanation": "Default setup 的選項，只在 CodeQL 分析目前沒有執行的 repository 啟用 default setup，讓 configuration 可套用到所有 repository。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T07",
+          "term": "預設 configuration",
+          "explanation": "只自動套用到新建立的 repository；轉移進組織的 repository 需手動套用。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T08",
+          "term": "CodeQL model pack",
+          "explanation": "擴充 CodeQL 對額外框架與函式庫的辨識；目前是公開預覽，支援 C/C++、C#、Java/Kotlin、Python、Ruby 與 Rust。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T09",
+          "term": "生產環境脈絡",
+          "explanation": "整合 Microsoft Defender for Cloud、JFrog Artifactory 或 CI/CD 的資料，協助排定 code scanning 與 Dependabot 警示的優先順序。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T10",
+          "term": "attached 狀態",
+          "explanation": "configuration 已套用，repository 繼承所有設定。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T11",
+          "term": "failed 狀態",
+          "explanation": "repository 現有設定與 configuration 衝突，無法套用。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T12",
+          "term": "removed_by_enterprise 狀態",
+          "explanation": "企業層級的設定變更與已套用的組織設定衝突。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T13",
+          "term": "Use as default for newly created repositories",
+          "explanation": "configuration 的 Policy 選項，可選 Public、Private and internal 或 All repositories；只自動套用到新建立的 repository。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T14",
+          "term": "Prevent direct alert dismissals",
+          "explanation": "configuration 中啟用委派警示關閉的選項，可分別用於 secret scanning、code scanning 與 Dependabot。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T15",
+          "term": "Extended metadata checks",
+          "explanation": "secret scanning 的 configuration 選項，只能在 validity checks 啟用時啟用。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T16",
+          "term": "Labeled runner",
+          "explanation": "Dependabot 或 default setup 使用的帶標籤 runner；Dependabot 預設標籤為 dependabot，公開 repository 一律用 GitHub-hosted runner。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T17",
+          "term": "AI applications 掃描",
+          "explanation": "global settings 中獨立於 AI Scan 的設定，控制不同的偵測器；啟用 AI Scan 不會啟用它。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T18",
+          "term": "不活躍 repository 持續掃描",
+          "explanation": "global settings 選項，讓不活躍 repository 每 30 天繼續掃描；週期固定，不可設定。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T19",
+          "term": "批次 script 啟用 advanced setup",
+          "explanation": "對不適用 default setup 的 repository，用 script 把 CodeQL workflow 加到每個 repository；組織需啟用 GitHub Actions。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T20",
+          "term": "Configurations REST API",
+          "explanation": "用來建立與管理 security configuration 的 REST 端點，涵蓋組織與企業層級。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T21",
+          "term": "repository_security_configuration",
+          "explanation": "稽核日誌事件，記錄 repository 的 configuration 狀態變更。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T22",
+          "term": "Private vulnerability reporting",
+          "explanation": "security configuration 中可啟用、停用或保持現狀的選項之一。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
         }
       ]
     }

@@ -75,7 +75,7 @@ test("門檻來自該考試的規則，不是寫死的數字", () => {
   assert.equal(has(errors, "官方來源必須在 1 至 2 項之間"), true);
   assert.equal(has(errors, "考試代碼必須為 GH-999"), true);
 });
-test("GH-500 樣本遵守題目層級規則（答案、選項長度、解析不重複）", () => {
+test("GH-500 已寫的內容遵守題目層級規則（答案、選項長度、解析不重複）", () => {
   const gh500 = resolve(import.meta.dirname, "..", "exams", "gh-500");
   const load = (path: string) =>
     JSON.parse(readFileSync(join(gh500, path), "utf8"));
@@ -90,9 +90,14 @@ test("GH-500 樣本遵守題目層級規則（答案、選項長度、解析不�
     meta: load("data/exam-meta.json"),
     summary: {},
     rules: load("data/contract.json"),
-    chapters: {
-      "d2.md": readFileSync(join(gh500, "content/chapters/d2.md"), "utf8"),
-    },
+    chapters: Object.fromEntries(
+      readdirSync(join(gh500, "content/chapters"))
+        .filter((name) => name.endsWith(".md"))
+        .map((name) => [
+          name,
+          readFileSync(join(gh500, "content/chapters", name), "utf8"),
+        ]),
+    ),
   });
   // Totals (question count, term count, other domains) are expected to fail
   // until every domain is written; only the per-question and answer-balance

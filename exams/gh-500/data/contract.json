@@ -2,9 +2,9 @@
   "code": "GH-500",
   "domains": 6,
   "plan": { "weeks": 4, "days": 28 },
-  "minQuestions": 60,
+  "minQuestions": 70,
   "minTerms": 120,
-  "sources": { "min": 20, "max": 60 },
+  "sources": { "min": 30, "max": 60 },
   "minFaq": 24,
   "minQa": 24,
   "minMustRemember": 36

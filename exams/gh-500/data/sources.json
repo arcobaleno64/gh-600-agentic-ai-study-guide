@@ -46,5 +46,317 @@
     "title": "Enabling secret scanning for your repository",
     "url": "https://docs.github.com/en/code-security/secret-scanning/enabling-secret-scanning-features/enabling-secret-scanning-for-your-repository",
     "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-07",
+    "title": "GitHub security features",
+    "url": "https://docs.github.com/en/code-security/getting-started/github-security-features",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-08",
+    "title": "Security overview",
+    "url": "https://docs.github.com/en/code-security/security-overview/about-security-overview",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-09",
+    "title": "About security campaigns",
+    "url": "https://docs.github.com/en/code-security/concepts/security-at-scale/about-security-campaigns",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-10",
+    "title": "Managing security managers in your organization",
+    "url": "https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/managing-security-managers-in-your-organization",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-11",
+    "title": "Delegated alert dismissal",
+    "url": "https://docs.github.com/en/code-security/concepts/security-at-scale/delegated-alert-dismissal",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-12",
+    "title": "Supply chain security",
+    "url": "https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/about-supply-chain-security",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-13",
+    "title": "Dependabot alerts",
+    "url": "https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-alerts",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-14",
+    "title": "Dependabot auto-triage rules",
+    "url": "https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-auto-triage-rules",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-15",
+    "title": "Dependency review",
+    "url": "https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-16",
+    "title": "Dependency graph",
+    "url": "https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-graph",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-17",
+    "title": "Exporting a software bill of materials for your repository",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/establish-provenance-and-integrity/export-dependencies-as-sbom",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-18",
+    "title": "Configuring the dependency review action",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/manage-your-dependency-security/configure-dependency-review-action",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-19",
+    "title": "Configuring open source license policies",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/manage-your-dependency-security/configure-license-policies",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-20",
+    "title": "Dependabot security updates",
+    "url": "https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-security-updates",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-21",
+    "title": "Configuring notifications for Dependabot alerts",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/manage-your-dependency-security/configure-dependabot-notifications",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-22",
+    "title": "Managing alerts that have been automatically dismissed by a Dependabot auto-triage rule",
+    "url": "https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-dependabot-alerts/managing-automatically-dismissed-alerts",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-23",
+    "title": "Dependabot version updates",
+    "url": "https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-version-updates",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-24",
+    "title": "Enforcing dependency review across an organization",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/enforce-dependency-review",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-25",
+    "title": "About code scanning",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/about-code-scanning",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-26",
+    "title": "About setup types for code scanning",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/setup-types",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-27",
+    "title": "Code scanning with CodeQL",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/codeql/codeql-code-scanning",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-28",
+    "title": "CodeQL query suites",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/codeql/codeql-query-suites",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-29",
+    "title": "Custom CodeQL queries",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/codeql/custom-queries",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-30",
+    "title": "SARIF files for code scanning",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/sarif-files",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-31",
+    "title": "Code scanning alerts",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning-alerts",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-32",
+    "title": "Triaging code scanning alerts in pull requests",
+    "url": "https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/triage-alerts-in-pull-requests",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-33",
+    "title": "Code scanning merge protection",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/merge-protection",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-34",
+    "title": "About autofix for code scanning",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-35",
+    "title": "About the tool status page",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/tool-status-page",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-36",
+    "title": "Repository properties for code scanning",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/repository-properties",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-37",
+    "title": "Configuring advanced setup for code scanning",
+    "url": "https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configuring-advanced-setup-for-code-scanning",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-38",
+    "title": "Uploading a SARIF file to GitHub",
+    "url": "https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/integrate-with-existing-tools/upload-sarif-file",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-39",
+    "title": "Resolving code scanning alerts",
+    "url": "https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-40",
+    "title": "CodeQL code scanning for compiled languages",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/codeql/codeql-for-compiled-languages",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-41",
+    "title": "Linking code scanning alerts to GitHub issues",
+    "url": "https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/track-alerts-in-issues",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-42",
+    "title": "Code scanning on pull requests",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning-on-pull-requests",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-43",
+    "title": "Integration with code scanning",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/integration-with-code-scanning",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-44",
+    "title": "GitHub Advisory Database",
+    "url": "https://docs.github.com/en/code-security/concepts/vulnerability-reporting-and-management/github-advisory-database",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-45",
+    "title": "Global security advisories",
+    "url": "https://docs.github.com/en/code-security/concepts/vulnerability-reporting-and-management/global-security-advisories",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-46",
+    "title": "Creating and managing security campaigns",
+    "url": "https://docs.github.com/en/code-security/how-tos/manage-security-alerts/remediate-alerts-at-scale/creating-managing-security-campaigns",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-47",
+    "title": "Set code scanning merge protection",
+    "url": "https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/manage-your-configuration/set-merge-protection",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-48",
+    "title": "Enabling security features at scale",
+    "url": "https://docs.github.com/en/code-security/concepts/security-at-scale/organization-security",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-49",
+    "title": "Configuring global security settings for your organization",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/configure-global-settings",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-50",
+    "title": "Creating a custom security configuration",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/create-custom-configuration",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-51",
+    "title": "Applying a custom security configuration",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/apply-custom-configuration",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-52",
+    "title": "Detaching repositories from their security configurations",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/manage-your-coverage/detach-security-configuration",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-53",
+    "title": "Configuring default setup for code scanning at scale",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/code-scanning-at-scale",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-54",
+    "title": "Configuring advanced setup for code scanning with CodeQL at scale",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/configuring-advanced-setup-for-code-scanning-with-codeql-at-scale",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-55",
+    "title": "Managing your paid use of Advanced Security",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/manage-usage-and-access/managing-your-github-advanced-security-license-usage",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-56",
+    "title": "Security configuration statuses",
+    "url": "https://docs.github.com/en/code-security/reference/security-at-scale/configuration-statuses",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-57",
+    "title": "Security configuration enforcement",
+    "url": "https://docs.github.com/en/code-security/reference/security-at-scale/configuration-enforcement",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-58",
+    "title": "REST API endpoints for code security configurations",
+    "url": "https://docs.github.com/en/rest/code-security/configurations",
+    "publisher": "GitHub Docs"
   }
 ]

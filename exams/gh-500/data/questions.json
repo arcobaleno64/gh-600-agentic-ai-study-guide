@@ -7,28 +7,28 @@
     "objectiveIds": ["D2-O1"],
     "sourceIds": ["GH500-DOC-01", "GH500-DOC-06"],
     "type": "single",
-    "answer": "A",
-    "question": "公開 repository 與組織擁有的私有 repository，在使用 secret scanning 的條件上有何差異？",
+    "answer": "B",
+    "question": "某個 GitHub Team 組織尚未購買 Secret Protection 或 Code Security，擁有一個公開 repository 與一個私有 repository，都沒有做任何安全設定。關於這個私有 repository 的 secret scanning，哪項描述正確？",
     "options": [
       {
         "id": "A",
-        "text": "公開的自動掃描且不收費；組織私有的需要 GitHub Secret Protection"
+        "text": "會自動掃描，而且不另外收費（公開 repository 的情況）"
       },
       {
         "id": "B",
-        "text": "兩者都自動掃描且不收費，差別只在可掃描的分支數量"
+        "text": "需要先取得並啟用 Secret Protection（組織私有的情況）"
       },
       {
         "id": "C",
-        "text": "公開的需另購授權；組織私有的預設即可免費使用掃描功能"
+        "text": "需要 Enterprise Managed Users 帳號（使用者私有 repository）"
       },
       {
         "id": "D",
-        "text": "兩者都必須先啟用 Secret Protection，才能掃描 Git 歷史"
+        "text": "可在 Assessments 頁面免費評估組織（免費評估的情況）"
       }
     ],
     "explanation": "公開 repository 的 secret scanning 自動執行，不另外收費；組織擁有的私有與 internal repository 需要 GitHub Secret Protection，由 GitHub Team 或 GitHub Enterprise Cloud 提供。",
-    "trap": "「只有公開的免費」容易被誤記成「只掃公開的」；私有 repository 並非不能掃，而是要先取得並啟用 Secret Protection。",
+    "trap": "每個選項在官方文件裡都是真實的條件，但各自適用於不同情境；要先判斷是公開、組織私有還是使用者私有 repository，再選對應的條件。",
     "domain": "設定與使用 Secret Protection",
     "difficulty": "基礎",
     "keywords": ["D2", "D2-O1"]
@@ -57,27 +57,27 @@
     "objectiveIds": ["D2-O1"],
     "sourceIds": ["GH500-DOC-01"],
     "type": "multiple",
-    "answer": ["A", "C"],
+    "answer": ["B", "D"],
     "question": "關於 partner patterns（合作夥伴樣式），下列哪些敘述正確？（選 2 項）",
     "options": [
       {
         "id": "A",
-        "text": "這類樣式預設啟用，不須管理員逐一設定"
+        "text": "預設不偵測，需要管理員在設定頁開啟"
       },
       {
         "id": "B",
-        "text": "每個供應商的樣式都要由管理員逐一手動開啟"
+        "text": "屬於預設的偵測，不必先自訂樣式"
       },
       {
         "id": "C",
-        "text": "偵測到的 secret 送給供應商，由其處理，例如撤銷"
+        "text": "偵測到的 secret 會列入警示清單，由管理員處理"
       },
       {
         "id": "D",
-        "text": "偵測結果一律列在 repository 的警示清單中供逐筆處理"
+        "text": "偵測到的 secret 會通知供應商，由供應商處理"
       }
     ],
-    "explanation": "Partner patterns 預設啟用；偵測到的合作夥伴 secret 會送給服務供應商，由供應商決定處置，例如撤銷憑證，這類 secret 不會出現在你的 repository 警示中。",
+    "explanation": "Partner patterns 屬於預設的偵測（官方稱 default detection）；偵測到的合作夥伴 secret 會直接回報給服務供應商，由供應商採取行動，例如撤銷憑證，這類 secret 不會顯示在你的 repository 警示中。",
     "trap": "「看不到警示」不等於「沒有偵測」；合作夥伴 secret 的處理被轉交給供應商，所以管理員在警示清單上看不到它。",
     "domain": "設定與使用 Secret Protection",
     "difficulty": "中等",
@@ -91,24 +91,24 @@
     "objectiveIds": ["D2-O1", "D2-O3"],
     "sourceIds": ["GH500-DOC-01"],
     "type": "single",
-    "answer": "C",
+    "answer": "A",
     "question": "團隊找到的有效 secret 太多，想決定先處理哪些。哪項功能最直接協助排定處理順序？",
     "options": [
       {
         "id": "A",
-        "text": "將所有警示一律標為 false positive 後再逐一檢查"
-      },
-      {
-        "id": "B",
-        "text": "停用 push protection，減少新增警示的數量"
-      },
-      {
-        "id": "C",
         "text": "有效性檢查，確認偵測到的 secret 是否仍然有效"
       },
       {
+        "id": "B",
+        "text": "Custom patterns，新增組織專用的偵測樣式與規則"
+      },
+      {
+        "id": "C",
+        "text": "Push protection，在推送時阻擋新的 secret"
+      },
+      {
         "id": "D",
-        "text": "改寫 Git 歷史，先移除最舊的 commit"
+        "text": "Delegated bypass，指定可以繞過保護的人員"
       }
     ],
     "explanation": "有效性檢查（validity checks）確認偵測到的 secret 是否仍然有效，讓團隊先處理仍可被利用的憑證。檢查時可能需要連到發行該 secret 的服務。",
@@ -125,28 +125,28 @@
     "objectiveIds": ["D2-O2"],
     "sourceIds": ["GH500-DOC-02"],
     "type": "single",
-    "answer": "B",
-    "question": "推送內容含有疑似 secret 時，push protection 預設會怎麼處理？",
+    "answer": "A",
+    "question": "開發者從命令列推送一個含有 partner pattern 偵測到的 API 金鑰的 commit。該 repository 已啟用 push protection，開發者不在任何繞過或豁免名單上。推送會發生什麼事？",
     "options": [
       {
         "id": "A",
-        "text": "允許推送完成，並立即建立最高嚴重度的警示"
+        "text": "推送被阻擋，開發者移除金鑰後重新推送（沒有繞過設定的情況）"
       },
       {
         "id": "B",
-        "text": "阻擋推送並說明原因，貢獻者須移除敏感內容後重推"
+        "text": "推送完成並建立開啟中的警示（以 I'll fix it later 繞過的情況）"
       },
       {
         "id": "C",
-        "text": "自動改寫 commit，移除 secret 後替貢獻者完成推送"
+        "text": "推送完成，而且完全不觸發 push protection（豁免者的情況）"
       },
       {
         "id": "D",
-        "text": "推送照常完成，只寄一封通知信給組織擁有者"
+        "text": "推送被阻擋，待審查者核准繞過請求後放行（委派繞過的情況）"
       }
     ],
     "explanation": "Push protection 在推送當下攔截：阻擋推送、說明原因，要求貢獻者檢視被標記的內容、移除敏感資訊後重新推送。",
-    "trap": "把 push protection 想成「事後警示」會選到允許推送的選項；它的價值在於 secret 還沒進入 repository 就被擋下。",
+    "trap": "後三個選項都是真實的 push protection 結果，但各自對應繞過、豁免或委派審查；題幹明說沒有任何繞過設定，才會得到預設的阻擋行為。",
     "domain": "設定與使用 Secret Protection",
     "difficulty": "基礎",
     "keywords": ["D2", "D2-O2"]
@@ -175,27 +175,31 @@
     "objectiveIds": ["D2-O2"],
     "sourceIds": ["GH500-DOC-02"],
     "type": "multiple",
-    "answer": ["A", "B", "D"],
+    "answer": ["A", "C", "E"],
     "question": "下列哪些推送途徑的 push protection 也涵蓋 AI 偵測的 secret？（選 3 項）",
     "options": [
       {
         "id": "A",
-        "text": "從命令列推送 commit"
+        "text": "從命令列推送 commit 到遠端"
       },
       {
         "id": "B",
-        "text": "在網頁介面提交變更"
+        "text": "透過 REST API 提交變更內容"
       },
       {
         "id": "C",
-        "text": "透過 REST API 提交內容"
+        "text": "在 GitHub 網頁介面提交變更"
       },
       {
         "id": "D",
-        "text": "把檔案上傳到 GitHub"
+        "text": "透過 GitHub MCP server 操作"
+      },
+      {
+        "id": "E",
+        "text": "把檔案上傳到 GitHub 的 repository"
       }
     ],
-    "explanation": "命令列推送、網頁介面提交與檔案上傳支援全部樣式類型，包含 AI 偵測的 secret；REST API 只支援 partner、generic 與 custom 樣式。",
+    "explanation": "命令列推送、網頁介面提交與檔案上傳支援全部樣式類型，包含 AI 偵測的 secret；REST API 與 GitHub MCP server（僅限公開 repository）只支援 partner、generic 與 custom 樣式。",
     "trap": "「同樣是 push protection」不代表每個途徑的涵蓋範圍一樣；評估防護時要逐一核對途徑與樣式類型。",
     "domain": "設定與使用 Secret Protection",
     "difficulty": "進階",
@@ -209,28 +213,28 @@
     "objectiveIds": ["D2-O3"],
     "sourceIds": ["GH500-DOC-01", "GH500-DOC-03"],
     "type": "single",
-    "answer": "D",
-    "question": "發現一個 API 金鑰留在舊的 commit 中，官方建議的處理優先順序是什麼？",
+    "answer": "A",
+    "question": "團隊發現三個月前的 commit 含有一個仍然有效、且正式環境正在使用的雲端 API 金鑰。處理這則警示的首要動作是什麼？",
     "options": [
       {
         "id": "A",
-        "text": "先改寫 Git 歷史，確認乾淨之後才開始處理金鑰本身"
+        "text": "撤銷或輪替金鑰並更新使用它的服務（金鑰仍有效的情況）"
       },
       {
         "id": "B",
-        "text": "直接關閉警示，因為舊的 commit 已無法被利用"
+        "text": "以 used in tests 關閉警示（金鑰只用於測試的情況）"
       },
       {
         "id": "C",
-        "text": "等待 GitHub 自動撤銷所有類型的憑證"
+        "text": "以 false positive 關閉警示（偵測結果不是真的 secret 的情況）"
       },
       {
         "id": "D",
-        "text": "視為已外洩，立即撤銷或輪替，通常不必先改寫歷史"
+        "text": "通報 GitHub 請其撤銷（私有 repository 中的 GitHub 權杖的情況）"
       }
     ],
     "explanation": "已提交的 secret 應視為已外洩。憑證一旦撤銷或輪替，改寫 Git 歷史通常不必要，而且耗時，所以先讓憑證失效。",
-    "trap": "清乾淨歷史看起來比較徹底，但風險來自憑證仍有效；憑證沒失效前，歷史再乾淨也沒有降低風險。",
+    "trap": "每個選項都是官方文件中真實存在的處理方式，但適用情境不同；題幹寫明金鑰仍有效且正在使用，所以首要動作是讓它失效。",
     "domain": "設定與使用 Secret Protection",
     "difficulty": "基礎",
     "keywords": ["D2", "D2-O3"]
@@ -259,24 +263,24 @@
     "objectiveIds": ["D2-O3"],
     "sourceIds": ["GH500-DOC-03"],
     "type": "single",
-    "answer": "A",
+    "answer": "C",
     "question": "通報私有 repository 中外洩的 GitHub 權杖前，官方提醒應先考慮什麼？",
     "options": [
       {
         "id": "A",
-        "text": "先輪替該權杖，以免撤銷後讓依賴它的工作流程中斷"
+        "text": "先通報，再輪替權杖，讓撤銷與服務更新同時完成"
       },
       {
         "id": "B",
-        "text": "先關閉警示，避免同一個權杖重複通知多位管理員"
+        "text": "先關閉警示，再通報，避免同一個權杖重複通知"
       },
       {
         "id": "C",
-        "text": "先停用 push protection，避免通報操作被攔截下來"
+        "text": "先輪替權杖，再通報，避免撤銷後工作流程中斷"
       },
       {
         "id": "D",
-        "text": "先刪除整個 repository，確保權杖不再被任何人讀取"
+        "text": "先把警示指派給同事，再通報，由對方決定是否輪替"
       }
     ],
     "explanation": "撤銷是單向動作：權杖一旦被撤銷，仍在使用它的服務就會失敗。先輪替並更新依賴它的服務，再通報，可以避免工作流程中斷。",
@@ -293,28 +297,28 @@
     "objectiveIds": ["D2-O4"],
     "sourceIds": ["GH500-DOC-04", "GH500-DOC-02"],
     "type": "single",
-    "answer": "C",
-    "question": "委派繞過中，「exemption（豁免）」與「bypass privileges（繞過權限）」的差別是什麼？",
+    "answer": "B",
+    "question": "組織要讓遷移機器人帳號的推送完全不被 push protection 阻擋。應該授予哪一種設定？",
     "options": [
       {
         "id": "A",
-        "text": "豁免只能用於人類使用者，繞過權限只能用於自動化帳號"
+        "text": "Bypass privileges 繞過權限名單"
       },
       {
         "id": "B",
-        "text": "兩者完全相同，只是在不同的設定頁面使用不同名稱"
+        "text": "Exemption 豁免者名單設定"
       },
       {
         "id": "C",
-        "text": "豁免者的推送完全不觸發保護；有繞過權限者被擋時才自行繞過"
+        "text": "Delegated alert dismissal"
       },
       {
         "id": "D",
-        "text": "豁免者必須逐次送審，繞過權限者則可以任意推送內容"
+        "text": "Custom pattern 自訂偵測樣式"
       }
     ],
-    "explanation": "Exemption 讓指定對象的推送完全不觸發 push protection，官方建議留給可信的自動化；bypass privileges 則是在被阻擋時可以自行繞過，並能審查他人的繞過請求。",
-    "trap": "「繞過」字面上聽起來比「豁免」寬鬆，實際上豁免才是完全不經過檢查，兩者的風險程度要分開看。",
+    "explanation": "Exemption 讓指定對象的推送完全不觸發 push protection，官方建議留給遷移機器人或服務帳號這類可信的自動化；bypass privileges 則是被阻擋時可以自行繞過，並能審查他人的繞過請求。",
+    "trap": "繞過權限聽起來比較寬鬆，但持有者仍會被阻擋，只是被擋時可以自行繞過；只有豁免才是完全不觸發。",
     "domain": "設定與使用 Secret Protection",
     "difficulty": "中等",
     "keywords": ["D2", "D2-O4"]
@@ -343,24 +347,24 @@
     "objectiveIds": ["D2-O4"],
     "sourceIds": ["GH500-DOC-05"],
     "type": "multiple",
-    "answer": ["B", "C"],
+    "answer": ["B", "D"],
     "question": "關於自訂樣式的「Save and dry run」，下列哪些敘述正確？（選 2 項）",
     "options": [
       {
         "id": "A",
-        "text": "組織層級的 dry run 只能在單一 repository 上執行"
+        "text": "dry run 會建立警示，供團隊檢視結果"
       },
       {
         "id": "B",
-        "text": "dry run 會找出符合項，但不會建立任何警示"
+        "text": "dry run 找出符合項，但不會建立警示"
       },
       {
         "id": "C",
-        "text": "結果最多顯示 1,000 筆，可檢視誤判後調整再跑"
+        "text": "dry run 的結果最多顯示 100 筆"
       },
       {
         "id": "D",
-        "text": "樣式必須先發佈，才能執行第一次 dry run"
+        "text": "dry run 的結果最多顯示 1,000 筆"
       }
     ],
     "explanation": "Dry run 找出符合項但不建立警示，結果最多顯示 1,000 筆，讓你檢視誤判、調整樣式後再跑；確認後才發佈。組織層級可涵蓋全部 repository，或最多 10 個選定的 repository。",
@@ -378,29 +382,2129 @@
     "sourceIds": ["GH500-DOC-05"],
     "type": "single",
     "answer": "B",
-    "question": "要讓新建立的自訂樣式也被 push protection 阻擋，正確順序是什麼？",
+    "question": "在組織層級對自訂樣式執行 dry run，可以選擇的範圍是什麼？",
     "options": [
       {
         "id": "A",
-        "text": "先啟用 push protection，再建立並發佈自訂樣式"
+        "text": "全部 repository，或最多 5 個選定的 repository"
       },
       {
         "id": "B",
-        "text": "先 dry run 並發佈樣式，再對該樣式啟用 push protection"
+        "text": "全部 repository，或最多 10 個選定的 repository"
       },
       {
         "id": "C",
-        "text": "只要建立樣式，push protection 就會自動涵蓋它"
+        "text": "全部 repository，或最多 20 個選定的 repository"
       },
       {
         "id": "D",
-        "text": "自訂樣式不支援 push protection，只能事後產生警示"
+        "text": "全部 repository，或最多 50 個選定的 repository"
       }
     ],
-    "explanation": "自訂樣式要先經 dry run、確認後發佈，發佈之後才會出現對該樣式啟用 push protection 的選項；在組織層級，它只對已啟用 push protection 的 repository 生效。",
-    "trap": "把「建立」與「發佈」視為同一步，會漏掉 dry run 檢查誤判的機會，也找不到啟用 push protection 的選項。",
+    "explanation": "組織層級的 dry run 可以涵蓋全部 repository，或最多 10 個選定的 repository；企業層級則是最多 10 個選定、且你擁有管理權限的 repository。",
+    "trap": "兩個層級都有「10 個」的上限，但企業層級還要求對每個 repository 有管理權限；把兩個層級的規則混在一起，會選到錯誤的上限或遺漏權限條件。",
     "domain": "設定與使用 Secret Protection",
-    "difficulty": "進階",
+    "difficulty": "中等",
     "keywords": ["D2", "D2-O4"]
+  },
+  {
+    "id": "GH500-015",
+    "exam": "GH-500",
+    "number": 15,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O1"],
+    "sourceIds": ["GH500-DOC-07"],
+    "type": "single",
+    "answer": "D",
+    "question": "下列哪一項功能在所有 GitHub 方案都能使用，不需要購買 Secret Protection 或 Code Security？",
+    "options": [
+      {
+        "id": "A",
+        "text": "Security campaigns，集中修復累積的警示"
+      },
+      {
+        "id": "B",
+        "text": "Custom patterns，自訂 secret 偵測樣式"
+      },
+      {
+        "id": "C",
+        "text": "Delegated bypass，委派繞過 push protection"
+      },
+      {
+        "id": "D",
+        "text": "Dependabot alerts 與 security updates"
+      }
+    ],
+    "explanation": "Dependabot alerts 與 security updates 屬於所有方案都能使用的功能。Security campaigns 需要 Code Security，custom patterns 與 delegated bypass 則需要 Secret Protection。",
+    "trap": "其他選項聽起來都像「基本的警示功能」；判斷時要回到功能表，看它列在哪一層，而不是看名稱像不像基礎功能。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "基礎",
+    "keywords": ["D1", "D1-O1"]
+  },
+  {
+    "id": "GH500-016",
+    "exam": "GH-500",
+    "number": 16,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O1"],
+    "sourceIds": ["GH500-DOC-08"],
+    "type": "true-false",
+    "answer": false,
+    "question": "Security overview 的各檢視顯示的是組織內所有分支的資料，而不只是預設分支。",
+    "explanation": "官方說明所有檢視顯示的都是各 repository 預設分支的資訊與指標。",
+    "trap": "把 security overview 當成全分支的彙總，會高估或低估實際風險；其他分支上的警示不在這些指標內。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "基礎",
+    "keywords": ["D1", "D1-O1"]
+  },
+  {
+    "id": "GH500-017",
+    "exam": "GH-500",
+    "number": 17,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O1"],
+    "sourceIds": ["GH500-DOC-08"],
+    "type": "single",
+    "answer": "C",
+    "question": "管理員在 security overview 看到某個 repository 沒有任何警示，準備回報「這個 repository 沒有弱點」。想確認這個結論是否可靠，下一步最合適的做法是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "用 Campaigns 檢視建立新的修復活動來追蹤"
+      },
+      {
+        "id": "B",
+        "text": "用 Assessments 檢視執行免費的 secret 風險評估"
+      },
+      {
+        "id": "C",
+        "text": "用 Coverage 檢視確認這個 repository 是否已啟用安全功能"
+      },
+      {
+        "id": "D",
+        "text": "用 Enablement 檢視比較各團隊採用安全功能的速度與進度"
+      }
+    ],
+    "explanation": "Security overview 顯示的是各功能產生的有效警示。沒有警示，可能是真的沒有問題，也可能是弱點尚未被偵測，或該功能在這個 repository 根本沒啟用；Coverage 檢視用來評估各 repository 採用安全功能的情況。",
+    "trap": "四個都是真實的檢視，但只有 Coverage 回答「這個 repository 有沒有啟用偵測」；「沒有警示」本身不能證明沒有風險。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O1"]
+  },
+  {
+    "id": "GH500-018",
+    "exam": "GH-500",
+    "number": 18,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O1"],
+    "sourceIds": ["GH500-DOC-07"],
+    "type": "multiple",
+    "answer": ["A", "C"],
+    "question": "下列哪些屬於 Secret Protection 提供的功能？（選 2 項）",
+    "options": [
+      {
+        "id": "A",
+        "text": "Custom patterns，自訂 secret 偵測樣式"
+      },
+      {
+        "id": "B",
+        "text": "Dependency review，檢視相依性變更"
+      },
+      {
+        "id": "C",
+        "text": "AI 偵測的 secret，找出無固定格式的密碼"
+      },
+      {
+        "id": "D",
+        "text": "CodeQL CLI，在本機執行程式碼分析"
+      }
+    ],
+    "explanation": "Custom patterns 與 AI 偵測的 secret 屬於 Secret Protection。Dependency review 與 CodeQL CLI 屬於 Code Security。",
+    "trap": "兩個套件都包含「掃描」類功能，名稱容易混淆；Secret Protection 管憑證，Code Security 管程式碼與相依性。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O1"]
+  },
+  {
+    "id": "GH500-019",
+    "exam": "GH-500",
+    "number": 19,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O2"],
+    "sourceIds": ["GH500-DOC-07", "GH500-DOC-12"],
+    "type": "single",
+    "answer": "B",
+    "question": "團隊想在合併 pull request 之前，了解其中相依性變更的安全影響。應該使用哪個功能？",
+    "options": [
+      {
+        "id": "A",
+        "text": "Dependabot version updates，依排程更新相依性"
+      },
+      {
+        "id": "B",
+        "text": "Dependency review，檢視新增與更新的相依性"
+      },
+      {
+        "id": "C",
+        "text": "Immutable releases，禁止發布後修改 release"
+      },
+      {
+        "id": "D",
+        "text": "Security campaigns，集中修復累積的警示"
+      }
+    ],
+    "explanation": "Dependency review 在 pull request 中顯示新增、移除或更新了哪些相依性，以及這些變更的安全影響，讓審查者在合併前判斷是否接受。",
+    "trap": "Dependabot 也和相依性有關，但它在合併後依警示或排程開 pull request，不是在審查變更時顯示影響。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "基礎",
+    "keywords": ["D1", "D1-O2"]
+  },
+  {
+    "id": "GH500-020",
+    "exam": "GH-500",
+    "number": 20,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O2"],
+    "sourceIds": ["GH500-DOC-09"],
+    "type": "single",
+    "answer": "A",
+    "question": "安全主管要把數百個 code scanning 警示分給開發者，並由一位聯絡人追蹤進度。最適合的功能是？",
+    "options": [
+      {
+        "id": "A",
+        "text": "Security campaign，分組警示並指派負責人"
+      },
+      {
+        "id": "B",
+        "text": "Delegated bypass，限制誰可以繞過保護"
+      },
+      {
+        "id": "C",
+        "text": "Custom pattern，增加新的偵測樣式與規則"
+      },
+      {
+        "id": "D",
+        "text": "Artifact attestation，證明建置來源"
+      }
+    ],
+    "explanation": "Security campaign 把一批警示分組分享給開發者，每個 campaign 有具名聯絡人，code scanning 警示還會自動觸發 Copilot Autofix 建議修復。",
+    "trap": "委派繞過與警示關閉治理管的是「誰能放行」，不是「怎麼把累積的警示分派出去修復」。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O2"]
+  },
+  {
+    "id": "GH500-021",
+    "exam": "GH-500",
+    "number": 21,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O2"],
+    "sourceIds": ["GH500-DOC-07"],
+    "type": "multiple",
+    "answer": ["A", "C", "E"],
+    "question": "下列哪些功能在變更進入預設分支或 repository 之前運作？（選 3 項）",
+    "options": [
+      {
+        "id": "A",
+        "text": "Dependency review，在 PR 檢視相依性變更"
+      },
+      {
+        "id": "B",
+        "text": "Security campaigns，事後修復累積的警示"
+      },
+      {
+        "id": "C",
+        "text": "Push protection，在推送時阻擋 secret"
+      },
+      {
+        "id": "D",
+        "text": "Dependabot security updates，修補已知弱點"
+      },
+      {
+        "id": "E",
+        "text": "Code scanning，檢查新增或修改的程式碼"
+      }
+    ],
+    "explanation": "Push protection 在推送時攔截，code scanning 讓你在合併進預設分支之前修復問題，dependency review 在合併前顯示相依性變更的影響。Security campaigns 則是對已存在的警示做大規模修復。",
+    "trap": "只看到「都屬於安全功能」就全選；題目問的是發生時間點，事後處理累積警示的功能不屬於預防導向。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "進階",
+    "keywords": ["D1", "D1-O2"]
+  },
+  {
+    "id": "GH500-022",
+    "exam": "GH-500",
+    "number": 22,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O3"],
+    "sourceIds": ["GH500-DOC-12"],
+    "type": "single",
+    "answer": "C",
+    "question": "某個 repository 已啟用 Dependabot alerts。一週內沒有人修改過 manifest 或 lockfile，今天卻出現一個新的 Dependabot 警示。最可能的原因是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "有人新增了一個相依性，使 dependency graph 變動"
+      },
+      {
+        "id": "B",
+        "text": "Dependabot version updates 依排程開了更新 pull request"
+      },
+      {
+        "id": "C",
+        "text": "GitHub Advisory Database 新增了一則影響其相依性的 advisory"
+      },
+      {
+        "id": "D",
+        "text": "管理員在設定頁面手動觸發了一次 Dependabot 掃描"
+      }
+    ],
+    "explanation": "Dependabot 在兩種情況下產生警示：資料庫新增 advisory，或 repository 的 dependency graph 變動。題幹說明相依性檔案沒有變，所以只剩新的 advisory 會造成新警示。",
+    "trap": "相依性變動也是真實的觸發來源，但題幹已排除；程式碼沒改，警示仍可能因為外部資料庫更新而出現。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O3"]
+  },
+  {
+    "id": "GH500-023",
+    "exam": "GH-500",
+    "number": 23,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O3"],
+    "sourceIds": ["GH500-DOC-11"],
+    "type": "single",
+    "answer": "D",
+    "question": "組織已啟用 delegated alert dismissal。一位只有寫入權限的開發者認為某個 code scanning 警示是誤報，想關閉它。接下來的流程是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "直接關閉警示（未啟用 delegated alert dismissal 時的情況）"
+      },
+      {
+        "id": "B",
+        "text": "把警示指派給有寫入權限的同事（警示指派功能）"
+      },
+      {
+        "id": "C",
+        "text": "提出繞過請求，由繞過名單上的審查者核准（委派繞過 push protection）"
+      },
+      {
+        "id": "D",
+        "text": "提出關閉請求，由擁有者或 security manager 核准或拒絕"
+      }
+    ],
+    "explanation": "啟用後，有寫入權限的使用者必須提出關閉請求；組織擁有者與 security manager 可以核准或拒絕，也能自己直接關閉。核准就關閉警示，拒絕則保持開啟。",
+    "trap": "前三個選項都是真實的行為，但分別屬於未啟用治理、警示指派與 push protection 的委派繞過；啟用 delegated alert dismissal 後，關閉才需要請求與審查。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O3"]
+  },
+  {
+    "id": "GH500-024",
+    "exam": "GH-500",
+    "number": 24,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O3"],
+    "sourceIds": ["GH500-DOC-08"],
+    "type": "true-false",
+    "answer": true,
+    "question": "把 repository 封存之後，其中仍開啟的警示會自動被關閉。",
+    "explanation": "官方在說明 security overview 的資料行為時指出，封存 repository 後，其中開啟的警示會自動關閉。",
+    "trap": "容易以為封存只是唯讀標記，不影響警示；它會改變警示狀態，進而影響儀表板的歷史數據解讀。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "基礎",
+    "keywords": ["D1", "D1-O3"]
+  },
+  {
+    "id": "GH500-025",
+    "exam": "GH-500",
+    "number": 25,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O3"],
+    "sourceIds": ["GH500-DOC-08"],
+    "type": "single",
+    "answer": "B",
+    "question": "稽核人員需要一份不會隨時間改變的去年第三季警示處置資料。官方建議的來源是？",
+    "options": [
+      {
+        "id": "A",
+        "text": "Security overview 的儀表板畫面截圖"
+      },
+      {
+        "id": "B",
+        "text": "稽核日誌（audit log）中的事件紀錄"
+      },
+      {
+        "id": "C",
+        "text": "Coverage 檢視中的啟用率統計"
+      },
+      {
+        "id": "D",
+        "text": "Dependabot 警示清單的目前狀態"
+      }
+    ],
+    "explanation": "Security overview 儀表板依 repository 目前狀態與警示歷史計算，同一段期間在不同時間查看可能得到不同結果；需要一致資料做合規或稽核時，官方建議改用稽核日誌。",
+    "trap": "截圖看起來是固定證據，但它反映的是當下計算結果；來源本身會變，截圖就不是可重現的稽核依據。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "進階",
+    "keywords": ["D1", "D1-O3"]
+  },
+  {
+    "id": "GH500-026",
+    "exam": "GH-500",
+    "number": 26,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O4"],
+    "sourceIds": ["GH500-DOC-10"],
+    "type": "single",
+    "answer": "D",
+    "question": "資安團隊需要檢視組織內所有安全警示並設定安全功能，但組織不想授予他們所有 repository 的管理員權限。應該怎麼做？",
+    "options": [
+      {
+        "id": "A",
+        "text": "由企業擁有者把資安團隊加入企業擁有者名單"
+      },
+      {
+        "id": "B",
+        "text": "由 repository 管理員在每個 repository 授予團隊 admin 權限"
+      },
+      {
+        "id": "C",
+        "text": "由組織擁有者建立一個只含稽核日誌權限的自訂角色"
+      },
+      {
+        "id": "D",
+        "text": "由組織擁有者把 security manager 角色指派給資安團隊"
+      }
+    ],
+    "explanation": "Security manager 是組織層級的角色，由組織擁有者指派給任何成員或團隊。它包含所有 repository 的讀取權限、所有安全警示的寫入權限，以及設定安全功能的能力，但不需要授予 admin 權限。",
+    "trap": "前三個做法都能給出某種權限，但不是過度授權，就是缺少檢視警示與設定功能的能力；security manager 正是為「最小必要權限」設計的角色。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "基礎",
+    "keywords": ["D1", "D1-O4"]
+  },
+  {
+    "id": "GH500-027",
+    "exam": "GH-500",
+    "number": 27,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O4"],
+    "sourceIds": ["GH500-DOC-12"],
+    "type": "multiple",
+    "answer": ["A", "C"],
+    "question": "關於 dependency review，下列哪些敘述正確？（選 2 項）",
+    "options": [
+      {
+        "id": "A",
+        "text": "顯示 pull request 中相依性的變動"
+      },
+      {
+        "id": "B",
+        "text": "在合併之後才顯示相依性的變動內容"
+      },
+      {
+        "id": "C",
+        "text": "需要先啟用 dependency graph 才能使用"
+      },
+      {
+        "id": "D",
+        "text": "不需要啟用 dependency graph 就能使用"
+      }
+    ],
+    "explanation": "Dependency review 在 pull request 中顯示相依性的變更與安全影響，並依賴 dependency graph，所以需要先啟用。私有 repository 還需要組織擁有 Code Security 或 Advanced Security 授權。",
+    "trap": "「公開 repository 預設可用」容易被擴大成「所有 repository 免費」；私有 repository 有授權條件。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O4"]
+  },
+  {
+    "id": "GH500-028",
+    "exam": "GH-500",
+    "number": 28,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O4"],
+    "sourceIds": ["GH500-DOC-12"],
+    "type": "single",
+    "answer": "B",
+    "question": "團隊想讓使用者能驗證：他們用 GitHub Actions 建置的軟體，是由哪份原始碼與哪次工作流程產生的。應該使用哪個機制？",
+    "options": [
+      {
+        "id": "A",
+        "text": "Immutable releases 功能"
+      },
+      {
+        "id": "B",
+        "text": "Artifact attestations 功能"
+      },
+      {
+        "id": "C",
+        "text": "Dependency review 功能"
+      },
+      {
+        "id": "D",
+        "text": "Dependabot version updates 功能"
+      }
+    ],
+    "explanation": "Artifact attestations 是經密碼學簽署的聲明，說明建置的來源（原始碼與工作流程）或相關的 SBOM。它不保證軟體安全，只提供資訊讓你更有把握軟體沒有被竄改。",
+    "trap": "Immutable releases 同樣和發布完整性有關，但它禁止發布後修改 release，並不說明軟體是怎麼建置出來的。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "進階",
+    "keywords": ["D1", "D1-O4"]
+  },
+  {
+    "id": "GH500-029",
+    "exam": "GH-500",
+    "number": 29,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O1"],
+    "sourceIds": ["GH500-DOC-17"],
+    "type": "single",
+    "answer": "A",
+    "question": "匯出的 SBOM 包含下列哪項資訊？",
+    "options": [
+      {
+        "id": "A",
+        "text": "相依性的間接路徑與授權資訊"
+      },
+      {
+        "id": "B",
+        "text": "依賴此專案的其他專案清單"
+      },
+      {
+        "id": "C",
+        "text": "此專案最近的 workflow 執行紀錄"
+      },
+      {
+        "id": "D",
+        "text": "此專案貢獻者的提交統計"
+      }
+    ],
+    "explanation": "SBOM 包含相依性、版本、套件識別碼、授權、間接相依性路徑與著作權資訊；不包含依賴你的專案（dependents）。",
+    "trap": "SBOM 描述你依賴什麼，不描述誰依賴你。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "基礎",
+    "keywords": ["D3", "D3-O1"]
+  },
+  {
+    "id": "GH500-030",
+    "exam": "GH-500",
+    "number": 30,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O1"],
+    "sourceIds": ["GH500-DOC-16"],
+    "type": "true-false",
+    "answer": false,
+    "question": "Dependency graph 會為私有 repository 列出 dependents（依賴它的其他 repository）。",
+    "explanation": "Dependents 只在公開 repository 列出，私有 repository 不回報這項資料。",
+    "trap": "私有 repository 同樣能使用 dependency graph 檢視自己的 dependencies，但 dependents 只對公開 repository 提供。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "基礎",
+    "keywords": ["D3", "D3-O1"]
+  },
+  {
+    "id": "GH500-031",
+    "exam": "GH-500",
+    "number": 31,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O1"],
+    "sourceIds": ["GH500-DOC-17"],
+    "type": "single",
+    "answer": "C",
+    "question": "用 REST API 請求產生 SBOM 後，回應為 202 時應該怎麼做？",
+    "options": [
+      {
+        "id": "A",
+        "text": "立即從回應內容讀取 SBOM"
+      },
+      {
+        "id": "B",
+        "text": "重新送出一次產生請求"
+      },
+      {
+        "id": "C",
+        "text": "輪詢 sbom_url 直到回應為 302"
+      },
+      {
+        "id": "D",
+        "text": "改按介面上的 Export SBOM"
+      }
+    ],
+    "explanation": "請求產生後要輪詢 sbom_url；回應為 202 表示尚未完成，回應為 302 時依重新導向下載完成的 SBOM。",
+    "trap": "202 代表已受理、尚未完成，不是結果。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O1"]
+  },
+  {
+    "id": "GH500-032",
+    "exam": "GH-500",
+    "number": 32,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O2"],
+    "sourceIds": ["GH500-DOC-13"],
+    "type": "multiple",
+    "answer": ["A", "B", "C", "E"],
+    "question": "官方文件建議在排定 Dependabot 警示優先順序時，一併參考哪些項目？（選 4 項）",
+    "options": [
+      {
+        "id": "A",
+        "text": "弱點的嚴重度等級"
+      },
+      {
+        "id": "B",
+        "text": "EPSS 利用預測分數"
+      },
+      {
+        "id": "C",
+        "text": "相依性的範圍（scope）"
+      },
+      {
+        "id": "D",
+        "text": "相依性的授權類型"
+      },
+      {
+        "id": "E",
+        "text": "相依性的直接或間接關係"
+      }
+    ],
+    "explanation": "文件建議合併參考嚴重度、EPSS 分數、相依性的範圍與相依性的關係；另可選用 reachability analysis。",
+    "trap": "授權類型屬於 dependency review 與授權合規的判斷項目，不是警示優先順序的依據。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O2"]
+  },
+  {
+    "id": "GH500-033",
+    "exam": "GH-500",
+    "number": 33,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O2"],
+    "sourceIds": ["GH500-DOC-20", "GH500-DOC-14"],
+    "type": "single",
+    "answer": "B",
+    "question": "團隊只想讓 Dependabot 為部分警示開 pull request，官方建議的做法是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "在 dependabot.yml 設定要處理的嚴重度"
+      },
+      {
+        "id": "B",
+        "text": "停用 security updates 並建立 auto-triage 規則"
+      },
+      {
+        "id": "C",
+        "text": "啟用 grouped security updates 並限制目錄"
+      },
+      {
+        "id": "D",
+        "text": "啟用 version updates 並調整 cooldown 天數"
+      }
+    ],
+    "explanation": "啟用 security updates 後會為每個有可用修補的開啟警示開 pull request；要自行挑選，官方建議停用它並建立 auto-triage 規則。dependabot.yml 與警示之間沒有互動。",
+    "trap": "dependabot.yml 的設定看似能篩選，但它與 Dependabot 警示沒有互動。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "進階",
+    "keywords": ["D3", "D3-O2"]
+  },
+  {
+    "id": "GH500-034",
+    "exam": "GH-500",
+    "number": 34,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O2"],
+    "sourceIds": ["GH500-DOC-14"],
+    "type": "true-false",
+    "answer": false,
+    "question": "Dismiss package malware alerts 這條 GitHub 預設規則，在公開 repository 預設啟用。",
+    "explanation": "Dismiss package malware alerts 預設停用，但可為任何使用 Dependabot malware alerts 的 repository 啟用；預設啟用的是 Dismiss low impact issues for development-scoped dependencies（公開 repository）。",
+    "trap": "兩條預設規則容易互換；惡意套件警示被自動關閉有風險，所以預設停用。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O2"]
+  },
+  {
+    "id": "GH500-035",
+    "exam": "GH-500",
+    "number": 35,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O2"],
+    "sourceIds": ["GH500-DOC-13"],
+    "type": "single",
+    "answer": "D",
+    "question": "首次啟用 Dependabot alerts 時，對 repository 中已存在的弱點，GitHub 會如何通知？",
+    "options": [
+      {
+        "id": "A",
+        "text": "為每個既有弱點各寄一封通知"
+      },
+      {
+        "id": "B",
+        "text": "寄一封彙總所有既有弱點的通知"
+      },
+      {
+        "id": "C",
+        "text": "只針對 critical 的既有弱點通知"
+      },
+      {
+        "id": "D",
+        "text": "不通知既有弱點，只通知啟用後新發現的"
+      }
+    ],
+    "explanation": "首次啟用時，GitHub 不會為已找到的弱點寄通知，只會通知啟用後新發現的相依性弱點（視通知偏好而定）。",
+    "trap": "啟用當下的大量既有警示不會引發通知，但警示仍然存在於清單中。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O2"]
+  },
+  {
+    "id": "GH500-036",
+    "exam": "GH-500",
+    "number": 36,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O2"],
+    "sourceIds": ["GH500-DOC-14", "GH500-DOC-22"],
+    "type": "single",
+    "answer": "A",
+    "question": "某警示被 auto-triage 規則自動關閉，之後相依性的範圍從 development 改成 production。這則警示會如何？",
+    "options": [
+      {
+        "id": "A",
+        "text": "可能被自動重新開啟"
+      },
+      {
+        "id": "B",
+        "text": "維持關閉，規則已套用過"
+      },
+      {
+        "id": "C",
+        "text": "會被系統永久刪除"
+      },
+      {
+        "id": "D",
+        "text": "需手動重新啟用規則才開"
+      }
+    ],
+    "explanation": "自動關閉的警示在中繼資料改變時可以被自動重新開啟，例如相依性範圍從 development 改成 production，或 GitHub 修改 advisory 的某些中繼資料。",
+    "trap": "自動關閉不是永久：它仍可查詢、可手動重新開啟，也可能因中繼資料改變而自動重開。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "進階",
+    "keywords": ["D3", "D3-O2"]
+  },
+  {
+    "id": "GH500-037",
+    "exam": "GH-500",
+    "number": 37,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O3"],
+    "sourceIds": ["GH500-DOC-15"],
+    "type": "true-false",
+    "answer": false,
+    "question": "Dependency review action 預設只有在發現 critical 嚴重度的弱點時，檢查才會失敗。",
+    "explanation": "預設情況下，只要發現有弱點的套件，檢查就會失敗；fail-on-severity 是用來設定達到哪個嚴重度才失敗的選用設定。",
+    "trap": "嚴重度門檻要自己設定，預設並不是只看 critical。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O3"]
+  },
+  {
+    "id": "GH500-038",
+    "exam": "GH-500",
+    "number": 38,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O3"],
+    "sourceIds": ["GH500-DOC-18"],
+    "type": "multiple",
+    "answer": ["A", "B", "D"],
+    "question": "下列哪些是 dependency review action 官方範例中可設定的選項？（選 3 項）",
+    "options": [
+      {
+        "id": "A",
+        "text": "fail-on-severity"
+      },
+      {
+        "id": "B",
+        "text": "fail-on-scopes"
+      },
+      {
+        "id": "C",
+        "text": "fail-on-age"
+      },
+      {
+        "id": "D",
+        "text": "allow-ghsas"
+      },
+      {
+        "id": "E",
+        "text": "allow-registries"
+      }
+    ],
+    "explanation": "範例中的選項包含 fail-on-severity、allow-licenses 或 deny-licenses（只能擇一）、allow-ghsas 與 fail-on-scopes。",
+    "trap": "選項名稱相近，只有範例中出現的才算；allow-licenses 與 deny-licenses 不能同時使用。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "進階",
+    "keywords": ["D3", "D3-O3"]
+  },
+  {
+    "id": "GH500-039",
+    "exam": "GH-500",
+    "number": 39,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O3"],
+    "sourceIds": ["GH500-DOC-24"],
+    "type": "single",
+    "answer": "C",
+    "question": "組織要讓所有 repository 的 pull request 必須通過 dependency review 才能合併，應該設定什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "組織層級的 Dependabot alerts 設定"
+      },
+      {
+        "id": "B",
+        "text": "組織層級的 webhook 與權限設定"
+      },
+      {
+        "id": "C",
+        "text": "branch ruleset 要求 workflow 通過才合併"
+      },
+      {
+        "id": "D",
+        "text": "CODEOWNERS 要求安全團隊審查"
+      }
+    ],
+    "explanation": "先在某個 repository 設定好 dependency review action，再建立 branch ruleset，啟用 Require workflows to pass before merging，並指定該 workflow。",
+    "trap": "Dependabot 設定管理警示與更新，不是合併前的強制檢查。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O3"]
+  },
+  {
+    "id": "GH500-040",
+    "exam": "GH-500",
+    "number": 40,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O3"],
+    "sourceIds": ["GH500-DOC-23"],
+    "type": "single",
+    "answer": "C",
+    "question": "Dependabot version updates 預設的 cooldown 是多久？",
+    "options": [
+      {
+        "id": "A",
+        "text": "1 天"
+      },
+      {
+        "id": "B",
+        "text": "7 天"
+      },
+      {
+        "id": "C",
+        "text": "3 天"
+      },
+      {
+        "id": "D",
+        "text": "14 天"
+      }
+    ],
+    "explanation": "預設有 3 天的 cooldown，新版本發布後 3 天才會被考慮；此預設不適用於 security updates，可用 cooldown 選項自訂。",
+    "trap": "預設 cooldown 只適用於 version updates，security updates 不受它延遲。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "基礎",
+    "keywords": ["D3", "D3-O3"]
+  },
+  {
+    "id": "GH500-041",
+    "exam": "GH-500",
+    "number": 41,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O4"],
+    "sourceIds": ["GH500-DOC-13"],
+    "type": "single",
+    "answer": "B",
+    "question": "GitHub Team 組織沒有 Code Security 或 Advanced Security 授權，能否指派公開 repository 的 Dependabot 警示？",
+    "options": [
+      {
+        "id": "A",
+        "text": "可以，公開 repository 不受授權限制"
+      },
+      {
+        "id": "B",
+        "text": "不可以，指派需要授權，公開也一樣"
+      },
+      {
+        "id": "C",
+        "text": "可以，但只能指派給人而非 agent"
+      },
+      {
+        "id": "D",
+        "text": "可以，但要先啟用 security updates"
+      }
+    ],
+    "explanation": "指派 Dependabot 警示需要 Code Security 或 Advanced Security 授權，官方明說包含公開 repository。",
+    "trap": "公開 repository 的許多功能免費，但警示指派不在其中。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "進階",
+    "keywords": ["D3", "D3-O4"]
+  },
+  {
+    "id": "GH500-042",
+    "exam": "GH-500",
+    "number": 42,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O4"],
+    "sourceIds": ["GH500-DOC-13"],
+    "type": "single",
+    "answer": "D",
+    "question": "Dependabot 警示的指派者變更時，GitHub 會送出哪個 webhook 事件？",
+    "options": [
+      {
+        "id": "A",
+        "text": "alert_assignment_changed"
+      },
+      {
+        "id": "B",
+        "text": "assignment_updated_event"
+      },
+      {
+        "id": "C",
+        "text": "dependabot_alert_assigned"
+      },
+      {
+        "id": "D",
+        "text": "assignees_changed"
+      }
+    ],
+    "explanation": "指派者變更時 GitHub 送出 assignees_changed webhook 事件，可用來觸發 workflow 或與外部系統同步。",
+    "trap": "事件名稱要記原文；其餘三個是看似合理的虛構名稱。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O4"]
+  },
+  {
+    "id": "GH500-043",
+    "exam": "GH-500",
+    "number": 43,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O1"],
+    "sourceIds": ["GH500-DOC-27"],
+    "type": "single",
+    "answer": "C",
+    "question": "專案主要用 PHP 撰寫，團隊想啟用 CodeQL default setup。官方文件對這個做法怎麼說？",
+    "options": [
+      {
+        "id": "A",
+        "text": "會自動改用 PHP 專用的查詢集"
+      },
+      {
+        "id": "B",
+        "text": "會要求先設定 manual build mode"
+      },
+      {
+        "id": "C",
+        "text": "CodeQL 不支援 PHP，可能不產生警示"
+      },
+      {
+        "id": "D",
+        "text": "只能使用 security-extended 查詢集"
+      }
+    ],
+    "explanation": "CodeQL 不支援清單以外的語言（例如 PHP、Scala）；嘗試使用可能不產生警示，分析也不完整。",
+    "trap": "看到「語言自動偵測」就以為什麼語言都能掃；清單以外的語言要改用能輸出 SARIF 的第三方工具。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "基礎",
+    "keywords": ["D4", "D4-O1"]
+  },
+  {
+    "id": "GH500-044",
+    "exam": "GH-500",
+    "number": 44,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O1"],
+    "sourceIds": ["GH500-DOC-40"],
+    "type": "single",
+    "answer": "B",
+    "question": "一個 Java repository 啟用 code scanning，沒有任何建置設定。CodeQL 預設用哪種 build mode 建立資料庫？",
+    "options": [
+      {
+        "id": "A",
+        "text": "autobuild，偵測並嘗試建置"
+      },
+      {
+        "id": "B",
+        "text": "none，不建置，直接從程式碼建立"
+      },
+      {
+        "id": "C",
+        "text": "manual，使用 workflow 定義的步驟"
+      },
+      {
+        "id": "D",
+        "text": "none，但要先啟用 dependency caching"
+      }
+    ],
+    "explanation": "C/C++、C#、Java 與 Rust 預設用 none（不建置）；其他編譯式語言（如 Go、Kotlin、Swift）用 autobuild。",
+    "trap": "Java 常被當成一定要建置的語言；現在預設是不建置。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "進階",
+    "keywords": ["D4", "D4-O1"]
+  },
+  {
+    "id": "GH500-045",
+    "exam": "GH-500",
+    "number": 45,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O1"],
+    "sourceIds": ["GH500-DOC-28"],
+    "type": "single",
+    "answer": "D",
+    "question": "團隊想在 default setup 下執行比預設更多、精確度稍低的查詢。應該選哪個 query suite？",
+    "options": [
+      {
+        "id": "A",
+        "text": "default，精確度高、誤報少的內建集合"
+      },
+      {
+        "id": "B",
+        "text": "security-and-quality，含可維護性與可靠性查詢"
+      },
+      {
+        "id": "C",
+        "text": "自訂 .qls 查詢集，由 YAML 定義"
+      },
+      {
+        "id": "D",
+        "text": "security-extended，介面上稱為 Extended"
+      }
+    ],
+    "explanation": "security-extended 是 default 加上精確度與嚴重度稍低的查詢，可用於 default setup；security-and-quality 與自訂 suite 需要 advanced setup。",
+    "trap": "security-and-quality 看起來更完整，但它只能用於 advanced setup。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O1"]
+  },
+  {
+    "id": "GH500-046",
+    "exam": "GH-500",
+    "number": 46,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O2"],
+    "sourceIds": ["GH500-DOC-26"],
+    "type": "single",
+    "answer": "A",
+    "question": "default setup 啟用後，在下列哪種情況下不會觸發掃描？",
+    "options": [
+      {
+        "id": "A",
+        "text": "來自 fork 的 pull request"
+      },
+      {
+        "id": "B",
+        "text": "對預設分支的 push 提交"
+      },
+      {
+        "id": "C",
+        "text": "以預設分支為目標的 pull request"
+      },
+      {
+        "id": "D",
+        "text": "啟用 default setup 當下的初始掃描"
+      }
+    ],
+    "explanation": "default setup 掃描啟用時、push 到預設或受保護分支、以及針對預設或受保護分支的 pull request，但不含來自 fork 的 pull request。",
+    "trap": "pull request 觸發看似包含所有來源；fork 來的被排除。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O2"]
+  },
+  {
+    "id": "GH500-047",
+    "exam": "GH-500",
+    "number": 47,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O2"],
+    "sourceIds": ["GH500-DOC-26"],
+    "type": "single",
+    "answer": "C",
+    "question": "default setup 的每週排程掃描要在什麼條件下才會運作？",
+    "options": [
+      {
+        "id": "A",
+        "text": "啟用後立即開始，不需任何活動"
+      },
+      {
+        "id": "B",
+        "text": "啟用滿 180 天之後才會開始"
+      },
+      {
+        "id": "C",
+        "text": "過去 180 天內有 push 或 PR 觸發"
+      },
+      {
+        "id": "D",
+        "text": "每次初始掃描完成後就會開始"
+      }
+    ],
+    "explanation": "每週排程的前提是過去 180 天內有 push 或 pull request 觸發過掃描；初始掃描與因設定變更觸發的掃描不算。",
+    "trap": "初始掃描看似算一次活動，但官方明說它不會啟動或延長排程。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "進階",
+    "keywords": ["D4", "D4-O2"]
+  },
+  {
+    "id": "GH500-048",
+    "exam": "GH-500",
+    "number": 48,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O2"],
+    "sourceIds": ["GH500-DOC-36"],
+    "type": "single",
+    "answer": "D",
+    "question": "組織設定了 github-codeql-config-file 屬性，而某個 advanced setup workflow 也在 codeql-action/init 指定了 config-file。最後使用哪一個？",
+    "options": [
+      {
+        "id": "A",
+        "text": "repository 屬性的值，因為屬於組織層級"
+      },
+      {
+        "id": "B",
+        "text": "兩個設定檔合併，重複的鍵互相覆寫"
+      },
+      {
+        "id": "C",
+        "text": "由設定檔的檔名字母順序來決定"
+      },
+      {
+        "id": "D",
+        "text": "workflow 中明確指定的 config-file"
+      }
+    ],
+    "explanation": "advanced workflow 明確指定的 config-file 輸入優先於 repository property；這讓 advanced workflow 可使用不同的設定。",
+    "trap": "組織層級通常優先，但這裡是明確指定的 workflow 輸入勝出。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "進階",
+    "keywords": ["D4", "D4-O2"]
+  },
+  {
+    "id": "GH500-049",
+    "exam": "GH-500",
+    "number": 49,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O3"],
+    "sourceIds": ["GH500-DOC-31"],
+    "type": "single",
+    "answer": "B",
+    "question": "開發者在功能分支修好一則警示，但預設分支尚未合併。警示頁面的狀態會怎麼顯示？",
+    "options": [
+      {
+        "id": "A",
+        "text": "關閉，因為功能分支已修復"
+      },
+      {
+        "id": "B",
+        "text": "仍反映預設分支，看 Affected branches"
+      },
+      {
+        "id": "C",
+        "text": "顯示為 in progress，等待合併"
+      },
+      {
+        "id": "D",
+        "text": "自動關閉，並從警示清單移除"
+      }
+    ],
+    "explanation": "警示頁面只反映預設分支的狀態；其他分支的狀態在 Affected branches 檢視。",
+    "trap": "修復所在的分支不等於警示頁面反映的分支。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O3"]
+  },
+  {
+    "id": "GH500-050",
+    "exam": "GH-500",
+    "number": 50,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O3"],
+    "sourceIds": ["GH500-DOC-32"],
+    "type": "single",
+    "answer": "C",
+    "question": "pull request 上的 code scanning 檢查只發現 warning 與 note 等級的警示。檢查結果會是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "失敗，因為任何警示都會使檢查失敗"
+      },
+      {
+        "id": "B",
+        "text": "失敗，直到管理員審查過每則警示"
+      },
+      {
+        "id": "C",
+        "text": "成功，較低嚴重度視為警告或附註"
+      },
+      {
+        "id": "D",
+        "text": "略過，不顯示任何註解與檢查結果"
+      }
+    ],
+    "explanation": "只有 error、critical 或 high 會使檢查失敗；較低嚴重度視為警告或附註，檢查成功。可在 repository 設定中覆寫。",
+    "trap": "以為任何警示都會擋下 pull request；預設只有高嚴重度才會。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O3"]
+  },
+  {
+    "id": "GH500-051",
+    "exam": "GH-500",
+    "number": 51,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O3"],
+    "sourceIds": ["GH500-DOC-34"],
+    "type": "multiple",
+    "answer": ["A", "C", "E"],
+    "question": "下列哪些是 Copilot Autofix 與 agentic autofix 的共同點，或 Copilot Autofix 的特性？（選 3 項）",
+    "options": [
+      {
+        "id": "A",
+        "text": "由 LLM 根據程式碼與分析結果產生修復"
+      },
+      {
+        "id": "B",
+        "text": "一次可指派最多 25 則警示給 agent"
+      },
+      {
+        "id": "C",
+        "text": "Copilot Autofix 的建議不消耗 credits"
+      },
+      {
+        "id": "D",
+        "text": "需要 Copilot 授權才能使用"
+      },
+      {
+        "id": "E",
+        "text": "盡力而為，不保證每則警示都成功"
+      }
+    ],
+    "explanation": "兩者都用 LLM 產生修復，且都是盡力而為；Copilot Autofix 不消耗 AI credits。「最多 25 則警示」是 agentic autofix 的批次指派，兩者都不需要 Copilot 授權。",
+    "trap": "25 則的上限和 AI credits 的消耗屬於不同的功能，容易混在一起。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "進階",
+    "keywords": ["D4", "D4-O3"]
+  },
+  {
+    "id": "GH500-052",
+    "exam": "GH-500",
+    "number": 52,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O3"],
+    "sourceIds": ["GH500-DOC-33"],
+    "type": "single",
+    "answer": "B",
+    "question": "組織想用 ruleset 阻擋含高嚴重度 code scanning 警示的 pull request 合併，但某 repository 根本沒設定 code scanning。這個規則會怎麼運作？",
+    "options": [
+      {
+        "id": "A",
+        "text": "自動為該 repository 啟用 code scanning"
+      },
+      {
+        "id": "B",
+        "text": "因必要工具未設定而阻擋，且不自動啟用"
+      },
+      {
+        "id": "C",
+        "text": "不阻擋，因為該 repository 沒有警示"
+      },
+      {
+        "id": "D",
+        "text": "改由 status checks 取代這條規則"
+      }
+    ],
+    "explanation": "必要工具未在 repository 設定也是阻擋條件之一；設定規則不會自動啟用 code scanning；它與 status checks 無關。",
+    "trap": "以為規則會順便啟用掃描；它只是把「沒掃描」也視為不通過。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "進階",
+    "keywords": ["D4", "D4-O3"]
+  },
+  {
+    "id": "GH500-053",
+    "exam": "GH-500",
+    "number": 53,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O4"],
+    "sourceIds": ["GH500-DOC-35"],
+    "type": "single",
+    "answer": "A",
+    "question": "管理員發現單一 repository 的 code scanning 沒有如預期產生警示，想先看這個 repository 內各語言的檔案涵蓋率與最近掃描時間。應該看哪裡？",
+    "options": [
+      {
+        "id": "A",
+        "text": "Tool status page，看這個 repository 的工具狀態"
+      },
+      {
+        "id": "B",
+        "text": "Security overview 的 Coverage，看各 repository 有無啟用"
+      },
+      {
+        "id": "C",
+        "text": "Dependency graph 的 Dependencies 檢視與清單"
+      },
+      {
+        "id": "D",
+        "text": "Actions 的 workflow 執行清單與各次執行紀錄"
+      }
+    ],
+    "explanation": "Tool status page 顯示各 code scanning 工具的設定狀態、最近掃描時間、各語言檔案涵蓋率與錯誤訊息，是除錯的起點；它只顯示 repository 預設分支，不在組織層級。",
+    "trap": "Coverage 檢視看的是各 repository 有沒有啟用安全功能，不是單一工具對各語言的檔案涵蓋率。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O4"]
+  },
+  {
+    "id": "GH500-054",
+    "exam": "GH-500",
+    "number": 54,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O4"],
+    "sourceIds": ["GH500-DOC-38"],
+    "type": "single",
+    "answer": "D",
+    "question": "同一個 workflow 要對同一個 commit 用 upload-sarif 上傳同一工具的兩個結果檔。必須提供什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "兩個檔案合併成單一 SARIF 檔再上傳"
+      },
+      {
+        "id": "B",
+        "text": "每個檔案使用不同的 SARIF 版本"
+      },
+      {
+        "id": "C",
+        "text": "在 repository 設定中啟用多重上傳"
+      },
+      {
+        "id": "D",
+        "text": "為每組結果指定唯一的 category"
+      }
+    ],
+    "explanation": "預設每次分析預期一個 SARIF 檔；同一 commit 上傳多組結果時，必須為每組指定唯一的 category。",
+    "trap": "category 通常在 CodeQL action 自動設定，所以容易忘記其他工具要自己指定。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "進階",
+    "keywords": ["D4", "D4-O4"]
+  },
+  {
+    "id": "GH500-055",
+    "exam": "GH-500",
+    "number": 55,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O1"],
+    "sourceIds": ["GH500-DOC-44"],
+    "type": "single",
+    "answer": "C",
+    "question": "下列哪個是格式正確的 GHSA ID？",
+    "options": [
+      {
+        "id": "A",
+        "text": "GHSA-2f9q-m3rv-w8cl"
+      },
+      {
+        "id": "B",
+        "text": "GHSA-2F9Q-M3RV-W8CJ"
+      },
+      {
+        "id": "C",
+        "text": "GHSA-2f9q-m3rv-w8cj"
+      },
+      {
+        "id": "D",
+        "text": "GHSA-2f9q-m3rv-w8c"
+      }
+    ],
+    "explanation": "格式是 GHSA 加三組各四碼，字元取自 23456789cfghjmpqrvwx，字母全為小寫；字母 l 不在字元集中。",
+    "trap": "大小寫與字元集都有規則；看起來像的 ID 可能含不允許的字元。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "進階",
+    "keywords": ["D5", "D5-O1"]
+  },
+  {
+    "id": "GH500-056",
+    "exam": "GH-500",
+    "number": 56,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O1"],
+    "sourceIds": ["GH500-DOC-44"],
+    "type": "true-false",
+    "answer": true,
+    "question": "EPSS 分數代表該弱點在未來 30 天內被利用的機率，而不是受影響專案的比例。",
+    "explanation": "EPSS 由 FIRST 提供，分數介於 0 到 1；例如 90.534% 表示未來 30 天內被利用的機率為 90.534%。",
+    "trap": "把機率誤讀成「有多少專案受影響」。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "基礎",
+    "keywords": ["D5", "D5-O1"]
+  },
+  {
+    "id": "GH500-057",
+    "exam": "GH-500",
+    "number": 57,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O1"],
+    "sourceIds": ["GH500-DOC-45"],
+    "type": "single",
+    "answer": "A",
+    "question": "一則直接從 National Vulnerability Database feed 自動發布、未經 GitHub 審查的 advisory，Dependabot 會怎麼處理？",
+    "options": [
+      {
+        "id": "A",
+        "text": "不為它產生 Dependabot 警示"
+      },
+      {
+        "id": "B",
+        "text": "產生警示，但標示為 unreviewed"
+      },
+      {
+        "id": "C",
+        "text": "只對 critical 嚴重度產生警示"
+      },
+      {
+        "id": "D",
+        "text": "只在啟用 malware alerts 時產生"
+      }
+    ],
+    "explanation": "Dependabot 不為未審查的 advisory 產生警示，因為這類 advisory 未檢查有效性或完整性；只有 GitHub-reviewed advisory 會觸發。",
+    "trap": "資料庫裡有的 advisory 不一定會出現在你的警示中。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "中等",
+    "keywords": ["D5", "D5-O1"]
+  },
+  {
+    "id": "GH500-058",
+    "exam": "GH-500",
+    "number": 58,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O1"],
+    "sourceIds": ["GH500-DOC-44"],
+    "type": "single",
+    "answer": "B",
+    "question": "惡意軟體（malware）advisory 的警示為什麼沒有修復版本？",
+    "options": [
+      {
+        "id": "A",
+        "text": "修補程式會在下個月才發布"
+      },
+      {
+        "id": "B",
+        "text": "惡意軟體是刻意設計，需移除並換掉"
+      },
+      {
+        "id": "C",
+        "text": "registry 會自動回收惡意的版本"
+      },
+      {
+        "id": "D",
+        "text": "Dependabot 只回報而不評估修復"
+      }
+    ],
+    "explanation": "惡意軟體是刻意設計來執行有害功能的程式碼，沒有可升級的修復版本；需要把它從專案移除，並找替代的相依性。",
+    "trap": "把惡意軟體當成一般弱點，等待升級到修復版本。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "中等",
+    "keywords": ["D5", "D5-O1"]
+  },
+  {
+    "id": "GH500-059",
+    "exam": "GH-500",
+    "number": 59,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O2"],
+    "sourceIds": ["GH500-DOC-46"],
+    "type": "single",
+    "answer": "C",
+    "question": "建立 security campaign 時，納入的警示數有什麼上限？",
+    "options": [
+      {
+        "id": "A",
+        "text": "100 則"
+      },
+      {
+        "id": "B",
+        "text": "500 則"
+      },
+      {
+        "id": "C",
+        "text": "1000 則"
+      },
+      {
+        "id": "D",
+        "text": "5000 則"
+      }
+    ],
+    "explanation": "建立 campaign 時要確認選擇的警示在 1000 則以內。",
+    "trap": "與 agentic autofix 一次最多 25 則的上限混淆。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "基礎",
+    "keywords": ["D5", "D5-O2"]
+  },
+  {
+    "id": "GH500-060",
+    "exam": "GH-500",
+    "number": 60,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O2"],
+    "sourceIds": ["GH500-DOC-09"],
+    "type": "single",
+    "answer": "B",
+    "question": "在 security campaign 中，一次最多可選幾則 code scanning 警示指派給 Copilot（agentic autofix）？",
+    "options": [
+      {
+        "id": "A",
+        "text": "10 則"
+      },
+      {
+        "id": "B",
+        "text": "25 則"
+      },
+      {
+        "id": "C",
+        "text": "50 則"
+      },
+      {
+        "id": "D",
+        "text": "100 則"
+      }
+    ],
+    "explanation": "一次最多選 25 則；一次指派啟動一個 agent session，並為所選警示建立一個 pull request。",
+    "trap": "campaign 的總警示上限與單次指派上限是兩個不同的數字。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "中等",
+    "keywords": ["D5", "D5-O2"]
+  },
+  {
+    "id": "GH500-061",
+    "exam": "GH-500",
+    "number": 61,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O2"],
+    "sourceIds": ["GH500-DOC-46"],
+    "type": "single",
+    "answer": "A",
+    "question": "Security campaign 的 campaign manager 必須是哪種身分？",
+    "options": [
+      {
+        "id": "A",
+        "text": "組織擁有者或 security manager"
+      },
+      {
+        "id": "B",
+        "text": "對 repository 有寫入權限的成員"
+      },
+      {
+        "id": "C",
+        "text": "任何具 admin 角色的組織成員"
+      },
+      {
+        "id": "D",
+        "text": "各 repository 的 CODEOWNERS"
+      }
+    ],
+    "explanation": "Campaign manager 必須是組織的擁有者或 security manager 的使用者或團隊。",
+    "trap": "能建立 campaign 的人（含具 admin 角色者）和能擔任 campaign manager 的人不完全相同。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "進階",
+    "keywords": ["D5", "D5-O2"]
+  },
+  {
+    "id": "GH500-062",
+    "exam": "GH-500",
+    "number": 62,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O2"],
+    "sourceIds": ["GH500-DOC-11"],
+    "type": "single",
+    "answer": "D",
+    "question": "在 GitHub Enterprise Server 上，Dependabot 警示的委派關閉需要哪個版本以上？",
+    "options": [
+      {
+        "id": "A",
+        "text": "3.17"
+      },
+      {
+        "id": "B",
+        "text": "3.19"
+      },
+      {
+        "id": "C",
+        "text": "3.23"
+      },
+      {
+        "id": "D",
+        "text": "3.21"
+      }
+    ],
+    "explanation": "Code scanning 與 secret scanning 的委派關閉在 GitHub Enterprise Server 3.17 以上可用，Dependabot 則需要 3.21 以上。",
+    "trap": "三種警示類型的版本門檻不同，容易全部記成 3.17。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "進階",
+    "keywords": ["D5", "D5-O2"]
+  },
+  {
+    "id": "GH500-063",
+    "exam": "GH-500",
+    "number": 63,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O3"],
+    "sourceIds": ["GH500-DOC-36"],
+    "type": "single",
+    "answer": "C",
+    "question": "哪個 repository property 可以停用改良的增量分析（例如因為硬體需求增加而失敗時）？",
+    "options": [
+      {
+        "id": "A",
+        "text": "github-codeql-config-file"
+      },
+      {
+        "id": "B",
+        "text": "github-codeql-extra-queries"
+      },
+      {
+        "id": "C",
+        "text": "github-codeql-disable-overlay"
+      },
+      {
+        "id": "D",
+        "text": "github-codeql-file-coverage-on-prs"
+      }
+    ],
+    "explanation": "將 github-codeql-disable-overlay 設為 true 可停用改良的增量分析。",
+    "trap": "四個屬性名稱都以 github-codeql 開頭，要記對各自的用途。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "中等",
+    "keywords": ["D5", "D5-O3"]
+  },
+  {
+    "id": "GH500-064",
+    "exam": "GH-500",
+    "number": 64,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O3"],
+    "sourceIds": ["GH500-DOC-36"],
+    "type": "single",
+    "answer": "D",
+    "question": "團隊要先驗證 repository property 的設定效果，再推廣到整個組織。官方建議怎麼做？",
+    "options": [
+      {
+        "id": "A",
+        "text": "直接對整個組織設值，出問題再回復"
+      },
+      {
+        "id": "B",
+        "text": "先在 fork 的 repository 測試再同步"
+      },
+      {
+        "id": "C",
+        "text": "在 advanced workflow 以環境變數模擬"
+      },
+      {
+        "id": "D",
+        "text": "在組織建立但不設值，改在測試庫設值"
+      }
+    ],
+    "explanation": "第一次設定屬性時，先在組織建立但不設值，改在一個測試 repository 設值並驗證，之後再推廣到組織或其他 repository。",
+    "trap": "屬性套用到所有 setup 類型，直接全組織設值的影響面最大。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "中等",
+    "keywords": ["D5", "D5-O3"]
+  },
+  {
+    "id": "GH500-065",
+    "exam": "GH-500",
+    "number": 65,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O4"],
+    "sourceIds": ["GH500-DOC-10"],
+    "type": "single",
+    "answer": "A",
+    "question": "某團隊持有 security manager 角色。對該團隊與某 repository 有 admin 權限的人，可以對該團隊的 repository 存取做什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "變更存取層級，但不能移除存取"
+      },
+      {
+        "id": "B",
+        "text": "移除存取，但不能變更存取層級"
+      },
+      {
+        "id": "C",
+        "text": "變更與移除存取兩者都可以做"
+      },
+      {
+        "id": "D",
+        "text": "兩者都不行，需組織擁有者操作"
+      }
+    ],
+    "explanation": "有 admin 權限的人可以變更團隊的存取層級，但不能移除存取。",
+    "trap": "角色保障了存取的下限，所以「可以調整」不等於「可以移除」。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "進階",
+    "keywords": ["D5", "D5-O4"]
+  },
+  {
+    "id": "GH500-066",
+    "exam": "GH-500",
+    "number": 66,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O4"],
+    "sourceIds": ["GH500-DOC-04"],
+    "type": "true-false",
+    "answer": true,
+    "question": "委派繞過 push protection 時，其他貢獻者提出的繞過請求會在 7 天後過期。",
+    "explanation": "委派繞過可為其他貢獻者的繞過請求引入審查流程，請求 7 天後過期。",
+    "trap": "把審查流程想成請求會一直等到有人處理。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "基礎",
+    "keywords": ["D5", "D5-O4"]
+  },
+  {
+    "id": "GH500-067",
+    "exam": "GH-500",
+    "number": 67,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O4"],
+    "sourceIds": ["GH500-DOC-04"],
+    "type": "multiple",
+    "answer": ["A", "B", "C"],
+    "question": "下列哪些人一律可以繞過 push protection？（選 3 項）",
+    "options": [
+      {
+        "id": "A",
+        "text": "組織內的擁有者角色"
+      },
+      {
+        "id": "B",
+        "text": "Security manager 角色"
+      },
+      {
+        "id": "C",
+        "text": "繞過名單中角色的成員"
+      },
+      {
+        "id": "D",
+        "text": "所有具寫入權限的成員"
+      },
+      {
+        "id": "E",
+        "text": "所有具 admin 角色的成員"
+      }
+    ],
+    "explanation": "組織擁有者、security manager，以及繞過名單中團隊、預設角色或自訂角色的成員，一律可以繞過；另有被指派具「審查並管理 secret scanning 繞過請求」權限之自訂角色的使用者。",
+    "trap": "寫入或 admin 權限本身不等於繞過權限，要在繞過名單中。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "進階",
+    "keywords": ["D5", "D5-O4"]
+  },
+  {
+    "id": "GH500-068",
+    "exam": "GH-500",
+    "number": 68,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O5"],
+    "sourceIds": ["GH500-DOC-07"],
+    "type": "single",
+    "answer": "D",
+    "question": "下列哪項功能的重點是處理已累積的警示，而不是在變更進入前預防？",
+    "options": [
+      {
+        "id": "A",
+        "text": "Push protection 推送保護"
+      },
+      {
+        "id": "B",
+        "text": "Dependency review 檢視"
+      },
+      {
+        "id": "C",
+        "text": "Code scanning 的 PR 檢查"
+      },
+      {
+        "id": "D",
+        "text": "Security campaigns 活動"
+      }
+    ],
+    "explanation": "Security campaigns 針對已存在的警示做大規模修復；push protection、dependency review 與 pull request 上的 code scanning 都在變更進入前運作。",
+    "trap": "都屬於安全功能，但時間點不同；題目問的是預防導向與事後處理。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "基礎",
+    "keywords": ["D5", "D5-O5"]
+  },
+  {
+    "id": "GH500-069",
+    "exam": "GH-500",
+    "number": 69,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O5"],
+    "sourceIds": ["GH500-DOC-15"],
+    "type": "true-false",
+    "answer": false,
+    "question": "Dependency review 的主要作用，是找出已經存在於相依性中的弱點。",
+    "explanation": "Dependabot alerts 找出已存在於相依性中的弱點；dependency review 則是在變更引入之前，於 pull request 顯示相依性變動與弱點。",
+    "trap": "兩者都顯示弱點資料，但時間點相反。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "中等",
+    "keywords": ["D5", "D5-O5"]
+  },
+  {
+    "id": "GH500-070",
+    "exam": "GH-500",
+    "number": 70,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O1"],
+    "sourceIds": ["GH500-DOC-56"],
+    "type": "single",
+    "answer": "B",
+    "question": "repository 管理員改了一個與未強制 configuration 衝突的設定。該 repository 的狀態會是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "detached，已完全斷開關聯"
+      },
+      {
+        "id": "B",
+        "text": "removed，仍關聯但不繼承全部"
+      },
+      {
+        "id": "C",
+        "text": "failed，無法套用 configuration"
+      },
+      {
+        "id": "D",
+        "text": "attached，繼續繼承全部設定"
+      }
+    ],
+    "explanation": "removed 表示 repository 管理員改了與未強制 configuration 衝突的設定，configuration 仍關聯，但 repository 不再繼承全部設定，也不計入涵蓋指標。",
+    "trap": "removed 與 detached 都像是「脫離管理」，但 detached 是完全斷開。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "中等",
+    "keywords": ["D6", "D6-O1"]
+  },
+  {
+    "id": "GH500-071",
+    "exam": "GH-500",
+    "number": 71,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O1"],
+    "sourceIds": ["GH500-DOC-52"],
+    "type": "true-false",
+    "answer": false,
+    "question": "把 repository 從 security configuration 卸除（detach）時，會同時還原該 repository 原本的安全設定。",
+    "explanation": "卸除不會改變 repository 現有的啟用設定；只是之後改為在 repository 層級個別管理。",
+    "trap": "卸除聽起來像復原，其實只是不再受 configuration 管理。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "基礎",
+    "keywords": ["D6", "D6-O1"]
+  },
+  {
+    "id": "GH500-072",
+    "exam": "GH-500",
+    "number": 72,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O1"],
+    "sourceIds": ["GH500-DOC-57"],
+    "type": "single",
+    "answer": "C",
+    "question": "腳本用 REST API 修改已強制 configuration 所控制的功能。呼叫會有什麼結果？",
+    "options": [
+      {
+        "id": "A",
+        "text": "回傳錯誤，因為該功能被鎖定"
+      },
+      {
+        "id": "B",
+        "text": "功能被改變，並記入稽核日誌"
+      },
+      {
+        "id": "C",
+        "text": "呼叫看似成功，但啟用狀態不變"
+      },
+      {
+        "id": "D",
+        "text": "只有企業管理員的呼叫會成功"
+      }
+    ],
+    "explanation": "對強制的 configuration，透過 REST API 的變更呼叫看似成功，但啟用狀態不會改變。",
+    "trap": "以為被鎖定的設定會回傳錯誤；實際上是無聲不生效。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "進階",
+    "keywords": ["D6", "D6-O1"]
+  },
+  {
+    "id": "GH500-073",
+    "exam": "GH-500",
+    "number": 73,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O2"],
+    "sourceIds": ["GH500-DOC-50"],
+    "type": "single",
+    "answer": "D",
+    "question": "組織建立了預設 security configuration，之後一個 repository 從其他組織轉移進來。這個 repository 會如何？",
+    "options": [
+      {
+        "id": "A",
+        "text": "自動套用預設 configuration"
+      },
+      {
+        "id": "B",
+        "text": "自動套用，但狀態標示為 attaching"
+      },
+      {
+        "id": "C",
+        "text": "維持 detached，直到下次排程套用"
+      },
+      {
+        "id": "D",
+        "text": "需手動套用適合的 configuration"
+      }
+    ],
+    "explanation": "預設 configuration 只自動套用到新建立的 repository；轉移進組織的 repository 要手動套用。",
+    "trap": "「預設」讓人以為所有進入組織的 repository 都會套用。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "中等",
+    "keywords": ["D6", "D6-O2"]
+  },
+  {
+    "id": "GH500-074",
+    "exam": "GH-500",
+    "number": 74,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O2"],
+    "sourceIds": ["GH500-DOC-50"],
+    "type": "true-false",
+    "answer": false,
+    "question": "在 security configuration 中，可以在未啟用 validity checks 的情況下啟用 extended metadata checks。",
+    "explanation": "只能在 validity checks 啟用時，才能啟用 extended metadata checks。",
+    "trap": "兩者列在同一組選項中，容易以為可以獨立開關。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "中等",
+    "keywords": ["D6", "D6-O2"]
+  },
+  {
+    "id": "GH500-075",
+    "exam": "GH-500",
+    "number": 75,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O2"],
+    "sourceIds": ["GH500-DOC-55"],
+    "type": "single",
+    "answer": "A",
+    "question": "管理員要讓 Code Security 保持停用，卻把 Code scanning 區塊的「Prevent direct alert dismissals」改成 Not set。結果會是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "Code Security 自動切換為 Enabled"
+      },
+      {
+        "id": "B",
+        "text": "Code Security 仍保持停用"
+      },
+      {
+        "id": "C",
+        "text": "僅 Dependabot alerts 被關閉"
+      },
+      {
+        "id": "D",
+        "text": "configuration 無法儲存並顯示錯誤"
+      }
+    ],
+    "explanation": "把該項改為 Not set 會自動把 Code Security 切換為 Enabled；為避免意外啟用付費功能，儲存與套用前要重新確認最上層的設定。",
+    "trap": "「Not set」看似沒動作，但會觸發付費功能啟用。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "進階",
+    "keywords": ["D6", "D6-O2"]
+  },
+  {
+    "id": "GH500-076",
+    "exam": "GH-500",
+    "number": 76,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O2"],
+    "sourceIds": ["GH500-DOC-49"],
+    "type": "single",
+    "answer": "C",
+    "question": "組織把 Dependabot 的 runner 類型設為標籤 runner。公開 repository 的 Dependabot 更新會用哪種 runner？",
+    "options": [
+      {
+        "id": "A",
+        "text": "符合標籤的自管 runner"
+      },
+      {
+        "id": "B",
+        "text": "符合標籤的 larger runner"
+      },
+      {
+        "id": "C",
+        "text": "GitHub 代管的標準 runner"
+      },
+      {
+        "id": "D",
+        "text": "由 repository 管理員自選"
+      }
+    ],
+    "explanation": "基於安全理由，公開 repository 一律用 GitHub-hosted runner，標籤 runner 對公開 repository 無效。",
+    "trap": "組織層級設定看似涵蓋所有 repository，但公開 repository 是例外。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "進階",
+    "keywords": ["D6", "D6-O2"]
+  },
+  {
+    "id": "GH500-077",
+    "exam": "GH-500",
+    "number": 77,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O2"],
+    "sourceIds": ["GH500-DOC-49"],
+    "type": "single",
+    "answer": "B",
+    "question": "組織已在 global settings 啟用 AI Scan for pull requests。AI applications 掃描會怎麼樣？",
+    "options": [
+      {
+        "id": "A",
+        "text": "一併啟用，因為屬於同一組偵測"
+      },
+      {
+        "id": "B",
+        "text": "不會啟用，需要另外選擇啟用"
+      },
+      {
+        "id": "C",
+        "text": "只對私有 repository 一併啟用"
+      },
+      {
+        "id": "D",
+        "text": "由 repository 管理員決定是否一併啟用"
+      }
+    ],
+    "explanation": "AI applications 掃描與 AI Scan 是各自獨立的設定，控制不同的偵測器；啟用 AI Scan 不會啟用 AI applications 掃描。",
+    "trap": "名稱都含 AI，容易以為是同一個開關。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "中等",
+    "keywords": ["D6", "D6-O2"]
+  },
+  {
+    "id": "GH500-078",
+    "exam": "GH-500",
+    "number": 78,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O3"],
+    "sourceIds": ["GH500-DOC-50"],
+    "type": "single",
+    "answer": "A",
+    "question": "組織要建立一個能套用到所有 repository 的 configuration，其中一部分 repository 已經在跑 advanced setup。Default setup 應選哪個選項？",
+    "options": [
+      {
+        "id": "A",
+        "text": "Enabled with advanced setup allowed"
+      },
+      {
+        "id": "B",
+        "text": "Not set，保持各 repository 現狀"
+      },
+      {
+        "id": "C",
+        "text": "Disabled，改由 workflow 檔控制"
+      },
+      {
+        "id": "D",
+        "text": "Enabled，覆蓋現有的 advanced setup"
+      }
+    ],
+    "explanation": "「Enabled with advanced setup allowed」只在 CodeQL 分析目前沒有執行的 repository 啟用 default setup，因此可套用到所有 repository。",
+    "trap": "直接選 Enabled 會與現有 advanced setup 衝突。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "進階",
+    "keywords": ["D6", "D6-O3"]
+  },
+  {
+    "id": "GH500-079",
+    "exam": "GH-500",
+    "number": 79,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O3"],
+    "sourceIds": ["GH500-DOC-54"],
+    "type": "single",
+    "answer": "C",
+    "question": "對不適用 default setup 的一批 repository，官方建議用什麼方式大規模啟用 advanced setup？",
+    "options": [
+      {
+        "id": "A",
+        "text": "在組織設定頁面一鍵啟用全部"
+      },
+      {
+        "id": "B",
+        "text": "套用 security configuration 即可"
+      },
+      {
+        "id": "C",
+        "text": "用批次 script 把 workflow 加到各庫"
+      },
+      {
+        "id": "D",
+        "text": "由各 repository 管理員自行建立"
+      }
+    ],
+    "explanation": "不適用 default setup 的 repository，用批次設定 script 把 CodeQL workflow 加到每個 repository；組織需啟用 GitHub Actions。",
+    "trap": "security configuration 可啟用 default setup，但不負責把自訂 workflow 加到各 repository。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "中等",
+    "keywords": ["D6", "D6-O3"]
+  },
+  {
+    "id": "GH500-080",
+    "exam": "GH-500",
+    "number": 80,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O4"],
+    "sourceIds": ["GH500-DOC-56"],
+    "type": "single",
+    "answer": "A",
+    "question": "管理員想追蹤 repository 的 security configuration 狀態何時變更。應該查稽核日誌的哪個事件？",
+    "options": [
+      {
+        "id": "A",
+        "text": "repository_security_configuration"
+      },
+      {
+        "id": "B",
+        "text": "repository_vulnerability_alert"
+      },
+      {
+        "id": "C",
+        "text": "org.update_security_configuration"
+      },
+      {
+        "id": "D",
+        "text": "repo.security_status_change"
+      }
+    ],
+    "explanation": "狀態變更會記錄為 repository_security_configuration 事件，可用 action:repository_security_configuration 篩選。",
+    "trap": "稽核日誌有多個 repository_ 開頭的事件，要記對各自的用途。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "進階",
+    "keywords": ["D6", "D6-O4"]
+  },
+  {
+    "id": "GH500-081",
+    "exam": "GH-500",
+    "number": 81,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O4"],
+    "sourceIds": ["GH500-DOC-58"],
+    "type": "true-false",
+    "answer": false,
+    "question": "取得企業 code security configuration 的 REST 端點，可以使用 fine-grained personal access token。",
+    "explanation": "該端點不適用 GitHub App user access token、installation access token 或 fine-grained personal access token；OAuth app 與 classic personal access token 需要 read:enterprise 範圍。",
+    "trap": "fine-grained token 常被視為較新、較推薦的選擇，但這個端點不支援。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "進階",
+    "keywords": ["D6", "D6-O4"]
   }
 ]

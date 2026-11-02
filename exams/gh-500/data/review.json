@@ -1,0 +1,92 @@
+{
+  "mustRemember": {
+    "GH-500": [
+      "安全功能分三層：所有方案、需購買 Secret Protection、需購買 Code Security。",
+      "公開 repository 的可用性以功能為單位判斷，不是整個套件免費。",
+      "沒有警示不代表沒有弱點，先用 Coverage 確認功能已啟用。",
+      "Security overview 顯示各 repository 預設分支的資料。",
+      "Security campaign 把警示分組給開發者共同消化，不靠口頭提醒。",
+      "需要穩定的合規資料時用稽核日誌，不用 security overview 儀表板。",
+      "自動掃描只保證公開 repository；組織私有 repository 需要 Secret Protection。",
+      "Secret scanning 檢查完整 Git 歷史、issue、pull request、Discussions、wiki 與 secret gist。",
+      "Push protection 在推送時阻擋，屬預防；繞過會留下紀錄與通知。",
+      "三個繞過理由中，只有 I'll fix it later 建立開啟中的警示。",
+      "外洩的 secret 先撤銷或輪替，改寫 Git 歷史通常不必要。",
+      "Exemption 讓推送完全不觸發 push protection；bypass privileges 被擋時可自行繞過。",
+      "Dependabot 警示在 advisory 新增或 dependency graph 改變時產生，只掃預設分支。",
+      "Security updates 更新到包含修補的最低版本；version updates 與弱點無關。",
+      "SBOM 以 SPDX 匯出，不含 dependents。",
+      "Dependency review 在引入之前攔下；Dependabot alerts 找出已存在的弱點。",
+      "allow-licenses 與 deny-licenses 只能擇一。",
+      "想挑選要開 pull request 的警示：停用 security updates，改建 auto-triage 規則。",
+      "Default setup 最省維護；需要自訂建置、matrix 或排程才用 advanced setup。",
+      "CodeQL 不支援清單以外的語言，例如 PHP 與 Scala。",
+      "security-and-quality 與自訂 query suite 需要 advanced setup。",
+      "警示頁面只反映預設分支，其他分支看 Affected branches。",
+      "同一 commit 上傳多組 SARIF 必須為每組指定唯一 category。",
+      "Copilot Autofix 為單一警示建議修復；agentic autofix 端到端並消耗 AI Credits。",
+      "EPSS 是未來 30 天內被利用的機率，不是受影響專案的比例。",
+      "Unreviewed 與 malware advisory 不會產生一般的 Dependabot 警示。",
+      "惡意軟體沒有修復版本，要移除並找替代。",
+      "一個 campaign 最多 1000 則警示；一次最多指派 25 則給 Copilot。",
+      "github-codeql-extra-queries 為整個組織加入額外查詢，套用到所有 setup 類型。",
+      "委派繞過的請求 7 天後過期；請求者不在名單上才需要審查。",
+      "Security configuration 控制 repository 層級；global settings 控制組織層級。",
+      "預設 configuration 只自動套用到新建立的 repository。",
+      "removed 仍關聯但不繼承全部設定；detached 完全斷開且不改變現有設定。",
+      "強制的 configuration 透過 REST API 修改看似成功，但狀態不會改變。",
+      "把 Prevent direct alert dismissals 改成 Not set 會自動啟用 Code Security。",
+      "公開 repository 的 Dependabot 一律使用 GitHub-hosted runner。"
+    ]
+  },
+  "cheatsheet": [
+    {
+      "combination": "Secret scanning vs Push protection",
+      "summary": "secret scanning 事後找出已存在的 secret；push protection 在推送時阻擋。"
+    },
+    {
+      "combination": "Bypass privileges vs Exemption",
+      "summary": "bypass privileges 被擋時可自行繞過；exemption 完全不觸發 push protection。"
+    },
+    {
+      "combination": "Dependabot alerts vs Dependency review",
+      "summary": "alerts 找已存在的弱點；dependency review 在 pull request 引入前攔下。"
+    },
+    {
+      "combination": "Security updates vs Version updates",
+      "summary": "security updates 由警示觸發；version updates 依設定檔保持最新。"
+    },
+    {
+      "combination": "Default setup vs Advanced setup",
+      "summary": "default 最省維護；advanced 可自訂 workflow、建置與排程。"
+    },
+    {
+      "combination": "Copilot Autofix vs Agentic autofix",
+      "summary": "前者為單一警示的建議修復；後者由 agent 端到端修復並開 draft pull request。"
+    },
+    {
+      "combination": "Severity vs Security severity",
+      "summary": "severity 為 Error、Warning、Note；security severity 為 Critical 到 Low，有時優先使用。"
+    },
+    {
+      "combination": "Delegated bypass vs Delegated alert dismissal",
+      "summary": "前者管誰能繞過 push protection；後者管誰能直接關閉警示。"
+    },
+    {
+      "combination": "Security configuration vs Global settings",
+      "summary": "前者控制 repository 層級功能；後者控制組織層級設定。"
+    },
+    {
+      "combination": "removed vs detached",
+      "summary": "removed 仍關聯；detached 完全斷開，現有設定不變。"
+    }
+  ],
+  "examDayChecklist": [
+    "正式應考前重新核對官方認證頁與 Study Guide 的時間、分數與語言。",
+    "只帶考試中心允許的身分證明。",
+    "先讀題幹的動詞與限制詞，再看選項。",
+    "功能類題目先判斷發生時間點：推送前、合併前，或事後處理。",
+    "不確定的題目先標記，完成後回看。",
+    "交卷前檢查複選題是否選齊。"
+  ]
+}
