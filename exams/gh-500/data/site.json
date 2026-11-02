@@ -7,5 +7,6 @@
   "metaDescription": "GH-500 GitHub Advanced Security 四週互動式備考指南",
   "summary": "28 天計畫、六領域教材、81 題原創題庫與考前速查。",
   "cachePrefix": "gh-500-study-guide",
+  "walkthrough": false,
   "quest": false
 }

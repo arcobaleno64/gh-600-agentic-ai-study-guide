@@ -7,5 +7,6 @@
   "metaDescription": "GH-600 Agentic AI Developer 四週互動式備考指南",
   "summary": "28 天計畫、六領域教材、60 題原創題庫與考前速查。",
   "cachePrefix": "gh-600-study-guide",
+  "walkthrough": true,
   "quest": true
 }

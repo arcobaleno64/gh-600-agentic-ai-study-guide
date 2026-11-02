@@ -7,11 +7,12 @@ import type {
   QuizAttempt,
   ThemeMode,
 } from "./types";
-import { progressKey } from "./site";
+import { examCode, progressKey } from "./site";
 
 const KEY = `${progressKey}-v1`;
 const themes: ThemeMode[] = ["system", "light", "dark"];
-const examCodes: ExamCode[] = ["GH-600", "GH-500"];
+// Only this build's exam has saved dates and attempts.
+const examCodes: ExamCode[] = [examCode];
 
 const defaults: ProgressData = {
   version: 1,

@@ -40,7 +40,9 @@ test("進度寫入失敗保留記憶體資料，恢復寫入後才解除警告",
   let savedKey = "";
   const store = execute(
     readFileSync(new URL("../src/store.ts", import.meta.url), "utf8"),
-    { "./site": { progressKey: progressKeyFor("GH-600") } },
+    {
+      "./site": { examCode: "GH-600", progressKey: progressKeyFor("GH-600") },
+    },
     {
       localStorage: {
         getItem: () => null,
@@ -214,6 +216,7 @@ function readerHarness(id: string, section: string) {
         navigate: (...args: unknown[]) => calls.push(args),
       },
       "../reading": { readingSections },
+      "../site": { site: { walkthrough: true } },
       "../components/CaseWalkthrough.vue": {},
       "../components/DeliveryTrace.vue": {},
     },

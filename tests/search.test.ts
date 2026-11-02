@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import vm from "node:vm";
 import ts from "typescript";
 import * as search from "../src/search.ts";
@@ -90,7 +90,12 @@ test("真實教材 MCP 排序、名詞查找、題幹相關程度及既有呼叫
   const exports: Record<string, any> = {};
   vm.runInNewContext(
     ts.transpileModule(
-      readFileSync(new URL("../src/content.ts", import.meta.url), "utf8"),
+      readFileSync(
+        new URL("../src/content.ts", import.meta.url),
+        "utf8",
+        // vite expands import.meta.glob at build time; this harness supplies the
+        // gh-600 chapter files itself.
+      ).replace("import.meta.glob(", "__glob("),
       {
         compilerOptions: {
           module: ts.ModuleKind.CommonJS,
@@ -100,6 +105,23 @@ test("真實教材 MCP 排序、名詞查找、題幹相關程度及既有呼叫
     ).outputText,
     {
       exports,
+      __glob: () =>
+        Object.fromEntries(
+          readdirSync(
+            new URL("../exams/gh-600/content/chapters/", import.meta.url),
+          )
+            .filter((name) => /^d\d+\.md$/.test(name))
+            .map((name) => [
+              `/exams/gh-600/content/chapters/${name}`,
+              readFileSync(
+                new URL(
+                  `../exams/gh-600/content/chapters/${name}`,
+                  import.meta.url,
+                ),
+                "utf8",
+              ),
+            ]),
+        ),
       require(name: string) {
         if (name === "./search") return search;
         if (name === "./reading") return reading;

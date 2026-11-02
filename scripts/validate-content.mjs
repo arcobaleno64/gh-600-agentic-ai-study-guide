@@ -31,12 +31,7 @@ const data = {
 const errors = validateContentData(data);
 for (const name of [
   "start-here.md",
-  "d1.md",
-  "d2.md",
-  "d3.md",
-  "d4.md",
-  "d5.md",
-  "d6.md",
+  ...data.meta.exam.domains.map((domain) => `${domain.id.toLowerCase()}.md`),
   "integration.md",
 ]) {
   if (

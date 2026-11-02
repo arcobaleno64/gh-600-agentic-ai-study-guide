@@ -58,3 +58,19 @@ test("每個考試都有完整的 site.json 欄位", () => {
     );
   }
 });
+
+// A new exam does not have to have six domains.
+for (const count of [5, 7]) {
+  test(`${count} 個領域的考試，首頁領域清單剛好是自己的 ${count} 項`, () => {
+    const base = loadSite("gh-500");
+    const domains = Array.from({ length: count }, (_, i) => ({
+      id: `D${i + 1}`,
+      name: `第 ${i + 1} 領域`,
+    }));
+    const index = renderSite(read("index.html"), { ...base, domains });
+    const links = index.match(/<li><a href="\/knowledge\/d\d+\/">/g) ?? [];
+    assert.equal(links.length, count);
+    assert.ok(!index.includes("準備代理架構"), "殘留 GH-600 的領域名稱");
+    assert.ok(index.includes(`D${count} 第 ${count} 領域`));
+  });
+}

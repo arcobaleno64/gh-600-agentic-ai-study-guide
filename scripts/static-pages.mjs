@@ -15,6 +15,10 @@ export const SITE_NAME = examSite.siteName;
 const root = fileURLToPath(new URL("..", import.meta.url));
 const examDir = join(root, "exams", process.env.EXAM || "gh-600");
 
+// Domain count as a numeral ("六" for six), used in page descriptions.
+const domainCount = (content) =>
+  "零一二三四五六七八九十"[content.meta.exam.domains.length];
+
 export function loadContent(dir = examDir) {
   const json = (name) =>
     JSON.parse(readFileSync(join(dir, "data", name), "utf8"));
@@ -229,10 +233,10 @@ function quizPages(content) {
     path: "/quiz/",
     label: "模擬題總覽",
     title: `${content.meta.exam.code} 模擬題`,
-    description: `依六個領域分組的 ${content.questions.length} 題原創模擬題，每題附正確答案、解析與常見陷阱。`,
+    description: `依${domainCount(content)}個領域分組的 ${content.questions.length} 題原創模擬題，每題附正確答案、解析與常見陷阱。`,
     app: "quiz",
     group: "模擬題",
-    body: `<p>依六個領域分組的 ${content.questions.length} 題原創模擬題。題目為學習用途自行撰寫，不是實際考題。</p><ul>${pages
+    body: `<p>依${domainCount(content)}個領域分組的 ${content.questions.length} 題原創模擬題。題目為學習用途自行撰寫，不是實際考題。</p><ul>${pages
       .map((page, i) => {
         const weight = domains[i].weight;
         return `<li><a href="${page.path}">${escapeHtml(page.title)}</a>（考試權重 ${weight.min}–${weight.max}%）</li>`;
@@ -251,7 +255,7 @@ function glossaryPage(content) {
     (n, c) => n + c.terms.length,
     0,
   );
-  const description = `${content.meta.exam.code} 六個領域共 ${count} 個名詞的繁體中文解釋。`;
+  const description = `${content.meta.exam.code} ${domainCount(content)}個領域共 ${count} 個名詞的繁體中文解釋。`;
   return {
     path: "/glossary/",
     label: "名詞庫",
@@ -293,7 +297,7 @@ function faqPage(content) {
     path: "/faq/",
     label: "FAQ／Q&A",
     title: `${content.meta.exam.code} 常見問題`,
-    description: `${content.meta.exam.code} 考試資訊與六領域觀念的 ${items.length} 則問答。`,
+    description: `${content.meta.exam.code} 考試資訊與${domainCount(content)}領域觀念的 ${items.length} 則問答。`,
     app: "faq",
     group: "速查",
     body: [...groups]
@@ -389,7 +393,7 @@ function llmsTxt(pages, content) {
   const lines = [
     `# ${SITE_NAME}`,
     "",
-    `> 繁體中文（臺灣）的 ${content.meta.exam.certificationName}（Exam ${content.meta.exam.code}: ${content.meta.exam.examName}）備考教材：六領域教材、名詞庫、問答與 ${content.questions.length} 題附解析的原創模擬題。`,
+    `> 繁體中文（臺灣）的 ${content.meta.exam.certificationName}（Exam ${content.meta.exam.code}: ${content.meta.exam.examName}）備考教材：${domainCount(content)}領域教材、名詞庫、問答與 ${content.questions.length} 題附解析的原創模擬題。`,
     "",
     content.meta.disclaimer,
     "",
