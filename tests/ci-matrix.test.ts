@@ -2,11 +2,13 @@ import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
 import test from "node:test";
 
+// Line endings are normalised: a Windows checkout (autocrlf) has CRLF, and the
+// patterns below match on LF.
 const workflow = (name: string) =>
   readFileSync(
     new URL(`../.github/workflows/${name}`, import.meta.url),
     "utf8",
-  );
+  ).replace(/\r\n/g, "\n");
 const exams = readdirSync(new URL("../exams/", import.meta.url));
 
 // A new exam under exams/ that is missing from the CI matrix would never be
