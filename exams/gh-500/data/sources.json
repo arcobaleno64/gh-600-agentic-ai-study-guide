@@ -292,5 +292,71 @@
     "title": "Set code scanning merge protection",
     "url": "https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/manage-your-configuration/set-merge-protection",
     "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-48",
+    "title": "Enabling security features at scale",
+    "url": "https://docs.github.com/en/code-security/concepts/security-at-scale/organization-security",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-49",
+    "title": "Configuring global security settings for your organization",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/configure-global-settings",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-50",
+    "title": "Creating a custom security configuration",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/create-custom-configuration",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-51",
+    "title": "Applying a custom security configuration",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/apply-custom-configuration",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-52",
+    "title": "Detaching repositories from their security configurations",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/manage-your-coverage/detach-security-configuration",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-53",
+    "title": "Configuring default setup for code scanning at scale",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/code-scanning-at-scale",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-54",
+    "title": "Configuring advanced setup for code scanning with CodeQL at scale",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/configuring-advanced-setup-for-code-scanning-with-codeql-at-scale",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-55",
+    "title": "Managing your paid use of Advanced Security",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/manage-usage-and-access/managing-your-github-advanced-security-license-usage",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-56",
+    "title": "Security configuration statuses",
+    "url": "https://docs.github.com/en/code-security/reference/security-at-scale/configuration-statuses",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-57",
+    "title": "Security configuration enforcement",
+    "url": "https://docs.github.com/en/code-security/reference/security-at-scale/configuration-enforcement",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-58",
+    "title": "REST API endpoints for code security configurations",
+    "url": "https://docs.github.com/en/rest/code-security/configurations",
+    "publisher": "GitHub Docs"
   }
 ]

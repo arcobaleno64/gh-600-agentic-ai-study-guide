@@ -324,6 +324,75 @@
           "category": "安全營運：最佳做法、優先順序與修復"
         }
       ]
+    },
+    {
+      "id": "D6",
+      "title": "GitHub 安全套件管理",
+      "terms": [
+        {
+          "id": "D6-T01",
+          "term": "Security configuration",
+          "explanation": "一組安全功能的啟用設定，可套用到組織內的 repository；控制 repository 層級的功能。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T02",
+          "term": "Global settings",
+          "explanation": "控制組織層級的安全設定，由所有 repository 繼承。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T03",
+          "term": "Enforced configuration",
+          "explanation": "強制的 security configuration；repository 擁有者不能改變它已啟用或已停用的功能，未設定的功能不強制。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T04",
+          "term": "removed 狀態",
+          "explanation": "repository 管理員改了與未強制 configuration 衝突的設定；仍關聯但不再繼承全部設定，也不計入涵蓋指標。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T05",
+          "term": "detached 狀態",
+          "explanation": "configuration 與 repository 完全斷開；現有安全設定不變，顯示為 No configuration。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T06",
+          "term": "Enabled with advanced setup allowed",
+          "explanation": "Default setup 的選項，只在 CodeQL 分析目前沒有執行的 repository 啟用 default setup，讓 configuration 可套用到所有 repository。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T07",
+          "term": "預設 configuration",
+          "explanation": "只自動套用到新建立的 repository；轉移進組織的 repository 需手動套用。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T08",
+          "term": "CodeQL model pack",
+          "explanation": "擴充 CodeQL 對額外框架與函式庫的辨識；目前是公開預覽，支援 C/C++、C#、Java/Kotlin、Python、Ruby 與 Rust。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        },
+        {
+          "id": "D6-T09",
+          "term": "生產環境脈絡",
+          "explanation": "整合 Microsoft Defender for Cloud、JFrog Artifactory 或 CI/CD 的資料，協助排定 code scanning 與 Dependabot 警示的優先順序。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件管理"
+        }
+      ]
     }
   ]
 }

@@ -2200,5 +2200,359 @@
     "domain": "安全營運：最佳做法、優先順序與修復",
     "difficulty": "中等",
     "keywords": ["D5", "D5-O5"]
+  },
+  {
+    "id": "GH500-073",
+    "exam": "GH-500",
+    "number": 73,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O1"],
+    "sourceIds": ["GH500-DOC-56"],
+    "type": "single",
+    "answer": "B",
+    "question": "repository 管理員改了一個與未強制 configuration 衝突的設定。該 repository 的狀態會是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "detached，已完全斷開關聯"
+      },
+      {
+        "id": "B",
+        "text": "removed，仍關聯但不繼承全部"
+      },
+      {
+        "id": "C",
+        "text": "failed，無法套用 configuration"
+      },
+      {
+        "id": "D",
+        "text": "attached，繼續繼承全部設定"
+      }
+    ],
+    "explanation": "removed 表示 repository 管理員改了與未強制 configuration 衝突的設定，configuration 仍關聯，但 repository 不再繼承全部設定，也不計入涵蓋指標。",
+    "trap": "removed 與 detached 都像是「脫離管理」，但 detached 是完全斷開。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "中等",
+    "keywords": ["D6", "D6-O1"]
+  },
+  {
+    "id": "GH500-074",
+    "exam": "GH-500",
+    "number": 74,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O1"],
+    "sourceIds": ["GH500-DOC-52"],
+    "type": "true-false",
+    "answer": false,
+    "question": "把 repository 從 security configuration 卸除（detach）時，會同時還原該 repository 原本的安全設定。",
+    "explanation": "卸除不會改變 repository 現有的啟用設定；只是之後改為在 repository 層級個別管理。",
+    "trap": "卸除聽起來像復原，其實只是不再受 configuration 管理。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "基礎",
+    "keywords": ["D6", "D6-O1"]
+  },
+  {
+    "id": "GH500-075",
+    "exam": "GH-500",
+    "number": 75,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O1"],
+    "sourceIds": ["GH500-DOC-57"],
+    "type": "single",
+    "answer": "C",
+    "question": "腳本用 REST API 修改已強制 configuration 所控制的功能。呼叫會有什麼結果？",
+    "options": [
+      {
+        "id": "A",
+        "text": "回傳錯誤，因為該功能被鎖定"
+      },
+      {
+        "id": "B",
+        "text": "功能被改變，並記入稽核日誌"
+      },
+      {
+        "id": "C",
+        "text": "呼叫看似成功，但啟用狀態不變"
+      },
+      {
+        "id": "D",
+        "text": "只有企業管理員的呼叫會成功"
+      }
+    ],
+    "explanation": "對強制的 configuration，透過 REST API 的變更呼叫看似成功，但啟用狀態不會改變。",
+    "trap": "以為被鎖定的設定會回傳錯誤；實際上是無聲不生效。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "進階",
+    "keywords": ["D6", "D6-O1"]
+  },
+  {
+    "id": "GH500-076",
+    "exam": "GH-500",
+    "number": 76,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O2"],
+    "sourceIds": ["GH500-DOC-50"],
+    "type": "single",
+    "answer": "D",
+    "question": "組織建立了預設 security configuration，之後一個 repository 從其他組織轉移進來。這個 repository 會如何？",
+    "options": [
+      {
+        "id": "A",
+        "text": "自動套用預設 configuration"
+      },
+      {
+        "id": "B",
+        "text": "自動套用，但狀態標示為 attaching"
+      },
+      {
+        "id": "C",
+        "text": "維持 detached，直到下次排程套用"
+      },
+      {
+        "id": "D",
+        "text": "需手動套用適合的 configuration"
+      }
+    ],
+    "explanation": "預設 configuration 只自動套用到新建立的 repository；轉移進組織的 repository 要手動套用。",
+    "trap": "「預設」讓人以為所有進入組織的 repository 都會套用。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "中等",
+    "keywords": ["D6", "D6-O2"]
+  },
+  {
+    "id": "GH500-077",
+    "exam": "GH-500",
+    "number": 77,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O2"],
+    "sourceIds": ["GH500-DOC-50"],
+    "type": "true-false",
+    "answer": false,
+    "question": "在 security configuration 中，可以在未啟用 validity checks 的情況下啟用 extended metadata checks。",
+    "explanation": "只能在 validity checks 啟用時，才能啟用 extended metadata checks。",
+    "trap": "兩者列在同一組選項中，容易以為可以獨立開關。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "中等",
+    "keywords": ["D6", "D6-O2"]
+  },
+  {
+    "id": "GH500-078",
+    "exam": "GH-500",
+    "number": 78,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O2"],
+    "sourceIds": ["GH500-DOC-55"],
+    "type": "single",
+    "answer": "A",
+    "question": "管理員要讓 Code Security 保持停用，卻把 Code scanning 區塊的「Prevent direct alert dismissals」改成 Not set。結果會是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "Code Security 自動切換為 Enabled"
+      },
+      {
+        "id": "B",
+        "text": "Code Security 仍保持停用"
+      },
+      {
+        "id": "C",
+        "text": "僅 Dependabot alerts 被關閉"
+      },
+      {
+        "id": "D",
+        "text": "configuration 無法儲存並顯示錯誤"
+      }
+    ],
+    "explanation": "把該項改為 Not set 會自動把 Code Security 切換為 Enabled；為避免意外啟用付費功能，儲存與套用前要重新確認最上層的設定。",
+    "trap": "「Not set」看似沒動作，但會觸發付費功能啟用。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "進階",
+    "keywords": ["D6", "D6-O2"]
+  },
+  {
+    "id": "GH500-079",
+    "exam": "GH-500",
+    "number": 79,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O2"],
+    "sourceIds": ["GH500-DOC-49"],
+    "type": "single",
+    "answer": "C",
+    "question": "組織把 Dependabot 的 runner 類型設為標籤 runner。公開 repository 的 Dependabot 更新會用哪種 runner？",
+    "options": [
+      {
+        "id": "A",
+        "text": "符合標籤的自管 runner"
+      },
+      {
+        "id": "B",
+        "text": "符合標籤的 larger runner"
+      },
+      {
+        "id": "C",
+        "text": "GitHub 代管的標準 runner"
+      },
+      {
+        "id": "D",
+        "text": "由 repository 管理員自選"
+      }
+    ],
+    "explanation": "基於安全理由，公開 repository 一律用 GitHub-hosted runner，標籤 runner 對公開 repository 無效。",
+    "trap": "組織層級設定看似涵蓋所有 repository，但公開 repository 是例外。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "進階",
+    "keywords": ["D6", "D6-O2"]
+  },
+  {
+    "id": "GH500-080",
+    "exam": "GH-500",
+    "number": 80,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O2"],
+    "sourceIds": ["GH500-DOC-49"],
+    "type": "single",
+    "answer": "B",
+    "question": "組織已在 global settings 啟用 AI Scan for pull requests。AI applications 掃描會怎麼樣？",
+    "options": [
+      {
+        "id": "A",
+        "text": "一併啟用，因為屬於同一組偵測"
+      },
+      {
+        "id": "B",
+        "text": "不會啟用，需要另外選擇啟用"
+      },
+      {
+        "id": "C",
+        "text": "只對私有 repository 一併啟用"
+      },
+      {
+        "id": "D",
+        "text": "由 repository 管理員決定是否一併啟用"
+      }
+    ],
+    "explanation": "AI applications 掃描與 AI Scan 是各自獨立的設定，控制不同的偵測器；啟用 AI Scan 不會啟用 AI applications 掃描。",
+    "trap": "名稱都含 AI，容易以為是同一個開關。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "中等",
+    "keywords": ["D6", "D6-O2"]
+  },
+  {
+    "id": "GH500-081",
+    "exam": "GH-500",
+    "number": 81,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O3"],
+    "sourceIds": ["GH500-DOC-50"],
+    "type": "single",
+    "answer": "A",
+    "question": "組織要建立一個能套用到所有 repository 的 configuration，其中一部分 repository 已經在跑 advanced setup。Default setup 應選哪個選項？",
+    "options": [
+      {
+        "id": "A",
+        "text": "Enabled with advanced setup allowed"
+      },
+      {
+        "id": "B",
+        "text": "Not set，保持各 repository 現狀"
+      },
+      {
+        "id": "C",
+        "text": "Disabled，改由 workflow 檔控制"
+      },
+      {
+        "id": "D",
+        "text": "Enabled，覆蓋現有的 advanced setup"
+      }
+    ],
+    "explanation": "「Enabled with advanced setup allowed」只在 CodeQL 分析目前沒有執行的 repository 啟用 default setup，因此可套用到所有 repository。",
+    "trap": "直接選 Enabled 會與現有 advanced setup 衝突。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "進階",
+    "keywords": ["D6", "D6-O3"]
+  },
+  {
+    "id": "GH500-082",
+    "exam": "GH-500",
+    "number": 82,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O3"],
+    "sourceIds": ["GH500-DOC-54"],
+    "type": "single",
+    "answer": "C",
+    "question": "對不適用 default setup 的一批 repository，官方建議用什麼方式大規模啟用 advanced setup？",
+    "options": [
+      {
+        "id": "A",
+        "text": "在組織設定頁面一鍵啟用全部"
+      },
+      {
+        "id": "B",
+        "text": "套用 security configuration 即可"
+      },
+      {
+        "id": "C",
+        "text": "用批次 script 把 workflow 加到各庫"
+      },
+      {
+        "id": "D",
+        "text": "由各 repository 管理員自行建立"
+      }
+    ],
+    "explanation": "不適用 default setup 的 repository，用批次設定 script 把 CodeQL workflow 加到每個 repository；組織需啟用 GitHub Actions。",
+    "trap": "security configuration 可啟用 default setup，但不負責把自訂 workflow 加到各 repository。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "中等",
+    "keywords": ["D6", "D6-O3"]
+  },
+  {
+    "id": "GH500-083",
+    "exam": "GH-500",
+    "number": 83,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O4"],
+    "sourceIds": ["GH500-DOC-56"],
+    "type": "single",
+    "answer": "A",
+    "question": "管理員想追蹤 repository 的 security configuration 狀態何時變更。應該查稽核日誌的哪個事件？",
+    "options": [
+      {
+        "id": "A",
+        "text": "repository_security_configuration"
+      },
+      {
+        "id": "B",
+        "text": "repository_vulnerability_alert"
+      },
+      {
+        "id": "C",
+        "text": "org.update_security_configuration"
+      },
+      {
+        "id": "D",
+        "text": "repo.security_status_change"
+      }
+    ],
+    "explanation": "狀態變更會記錄為 repository_security_configuration 事件，可用 action:repository_security_configuration 篩選。",
+    "trap": "稽核日誌有多個 repository_ 開頭的事件，要記對各自的用途。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "進階",
+    "keywords": ["D6", "D6-O4"]
+  },
+  {
+    "id": "GH500-084",
+    "exam": "GH-500",
+    "number": 84,
+    "domainId": "D6",
+    "objectiveIds": ["D6-O4"],
+    "sourceIds": ["GH500-DOC-58"],
+    "type": "true-false",
+    "answer": false,
+    "question": "取得企業 code security configuration 的 REST 端點，可以使用 fine-grained personal access token。",
+    "explanation": "該端點不適用 GitHub App user access token、installation access token 或 fine-grained personal access token；OAuth app 與 classic personal access token 需要 read:enterprise 範圍。",
+    "trap": "fine-grained token 常被視為較新、較推薦的選擇，但這個端點不支援。",
+    "domain": "GitHub 安全套件管理",
+    "difficulty": "進階",
+    "keywords": ["D6", "D6-O4"]
   }
 ]
