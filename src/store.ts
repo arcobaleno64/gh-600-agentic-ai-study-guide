@@ -3,6 +3,7 @@ import type {
   ExamCode,
   ProgressData,
   QuestionStat,
+  QuestProgress,
   QuizAttempt,
   ThemeMode,
 } from "./types";
@@ -21,6 +22,7 @@ const defaults: ProgressData = {
   wrongQuestionIds: [],
   quizAttempts: [],
   reviewChecks: [],
+  quest: { cleared: {}, freeRoam: false },
   examDates: {},
   theme: "system",
 };
@@ -101,6 +103,22 @@ function sanitizeAttempts(value: unknown): QuizAttempt[] {
   return result.slice(0, 30);
 }
 
+function sanitizeQuest(value: unknown): QuestProgress {
+  const result: QuestProgress = { cleared: {}, freeRoam: false };
+  if (!isRecord(value)) return result;
+  result.freeRoam = value.freeRoam === true;
+  if (isRecord(value.cleared)) {
+    for (const [id, stars] of Object.entries(value.cleared)) {
+      if (!/^[A-Za-z0-9-]{1,24}$/.test(id)) continue;
+      if (!Number.isInteger(stars) || Number(stars) < 1 || Number(stars) > 3)
+        continue;
+      if (Object.keys(result.cleared).length >= 64) break;
+      result.cleared[id] = Number(stars);
+    }
+  }
+  return result;
+}
+
 function sanitizeProgress(value: unknown): ProgressData {
   if (!isRecord(value)) return structuredClone(defaults);
 
@@ -150,6 +168,7 @@ function sanitizeProgress(value: unknown): ProgressData {
     wrongQuestionIds: uniqueStrings(value.wrongQuestionIds),
     quizAttempts: sanitizeAttempts(value.quizAttempts),
     reviewChecks: uniqueStrings(value.reviewChecks),
+    quest: sanitizeQuest(value.quest),
     examDates,
     theme: themes.includes(value.theme as ThemeMode)
       ? (value.theme as ThemeMode)
@@ -226,6 +245,11 @@ export function recordQuestion(id: string, correct: boolean): void {
   }
   stat.lastAnsweredAt = new Date().toISOString();
   progress.questionStats[id] = stat;
+}
+
+export function recordQuestClear(id: string, stars: number): void {
+  const best = Math.max(progress.quest.cleared[id] ?? 0, stars);
+  progress.quest.cleared[id] = Math.min(3, Math.max(1, Math.floor(best)));
 }
 
 export function addAttempt(attempt: QuizAttempt): void {
