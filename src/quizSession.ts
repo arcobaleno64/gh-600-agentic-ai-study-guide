@@ -4,6 +4,11 @@ import type { Question, QuestionAnswer, QuestionOption } from "./types.ts";
 // throw away a 120-minute mock exam. Only ids are stored; question text always
 // comes from the current bank, and a session that no longer matches it is dropped.
 export const SESSION_KEY = "gh600-quiz-session-v1";
+let key = SESSION_KEY;
+// Another exam keeps its own in-progress session; see sessionKey in site.ts.
+export const useSessionKey = (next: string) => {
+  key = next;
+};
 export type QuizMode = "練習模式" | "模擬考模式" | "仿真考模式";
 
 export interface SavedSession {
@@ -34,7 +39,7 @@ type Store = Pick<Storage, "getItem" | "setItem" | "removeItem">;
 
 export function saveSession(storage: Store, session: SavedSession): boolean {
   try {
-    storage.setItem(SESSION_KEY, JSON.stringify(session));
+    storage.setItem(key, JSON.stringify(session));
     return true;
   } catch {
     return false;
@@ -43,7 +48,7 @@ export function saveSession(storage: Store, session: SavedSession): boolean {
 
 export function clearSession(storage: Store) {
   try {
-    storage.removeItem(SESSION_KEY);
+    storage.removeItem(key);
   } catch {
     /* storage unavailable: nothing to clear */
   }
@@ -56,7 +61,7 @@ export function loadSession(
 ): RestoredSession | null {
   let raw: unknown;
   try {
-    raw = JSON.parse(storage.getItem(SESSION_KEY) ?? "null");
+    raw = JSON.parse(storage.getItem(key) ?? "null");
   } catch {
     return null;
   }

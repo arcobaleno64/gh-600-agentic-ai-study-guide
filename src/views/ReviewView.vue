@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { review } from "../content";
+import { examCode } from "../site";
 import { progress, toggleReviewCheck } from "../store";
 const compact = ref(false);
-const memories = review.mustRemember["GH-600"];
+const memories = review.mustRemember[examCode];
 function printPage() {
   window.print();
 }

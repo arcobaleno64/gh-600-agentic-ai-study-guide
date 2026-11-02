@@ -1,6 +1,7 @@
 import { reactive } from "vue";
 import type { RouteName } from "./types";
 import { decodeRouteParam } from "./utils";
+import { site } from "./site";
 export const route = reactive<{
   name: RouteName;
   param: string;
@@ -14,7 +15,7 @@ const names = new Set<RouteName>([
   "quiz",
   "faq",
   "review",
-  "quest",
+  ...(site.quest ? (["quest"] as const) : []),
   "sources",
   "settings",
 ]);

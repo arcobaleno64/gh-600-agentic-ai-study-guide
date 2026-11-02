@@ -12,10 +12,11 @@ import {
 import { downloadJson } from "../utils";
 import { showToast } from "../toast";
 import type { ExamCode, ThemeMode } from "../types";
+import { progressKey } from "../site";
 const fileInput = ref<HTMLInputElement | null>(null);
 function exportData() {
   downloadJson(
-    `gh-600-study-progress-${new Date().toISOString().slice(0, 10)}.json`,
+    `${progressKey}-${new Date().toISOString().slice(0, 10)}.json`,
     exportProgress(),
   );
   showToast("學習紀錄已匯出。", "success");

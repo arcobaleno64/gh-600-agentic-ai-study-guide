@@ -7,10 +7,11 @@ import type {
   QuizAttempt,
   ThemeMode,
 } from "./types";
+import { progressKey } from "./site";
 
-const KEY = "gh-600-study-progress-v1";
+const KEY = `${progressKey}-v1`;
 const themes: ThemeMode[] = ["system", "light", "dark"];
-const examCodes: ExamCode[] = ["GH-600"];
+const examCodes: ExamCode[] = ["GH-600", "GH-500"];
 
 const defaults: ProgressData = {
   version: 1,
@@ -286,18 +287,14 @@ export const setExamDate = (exam: ExamCode, date: string) => {
 
 export function exportProgress() {
   return {
-    schema: "gh-600-study-progress",
+    schema: progressKey,
     exportedAt: new Date().toISOString(),
     ...JSON.parse(JSON.stringify(progress)),
   };
 }
 
 export function importProgress(value: unknown): void {
-  if (
-    !isRecord(value) ||
-    value.schema !== "gh-600-study-progress" ||
-    value.version !== 1
-  ) {
+  if (!isRecord(value) || value.schema !== progressKey || value.version !== 1) {
     throw new Error("檔案格式或版本不是本網站支援的學習紀錄。");
   }
   Object.assign(progress, sanitizeProgress(value));
