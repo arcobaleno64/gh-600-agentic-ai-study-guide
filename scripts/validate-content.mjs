@@ -1,8 +1,9 @@
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { validateContentData } from "./content-contract.mjs";
+import { examRoot } from "./exam.mjs";
 
-const root = resolve(process.cwd());
+const root = examRoot;
 const read = (path) => JSON.parse(readFileSync(join(root, path), "utf8"));
 const chapterDir = join(root, "content", "chapters");
 const chapterFiles = readdirSync(chapterDir).filter((name) =>

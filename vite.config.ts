@@ -2,6 +2,10 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
+import { fileURLToPath } from "node:url";
+
+// One exam per build: EXAM picks exams/<code>/ (default gh-600).
+const exam = process.env.EXAM || "gh-600";
 export default defineConfig({
   plugins: [
     vue(),
@@ -51,6 +55,11 @@ export default defineConfig({
       },
     },
   ],
+  resolve: {
+    alias: {
+      "@exam": fileURLToPath(new URL(`./exams/${exam}`, import.meta.url)),
+    },
+  },
   base: "./",
   build: { target: "es2022", sourcemap: true },
 });

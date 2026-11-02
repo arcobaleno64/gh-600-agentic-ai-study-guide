@@ -18,7 +18,9 @@ import {
 } from "../src/quizSession.ts";
 import type { Question } from "../src/types.ts";
 
-const read = (path: string) => JSON.parse(readFileSync(path, "utf8"));
+const examRoot = new URL("../exams/gh-600/", import.meta.url);
+const read = (path: string) =>
+  JSON.parse(readFileSync(new URL(path, examRoot), "utf8"));
 const part1 = read("data/exam-part1.json") as {
   scenario: ExamScenario;
   questions: Question[];

@@ -135,13 +135,16 @@ function readerHarness(id: string, section: string) {
       id,
       title: id,
       raw: readFileSync(
-        new URL(`../content/chapters/${id}.md`, import.meta.url),
+        new URL(`../exams/gh-600/content/chapters/${id}.md`, import.meta.url),
         "utf8",
       ),
     }),
   );
   const questions = JSON.parse(
-    readFileSync(new URL("../data/questions.json", import.meta.url), "utf8"),
+    readFileSync(
+      new URL("../exams/gh-600/data/questions.json", import.meta.url),
+      "utf8",
+    ),
   );
   const source = readFileSync(
     new URL("../src/views/KnowledgeView.vue", import.meta.url),
@@ -391,7 +394,10 @@ test("六段案例的教材連結都對應真實 objective，且各選項回饋�
     );
     for (const stage of h.state.stages) {
       const chapter = readFileSync(
-        new URL(`../content/chapters/${stage.id}.md`, import.meta.url),
+        new URL(
+          `../exams/gh-600/content/chapters/${stage.id}.md`,
+          import.meta.url,
+        ),
         "utf8",
       );
       assert.ok(

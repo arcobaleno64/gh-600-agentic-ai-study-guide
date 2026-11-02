@@ -4,7 +4,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { validateContentData } from "../scripts/content-contract.mjs";
 
-const root = resolve(import.meta.dirname, "..");
+const root = resolve(import.meta.dirname, "..", "exams", "gh-600");
 const read = (path: string) =>
   JSON.parse(readFileSync(join(root, path), "utf8"));
 function fixture() {

@@ -1,7 +1,7 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { extname, join, resolve, relative } from "node:path";
 const root = resolve(process.cwd()),
-  roots = ["content", "data", "src"],
+  roots = ["exams", "src"],
   exts = new Set([".md", ".json", ".vue", ".ts"]),
   pairs = [
     ["数据", "資料"],
