@@ -1,7 +1,8 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
-const root = resolve(import.meta.dirname, "..");
+import { examRoot } from "./exam.mjs";
+const root = examRoot;
 const writeJson = (path, value) =>
   writeFileSync(
     join(root, path),

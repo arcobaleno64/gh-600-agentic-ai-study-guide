@@ -11,8 +11,8 @@
     "build": "npm run validate && vite build && node scripts/static-pages.mjs",
     "preview": "vite preview",
     "deploy": "npm run build && wrangler deploy",
-    "format": "prettier --write \"src/**/*.{ts,vue,css}\" \"tests/**/*.ts\" \"scripts/*.mjs\" \"content/**/*.md\" \"data/*.json\" \"*.{json,ts,md,html}\" \".github/workflows/*.yml\" \"public/*.{json,html}\" \"wrangler.jsonc\"",
-    "format:check": "prettier --check \"src/**/*.{ts,vue,css}\" \"tests/**/*.ts\" \"scripts/*.mjs\" \"content/**/*.md\" \"data/*.json\" \"*.{json,ts,md,html}\" \".github/workflows/*.yml\" \"public/*.{json,html}\" \"wrangler.jsonc\""
+    "format": "prettier --write \"src/**/*.{ts,vue,css}\" \"tests/**/*.ts\" \"scripts/*.mjs\" \"exams/*/content/**/*.md\" \"exams/*/data/*.json\" \"*.{json,ts,md,html}\" \".github/workflows/*.yml\" \"public/*.{json,html}\" \"wrangler.jsonc\"",
+    "format:check": "prettier --check \"src/**/*.{ts,vue,css}\" \"tests/**/*.ts\" \"scripts/*.mjs\" \"exams/*/content/**/*.md\" \"exams/*/data/*.json\" \"*.{json,ts,md,html}\" \".github/workflows/*.yml\" \"public/*.{json,html}\" \"wrangler.jsonc\""
   },
   "dependencies": {
     "marked": "^16.2.1",

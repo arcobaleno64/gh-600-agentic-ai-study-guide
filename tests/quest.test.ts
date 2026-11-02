@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import questionData from "../data/questions.json" with { type: "json" };
+import questionData from "../exams/gh-600/data/questions.json" with { type: "json" };
 import {
   buildPath,
   isUnlocked,

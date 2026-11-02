@@ -5,7 +5,7 @@ import { readingSections, readingExcerpt } from "../src/reading.ts";
 
 test("章節目錄保留教材順序、考試目標及全文", () => {
   const raw = readFileSync(
-    new URL("../content/chapters/d2.md", import.meta.url),
+    new URL("../exams/gh-600/content/chapters/d2.md", import.meta.url),
     "utf8",
   );
   const { sections } = readingSections(raw);

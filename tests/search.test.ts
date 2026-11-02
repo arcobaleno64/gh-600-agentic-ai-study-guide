@@ -103,10 +103,14 @@ test("真實教材 MCP 排序、名詞查找、題幹相關程度及既有呼叫
       require(name: string) {
         if (name === "./search") return search;
         if (name === "./reading") return reading;
-        const path = new URL(
-          name.replace(/\?raw$/, ""),
-          new URL("../src/content.ts", import.meta.url),
-        );
+        const file = name.replace(/\?raw$/, "");
+        // "@exam/" is the vite alias for exams/<code>/ (these tests use gh-600).
+        const path = file.startsWith("@exam/")
+          ? new URL(
+              `../exams/gh-600/${file.slice("@exam/".length)}`,
+              import.meta.url,
+            )
+          : new URL(file, new URL("../src/content.ts", import.meta.url));
         const raw = readFileSync(path, "utf8");
         return { default: name.endsWith("?raw") ? raw : JSON.parse(raw) };
       },

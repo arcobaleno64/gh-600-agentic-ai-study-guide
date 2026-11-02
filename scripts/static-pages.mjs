@@ -12,8 +12,9 @@ export const SITE_URL =
 export const SITE_NAME = "GH-600 Agentic AI Developer 四週備考指南";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
+const examDir = join(root, "exams", process.env.EXAM || "gh-600");
 
-export function loadContent(dir = root) {
+export function loadContent(dir = examDir) {
   const json = (name) =>
     JSON.parse(readFileSync(join(dir, "data", name), "utf8"));
   const md = (name) =>
