@@ -1,0 +1,50 @@
+[
+  {
+    "id": "GH500-CERT",
+    "title": "GitHub Advanced Security",
+    "url": "https://learn.microsoft.com/en-us/credentials/certifications/github-advanced-security/",
+    "publisher": "Microsoft Learn"
+  },
+  {
+    "id": "GH500-SG",
+    "title": "Study guide for Exam GH-500: GitHub Advanced Security",
+    "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-500",
+    "publisher": "Microsoft Learn"
+  },
+  {
+    "id": "GH500-DOC-01",
+    "title": "About secret scanning",
+    "url": "https://docs.github.com/en/code-security/secret-scanning/introduction/about-secret-scanning",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-02",
+    "title": "About push protection",
+    "url": "https://docs.github.com/en/code-security/secret-scanning/introduction/about-push-protection",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-03",
+    "title": "Resolving alerts from secret scanning",
+    "url": "https://docs.github.com/en/code-security/secret-scanning/managing-alerts-from-secret-scanning/resolving-alerts",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-04",
+    "title": "About delegated bypass for push protection",
+    "url": "https://docs.github.com/en/code-security/secret-scanning/using-advanced-secret-scanning-and-push-protection-features/delegated-bypass-for-push-protection/about-delegated-bypass-for-push-protection",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-05",
+    "title": "Defining custom patterns for secret scanning",
+    "url": "https://docs.github.com/en/code-security/secret-scanning/using-advanced-secret-scanning-and-push-protection-features/custom-patterns/defining-custom-patterns-for-secret-scanning",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-06",
+    "title": "Enabling secret scanning for your repository",
+    "url": "https://docs.github.com/en/code-security/secret-scanning/enabling-secret-scanning-features/enabling-secret-scanning-for-your-repository",
+    "publisher": "GitHub Docs"
+  }
+]

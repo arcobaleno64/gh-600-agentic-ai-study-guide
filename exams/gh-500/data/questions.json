@@ -1,0 +1,406 @@
+[
+  {
+    "id": "GH500-001",
+    "exam": "GH-500",
+    "number": 1,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O1"],
+    "sourceIds": ["GH500-DOC-01", "GH500-DOC-06"],
+    "type": "single",
+    "answer": "A",
+    "question": "公開 repository 與組織擁有的私有 repository，在使用 secret scanning 的條件上有何差異？",
+    "options": [
+      {
+        "id": "A",
+        "text": "公開的自動掃描且不收費；組織私有的需要 GitHub Secret Protection"
+      },
+      {
+        "id": "B",
+        "text": "兩者都自動掃描且不收費，差別只在可掃描的分支數量"
+      },
+      {
+        "id": "C",
+        "text": "公開的需另購授權；組織私有的預設即可免費使用掃描功能"
+      },
+      {
+        "id": "D",
+        "text": "兩者都必須先啟用 Secret Protection，才能掃描 Git 歷史"
+      }
+    ],
+    "explanation": "公開 repository 的 secret scanning 自動執行，不另外收費；組織擁有的私有與 internal repository 需要 GitHub Secret Protection，由 GitHub Team 或 GitHub Enterprise Cloud 提供。",
+    "trap": "「只有公開的免費」容易被誤記成「只掃公開的」；私有 repository 並非不能掃，而是要先取得並啟用 Secret Protection。",
+    "domain": "設定與使用 Secret Protection",
+    "difficulty": "基礎",
+    "keywords": ["D2", "D2-O1"]
+  },
+  {
+    "id": "GH500-002",
+    "exam": "GH-500",
+    "number": 2,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O1"],
+    "sourceIds": ["GH500-DOC-01"],
+    "type": "true-false",
+    "answer": false,
+    "question": "Secret scanning 只檢查最新一次 commit 的程式碼，不會檢查過去的 Git 歷史。",
+    "explanation": "Secret scanning 會掃描所有分支的完整 Git 歷史，另外也檢查 issue 與 pull request 的文字、Discussions、wiki 與 secret gist。",
+    "trap": "掃描範圍常被想成「只有程式碼檔案」；實際上討論區與文字欄位裡貼出的憑證同樣會被找出來。",
+    "domain": "設定與使用 Secret Protection",
+    "difficulty": "基礎",
+    "keywords": ["D2", "D2-O1"]
+  },
+  {
+    "id": "GH500-003",
+    "exam": "GH-500",
+    "number": 3,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O1"],
+    "sourceIds": ["GH500-DOC-01"],
+    "type": "multiple",
+    "answer": ["A", "C"],
+    "question": "關於 partner patterns（合作夥伴樣式），下列哪些敘述正確？（選 2 項）",
+    "options": [
+      {
+        "id": "A",
+        "text": "這類樣式預設啟用，不須管理員逐一設定"
+      },
+      {
+        "id": "B",
+        "text": "每個供應商的樣式都要由管理員逐一手動開啟"
+      },
+      {
+        "id": "C",
+        "text": "偵測到的 secret 送給供應商，由其處理，例如撤銷"
+      },
+      {
+        "id": "D",
+        "text": "偵測結果一律列在 repository 的警示清單中供逐筆處理"
+      }
+    ],
+    "explanation": "Partner patterns 預設啟用；偵測到的合作夥伴 secret 會送給服務供應商，由供應商決定處置，例如撤銷憑證，這類 secret 不會出現在你的 repository 警示中。",
+    "trap": "「看不到警示」不等於「沒有偵測」；合作夥伴 secret 的處理被轉交給供應商，所以管理員在警示清單上看不到它。",
+    "domain": "設定與使用 Secret Protection",
+    "difficulty": "中等",
+    "keywords": ["D2", "D2-O1"]
+  },
+  {
+    "id": "GH500-004",
+    "exam": "GH-500",
+    "number": 4,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O1", "D2-O3"],
+    "sourceIds": ["GH500-DOC-01"],
+    "type": "single",
+    "answer": "C",
+    "question": "團隊找到的有效 secret 太多，想決定先處理哪些。哪項功能最直接協助排定處理順序？",
+    "options": [
+      {
+        "id": "A",
+        "text": "將所有警示一律標為 false positive 後再逐一檢查"
+      },
+      {
+        "id": "B",
+        "text": "停用 push protection，減少新增警示的數量"
+      },
+      {
+        "id": "C",
+        "text": "有效性檢查，確認偵測到的 secret 是否仍然有效"
+      },
+      {
+        "id": "D",
+        "text": "改寫 Git 歷史，先移除最舊的 commit"
+      }
+    ],
+    "explanation": "有效性檢查（validity checks）確認偵測到的 secret 是否仍然有效，讓團隊先處理仍可被利用的憑證。檢查時可能需要連到發行該 secret 的服務。",
+    "trap": "減少警示數量或清歷史都不會改變風險排序；真正能分出輕重的是 secret 是否仍有效。",
+    "domain": "設定與使用 Secret Protection",
+    "difficulty": "中等",
+    "keywords": ["D2", "D2-O1", "D2-O3"]
+  },
+  {
+    "id": "GH500-005",
+    "exam": "GH-500",
+    "number": 5,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O2"],
+    "sourceIds": ["GH500-DOC-02"],
+    "type": "single",
+    "answer": "B",
+    "question": "推送內容含有疑似 secret 時，push protection 預設會怎麼處理？",
+    "options": [
+      {
+        "id": "A",
+        "text": "允許推送完成，並立即建立最高嚴重度的警示"
+      },
+      {
+        "id": "B",
+        "text": "阻擋推送並說明原因，貢獻者須移除敏感內容後重推"
+      },
+      {
+        "id": "C",
+        "text": "自動改寫 commit，移除 secret 後替貢獻者完成推送"
+      },
+      {
+        "id": "D",
+        "text": "推送照常完成，只寄一封通知信給組織擁有者"
+      }
+    ],
+    "explanation": "Push protection 在推送當下攔截：阻擋推送、說明原因，要求貢獻者檢視被標記的內容、移除敏感資訊後重新推送。",
+    "trap": "把 push protection 想成「事後警示」會選到允許推送的選項；它的價值在於 secret 還沒進入 repository 就被擋下。",
+    "domain": "設定與使用 Secret Protection",
+    "difficulty": "基礎",
+    "keywords": ["D2", "D2-O2"]
+  },
+  {
+    "id": "GH500-006",
+    "exam": "GH-500",
+    "number": 6,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O2"],
+    "sourceIds": ["GH500-DOC-02"],
+    "type": "true-false",
+    "answer": true,
+    "question": "貢獻者以「I'll fix it later」為理由繞過 push protection 時，會建立一個仍為開啟狀態的警示。",
+    "explanation": "三個繞過理由中，只有「I'll fix it later」建立開啟中的警示；另外兩個理由建立的是已關閉的警示。",
+    "trap": "容易把三個理由都當成建立已關閉的警示；實際上只有稱為測試用途或誤判的兩種才會直接關閉。",
+    "domain": "設定與使用 Secret Protection",
+    "difficulty": "中等",
+    "keywords": ["D2", "D2-O2"]
+  },
+  {
+    "id": "GH500-007",
+    "exam": "GH-500",
+    "number": 7,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O2"],
+    "sourceIds": ["GH500-DOC-02"],
+    "type": "multiple",
+    "answer": ["A", "B", "D"],
+    "question": "下列哪些推送途徑的 push protection 也涵蓋 AI 偵測的 secret？（選 3 項）",
+    "options": [
+      {
+        "id": "A",
+        "text": "從命令列推送 commit"
+      },
+      {
+        "id": "B",
+        "text": "在網頁介面提交變更"
+      },
+      {
+        "id": "C",
+        "text": "透過 REST API 提交內容"
+      },
+      {
+        "id": "D",
+        "text": "把檔案上傳到 GitHub"
+      }
+    ],
+    "explanation": "命令列推送、網頁介面提交與檔案上傳支援全部樣式類型，包含 AI 偵測的 secret；REST API 只支援 partner、generic 與 custom 樣式。",
+    "trap": "「同樣是 push protection」不代表每個途徑的涵蓋範圍一樣；評估防護時要逐一核對途徑與樣式類型。",
+    "domain": "設定與使用 Secret Protection",
+    "difficulty": "進階",
+    "keywords": ["D2", "D2-O2"]
+  },
+  {
+    "id": "GH500-008",
+    "exam": "GH-500",
+    "number": 8,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O3"],
+    "sourceIds": ["GH500-DOC-01", "GH500-DOC-03"],
+    "type": "single",
+    "answer": "D",
+    "question": "發現一個 API 金鑰留在舊的 commit 中，官方建議的處理優先順序是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "先改寫 Git 歷史，確認乾淨之後才開始處理金鑰本身"
+      },
+      {
+        "id": "B",
+        "text": "直接關閉警示，因為舊的 commit 已無法被利用"
+      },
+      {
+        "id": "C",
+        "text": "等待 GitHub 自動撤銷所有類型的憑證"
+      },
+      {
+        "id": "D",
+        "text": "視為已外洩，立即撤銷或輪替，通常不必先改寫歷史"
+      }
+    ],
+    "explanation": "已提交的 secret 應視為已外洩。憑證一旦撤銷或輪替，改寫 Git 歷史通常不必要，而且耗時，所以先讓憑證失效。",
+    "trap": "清乾淨歷史看起來比較徹底，但風險來自憑證仍有效；憑證沒失效前，歷史再乾淨也沒有降低風險。",
+    "domain": "設定與使用 Secret Protection",
+    "difficulty": "基礎",
+    "keywords": ["D2", "D2-O3"]
+  },
+  {
+    "id": "GH500-009",
+    "exam": "GH-500",
+    "number": 9,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O3"],
+    "sourceIds": ["GH500-DOC-03"],
+    "type": "true-false",
+    "answer": false,
+    "question": "對私有 repository 中外洩的任何類型憑證，只要通報 GitHub，GitHub 就會代為撤銷。",
+    "explanation": "通報撤銷的功能目前只針對仍有效或尚未確認的 GitHub personal access token，而且仍是公開預覽；其他類型的憑證要由使用者自行處理。",
+    "trap": "「通報」容易被誤解成通用的撤銷服務；它只適用於特定類型的 GitHub 權杖，不涵蓋第三方供應商的憑證。",
+    "domain": "設定與使用 Secret Protection",
+    "difficulty": "進階",
+    "keywords": ["D2", "D2-O3"]
+  },
+  {
+    "id": "GH500-010",
+    "exam": "GH-500",
+    "number": 10,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O3"],
+    "sourceIds": ["GH500-DOC-03"],
+    "type": "single",
+    "answer": "A",
+    "question": "通報私有 repository 中外洩的 GitHub 權杖前，官方提醒應先考慮什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "先輪替該權杖，以免撤銷後讓依賴它的工作流程中斷"
+      },
+      {
+        "id": "B",
+        "text": "先關閉警示，避免同一個權杖重複通知多位管理員"
+      },
+      {
+        "id": "C",
+        "text": "先停用 push protection，避免通報操作被攔截下來"
+      },
+      {
+        "id": "D",
+        "text": "先刪除整個 repository，確保權杖不再被任何人讀取"
+      }
+    ],
+    "explanation": "撤銷是單向動作：權杖一旦被撤銷，仍在使用它的服務就會失敗。先輪替並更新依賴它的服務，再通報，可以避免工作流程中斷。",
+    "trap": "只想著「越快撤銷越安全」會忽略營運影響；官方的順序是先讓替代憑證就位，再讓舊憑證失效。",
+    "domain": "設定與使用 Secret Protection",
+    "difficulty": "進階",
+    "keywords": ["D2", "D2-O3"]
+  },
+  {
+    "id": "GH500-011",
+    "exam": "GH-500",
+    "number": 11,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O4"],
+    "sourceIds": ["GH500-DOC-04", "GH500-DOC-02"],
+    "type": "single",
+    "answer": "C",
+    "question": "委派繞過中，「exemption（豁免）」與「bypass privileges（繞過權限）」的差別是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "豁免只能用於人類使用者，繞過權限只能用於自動化帳號"
+      },
+      {
+        "id": "B",
+        "text": "兩者完全相同，只是在不同的設定頁面使用不同名稱"
+      },
+      {
+        "id": "C",
+        "text": "豁免者的推送完全不觸發保護；有繞過權限者被擋時才自行繞過"
+      },
+      {
+        "id": "D",
+        "text": "豁免者必須逐次送審，繞過權限者則可以任意推送內容"
+      }
+    ],
+    "explanation": "Exemption 讓指定對象的推送完全不觸發 push protection，官方建議留給可信的自動化；bypass privileges 則是在被阻擋時可以自行繞過，並能審查他人的繞過請求。",
+    "trap": "「繞過」字面上聽起來比「豁免」寬鬆，實際上豁免才是完全不經過檢查，兩者的風險程度要分開看。",
+    "domain": "設定與使用 Secret Protection",
+    "difficulty": "中等",
+    "keywords": ["D2", "D2-O4"]
+  },
+  {
+    "id": "GH500-012",
+    "exam": "GH-500",
+    "number": 12,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O4"],
+    "sourceIds": ["GH500-DOC-04"],
+    "type": "true-false",
+    "answer": true,
+    "question": "不在繞過名單上的貢獻者所提出的繞過請求，有 7 天的有效期限，逾期即失效。",
+    "explanation": "委派繞過下，名單以外的貢獻者提出的請求進入審查流程，並且在 7 天後過期。",
+    "trap": "容易以為請求會一直等到有人處理為止；有期限代表審查者若遲遲不處理，貢獻者必須重新提出。",
+    "domain": "設定與使用 Secret Protection",
+    "difficulty": "基礎",
+    "keywords": ["D2", "D2-O4"]
+  },
+  {
+    "id": "GH500-013",
+    "exam": "GH-500",
+    "number": 13,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O4"],
+    "sourceIds": ["GH500-DOC-05"],
+    "type": "multiple",
+    "answer": ["B", "C"],
+    "question": "關於自訂樣式的「Save and dry run」，下列哪些敘述正確？（選 2 項）",
+    "options": [
+      {
+        "id": "A",
+        "text": "組織層級的 dry run 只能在單一 repository 上執行"
+      },
+      {
+        "id": "B",
+        "text": "dry run 會找出符合項，但不會建立任何警示"
+      },
+      {
+        "id": "C",
+        "text": "結果最多顯示 1,000 筆，可檢視誤判後調整再跑"
+      },
+      {
+        "id": "D",
+        "text": "樣式必須先發佈，才能執行第一次 dry run"
+      }
+    ],
+    "explanation": "Dry run 找出符合項但不建立警示，結果最多顯示 1,000 筆，讓你檢視誤判、調整樣式後再跑；確認後才發佈。組織層級可涵蓋全部 repository，或最多 10 個選定的 repository。",
+    "trap": "順序是先 dry run、後發佈；把發佈當成前提，會讓誤判的樣式直接影響貢獻者。",
+    "domain": "設定與使用 Secret Protection",
+    "difficulty": "中等",
+    "keywords": ["D2", "D2-O4"]
+  },
+  {
+    "id": "GH500-014",
+    "exam": "GH-500",
+    "number": 14,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O4"],
+    "sourceIds": ["GH500-DOC-05"],
+    "type": "single",
+    "answer": "B",
+    "question": "要讓新建立的自訂樣式也被 push protection 阻擋，正確順序是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "先啟用 push protection，再建立並發佈自訂樣式"
+      },
+      {
+        "id": "B",
+        "text": "先 dry run 並發佈樣式，再對該樣式啟用 push protection"
+      },
+      {
+        "id": "C",
+        "text": "只要建立樣式，push protection 就會自動涵蓋它"
+      },
+      {
+        "id": "D",
+        "text": "自訂樣式不支援 push protection，只能事後產生警示"
+      }
+    ],
+    "explanation": "自訂樣式要先經 dry run、確認後發佈，發佈之後才會出現對該樣式啟用 push protection 的選項；在組織層級，它只對已啟用 push protection 的 repository 生效。",
+    "trap": "把「建立」與「發佈」視為同一步，會漏掉 dry run 檢查誤判的機會，也找不到啟用 push protection 的選項。",
+    "domain": "設定與使用 Secret Protection",
+    "difficulty": "進階",
+    "keywords": ["D2", "D2-O4"]
+  }
+]
