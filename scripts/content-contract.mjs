@@ -18,8 +18,12 @@ export function validateContentData(data) {
     review,
     meta,
     summary,
+    rules,
     chapters = {},
   } = data;
+  // Per-exam thresholds live in exams/<code>/data/contract.json; there is no
+  // default, so an exam can never be validated against another exam's numbers.
+  if (!rules?.code) return ["缺少 contract.json 規則，無法驗證內容。"];
   const exam = meta?.exam;
   const domains = exam?.domains ?? [];
   const domainIds = domains.map((domain) => domain.id);
@@ -31,8 +35,11 @@ export function validateContentData(data) {
   const terms =
     glossary?.categories?.flatMap((category) => category.terms ?? []) ?? [];
 
-  ok(exam?.code === "GH-600", "考試代碼必須為 GH-600。");
-  ok(domains.length === 6 && unique(domainIds), "必須定義六個不重複的領域。");
+  ok(exam?.code === rules.code, `考試代碼必須為 ${rules.code}。`);
+  ok(
+    domains.length === rules.domains && unique(domainIds),
+    `必須定義 ${rules.domains} 個不重複的領域。`,
+  );
   ok(
     objectiveIds.length > 0 && unique(objectiveIds),
     "objective ID 不得為空或重複。",
@@ -47,8 +54,8 @@ export function validateContentData(data) {
     "領域權重格式錯誤。",
   );
   ok(
-    plan?.weeks?.length === 4 && days.length === 28,
-    "四週計畫必須有 4 週、28 天。",
+    plan?.weeks?.length === rules.plan.weeks && days.length === rules.plan.days,
+    `計畫必須有 ${rules.plan.weeks} 週、${rules.plan.days} 天。`,
   );
   ok(
     days.every(
@@ -64,8 +71,8 @@ export function validateContentData(data) {
   );
 
   ok(
-    Array.isArray(questions) && questions.length >= 60,
-    "題庫至少需要 60 題，之後可持續擴充。",
+    Array.isArray(questions) && questions.length >= rules.minQuestions,
+    `題庫至少需要 ${rules.minQuestions} 題，之後可持續擴充。`,
   );
   ok(unique(questions.map((question) => question.id)), "題目 ID 重複。");
   const numbers = questions
@@ -80,7 +87,7 @@ export function validateContentData(data) {
   );
   const allowedTypes = new Set(["single", "multiple", "true-false"]);
   for (const question of questions) {
-    ok(question.exam === "GH-600", `${question.id} 考試代碼無效。`);
+    ok(question.exam === rules.code, `${question.id} 考試代碼無效。`);
     ok(domainIds.includes(question.domainId), `${question.id} domainId 無效。`);
     ok(
       Array.isArray(question.objectiveIds) &&
@@ -224,14 +231,17 @@ export function validateContentData(data) {
   }
 
   ok(
-    terms.length >= 120 && unique(terms.map((term) => term.id)),
-    "名詞庫至少需要 120 個不重複詞條。",
+    terms.length >= rules.minTerms && unique(terms.map((term) => term.id)),
+    `名詞庫至少需要 ${rules.minTerms} 個不重複詞條。`,
   );
   ok(
     Array.isArray(sources) &&
-      sources.length === 36 &&
+      sources.length >= rules.sources.min &&
+      sources.length <= rules.sources.max &&
       unique(sources.map((source) => source.id)),
-    "官方來源必須正好 36 項且 ID 不重複。",
+    rules.sources.min === rules.sources.max
+      ? `官方來源必須正好 ${rules.sources.min} 項且 ID 不重複。`
+      : `官方來源必須在 ${rules.sources.min} 至 ${rules.sources.max} 項之間且 ID 不重複。`,
   );
   for (const source of sources) {
     let host = "";
@@ -247,14 +257,14 @@ export function validateContentData(data) {
     );
   }
   ok(
-    faq?.length >= 24 &&
-      qa?.length >= 24 &&
+    faq?.length >= rules.minFaq &&
+      qa?.length >= rules.minQa &&
       unique([...faq, ...qa].map((item) => item.id)),
-    "FAQ 與情境 Q&A 各至少 24 題且 ID 不重複。",
+    `FAQ 至少 ${rules.minFaq} 題、情境 Q&A 至少 ${rules.minQa} 題且 ID 不重複。`,
   );
   ok(
-    review?.mustRemember?.["GH-600"]?.length >= 36,
-    "GH-600 必背句至少需要 36 條。",
+    review?.mustRemember?.[rules.code]?.length >= rules.minMustRemember,
+    `${rules.code} 必背句至少需要 ${rules.minMustRemember} 條。`,
   );
   ok(
     summary?.studyDays === days.length &&
@@ -262,7 +272,7 @@ export function validateContentData(data) {
       summary?.officialSources === sources.length &&
       summary?.faqItems === faq.length &&
       summary?.scenarioItems === qa.length &&
-      summary?.mustRemember === review.mustRemember["GH-600"].length,
+      summary?.mustRemember === review.mustRemember?.[rules.code]?.length,
     "內容摘要與實際資料不一致。",
   );
   return errors;

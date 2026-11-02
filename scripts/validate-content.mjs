@@ -25,6 +25,7 @@ const data = {
   review: read("data/review.json"),
   meta: read("data/exam-meta.json"),
   summary: read("data/content-summary.json"),
+  rules: read("data/contract.json"),
   chapters,
 };
 const errors = validateContentData(data);
@@ -49,5 +50,5 @@ if (errors.length) {
   process.exit(1);
 }
 console.log(
-  `[完成] 內容驗證通過：28 天、${data.questions.length} 題、${data.glossary.categories.flatMap((category) => category.terms).length} 個名詞、${data.sources.length} 項官方來源、${data.faq.length} 題 FAQ、${data.qa.length} 題情境 Q&A。`,
+  `[完成] 內容驗證通過：${data.rules.code}、${data.rules.plan.days} 天、${data.questions.length} 題、${data.glossary.categories.flatMap((category) => category.terms).length} 個名詞、${data.sources.length} 項官方來源、${data.faq.length} 題 FAQ、${data.qa.length} 題情境 Q&A。`,
 );

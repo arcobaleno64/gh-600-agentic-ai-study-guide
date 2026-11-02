@@ -1,0 +1,60 @@
+{
+  "version": "0.1.0-d2-sample",
+  "categories": [
+    {
+      "id": "D2",
+      "title": "設定與使用 Secret Protection",
+      "terms": [
+        {
+          "id": "D2-T01",
+          "term": "Secret scanning",
+          "explanation": "掃描所有分支的完整 Git 歷史、issue 與 pull request 文字、Discussions、wiki 與 secret gist，找出寫死的憑證並產生警示。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Secret Protection"
+        },
+        {
+          "id": "D2-T02",
+          "term": "Push protection",
+          "explanation": "在推送當下偵測疑似 secret 並阻擋，要求貢獻者移除後重推；與事後才產生警示的 secret scanning 不同。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Secret Protection"
+        },
+        {
+          "id": "D2-T03",
+          "term": "Partner patterns",
+          "explanation": "偵測服務供應商發行憑證的樣式，預設啟用；偵測到的 secret 會送給供應商處理，不會列在 repository 警示中。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Secret Protection"
+        },
+        {
+          "id": "D2-T04",
+          "term": "Validity checks",
+          "explanation": "確認偵測到的 secret 是否仍然有效，協助依風險排定處理順序。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Secret Protection"
+        },
+        {
+          "id": "D2-T05",
+          "term": "Delegated bypass",
+          "explanation": "把繞過 push protection 的權限收斂給指定對象；其他貢獻者的繞過請求送審，並在 7 天後過期。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Secret Protection"
+        },
+        {
+          "id": "D2-T06",
+          "term": "Exemption",
+          "explanation": "委派繞過下的一種授權，讓指定對象的推送完全不觸發 push protection，適合可信的自動化帳號。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Secret Protection"
+        },
+        {
+          "id": "D2-T07",
+          "term": "Custom pattern",
+          "explanation": "以規則運算式自訂的 secret 樣式，可定義在 repository、組織或企業層級；先 dry run 檢視誤判，發佈後才能啟用 push protection。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Secret Protection"
+        }
+      ]
+    }
+  ]
+}
