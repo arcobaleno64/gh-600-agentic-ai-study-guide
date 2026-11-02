@@ -30,6 +30,10 @@ const TEXT_FIELDS = [
 const domainLine = (d) =>
   `<li><a href="/knowledge/${d.id.toLowerCase()}/">${d.id} ${d.name}</a></li>`;
 
+// One run of consecutive domain links (the list in index.html).
+const DOMAIN_RUN =
+  /^([ \t]*)<li><a href="\/knowledge\/d\d+\/">[^\n]*<\/a><\/li>(\r?\n)(?:\1<li><a href="\/knowledge\/d\d+\/">[^\n]*<\/a><\/li>\r?\n)*/m;
+
 // Longest value first so a value that contains another one is replaced whole.
 export function renderSite(text, to, from = loadSite(BASELINE)) {
   let out = text;
@@ -37,9 +41,9 @@ export function renderSite(text, to, from = loadSite(BASELINE)) {
     (a, b) => from[b].length - from[a].length,
   ))
     out = out.split(from[field]).join(to[field]);
-  from.domains.forEach((d, i) => {
-    if (to.domains[i])
-      out = out.split(domainLine(d)).join(domainLine(to.domains[i]));
-  });
-  return out;
+  // The run of domain links is replaced as a whole, so an exam with fewer or
+  // more domains than gh-600 gets exactly its own list.
+  return out.replace(DOMAIN_RUN, (_run, indent, eol) =>
+    to.domains.map((d) => `${indent}${domainLine(d)}${eol}`).join(""),
+  );
 }

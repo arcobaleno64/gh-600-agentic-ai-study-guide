@@ -1,4 +1,5 @@
-export type ExamCode = "GH-600" | "GH-500";
+// Any exam under exams/; its code comes from that exam's exam-meta.json.
+export type ExamCode = string;
 export interface SiteConfig {
   siteUrl: string;
   siteName: string;
@@ -8,6 +9,7 @@ export interface SiteConfig {
   metaDescription: string;
   summary: string;
   cachePrefix: string;
+  walkthrough: boolean;
   quest: boolean;
 }
 export type RouteName =

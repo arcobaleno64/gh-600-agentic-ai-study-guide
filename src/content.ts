@@ -9,12 +9,6 @@ import reviewData from "@exam/data/review.json";
 import metaData from "@exam/data/exam-meta.json";
 import summaryData from "@exam/data/content-summary.json";
 import startHere from "@exam/content/chapters/start-here.md?raw";
-import d1 from "@exam/content/chapters/d1.md?raw";
-import d2 from "@exam/content/chapters/d2.md?raw";
-import d3 from "@exam/content/chapters/d3.md?raw";
-import d4 from "@exam/content/chapters/d4.md?raw";
-import d5 from "@exam/content/chapters/d5.md?raw";
-import d6 from "@exam/content/chapters/d6.md?raw";
 import integration from "@exam/content/chapters/integration.md?raw";
 import type {
   ExamMeta,
@@ -68,14 +62,26 @@ export const summary = {
     ]),
   ),
 };
-const domainMarkdown = { D1: d1, D2: d2, D3: d3, D4: d4, D5: d5, D6: d6 };
+// One chapter file per domain (d1.md, d2.md ...), however many the exam has.
+const domainFiles = import.meta.glob("@exam/content/chapters/*.md", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+}) as Record<string, string>;
+const domainMarkdown = (id: string): string => {
+  const file = Object.entries(domainFiles).find(([path]) =>
+    path.endsWith(`/${id.toLowerCase()}.md`),
+  );
+  if (!file) throw new Error(`缺少領域 ${id} 的章節檔。`);
+  return file[1];
+};
 export const chapters = [
   { id: "start-here", title: "開始使用", domain: "總覽", raw: startHere },
   ...examMeta.exam.domains.map((domain) => ({
     id: domain.id.toLowerCase(),
     title: domain.name,
     domain: domain.id,
-    raw: domainMarkdown[domain.id as keyof typeof domainMarkdown],
+    raw: domainMarkdown(domain.id),
   })),
   {
     id: "integration",

@@ -11,6 +11,7 @@ import { marked, Renderer } from "marked";
 import { chapters, examMeta, questions, sources, terms } from "../content";
 import { navigate, route } from "../router";
 import { readingSections } from "../reading";
+import { site } from "../site";
 import CaseWalkthrough from "../components/CaseWalkthrough.vue";
 import DeliveryTrace from "../components/DeliveryTrace.vue";
 
@@ -248,7 +249,7 @@ watch(
         >{{ section.title }}
       </a>
     </nav>
-    <CaseWalkthrough v-show="chapterIndex === 0" />
+    <CaseWalkthrough v-if="site.walkthrough" v-show="chapterIndex === 0" />
     <div class="reading-layout">
       <article class="reading-article">
         <header v-if="chapterIndex !== 0" class="reading-title">
@@ -271,7 +272,11 @@ watch(
         >
           <h2>{{ section.title }}</h2>
           <DeliveryTrace
-            v-if="active.id === 'integration' && section === parsed.sections[0]"
+            v-if="
+              site.walkthrough &&
+              active.id === 'integration' &&
+              section === parsed.sections[0]
+            "
           />
           <div
             class="markdown-body"
