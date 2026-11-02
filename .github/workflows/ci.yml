@@ -30,3 +30,31 @@ jobs:
         run: npm run build
       - name: Audit production dependencies
         run: npm audit --omit=dev
+
+  # Every exam under exams/ is validated and built on its own; the default
+  # exam's tests, types and audit already run in verify above.
+  exams:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        exam: [gh-600, gh-500]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Validate ${{ matrix.exam }} content
+        run: |
+          EXAM=${{ matrix.exam }} node scripts/validate-content.mjs
+          EXAM=${{ matrix.exam }} node scripts/check-language.mjs
+      - name: Build ${{ matrix.exam }}
+        run: |
+          EXAM=${{ matrix.exam }} npx vite build
+          EXAM=${{ matrix.exam }} node scripts/static-pages.mjs
