@@ -117,6 +117,75 @@
           "category": "設定與使用 Secret Protection"
         }
       ]
+    },
+    {
+      "id": "D3",
+      "title": "設定與使用供應鏈安全",
+      "terms": [
+        {
+          "id": "D3-T01",
+          "term": "Dependency graph",
+          "explanation": "repository 中 manifest 與 lock 檔以及 dependency submission API 提交資料的摘要，列出 dependencies 與 dependents；公開 repository 預設啟用。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T02",
+          "term": "SBOM",
+          "explanation": "專案相依性的正式、機器可讀清單；GitHub 可從 dependency graph 匯出 SPDX 格式，內容不含 dependents。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T03",
+          "term": "Dependabot alerts",
+          "explanation": "在 GitHub Advisory Database 新增 advisory，或 dependency graph 改變時，針對預設分支發出的有弱點相依性警示；只有經 GitHub 審查的 advisory 會觸發。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T04",
+          "term": "EPSS",
+          "explanation": "Exploit Prediction Scoring System，弱點被利用機率的分數；官方建議與嚴重度、範圍、關係一併用來排定警示優先順序。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T05",
+          "term": "Dependabot security updates",
+          "explanation": "為有可用修補的 Dependabot 警示自動開 pull request，更新到包含修補的最低版本；合併後關閉對應警示。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T06",
+          "term": "Dependabot version updates",
+          "explanation": "依 dependabot.yml 讓相依性保持最新版本，不論有無弱點；預設有 3 天的 cooldown，security updates 不受影響。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T07",
+          "term": "Auto-triage 規則",
+          "explanation": "在通知寄出前自動關閉、延後或重新開啟 Dependabot 警示的規則，分為 GitHub 預設規則與自訂規則。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T08",
+          "term": "Dependency review",
+          "explanation": "在 pull request 顯示相依性變動與弱點資料，於引入前攔下問題；要先啟用 dependency graph。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        },
+        {
+          "id": "D3-T09",
+          "term": "Dependency review action",
+          "explanation": "在 pull request 比較相依性差異的 GitHub Action；預設發現有弱點的套件就失敗，allow-licenses 與 deny-licenses 只能擇一。",
+          "exams": ["GH-500"],
+          "category": "設定與使用供應鏈安全"
+        }
+      ]
     }
   ]
 }

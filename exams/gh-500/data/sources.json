@@ -82,5 +82,77 @@
     "title": "Supply chain security",
     "url": "https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/about-supply-chain-security",
     "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-13",
+    "title": "Dependabot alerts",
+    "url": "https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-alerts",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-14",
+    "title": "Dependabot auto-triage rules",
+    "url": "https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-auto-triage-rules",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-15",
+    "title": "Dependency review",
+    "url": "https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-16",
+    "title": "Dependency graph",
+    "url": "https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-graph",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-17",
+    "title": "Exporting a software bill of materials for your repository",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/establish-provenance-and-integrity/export-dependencies-as-sbom",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-18",
+    "title": "Configuring the dependency review action",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/manage-your-dependency-security/configure-dependency-review-action",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-19",
+    "title": "Configuring open source license policies",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/manage-your-dependency-security/configure-license-policies",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-20",
+    "title": "Dependabot security updates",
+    "url": "https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-security-updates",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-21",
+    "title": "Configuring notifications for Dependabot alerts",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/manage-your-dependency-security/configure-dependabot-notifications",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-22",
+    "title": "Managing alerts that have been automatically dismissed by a Dependabot auto-triage rule",
+    "url": "https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-dependabot-alerts/managing-automatically-dismissed-alerts",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-23",
+    "title": "Dependabot version updates",
+    "url": "https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-version-updates",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-24",
+    "title": "Enforcing dependency review across an organization",
+    "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/enforce-dependency-review",
+    "publisher": "GitHub Docs"
   }
 ]

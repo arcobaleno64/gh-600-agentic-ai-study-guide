@@ -850,5 +850,435 @@
     "domain": "GitHub 安全套件、功能與生態系",
     "difficulty": "進階",
     "keywords": ["D1", "D1-O4"]
+  },
+  {
+    "id": "GH500-029",
+    "exam": "GH-500",
+    "number": 29,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O1"],
+    "sourceIds": ["GH500-DOC-17"],
+    "type": "single",
+    "answer": "A",
+    "question": "匯出的 SBOM 包含下列哪項資訊？",
+    "options": [
+      {
+        "id": "A",
+        "text": "相依性的間接路徑與授權資訊"
+      },
+      {
+        "id": "B",
+        "text": "依賴此專案的其他專案清單"
+      },
+      {
+        "id": "C",
+        "text": "此專案最近的 workflow 執行紀錄"
+      },
+      {
+        "id": "D",
+        "text": "此專案貢獻者的提交統計"
+      }
+    ],
+    "explanation": "SBOM 包含相依性、版本、套件識別碼、授權、間接相依性路徑與著作權資訊；不包含依賴你的專案（dependents）。",
+    "trap": "SBOM 描述你依賴什麼，不描述誰依賴你。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "基礎",
+    "keywords": ["D3", "D3-O1"]
+  },
+  {
+    "id": "GH500-030",
+    "exam": "GH-500",
+    "number": 30,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O1"],
+    "sourceIds": ["GH500-DOC-16"],
+    "type": "true-false",
+    "answer": false,
+    "question": "Dependency graph 會為私有 repository 列出 dependents（依賴它的其他 repository）。",
+    "explanation": "Dependents 只在公開 repository 列出，私有 repository 不回報這項資料。",
+    "trap": "私有 repository 同樣能使用 dependency graph 檢視自己的 dependencies，但 dependents 只對公開 repository 提供。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "基礎",
+    "keywords": ["D3", "D3-O1"]
+  },
+  {
+    "id": "GH500-031",
+    "exam": "GH-500",
+    "number": 31,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O1"],
+    "sourceIds": ["GH500-DOC-17"],
+    "type": "single",
+    "answer": "C",
+    "question": "用 REST API 請求產生 SBOM 後，回應為 202 時應該怎麼做？",
+    "options": [
+      {
+        "id": "A",
+        "text": "立即從回應內容讀取 SBOM"
+      },
+      {
+        "id": "B",
+        "text": "重新送出一次產生請求"
+      },
+      {
+        "id": "C",
+        "text": "輪詢 sbom_url 直到回應為 302"
+      },
+      {
+        "id": "D",
+        "text": "改按介面上的 Export SBOM"
+      }
+    ],
+    "explanation": "請求產生後要輪詢 sbom_url；回應為 202 表示尚未完成，回應為 302 時依重新導向下載完成的 SBOM。",
+    "trap": "202 代表已受理、尚未完成，不是結果。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O1"]
+  },
+  {
+    "id": "GH500-032",
+    "exam": "GH-500",
+    "number": 32,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O2"],
+    "sourceIds": ["GH500-DOC-13"],
+    "type": "multiple",
+    "answer": ["A", "B", "C", "E"],
+    "question": "官方文件建議在排定 Dependabot 警示優先順序時，一併參考哪些項目？（選 4 項）",
+    "options": [
+      {
+        "id": "A",
+        "text": "弱點的嚴重度等級"
+      },
+      {
+        "id": "B",
+        "text": "EPSS 利用預測分數"
+      },
+      {
+        "id": "C",
+        "text": "相依性的範圍（scope）"
+      },
+      {
+        "id": "D",
+        "text": "相依性的授權類型"
+      },
+      {
+        "id": "E",
+        "text": "相依性的直接或間接關係"
+      }
+    ],
+    "explanation": "文件建議合併參考嚴重度、EPSS 分數、相依性的範圍與相依性的關係；另可選用 reachability analysis。",
+    "trap": "授權類型屬於 dependency review 與授權合規的判斷項目，不是警示優先順序的依據。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O2"]
+  },
+  {
+    "id": "GH500-033",
+    "exam": "GH-500",
+    "number": 33,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O2"],
+    "sourceIds": ["GH500-DOC-20", "GH500-DOC-14"],
+    "type": "single",
+    "answer": "B",
+    "question": "團隊只想讓 Dependabot 為部分警示開 pull request，官方建議的做法是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "在 dependabot.yml 設定要處理的嚴重度"
+      },
+      {
+        "id": "B",
+        "text": "停用 security updates 並建立 auto-triage 規則"
+      },
+      {
+        "id": "C",
+        "text": "啟用 grouped security updates 並限制目錄"
+      },
+      {
+        "id": "D",
+        "text": "啟用 version updates 並調整 cooldown 天數"
+      }
+    ],
+    "explanation": "啟用 security updates 後會為每個有可用修補的開啟警示開 pull request；要自行挑選，官方建議停用它並建立 auto-triage 規則。dependabot.yml 與警示之間沒有互動。",
+    "trap": "dependabot.yml 的設定看似能篩選，但它與 Dependabot 警示沒有互動。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "進階",
+    "keywords": ["D3", "D3-O2"]
+  },
+  {
+    "id": "GH500-034",
+    "exam": "GH-500",
+    "number": 34,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O2"],
+    "sourceIds": ["GH500-DOC-14"],
+    "type": "true-false",
+    "answer": false,
+    "question": "Dismiss package malware alerts 這條 GitHub 預設規則，在公開 repository 預設啟用。",
+    "explanation": "Dismiss package malware alerts 預設停用，但可為任何使用 Dependabot malware alerts 的 repository 啟用；預設啟用的是 Dismiss low impact issues for development-scoped dependencies（公開 repository）。",
+    "trap": "兩條預設規則容易互換；惡意套件警示被自動關閉有風險，所以預設停用。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O2"]
+  },
+  {
+    "id": "GH500-035",
+    "exam": "GH-500",
+    "number": 35,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O2"],
+    "sourceIds": ["GH500-DOC-13"],
+    "type": "single",
+    "answer": "D",
+    "question": "首次啟用 Dependabot alerts 時，對 repository 中已存在的弱點，GitHub 會如何通知？",
+    "options": [
+      {
+        "id": "A",
+        "text": "為每個既有弱點各寄一封通知"
+      },
+      {
+        "id": "B",
+        "text": "寄一封彙總所有既有弱點的通知"
+      },
+      {
+        "id": "C",
+        "text": "只針對 critical 的既有弱點通知"
+      },
+      {
+        "id": "D",
+        "text": "不通知既有弱點，只通知啟用後新發現的"
+      }
+    ],
+    "explanation": "首次啟用時，GitHub 不會為已找到的弱點寄通知，只會通知啟用後新發現的相依性弱點（視通知偏好而定）。",
+    "trap": "啟用當下的大量既有警示不會引發通知，但警示仍然存在於清單中。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O2"]
+  },
+  {
+    "id": "GH500-036",
+    "exam": "GH-500",
+    "number": 36,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O2"],
+    "sourceIds": ["GH500-DOC-14", "GH500-DOC-22"],
+    "type": "single",
+    "answer": "A",
+    "question": "某警示被 auto-triage 規則自動關閉，之後相依性的範圍從 development 改成 production。這則警示會如何？",
+    "options": [
+      {
+        "id": "A",
+        "text": "可能被自動重新開啟"
+      },
+      {
+        "id": "B",
+        "text": "維持關閉，規則已套用過"
+      },
+      {
+        "id": "C",
+        "text": "會被系統永久刪除"
+      },
+      {
+        "id": "D",
+        "text": "需手動重新啟用規則才開"
+      }
+    ],
+    "explanation": "自動關閉的警示在中繼資料改變時可以被自動重新開啟，例如相依性範圍從 development 改成 production，或 GitHub 修改 advisory 的某些中繼資料。",
+    "trap": "自動關閉不是永久：它仍可查詢、可手動重新開啟，也可能因中繼資料改變而自動重開。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "進階",
+    "keywords": ["D3", "D3-O2"]
+  },
+  {
+    "id": "GH500-037",
+    "exam": "GH-500",
+    "number": 37,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O3"],
+    "sourceIds": ["GH500-DOC-15"],
+    "type": "true-false",
+    "answer": false,
+    "question": "Dependency review action 預設只有在發現 critical 嚴重度的弱點時，檢查才會失敗。",
+    "explanation": "預設情況下，只要發現有弱點的套件，檢查就會失敗；fail-on-severity 是用來設定達到哪個嚴重度才失敗的選用設定。",
+    "trap": "嚴重度門檻要自己設定，預設並不是只看 critical。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O3"]
+  },
+  {
+    "id": "GH500-038",
+    "exam": "GH-500",
+    "number": 38,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O3"],
+    "sourceIds": ["GH500-DOC-18"],
+    "type": "multiple",
+    "answer": ["A", "B", "D"],
+    "question": "下列哪些是 dependency review action 官方範例中可設定的選項？（選 3 項）",
+    "options": [
+      {
+        "id": "A",
+        "text": "fail-on-severity"
+      },
+      {
+        "id": "B",
+        "text": "fail-on-scopes"
+      },
+      {
+        "id": "C",
+        "text": "fail-on-age"
+      },
+      {
+        "id": "D",
+        "text": "allow-ghsas"
+      },
+      {
+        "id": "E",
+        "text": "allow-registries"
+      }
+    ],
+    "explanation": "範例中的選項包含 fail-on-severity、allow-licenses 或 deny-licenses（只能擇一）、allow-ghsas 與 fail-on-scopes。",
+    "trap": "選項名稱相近，只有範例中出現的才算；allow-licenses 與 deny-licenses 不能同時使用。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "進階",
+    "keywords": ["D3", "D3-O3"]
+  },
+  {
+    "id": "GH500-039",
+    "exam": "GH-500",
+    "number": 39,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O3"],
+    "sourceIds": ["GH500-DOC-24"],
+    "type": "single",
+    "answer": "C",
+    "question": "組織要讓所有 repository 的 pull request 必須通過 dependency review 才能合併，應該設定什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "組織層級的 Dependabot alerts 設定"
+      },
+      {
+        "id": "B",
+        "text": "組織層級的 webhook 與權限設定"
+      },
+      {
+        "id": "C",
+        "text": "branch ruleset 要求 workflow 通過才合併"
+      },
+      {
+        "id": "D",
+        "text": "CODEOWNERS 要求安全團隊審查"
+      }
+    ],
+    "explanation": "先在某個 repository 設定好 dependency review action，再建立 branch ruleset，啟用 Require workflows to pass before merging，並指定該 workflow。",
+    "trap": "Dependabot 設定管理警示與更新，不是合併前的強制檢查。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O3"]
+  },
+  {
+    "id": "GH500-040",
+    "exam": "GH-500",
+    "number": 40,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O3"],
+    "sourceIds": ["GH500-DOC-23"],
+    "type": "single",
+    "answer": "C",
+    "question": "Dependabot version updates 預設的 cooldown 是多久？",
+    "options": [
+      {
+        "id": "A",
+        "text": "1 天"
+      },
+      {
+        "id": "B",
+        "text": "7 天"
+      },
+      {
+        "id": "C",
+        "text": "3 天"
+      },
+      {
+        "id": "D",
+        "text": "14 天"
+      }
+    ],
+    "explanation": "預設有 3 天的 cooldown，新版本發布後 3 天才會被考慮；此預設不適用於 security updates，可用 cooldown 選項自訂。",
+    "trap": "預設 cooldown 只適用於 version updates，security updates 不受它延遲。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "基礎",
+    "keywords": ["D3", "D3-O3"]
+  },
+  {
+    "id": "GH500-041",
+    "exam": "GH-500",
+    "number": 41,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O4"],
+    "sourceIds": ["GH500-DOC-13"],
+    "type": "single",
+    "answer": "B",
+    "question": "GitHub Team 組織沒有 Code Security 或 Advanced Security 授權，能否指派公開 repository 的 Dependabot 警示？",
+    "options": [
+      {
+        "id": "A",
+        "text": "可以，公開 repository 不受授權限制"
+      },
+      {
+        "id": "B",
+        "text": "不可以，指派需要授權，公開也一樣"
+      },
+      {
+        "id": "C",
+        "text": "可以，但只能指派給人而非 agent"
+      },
+      {
+        "id": "D",
+        "text": "可以，但要先啟用 security updates"
+      }
+    ],
+    "explanation": "指派 Dependabot 警示需要 Code Security 或 Advanced Security 授權，官方明說包含公開 repository。",
+    "trap": "公開 repository 的許多功能免費，但警示指派不在其中。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "進階",
+    "keywords": ["D3", "D3-O4"]
+  },
+  {
+    "id": "GH500-042",
+    "exam": "GH-500",
+    "number": 42,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O4"],
+    "sourceIds": ["GH500-DOC-13"],
+    "type": "single",
+    "answer": "D",
+    "question": "Dependabot 警示的指派者變更時，GitHub 會送出哪個 webhook 事件？",
+    "options": [
+      {
+        "id": "A",
+        "text": "alert_assignment_changed"
+      },
+      {
+        "id": "B",
+        "text": "assignment_updated_event"
+      },
+      {
+        "id": "C",
+        "text": "dependabot_alert_assigned"
+      },
+      {
+        "id": "D",
+        "text": "assignees_changed"
+      }
+    ],
+    "explanation": "指派者變更時 GitHub 送出 assignees_changed webhook 事件，可用來觸發 workflow 或與外部系統同步。",
+    "trap": "事件名稱要記原文；其餘三個是看似合理的虛構名稱。",
+    "domain": "設定與使用供應鏈安全",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O4"]
   }
 ]
