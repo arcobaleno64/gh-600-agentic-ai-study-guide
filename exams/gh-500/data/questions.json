@@ -1388,22 +1388,6 @@
     "exam": "GH-500",
     "number": 46,
     "domainId": "D4",
-    "objectiveIds": ["D4-O1"],
-    "sourceIds": ["GH500-DOC-29"],
-    "type": "true-false",
-    "answer": true,
-    "question": "要在 code scanning 中額外執行自訂 CodeQL 查詢，必須使用 advanced setup 或外部 CI 系統。",
-    "explanation": "額外查詢只能在 advanced setup 或外部 CI 執行，而且查詢要屬於已發布的 CodeQL query pack 或 repository 中的 CodeQL pack。",
-    "trap": "default setup 可以改 query suite，但不能任意加自訂查詢（自訂設定檔與 extra-queries 屬性是另一條路徑）。",
-    "domain": "設定與使用 Code Security",
-    "difficulty": "中等",
-    "keywords": ["D4", "D4-O1"]
-  },
-  {
-    "id": "GH500-047",
-    "exam": "GH-500",
-    "number": 47,
-    "domainId": "D4",
     "objectiveIds": ["D4-O2"],
     "sourceIds": ["GH500-DOC-26"],
     "type": "single",
@@ -1434,9 +1418,9 @@
     "keywords": ["D4", "D4-O2"]
   },
   {
-    "id": "GH500-048",
+    "id": "GH500-047",
     "exam": "GH-500",
-    "number": 48,
+    "number": 47,
     "domainId": "D4",
     "objectiveIds": ["D4-O2"],
     "sourceIds": ["GH500-DOC-26"],
@@ -1468,9 +1452,9 @@
     "keywords": ["D4", "D4-O2"]
   },
   {
-    "id": "GH500-049",
+    "id": "GH500-048",
     "exam": "GH-500",
-    "number": 49,
+    "number": 48,
     "domainId": "D4",
     "objectiveIds": ["D4-O2"],
     "sourceIds": ["GH500-DOC-36"],
@@ -1502,25 +1486,9 @@
     "keywords": ["D4", "D4-O2"]
   },
   {
-    "id": "GH500-050",
+    "id": "GH500-049",
     "exam": "GH-500",
-    "number": 50,
-    "domainId": "D4",
-    "objectiveIds": ["D4-O2"],
-    "sourceIds": ["GH500-DOC-36"],
-    "type": "true-false",
-    "answer": false,
-    "question": "透過 repository properties 設定的 code scanning 自訂，只對 default setup 生效。",
-    "explanation": "透過 repository properties 的自訂套用到所有 setup 類型；這些屬性要由組織手動建立。",
-    "trap": "github-codeql-config-file 會和 default setup 的設定合併，容易誤以為只作用於 default setup。",
-    "domain": "設定與使用 Code Security",
-    "difficulty": "中等",
-    "keywords": ["D4", "D4-O2"]
-  },
-  {
-    "id": "GH500-051",
-    "exam": "GH-500",
-    "number": 51,
+    "number": 49,
     "domainId": "D4",
     "objectiveIds": ["D4-O3"],
     "sourceIds": ["GH500-DOC-31"],
@@ -1552,9 +1520,9 @@
     "keywords": ["D4", "D4-O3"]
   },
   {
-    "id": "GH500-052",
+    "id": "GH500-050",
     "exam": "GH-500",
-    "number": 52,
+    "number": 50,
     "domainId": "D4",
     "objectiveIds": ["D4-O3"],
     "sourceIds": ["GH500-DOC-32"],
@@ -1586,9 +1554,9 @@
     "keywords": ["D4", "D4-O3"]
   },
   {
-    "id": "GH500-053",
+    "id": "GH500-051",
     "exam": "GH-500",
-    "number": 53,
+    "number": 51,
     "domainId": "D4",
     "objectiveIds": ["D4-O3"],
     "sourceIds": ["GH500-DOC-34"],
@@ -1624,9 +1592,9 @@
     "keywords": ["D4", "D4-O3"]
   },
   {
-    "id": "GH500-054",
+    "id": "GH500-052",
     "exam": "GH-500",
-    "number": 54,
+    "number": 52,
     "domainId": "D4",
     "objectiveIds": ["D4-O3"],
     "sourceIds": ["GH500-DOC-33"],
@@ -1658,9 +1626,9 @@
     "keywords": ["D4", "D4-O3"]
   },
   {
-    "id": "GH500-055",
+    "id": "GH500-053",
     "exam": "GH-500",
-    "number": 55,
+    "number": 53,
     "domainId": "D4",
     "objectiveIds": ["D4-O4"],
     "sourceIds": ["GH500-DOC-35"],
@@ -1692,9 +1660,9 @@
     "keywords": ["D4", "D4-O4"]
   },
   {
-    "id": "GH500-056",
+    "id": "GH500-054",
     "exam": "GH-500",
-    "number": 56,
+    "number": 54,
     "domainId": "D4",
     "objectiveIds": ["D4-O4"],
     "sourceIds": ["GH500-DOC-38"],
@@ -1726,25 +1694,9 @@
     "keywords": ["D4", "D4-O4"]
   },
   {
-    "id": "GH500-057",
+    "id": "GH500-055",
     "exam": "GH-500",
-    "number": 57,
-    "domainId": "D4",
-    "objectiveIds": ["D4-O4"],
-    "sourceIds": ["GH500-DOC-42"],
-    "type": "true-false",
-    "answer": true,
-    "question": "「Code scanning on pull requests」報告的 CodeQL 指標，只追蹤已合併到預設分支的 pull request。",
-    "explanation": "CodeQL 指標只追蹤已合併到 repository 預設分支的 pull request；Copilot Autofix 的指標只在啟用的 repository 顯示。",
-    "trap": "以為指標涵蓋所有開啟中的 pull request；只算已合併的。",
-    "domain": "設定與使用 Code Security",
-    "difficulty": "中等",
-    "keywords": ["D4", "D4-O4"]
-  },
-  {
-    "id": "GH500-058",
-    "exam": "GH-500",
-    "number": 58,
+    "number": 55,
     "domainId": "D5",
     "objectiveIds": ["D5-O1"],
     "sourceIds": ["GH500-DOC-44"],
@@ -1776,9 +1728,9 @@
     "keywords": ["D5", "D5-O1"]
   },
   {
-    "id": "GH500-059",
+    "id": "GH500-056",
     "exam": "GH-500",
-    "number": 59,
+    "number": 56,
     "domainId": "D5",
     "objectiveIds": ["D5-O1"],
     "sourceIds": ["GH500-DOC-44"],
@@ -1792,9 +1744,9 @@
     "keywords": ["D5", "D5-O1"]
   },
   {
-    "id": "GH500-060",
+    "id": "GH500-057",
     "exam": "GH-500",
-    "number": 60,
+    "number": 57,
     "domainId": "D5",
     "objectiveIds": ["D5-O1"],
     "sourceIds": ["GH500-DOC-45"],
@@ -1826,9 +1778,9 @@
     "keywords": ["D5", "D5-O1"]
   },
   {
-    "id": "GH500-061",
+    "id": "GH500-058",
     "exam": "GH-500",
-    "number": 61,
+    "number": 58,
     "domainId": "D5",
     "objectiveIds": ["D5-O1"],
     "sourceIds": ["GH500-DOC-44"],
@@ -1860,9 +1812,9 @@
     "keywords": ["D5", "D5-O1"]
   },
   {
-    "id": "GH500-062",
+    "id": "GH500-059",
     "exam": "GH-500",
-    "number": 62,
+    "number": 59,
     "domainId": "D5",
     "objectiveIds": ["D5-O2"],
     "sourceIds": ["GH500-DOC-46"],
@@ -1894,9 +1846,9 @@
     "keywords": ["D5", "D5-O2"]
   },
   {
-    "id": "GH500-063",
+    "id": "GH500-060",
     "exam": "GH-500",
-    "number": 63,
+    "number": 60,
     "domainId": "D5",
     "objectiveIds": ["D5-O2"],
     "sourceIds": ["GH500-DOC-09"],
@@ -1928,9 +1880,9 @@
     "keywords": ["D5", "D5-O2"]
   },
   {
-    "id": "GH500-064",
+    "id": "GH500-061",
     "exam": "GH-500",
-    "number": 64,
+    "number": 61,
     "domainId": "D5",
     "objectiveIds": ["D5-O2"],
     "sourceIds": ["GH500-DOC-46"],
@@ -1962,9 +1914,9 @@
     "keywords": ["D5", "D5-O2"]
   },
   {
-    "id": "GH500-065",
+    "id": "GH500-062",
     "exam": "GH-500",
-    "number": 65,
+    "number": 62,
     "domainId": "D5",
     "objectiveIds": ["D5-O2"],
     "sourceIds": ["GH500-DOC-11"],
@@ -1996,9 +1948,9 @@
     "keywords": ["D5", "D5-O2"]
   },
   {
-    "id": "GH500-066",
+    "id": "GH500-063",
     "exam": "GH-500",
-    "number": 66,
+    "number": 63,
     "domainId": "D5",
     "objectiveIds": ["D5-O3"],
     "sourceIds": ["GH500-DOC-36"],
@@ -2030,9 +1982,9 @@
     "keywords": ["D5", "D5-O3"]
   },
   {
-    "id": "GH500-067",
+    "id": "GH500-064",
     "exam": "GH-500",
-    "number": 67,
+    "number": 64,
     "domainId": "D5",
     "objectiveIds": ["D5-O3"],
     "sourceIds": ["GH500-DOC-36"],
@@ -2064,9 +2016,9 @@
     "keywords": ["D5", "D5-O3"]
   },
   {
-    "id": "GH500-068",
+    "id": "GH500-065",
     "exam": "GH-500",
-    "number": 68,
+    "number": 65,
     "domainId": "D5",
     "objectiveIds": ["D5-O4"],
     "sourceIds": ["GH500-DOC-10"],
@@ -2098,9 +2050,9 @@
     "keywords": ["D5", "D5-O4"]
   },
   {
-    "id": "GH500-069",
+    "id": "GH500-066",
     "exam": "GH-500",
-    "number": 69,
+    "number": 66,
     "domainId": "D5",
     "objectiveIds": ["D5-O4"],
     "sourceIds": ["GH500-DOC-04"],
@@ -2114,9 +2066,9 @@
     "keywords": ["D5", "D5-O4"]
   },
   {
-    "id": "GH500-070",
+    "id": "GH500-067",
     "exam": "GH-500",
-    "number": 70,
+    "number": 67,
     "domainId": "D5",
     "objectiveIds": ["D5-O4"],
     "sourceIds": ["GH500-DOC-04"],
@@ -2152,9 +2104,9 @@
     "keywords": ["D5", "D5-O4"]
   },
   {
-    "id": "GH500-071",
+    "id": "GH500-068",
     "exam": "GH-500",
-    "number": 71,
+    "number": 68,
     "domainId": "D5",
     "objectiveIds": ["D5-O5"],
     "sourceIds": ["GH500-DOC-07"],
@@ -2186,9 +2138,9 @@
     "keywords": ["D5", "D5-O5"]
   },
   {
-    "id": "GH500-072",
+    "id": "GH500-069",
     "exam": "GH-500",
-    "number": 72,
+    "number": 69,
     "domainId": "D5",
     "objectiveIds": ["D5-O5"],
     "sourceIds": ["GH500-DOC-15"],
@@ -2202,9 +2154,9 @@
     "keywords": ["D5", "D5-O5"]
   },
   {
-    "id": "GH500-073",
+    "id": "GH500-070",
     "exam": "GH-500",
-    "number": 73,
+    "number": 70,
     "domainId": "D6",
     "objectiveIds": ["D6-O1"],
     "sourceIds": ["GH500-DOC-56"],
@@ -2236,9 +2188,9 @@
     "keywords": ["D6", "D6-O1"]
   },
   {
-    "id": "GH500-074",
+    "id": "GH500-071",
     "exam": "GH-500",
-    "number": 74,
+    "number": 71,
     "domainId": "D6",
     "objectiveIds": ["D6-O1"],
     "sourceIds": ["GH500-DOC-52"],
@@ -2252,9 +2204,9 @@
     "keywords": ["D6", "D6-O1"]
   },
   {
-    "id": "GH500-075",
+    "id": "GH500-072",
     "exam": "GH-500",
-    "number": 75,
+    "number": 72,
     "domainId": "D6",
     "objectiveIds": ["D6-O1"],
     "sourceIds": ["GH500-DOC-57"],
@@ -2286,9 +2238,9 @@
     "keywords": ["D6", "D6-O1"]
   },
   {
-    "id": "GH500-076",
+    "id": "GH500-073",
     "exam": "GH-500",
-    "number": 76,
+    "number": 73,
     "domainId": "D6",
     "objectiveIds": ["D6-O2"],
     "sourceIds": ["GH500-DOC-50"],
@@ -2320,9 +2272,9 @@
     "keywords": ["D6", "D6-O2"]
   },
   {
-    "id": "GH500-077",
+    "id": "GH500-074",
     "exam": "GH-500",
-    "number": 77,
+    "number": 74,
     "domainId": "D6",
     "objectiveIds": ["D6-O2"],
     "sourceIds": ["GH500-DOC-50"],
@@ -2336,9 +2288,9 @@
     "keywords": ["D6", "D6-O2"]
   },
   {
-    "id": "GH500-078",
+    "id": "GH500-075",
     "exam": "GH-500",
-    "number": 78,
+    "number": 75,
     "domainId": "D6",
     "objectiveIds": ["D6-O2"],
     "sourceIds": ["GH500-DOC-55"],
@@ -2370,9 +2322,9 @@
     "keywords": ["D6", "D6-O2"]
   },
   {
-    "id": "GH500-079",
+    "id": "GH500-076",
     "exam": "GH-500",
-    "number": 79,
+    "number": 76,
     "domainId": "D6",
     "objectiveIds": ["D6-O2"],
     "sourceIds": ["GH500-DOC-49"],
@@ -2404,9 +2356,9 @@
     "keywords": ["D6", "D6-O2"]
   },
   {
-    "id": "GH500-080",
+    "id": "GH500-077",
     "exam": "GH-500",
-    "number": 80,
+    "number": 77,
     "domainId": "D6",
     "objectiveIds": ["D6-O2"],
     "sourceIds": ["GH500-DOC-49"],
@@ -2438,9 +2390,9 @@
     "keywords": ["D6", "D6-O2"]
   },
   {
-    "id": "GH500-081",
+    "id": "GH500-078",
     "exam": "GH-500",
-    "number": 81,
+    "number": 78,
     "domainId": "D6",
     "objectiveIds": ["D6-O3"],
     "sourceIds": ["GH500-DOC-50"],
@@ -2472,9 +2424,9 @@
     "keywords": ["D6", "D6-O3"]
   },
   {
-    "id": "GH500-082",
+    "id": "GH500-079",
     "exam": "GH-500",
-    "number": 82,
+    "number": 79,
     "domainId": "D6",
     "objectiveIds": ["D6-O3"],
     "sourceIds": ["GH500-DOC-54"],
@@ -2506,9 +2458,9 @@
     "keywords": ["D6", "D6-O3"]
   },
   {
-    "id": "GH500-083",
+    "id": "GH500-080",
     "exam": "GH-500",
-    "number": 83,
+    "number": 80,
     "domainId": "D6",
     "objectiveIds": ["D6-O4"],
     "sourceIds": ["GH500-DOC-56"],
@@ -2540,9 +2492,9 @@
     "keywords": ["D6", "D6-O4"]
   },
   {
-    "id": "GH500-084",
+    "id": "GH500-081",
     "exam": "GH-500",
-    "number": 84,
+    "number": 81,
     "domainId": "D6",
     "objectiveIds": ["D6-O4"],
     "sourceIds": ["GH500-DOC-58"],

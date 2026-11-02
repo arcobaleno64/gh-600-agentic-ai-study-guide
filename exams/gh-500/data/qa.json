@@ -1,0 +1,170 @@
+[
+  {
+    "id": "QA-01",
+    "category": "D1",
+    "question": "管理員看到 security overview 某 repository 沒有警示就回報「沒有弱點」，漏了什麼？",
+    "answer": "漏了確認功能是否啟用；要先用 Coverage 檢視，因為沒有警示也可能是功能沒啟用或弱點尚未被偵測。",
+    "keyWords": ["D1"]
+  },
+  {
+    "id": "QA-02",
+    "category": "D1",
+    "question": "稽核要求「去年第三季所有已關閉警示」的穩定數字，團隊截取儀表板，錯在哪？",
+    "answer": "儀表板指標會隨時間變動；需要一致的合規資料時，官方建議改用稽核日誌。",
+    "keyWords": ["D1"]
+  },
+  {
+    "id": "QA-03",
+    "category": "D1",
+    "question": "團隊累積上百個警示，只在聊天室提醒大家去修，三個月沒進展。該用什麼？",
+    "answer": "Security campaign：把緊急且相近的警示分組，指派負責人與聯絡人，讓開發者在原有流程中追蹤。",
+    "keyWords": ["D1"]
+  },
+  {
+    "id": "QA-04",
+    "category": "D1",
+    "question": "團隊只啟用 Dependabot version updates，就認為有弱點的相依性會自動修復，錯在哪？",
+    "answer": "Version updates 依排程更新到最新版，與弱點無關；由警示觸發的修復是 security updates，要另外啟用。",
+    "keyWords": ["D1"]
+  },
+  {
+    "id": "QA-05",
+    "category": "D2",
+    "question": "組織的私有 repository 沒有任何設定，團隊以為 secret scanning 預設就會跑，錯在哪？",
+    "answer": "自動掃描只保證公開 repository；組織私有 repository 需要 Secret Protection 並啟用。",
+    "keyWords": ["D2"]
+  },
+  {
+    "id": "QA-06",
+    "category": "D2",
+    "question": "開發者用 REST API 提交一個靠 AI 偵測才能辨識的密碼，團隊認為所有途徑保護相同，錯在哪？",
+    "answer": "AI 偵測的 secret 在命令列、網頁介面與檔案上傳受保護，REST API 途徑不含這一類。",
+    "keyWords": ["D2"]
+  },
+  {
+    "id": "QA-07",
+    "category": "D2",
+    "question": "API 金鑰留在三個月前的 commit，團隊先花兩天用 rebase 清歷史再處理金鑰，順序錯在哪？",
+    "answer": "金鑰一被發現就應視為外洩，先撤銷或輪替；歷史改寫通常不必要，且耗時。",
+    "keyWords": ["D2"]
+  },
+  {
+    "id": "QA-08",
+    "category": "D2",
+    "question": "剛寫好公司內部權杖的自訂樣式，想立刻讓 push protection 擋住它，正確流程是什麼？",
+    "answer": "先 Save and dry run 檢視誤判（不建立警示），再 Publish pattern，之後才能 Enable push protection。",
+    "keyWords": ["D2"]
+  },
+  {
+    "id": "QA-09",
+    "category": "D3",
+    "question": "稽核要求「依賴本專案的其他專案」清單，團隊匯出 SBOM 交差，錯在哪？",
+    "answer": "SBOM 描述專案依賴什麼，不含 dependents；要看誰依賴你，用 dependency graph 的 Dependents，且只在公開 repository 可用。",
+    "keyWords": ["D3"]
+  },
+  {
+    "id": "QA-10",
+    "category": "D3",
+    "question": "啟用 security updates 後嫌噪音大，想在 dependabot.yml 設定只處理 high，為什麼行不通？",
+    "answer": "dependabot.yml 與警示沒有互動；官方建議停用 security updates，改建 auto-triage 規則指定要開 pull request 的警示。",
+    "keyWords": ["D3"]
+  },
+  {
+    "id": "QA-11",
+    "category": "D3",
+    "question": "在 dependency review action 同時設了 allow-licenses 與 deny-licenses 想雙重把關，結果如何？",
+    "answer": "兩者只能擇一，同時設定會出錯；限定可接受授權用 allow，封鎖特定授權用 deny。",
+    "keyWords": ["D3"]
+  },
+  {
+    "id": "QA-12",
+    "category": "D3",
+    "question": "資安主管想把一批公開 repository 的 Dependabot 警示指派給 Copilot，但組織沒有 Code Security 或 Advanced Security 授權，能做嗎？",
+    "answer": "不能；指派 Dependabot 警示需要授權，官方明說公開 repository 也一樣。",
+    "keyWords": ["D3"]
+  },
+  {
+    "id": "QA-13",
+    "category": "D4",
+    "question": "專案主要用 PHP 撰寫，團隊想用 CodeQL default setup 取得完整覆蓋，問題在哪？",
+    "answer": "CodeQL 不支援 PHP，可能不產生警示；要改用能輸出 SARIF 的第三方工具並上傳。",
+    "keyWords": ["D4"]
+  },
+  {
+    "id": "QA-14",
+    "category": "D4",
+    "question": "要為 Java 專案指定自己的建置步驟並把掃描改成每天一次，該用哪種設定？",
+    "answer": "Advanced setup：自訂排程與建置步驟超出 default setup 的自訂範圍。",
+    "keyWords": ["D4"]
+  },
+  {
+    "id": "QA-15",
+    "category": "D4",
+    "question": "開發者在功能分支修好警示，警示頁面仍顯示開啟，為什麼？",
+    "answer": "警示頁面只反映預設分支的狀態；其他分支看 Affected branches，要合併進預設分支後才會在預設分支關閉。",
+    "keyWords": ["D4"]
+  },
+  {
+    "id": "QA-16",
+    "category": "D4",
+    "question": "對同一 commit 用 upload-sarif 上傳兩個不同工具的 SARIF，卻沒指定 category，會怎樣？",
+    "answer": "同一 commit 上傳多組結果必須為每組指定唯一 category；沒有 category 無法區分後上傳的結果。",
+    "keyWords": ["D4"]
+  },
+  {
+    "id": "QA-17",
+    "category": "D5",
+    "question": "主管把 EPSS 90.534%（第 95 百分位）解讀成 90% 的專案受影響，錯在哪？",
+    "answer": "EPSS 是弱點未來 30 天內被利用的機率；第 95 百分位表示 95% 已模型化弱點比它更不可能被利用。",
+    "keyWords": ["D5"]
+  },
+  {
+    "id": "QA-18",
+    "category": "D5",
+    "question": "想建立一個納入 1,500 則警示的 campaign，會遇到什麼限制？",
+    "answer": "一個 campaign 的警示不得超過 1000 則；要縮小篩選或拆成多個 campaign。",
+    "keyWords": ["D5"]
+  },
+  {
+    "id": "QA-19",
+    "category": "D5",
+    "question": "300 個 repository 用 default setup，想全部加上公司自訂查詢又不想改成 advanced setup，怎麼做？",
+    "answer": "在組織建立並設定 github-codeql-extra-queries repository property，它套用到所有 setup 類型。",
+    "keyWords": ["D5"]
+  },
+  {
+    "id": "QA-20",
+    "category": "D5",
+    "question": "想讓遷移機器人的推送完全不被 push protection 阻擋，同時讓一般開發者被擋時能申請繞過，怎麼設定？",
+    "answer": "對機器人授予豁免（exemption），對一般開發者啟用委派繞過審查流程，請求 7 天後過期。",
+    "keyWords": ["D5"]
+  },
+  {
+    "id": "QA-21",
+    "category": "D5",
+    "question": "團隊只靠每週 Dependabot 警示處理相依性風險並稱之為「左移」，哪裡不對？",
+    "answer": "警示是事後處理已在相依性中的弱點；要在引入前攔下，用 dependency review，並以 ruleset 要求其 workflow 通過才能合併。",
+    "keyWords": ["D5"]
+  },
+  {
+    "id": "QA-22",
+    "category": "D6",
+    "question": "管理員發現某 repository 狀態為 removed，想知道它是否還受 configuration 管理。",
+    "answer": "removed 仍與 configuration 關聯，但 repository 不再繼承全部設定也不計入涵蓋指標；重新套用可恢復，啟用強制可預防。",
+    "keyWords": ["D6"]
+  },
+  {
+    "id": "QA-23",
+    "category": "D6",
+    "question": "組織建立預設 configuration 三天後，一個 repository 從別的組織轉移進來，管理員以為已自動套用，錯在哪？",
+    "answer": "預設 configuration 只自動套用到新建立的 repository；轉移進來的要手動套用。",
+    "keyWords": ["D6"]
+  },
+  {
+    "id": "QA-24",
+    "category": "D6",
+    "question": "要建立能套用到全部 repository、又不破壞現有 advanced setup 的 configuration，default setup 選哪個選項？",
+    "answer": "Enabled with advanced setup allowed：只在 CodeQL 分析目前沒有執行的 repository 啟用 default setup。",
+    "keyWords": ["D6"]
+  }
+]

@@ -1,0 +1,279 @@
+{
+  "version": "1.0.0",
+  "weeks": [
+    {
+      "id": "week-1",
+      "week": 1,
+      "title": "安全套件、Secret Protection",
+      "days": [
+        {
+          "day": 1,
+          "title": "建立考試地圖",
+          "reading": "讀認證頁、Study Guide 與六領域權重。",
+          "output": "畫出六領域與 25 個 objective 的一頁地圖。",
+          "passCriteria": "能不看資料說出六領域與權重區間。",
+          "domainId": "D1"
+        },
+        {
+          "day": 2,
+          "title": "三層功能與 security overview",
+          "reading": "D1-O1：三層功能對照、公開 repository 差別、security overview。",
+          "output": "整理三層功能表與各 overview 檢視的用途。",
+          "passCriteria": "能說出某功能在公開 repository 是否可用。",
+          "domainId": "D1"
+        },
+        {
+          "day": 3,
+          "title": "安全 SDLC 與警示管理",
+          "reading": "D1-O2、D1-O3：功能對應開發流程、campaigns、delegated dismissal。",
+          "output": "列出各階段對應功能與警示的關閉治理。",
+          "passCriteria": "能區分預防導向與事後處理。",
+          "domainId": "D1"
+        },
+        {
+          "day": 4,
+          "title": "存取、治理與供應鏈基本概念",
+          "reading": "D1-O4：security manager、治理功能、供應鏈功能表。",
+          "output": "畫出七個供應鏈功能各自的作用。",
+          "passCriteria": "能說出 version updates 與 security updates 的差別。",
+          "domainId": "D1"
+        },
+        {
+          "day": 5,
+          "title": "啟用 Secret Protection",
+          "reading": "D2-O1：誰需要啟用、樣式類型、有效性檢查。",
+          "output": "寫出公開、私有、使用者擁有三種 repository 的條件。",
+          "passCriteria": "能判斷某 repository 是否需要啟用。",
+          "domainId": "D2"
+        },
+        {
+          "day": 6,
+          "title": "預防機密外洩",
+          "reading": "D2-O2：push protection 途徑、樣式、繞過理由。",
+          "output": "做一張途徑與支援樣式的對照表。",
+          "passCriteria": "能說出三個繞過理由各建立什麼警示。",
+          "domainId": "D2"
+        },
+        {
+          "day": 7,
+          "title": "D1、D2 題組",
+          "reading": "重讀 D1、D2 的判斷練習並做題。",
+          "output": "完成 D1、D2 錯題分類。",
+          "passCriteria": "D1、D2 題目答對率達 80%。",
+          "domainId": "D2"
+        }
+      ]
+    },
+    {
+      "id": "week-2",
+      "week": 2,
+      "title": "Secret Protection 與供應鏈安全",
+      "days": [
+        {
+          "day": 8,
+          "title": "警示回應、存取與自訂樣式",
+          "reading": "D2-O3、D2-O4：修復優先順序、委派繞過、自訂樣式。",
+          "output": "寫出外洩 secret 的處理順序與自訂樣式流程。",
+          "passCriteria": "能說出 exemption 與 bypass privileges 的差別。",
+          "domainId": "D2"
+        },
+        {
+          "day": 9,
+          "title": "相依性風險與 SBOM",
+          "reading": "D3-O1：dependency graph、Advisory Database、SBOM。",
+          "output": "匯出一份 SBOM 並說明它不含什麼。",
+          "passCriteria": "能說出 SBOM 的內容與匯出方式。",
+          "domainId": "D3"
+        },
+        {
+          "day": 10,
+          "title": "偵測、優先順序與回應警示",
+          "reading": "D3-O2：警示觸發、EPSS、security updates、auto-triage。",
+          "output": "畫出警示從產生到關閉的流程。",
+          "passCriteria": "能說出怎麼只對部分警示開 pull request。",
+          "domainId": "D3"
+        },
+        {
+          "day": 11,
+          "title": "開發中保護相依性",
+          "reading": "D3-O3：dependency review、action 選項、version updates。",
+          "output": "列出 action 的四個選項與限制。",
+          "passCriteria": "能說出 allow 與 deny 的規則。",
+          "domainId": "D3"
+        },
+        {
+          "day": 12,
+          "title": "供應鏈的原則、權限與整合",
+          "reading": "D3-O4：誰能啟用、警示指派、webhook 與 API。",
+          "output": "整理各功能的啟用權限表。",
+          "passCriteria": "能說出指派 Dependabot 警示需要什麼授權。",
+          "domainId": "D3"
+        },
+        {
+          "day": 13,
+          "title": "D3 題組",
+          "reading": "重讀 D3 判斷練習並做題。",
+          "output": "完成 D3 錯題分類。",
+          "passCriteria": "D3 題目答對率達 80%。",
+          "domainId": "D3"
+        },
+        {
+          "day": 14,
+          "title": "D1 到 D3 複習",
+          "reading": "重讀 D1 到 D3 的陷阱欄與名詞。",
+          "output": "寫出 D1 到 D3 各自的三個易混淆對。",
+          "passCriteria": "能不看資料說出各對的差別。",
+          "domainId": "D3"
+        }
+      ]
+    },
+    {
+      "id": "week-3",
+      "week": 3,
+      "title": "Code Security 與安全營運",
+      "days": [
+        {
+          "day": 15,
+          "title": "程式碼掃描的做法與工具",
+          "reading": "D4-O1：CodeQL、build mode、query suite、SARIF。",
+          "output": "整理三個 query suite 的差別與可用 setup。",
+          "passCriteria": "能判斷某語言是否被 CodeQL 支援。",
+          "domainId": "D4"
+        },
+        {
+          "day": 16,
+          "title": "設定 Code Security",
+          "reading": "D4-O2：default setup、advanced setup、repository properties。",
+          "output": "做 default 與 advanced 的選擇表。",
+          "passCriteria": "能說出 default setup 的觸發時機。",
+          "domainId": "D4"
+        },
+        {
+          "day": 17,
+          "title": "分析、分流並修復警示",
+          "reading": "D4-O3：警示頁面、pull request 檢查、merge protection、autofix。",
+          "output": "畫出 pull request 上警示到合併的流程。",
+          "passCriteria": "能說出哪些嚴重度使檢查失敗。",
+          "domainId": "D4"
+        },
+        {
+          "day": 18,
+          "title": "最佳化與自動化營運",
+          "reading": "D4-O4：tool status page、指標、issue 連結、SARIF 上傳。",
+          "output": "寫出多組 SARIF 上傳的規則。",
+          "passCriteria": "能說出 category 的用途。",
+          "domainId": "D4"
+        },
+        {
+          "day": 19,
+          "title": "D4 題組",
+          "reading": "重讀 D4 判斷練習並做題。",
+          "output": "完成 D4 錯題分類。",
+          "passCriteria": "D4 題目答對率達 80%。",
+          "domainId": "D4"
+        },
+        {
+          "day": 20,
+          "title": "弱點脈絡與修復框架",
+          "reading": "D5-O1：GHSA、CVE、CWE、EPSS、advisory 類型。",
+          "output": "做 advisory 三類與是否產生警示的對照表。",
+          "passCriteria": "能說出 EPSS 的正確解讀。",
+          "domainId": "D5"
+        },
+        {
+          "day": 21,
+          "title": "大規模排定與管理",
+          "reading": "D5-O2：security campaigns、合併規則、關閉與記錄。",
+          "output": "寫出 campaign 的限制與建立流程。",
+          "passCriteria": "能說出 1000 與 25 兩個數字各代表什麼。",
+          "domainId": "D5"
+        }
+      ]
+    },
+    {
+      "id": "week-4",
+      "week": 4,
+      "title": "安全營運、套件管理與總複習",
+      "days": [
+        {
+          "day": 22,
+          "title": "客製化偵測與協作治理",
+          "reading": "D5-O3、D5-O4：extra-queries、security manager、委派機制。",
+          "output": "整理委派繞過與委派關閉的差別。",
+          "passCriteria": "能說出誰一律可繞過 push protection。",
+          "domainId": "D5"
+        },
+        {
+          "day": 23,
+          "title": "左移與 D5 題組",
+          "reading": "D5-O5 並重讀 D5 判斷練習。",
+          "output": "完成 D5 錯題分類。",
+          "passCriteria": "D5 題目答對率達 80%。",
+          "domainId": "D5"
+        },
+        {
+          "day": 24,
+          "title": "大規模推出",
+          "reading": "D6-O1：security configuration、狀態、強制。",
+          "output": "畫出 configuration 八個狀態的轉換。",
+          "passCriteria": "能說出 removed 與 detached 的差別。",
+          "domainId": "D6"
+        },
+        {
+          "day": 25,
+          "title": "設定功能與預設值",
+          "reading": "D6-O2：建立 configuration、global settings。",
+          "output": "整理 configuration 區塊與 global settings 的項目。",
+          "passCriteria": "能說出預設 configuration 的套用範圍。",
+          "domainId": "D6"
+        },
+        {
+          "day": 26,
+          "title": "治理與自動化",
+          "reading": "D6-O3、D6-O4：角色、大規模啟用 code scanning、REST API。",
+          "output": "寫出大規模啟用 default 與 advanced setup 的方式。",
+          "passCriteria": "能說出強制 configuration 透過 API 修改的結果。",
+          "domainId": "D6"
+        },
+        {
+          "day": 27,
+          "title": "全題庫模擬",
+          "reading": "做完整題庫並分類錯題。",
+          "output": "完成錯題原因分類。",
+          "passCriteria": "整體答對率達 80%。",
+          "domainId": "D6"
+        },
+        {
+          "day": 28,
+          "title": "總複習與考前檢查",
+          "reading": "重讀必背句、對照表與考前清單。",
+          "output": "完成考前檢查清單。",
+          "passCriteria": "能在 10 分鐘內說出六領域的重點與易混淆對。",
+          "domainId": "D6"
+        }
+      ]
+    }
+  ],
+  "wrongAnswerMethod": [
+    {
+      "type": "功能混淆",
+      "symptom": "把相近的功能或設定當成同一個，例如 security updates 與 version updates。",
+      "remedy": "回到章節的對照表，寫出各自的觸發條件與邊界。"
+    },
+    {
+      "type": "題幹漏讀",
+      "symptom": "忽略「公開」「組織層級」「預設分支」等限制詞。",
+      "remedy": "圈出限制詞後再看選項。"
+    },
+    {
+      "type": "數字記錯",
+      "symptom": "把 3 天、25 則、1000 則、7 天等數字互換。",
+      "remedy": "每個數字配一個它代表的規則，寫成必背句。"
+    },
+    {
+      "type": "直覺錯誤",
+      "symptom": "依常理選答案，但官方行為違反直覺，例如 Not set 反而啟用付費功能。",
+      "remedy": "把違反直覺的行為記進陷阱清單，並在實驗中驗證。"
+    }
+  ]
+}

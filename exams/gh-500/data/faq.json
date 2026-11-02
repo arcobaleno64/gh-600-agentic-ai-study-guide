@@ -1,0 +1,170 @@
+[
+  {
+    "id": "FAQ-01",
+    "category": "考試資訊",
+    "question": "GH-500 對應哪個認證？",
+    "answer": "GitHub Advanced Security 認證；本站以 Microsoft Learn 的認證頁與 Study Guide 為範圍依據。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-02",
+    "category": "考試資訊",
+    "question": "考試時間與及格分數是多少？",
+    "answer": "資料記載為 100 分鐘、及格分數 700；正式應考前請重新核對官方認證頁。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-03",
+    "category": "考試資訊",
+    "question": "考試提供哪些語言？",
+    "answer": "English、Spanish、Portuguese (Brazil)、Korean、Japanese。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-04",
+    "category": "考試資訊",
+    "question": "這個網站是官方出版品嗎？",
+    "answer": "不是。本站是繁體中文原創學習整理，不含實際考題、考古題或外洩題庫。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-05",
+    "category": "考試資訊",
+    "question": "六個領域與權重是什麼？",
+    "answer": "D1 安全套件、功能與生態系，D2 Secret Protection，D3 供應鏈安全，D5 安全營運：各 15–20%；D4 Code Security、D6 安全套件管理：各 10–15%。",
+    "keyWords": ["D1", "D2", "D3", "D4", "D5", "D6"]
+  },
+  {
+    "id": "FAQ-06",
+    "category": "D1",
+    "question": "GitHub Advanced Security 現在分成哪兩個產品？",
+    "answer": "GitHub Secret Protection 與 GitHub Code Security；提供給 GitHub Team 與 GitHub Enterprise Cloud 的組織。",
+    "keyWords": ["D1"]
+  },
+  {
+    "id": "FAQ-07",
+    "category": "D1",
+    "question": "公開 repository 的安全功能都免費嗎？",
+    "answer": "不是。要以功能為單位判斷：secret scanning 使用者警示、push protection、code scanning、CodeQL CLI、Copilot Autofix 與 dependency review 標示公開可用；delegated bypass、custom patterns、AI Scan、自訂自動分流規則與 security campaigns 沒有。",
+    "keyWords": ["D1"]
+  },
+  {
+    "id": "FAQ-08",
+    "category": "D2",
+    "question": "Secret scanning 掃描哪些內容？",
+    "answer": "所有分支的完整 Git 歷史，以及 issue、pull request、Discussions、wiki 與 secret gist 的文字。",
+    "keyWords": ["D2"]
+  },
+  {
+    "id": "FAQ-09",
+    "category": "D2",
+    "question": "Push protection 與 secret scanning 差在哪？",
+    "answer": "Push protection 在推送時阻擋，屬預防；secret scanning 事後找出已存在的 secret 並建立警示。",
+    "keyWords": ["D2"]
+  },
+  {
+    "id": "FAQ-10",
+    "category": "D2",
+    "question": "繞過 push protection 要給什麼理由，各建立什麼警示？",
+    "answer": "三選一：It's used in tests 與 It's a false positive 建立已關閉的警示；I'll fix it later 建立開啟中的警示。",
+    "keyWords": ["D2"]
+  },
+  {
+    "id": "FAQ-11",
+    "category": "D2",
+    "question": "發現 secret 外洩時第一步做什麼？",
+    "answer": "視為已外洩，先撤銷或輪替憑證並更新使用它的服務；憑證失效後改寫 Git 歷史通常不必要。",
+    "keyWords": ["D2"]
+  },
+  {
+    "id": "FAQ-12",
+    "category": "D3",
+    "question": "Dependabot 警示何時產生？",
+    "answer": "GitHub Advisory Database 新增 advisory，或 repository 的 dependency graph 改變時，針對預設分支產生。",
+    "keyWords": ["D3"]
+  },
+  {
+    "id": "FAQ-13",
+    "category": "D3",
+    "question": "Security updates 與 version updates 有什麼不同？",
+    "answer": "Security updates 由警示觸發，更新到包含修補的最低版本；version updates 依 dependabot.yml 讓相依性保持最新，與弱點無關。",
+    "keyWords": ["D3"]
+  },
+  {
+    "id": "FAQ-14",
+    "category": "D3",
+    "question": "SBOM 包含什麼？",
+    "answer": "相依性、版本、套件識別碼、授權、間接相依性路徑與著作權資訊，以 SPDX 格式匯出；不包含 dependents。",
+    "keyWords": ["D3"]
+  },
+  {
+    "id": "FAQ-15",
+    "category": "D3",
+    "question": "Dependency review 與 Dependabot alerts 差在哪？",
+    "answer": "Alerts 找出已在相依性中的弱點；dependency review 在 pull request 於引入之前顯示相依性變動與弱點。",
+    "keyWords": ["D3"]
+  },
+  {
+    "id": "FAQ-16",
+    "category": "D4",
+    "question": "Default setup 與 advanced setup 怎麼選？",
+    "answer": "Default setup 最快、最省維護；需要自訂 workflow（建置、matrix、排程）或外部 CI 時用 advanced setup。",
+    "keyWords": ["D4"]
+  },
+  {
+    "id": "FAQ-17",
+    "category": "D4",
+    "question": "CodeQL 支援哪些語言？",
+    "answer": "C/C++、C#、Go、Java/Kotlin、JavaScript/TypeScript、Python、Ruby、Rust、Swift 與 GitHub Actions workflows；不支援 PHP、Scala 等清單以外的語言。",
+    "keyWords": ["D4"]
+  },
+  {
+    "id": "FAQ-18",
+    "category": "D4",
+    "question": "Copilot Autofix 與 agentic autofix 差在哪？",
+    "answer": "Copilot Autofix 為單一警示產生建議修復，由你審查後建立 pull request；agentic autofix 由 agent 端到端修復並開 draft pull request，會消耗 AI Credits 與 Actions 分鐘數。",
+    "keyWords": ["D4"]
+  },
+  {
+    "id": "FAQ-19",
+    "category": "D5",
+    "question": "EPSS 分數代表什麼？",
+    "answer": "弱點在未來 30 天內被利用的機率（0 到 1），由 FIRST 提供、GitHub 每日同步，不是受影響專案的比例。",
+    "keyWords": ["D5"]
+  },
+  {
+    "id": "FAQ-20",
+    "category": "D5",
+    "question": "Security campaign 是什麼？",
+    "answer": "把一組警示分享給開發者共同消化的機制；一個 campaign 的警示不得超過 1000 則，一次最多指派 25 則 code scanning 警示給 Copilot。",
+    "keyWords": ["D5"]
+  },
+  {
+    "id": "FAQ-21",
+    "category": "D5",
+    "question": "Security manager 角色能做什麼？",
+    "answer": "讀取所有 repository、寫入所有安全警示、設定安全功能，不需要 admin 權限；由組織擁有者指派。",
+    "keyWords": ["D5"]
+  },
+  {
+    "id": "FAQ-22",
+    "category": "D5",
+    "question": "Delegated bypass 與 delegated alert dismissal 差在哪？",
+    "answer": "Delegated bypass 管誰能繞過 push protection；delegated alert dismissal 管誰能直接關閉警示。",
+    "keyWords": ["D5"]
+  },
+  {
+    "id": "FAQ-23",
+    "category": "D6",
+    "question": "Security configuration 與 global settings 差在哪？",
+    "answer": "Security configuration 控制 repository 層級的功能；global settings 控制組織層級的設定並由所有 repository 繼承。",
+    "keyWords": ["D6"]
+  },
+  {
+    "id": "FAQ-24",
+    "category": "D6",
+    "question": "configuration 的 removed 與 detached 狀態差在哪？",
+    "answer": "removed：管理員改了與未強制設定衝突的項目，仍關聯但不繼承全部設定；detached：完全斷開，現有設定不變。",
+    "keyWords": ["D6"]
+  }
+]
