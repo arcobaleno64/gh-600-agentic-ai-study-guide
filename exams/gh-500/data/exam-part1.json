@@ -1,0 +1,346 @@
+{
+  "scenario": {
+    "title": "情境：orders-api 的安全設定",
+    "intro": "Contoso 訂單團隊的組織已啟用 GitHub Secret Protection 與 GitHub Code Security。私有 repository orders-api 以 JavaScript 開發，另有一個以 PHP 撰寫的 admin 資料夾。團隊目前的設定如下：",
+    "facts": [
+      "Code scanning：以 default setup 啟用 CodeQL。預設分支另有 ruleset，內含 code scanning 規則，必要工具是 CodeQL。",
+      "Secret scanning 與 push protection 皆已啟用，沒有另外設定 delegated bypass。",
+      "Dependabot alerts 與 security updates 皆已啟用，repository 中另有一份 dependabot.yml。",
+      "組織建立了一份預設的 security configuration，之後新建立的 repository 都由它管理。"
+    ],
+    "context": "上線一個月後，團隊回報以下現象：",
+    "observations": [
+      "(a) 開發者在功能分支修好某則 code scanning 警示，開了 pull request 且 code scanning 檢查通過，但警示頁面仍顯示開啟中。",
+      "(b) 另一位開發者推送含權杖的 commit 時被 push protection 擋下，他選了「I'll fix it later」後完成推送。",
+      "(c) 團隊想只對 high 以上嚴重度的 Dependabot 警示自動開 pull request，在 dependabot.yml 加了嚴重度條件，但沒有任何效果。",
+      "(d) 稽核者要求提供依賴 orders-api 的專案清單，團隊匯出 SBOM 後，裡面找不到這份清單。",
+      "(e) admin 資料夾的 PHP 程式碼沒有任何 code scanning 警示，專案經理據此認為它沒有弱點。",
+      "(f) 一個從別的組織轉移進來的 repository 沒有套用預設 configuration；另一個 repository 的 configuration 狀態顯示 removed。",
+      "(g) 警示越積越多，安全團隊想用一個 security campaign 一次納入 1,200 則 code scanning 警示。"
+    ]
+  },
+  "questions": [
+    {
+      "id": "GH500-P1-01",
+      "exam": "GH-500",
+      "number": 901,
+      "domainId": "D4",
+      "objectiveIds": ["D4-O3"],
+      "sourceIds": ["GH500-DOC-31", "GH500-DOC-42"],
+      "type": "single",
+      "question": "現象 (a)：功能分支已修好，警示頁面卻仍顯示開啟中。最可能的原因是什麼？",
+      "options": [
+        {
+          "id": "A",
+          "text": "pull request 的掃描結果尚未回傳，要等每週排程跑完才會更新"
+        },
+        {
+          "id": "B",
+          "text": "警示必須由具 admin 權限的人手動關閉，狀態才會更新"
+        },
+        {
+          "id": "C",
+          "text": "警示頁面只反映預設分支，修復要合併進預設分支才會關閉"
+        },
+        {
+          "id": "D",
+          "text": "ruleset 的 code scanning 規則會把警示狀態凍結在原值"
+        }
+      ],
+      "answer": "C",
+      "explanation": "警示頁面的狀態與細節只反映警示在預設分支上的狀態，其他分支的狀態看 Affected branches。pull request 的檢查通過，代表那個分支沒有新警示；要等修復合併進預設分支，警示才會在預設分支關閉。",
+      "trap": "把功能分支或 pull request 上的檢查通過，當成預設分支的警示已經關閉。",
+      "domain": "設定與使用 Code Security",
+      "difficulty": "中等",
+      "keywords": ["D4", "D4-O3", "Affected branches", "預設分支"]
+    },
+    {
+      "id": "GH500-P1-02",
+      "exam": "GH-500",
+      "number": 902,
+      "domainId": "D2",
+      "objectiveIds": ["D2-O2"],
+      "sourceIds": ["GH500-DOC-02"],
+      "type": "single",
+      "question": "現象 (b)：選擇「I'll fix it later」繞過後，會在 repository 建立什麼警示？",
+      "options": [
+        {
+          "id": "A",
+          "text": "已關閉的警示，關閉原因為 used in tests"
+        },
+        {
+          "id": "B",
+          "text": "建立一則開啟中的警示，留待團隊之後再處理"
+        },
+        {
+          "id": "C",
+          "text": "已關閉的警示，關閉原因為 false positive"
+        },
+        {
+          "id": "D",
+          "text": "不建立任何警示，只把這次繞過寫入稽核日誌紀錄"
+        }
+      ],
+      "answer": "B",
+      "explanation": "繞過 push protection 時要從三個理由擇一：It's used in tests 與 It's a false positive 建立已關閉的警示，I'll fix it later 建立開啟中的警示。繞過事件也會寫入稽核日誌並以電子郵件通知相關人員，所以不是「不留痕跡」。",
+      "trap": "以為所有繞過理由都建立已關閉的警示，或以為繞過只留下稽核日誌。",
+      "domain": "設定與使用 Secret Protection",
+      "difficulty": "中等",
+      "keywords": ["D2", "D2-O2", "push protection", "繞過"]
+    },
+    {
+      "id": "GH500-P1-03",
+      "exam": "GH-500",
+      "number": 903,
+      "domainId": "D3",
+      "objectiveIds": ["D3-O2"],
+      "sourceIds": ["GH500-DOC-14", "GH500-DOC-20"],
+      "type": "single",
+      "question": "現象 (c)：dependabot.yml 的嚴重度條件沒有效果。依官方建議，團隊應該怎麼做？",
+      "options": [
+        {
+          "id": "A",
+          "text": "保持 security updates 啟用，並在 dependabot.yml 加入更多嚴重度條件"
+        },
+        {
+          "id": "B",
+          "text": "把 Dependabot alerts 的通知改成只寄送 high 以上的警示"
+        },
+        {
+          "id": "C",
+          "text": "在 dependency review action 設定 fail-on-severity: high"
+        },
+        {
+          "id": "D",
+          "text": "停用 security updates，改建 auto-triage 規則指定要開 pull request 的警示"
+        }
+      ],
+      "answer": "D",
+      "explanation": "dependabot.yml 與警示沒有互動，無法用它篩選要處理的警示。想自行挑選要開 pull request 的警示，官方建議保持 security updates 停用，改建 auto-triage 規則。通知設定只影響誰收到信，dependency review 作用在 pull request 的相依性變更，兩者都不會決定哪些警示產生更新 pull request。",
+      "trap": "把 dependabot.yml（version updates 的設定）與 Dependabot 警示的處理混為一談。",
+      "domain": "設定與使用供應鏈安全",
+      "difficulty": "進階",
+      "keywords": ["D3", "D3-O2", "auto-triage", "dependabot.yml"]
+    },
+    {
+      "id": "GH500-P1-04",
+      "exam": "GH-500",
+      "number": 904,
+      "domainId": "D3",
+      "objectiveIds": ["D3-O1"],
+      "sourceIds": ["GH500-DOC-16", "GH500-DOC-17"],
+      "type": "single",
+      "question": "現象 (d)：匯出的 SBOM 裡找不到依賴 orders-api 的專案清單。原因是什麼？",
+      "options": [
+        {
+          "id": "A",
+          "text": "SBOM 只描述專案依賴什麼，不含依賴這個專案的 dependents"
+        },
+        {
+          "id": "B",
+          "text": "SBOM 只收錄直接相依性，依賴它的專案被視為間接相依性而省略"
+        },
+        {
+          "id": "C",
+          "text": "SBOM 要有 Code Security 授權才會附上 dependents"
+        },
+        {
+          "id": "D",
+          "text": "Dependents 檢視對私有 repository 也會列出依賴它的專案"
+        }
+      ],
+      "answer": "A",
+      "explanation": "SBOM 包含專案的相依性、版本、套件識別碼、授權與間接相依性路徑，不含 dependents。要看誰依賴你，用 dependency graph 的 Dependents 檢視，而且它只在公開 repository 列出；orders-api 是私有 repository，不回報這項資料。",
+      "trap": "把「我依賴什麼」與「誰依賴我」當成同一份清單。",
+      "domain": "設定與使用供應鏈安全",
+      "difficulty": "基礎",
+      "keywords": ["D3", "D3-O1", "SBOM", "dependents"]
+    },
+    {
+      "id": "GH500-P1-05",
+      "exam": "GH-500",
+      "number": 905,
+      "domainId": "D4",
+      "objectiveIds": ["D4-O1"],
+      "sourceIds": ["GH500-DOC-27"],
+      "type": "single",
+      "question": "現象 (e)：PHP 程式碼沒有 code scanning 警示。最合理的判讀是什麼？",
+      "options": [
+        {
+          "id": "A",
+          "text": "default setup 預設排除名為 admin 的資料夾，所以不會有警示"
+        },
+        {
+          "id": "B",
+          "text": "PHP 程式碼已通過 CodeQL 分析，確認沒有任何弱點"
+        },
+        {
+          "id": "C",
+          "text": "CodeQL 不支援 PHP，沒有警示不代表沒有弱點"
+        },
+        {
+          "id": "D",
+          "text": "ruleset 的 code scanning 規則會隱藏 PHP 檔案的警示"
+        }
+      ],
+      "answer": "C",
+      "explanation": "CodeQL 支援的語言包含 JavaScript/TypeScript，但不支援 PHP；嘗試使用可能不會產生警示或分析不完整。沒有警示可能只是該語言不在掃描範圍內，要掃描 PHP 需改用能輸出 SARIF 的第三方工具。",
+      "trap": "把「沒有警示」當成「沒有弱點」，卻沒先確認該語言是否在掃描範圍內。",
+      "domain": "設定與使用 Code Security",
+      "difficulty": "基礎",
+      "keywords": ["D4", "D4-O1", "CodeQL", "PHP"]
+    },
+    {
+      "id": "GH500-P1-06",
+      "exam": "GH-500",
+      "number": 906,
+      "domainId": "D6",
+      "objectiveIds": ["D6-O2"],
+      "sourceIds": ["GH500-DOC-50", "GH500-DOC-51"],
+      "type": "single",
+      "question": "現象 (f) 的前半：轉移進來的 repository 沒有套用預設 configuration。原因是什麼？",
+      "options": [
+        {
+          "id": "A",
+          "text": "預設 configuration 只會套用到公開 repository，不會套用到私有 repository"
+        },
+        {
+          "id": "B",
+          "text": "預設 configuration 只自動套用到新建立的 repository，轉移進來的要手動套用"
+        },
+        {
+          "id": "C",
+          "text": "預設 configuration 必須先啟用強制，才會套用到任何 repository"
+        },
+        {
+          "id": "D",
+          "text": "預設 configuration 每週才同步一次，要等下一次同步才會套用"
+        }
+      ],
+      "answer": "B",
+      "explanation": "「Use as default for newly created repositories」設定的預設 configuration 只自動套用到新建立的 repository；轉移進來的 repository 需要手動套用。是否啟用強制是另一個選項，與它是否為預設無關。",
+      "trap": "以為「預設」代表組織內所有 repository 都會自動被套用。",
+      "domain": "GitHub 安全套件管理",
+      "difficulty": "中等",
+      "keywords": ["D6", "D6-O2", "預設 configuration", "轉移"]
+    },
+    {
+      "id": "GH500-P1-07",
+      "exam": "GH-500",
+      "number": 907,
+      "domainId": "D4",
+      "objectiveIds": ["D4-O4"],
+      "sourceIds": ["GH500-DOC-30", "GH500-DOC-38"],
+      "type": "multiple",
+      "question": "要把 admin 資料夾的 PHP 程式碼也納入 code scanning，並與 CodeQL 的結果並存，應該做哪些事？（選 2 項）",
+      "options": [
+        {
+          "id": "A",
+          "text": "改用能輸出 SARIF 的第三方掃描工具，並透過 Actions 或 API 上傳"
+        },
+        {
+          "id": "B",
+          "text": "在 default setup 的語言清單中加入 PHP，讓 CodeQL 直接分析"
+        },
+        {
+          "id": "C",
+          "text": "在 ruleset 的 code scanning 規則中，把必要工具改成 PHP 分析工具"
+        },
+        {
+          "id": "D",
+          "text": "為這組上傳的結果指定與同一 commit 其他結果不同的 category"
+        }
+      ],
+      "answer": ["A", "D"],
+      "explanation": "CodeQL 不支援 PHP，所以要用能輸出 SARIF 的第三方工具，並透過 Actions 或 API 上傳。同一個 commit 上傳多組結果時，必須為每組指定唯一的 category，否則後上傳的結果無法與前一組區分。default setup 的語言清單只列 CodeQL 支援的語言，ruleset 的規則只決定哪些工具的結果要把關，兩者都不能新增語言支援。",
+      "trap": "以為只要在設定裡勾選語言就能掃描，忽略該語言根本不被 CodeQL 支援；或上傳多組結果卻沒有區分 category。",
+      "domain": "設定與使用 Code Security",
+      "difficulty": "進階",
+      "keywords": ["D4", "D4-O4", "SARIF", "category"]
+    },
+    {
+      "id": "GH500-P1-08",
+      "exam": "GH-500",
+      "number": 908,
+      "domainId": "D5",
+      "objectiveIds": ["D5-O2"],
+      "sourceIds": ["GH500-DOC-09"],
+      "type": "true-false",
+      "answer": true,
+      "question": "安全團隊一次最多可選 25 則 code scanning 警示指派給 Copilot，由 agent 產生修復並開啟 pull request。",
+      "explanation": "Agentic autofix 可把警示指派給 Copilot，由 agent 探索程式碼庫、產生並驗證修復，再開啟 draft pull request。一次可從 backlog 或 security campaign 選最多 25 則警示，一次指派產生一個 agent session 與一個 pull request。",
+      "trap": "把「一個 campaign 的警示上限」與「一次指派給 Copilot 的上限」兩個數字混為一談。",
+      "domain": "安全營運：最佳做法、優先順序與修復",
+      "difficulty": "中等",
+      "keywords": ["D5", "D5-O2", "Copilot", "25"]
+    },
+    {
+      "id": "GH500-P1-09",
+      "exam": "GH-500",
+      "number": 909,
+      "domainId": "D5",
+      "objectiveIds": ["D5-O2"],
+      "sourceIds": ["GH500-DOC-46"],
+      "type": "single",
+      "question": "現象 (g)：用一個 campaign 納入 1,200 則警示會遇到什麼限制？",
+      "options": [
+        {
+          "id": "A",
+          "text": "一個 campaign 的警示不得超過 1000 則，要縮小篩選或拆成多個"
+        },
+        {
+          "id": "B",
+          "text": "campaign 只收 Dependabot 警示，不能納入 code scanning 警示"
+        },
+        {
+          "id": "C",
+          "text": "草稿狀態的 campaign 最多只能納入 25 則警示，發布後才解除"
+        },
+        {
+          "id": "D",
+          "text": "只有企業擁有者才能建立警示數超過 100 則的 campaign"
+        }
+      ],
+      "answer": "A",
+      "explanation": "一個 campaign 的警示數不得超過 1000 則，所以 1,200 則要縮小篩選條件，或拆成多個 campaign。campaign 可由組織擁有者、security manager 與具 admin 角色的組織成員建立，也能先存成草稿再發布。",
+      "trap": "只記得 25 這個數字，把一次指派給 Copilot 的上限當成 campaign 的上限。",
+      "domain": "安全營運：最佳做法、優先順序與修復",
+      "difficulty": "基礎",
+      "keywords": ["D5", "D5-O2", "campaign", "1000"]
+    },
+    {
+      "id": "GH500-P1-10",
+      "exam": "GH-500",
+      "number": 910,
+      "domainId": "D6",
+      "objectiveIds": ["D6-O1"],
+      "sourceIds": ["GH500-DOC-56", "GH500-DOC-57"],
+      "type": "single",
+      "question": "現象 (f) 的後半：某個 repository 的 configuration 狀態顯示 removed。下列何者正確？",
+      "options": [
+        {
+          "id": "A",
+          "text": "已與 configuration 完全斷開，repository 現有的安全設定維持不變"
+        },
+        {
+          "id": "B",
+          "text": "configuration 已被刪除，repository 的所有安全功能因此一併關閉"
+        },
+        {
+          "id": "C",
+          "text": "由企業層級的設定變更造成，組織管理員無法再處理這個 repository"
+        },
+        {
+          "id": "D",
+          "text": "仍與 configuration 關聯但不再繼承全部設定，對 configuration 啟用強制可預防"
+        }
+      ],
+      "answer": "D",
+      "explanation": "removed 表示 repository 管理員改了與未強制的 configuration 衝突的設定：repository 仍與 configuration 關聯，但不再繼承全部設定，也不計入涵蓋指標；重新套用可恢復，啟用強制可預防。完全斷開的是 detached，企業層級衝突造成的是 removed_by_enterprise。",
+      "trap": "把 removed 當成 detached，或把 removed 當成 removed_by_enterprise。",
+      "domain": "GitHub 安全套件管理",
+      "difficulty": "中等",
+      "keywords": ["D6", "D6-O1", "removed", "detached"]
+    }
+  ]
+}
