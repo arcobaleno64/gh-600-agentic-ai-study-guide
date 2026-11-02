@@ -7,28 +7,28 @@
     "objectiveIds": ["D2-O1"],
     "sourceIds": ["GH500-DOC-01", "GH500-DOC-06"],
     "type": "single",
-    "answer": "C",
-    "question": "公開 repository 與組織擁有的私有 repository，在使用 secret scanning 的條件上有何差異？",
+    "answer": "B",
+    "question": "某個 GitHub Team 組織尚未購買 Secret Protection 或 Code Security，擁有一個公開 repository 與一個私有 repository，都沒有做任何安全設定。關於這個私有 repository 的 secret scanning，哪項描述正確？",
     "options": [
       {
         "id": "A",
-        "text": "公開的需要 Secret Protection；組織私有的自動掃描，免費"
+        "text": "會自動掃描，而且不另外收費（公開 repository 的情況）"
       },
       {
         "id": "B",
-        "text": "公開的自動掃描，免費；組織私有的需要 Code Security"
+        "text": "需要先取得並啟用 Secret Protection（組織私有的情況）"
       },
       {
         "id": "C",
-        "text": "公開的自動掃描，免費；組織私有的需要 Secret Protection"
+        "text": "需要 Enterprise Managed Users 帳號（使用者私有 repository）"
       },
       {
         "id": "D",
-        "text": "公開的需要 Code Security；組織私有的需要 Secret Protection"
+        "text": "可在 Assessments 頁面免費評估組織（免費評估的情況）"
       }
     ],
     "explanation": "公開 repository 的 secret scanning 自動執行，不另外收費；組織擁有的私有與 internal repository 需要 GitHub Secret Protection，由 GitHub Team 或 GitHub Enterprise Cloud 提供。",
-    "trap": "「只有公開的免費」容易被誤記成「只掃公開的」；私有 repository 並非不能掃，而是要先取得並啟用 Secret Protection。",
+    "trap": "每個選項在官方文件裡都是真實的條件，但各自適用於不同情境；要先判斷是公開、組織私有還是使用者私有 repository，再選對應的條件。",
     "domain": "設定與使用 Secret Protection",
     "difficulty": "基礎",
     "keywords": ["D2", "D2-O1"]
@@ -125,28 +125,28 @@
     "objectiveIds": ["D2-O2"],
     "sourceIds": ["GH500-DOC-02"],
     "type": "single",
-    "answer": "D",
-    "question": "推送內容含有疑似 secret 時，push protection 預設會怎麼處理？",
+    "answer": "A",
+    "question": "開發者從命令列推送一個含有 partner pattern 偵測到的 API 金鑰的 commit。該 repository 已啟用 push protection，開發者不在任何繞過或豁免名單上。推送會發生什麼事？",
     "options": [
       {
         "id": "A",
-        "text": "允許推送完成，並建立警示通知管理員"
+        "text": "推送被阻擋，開發者移除金鑰後重新推送（沒有繞過設定的情況）"
       },
       {
         "id": "B",
-        "text": "阻擋推送，並由管理員審查後決定是否放行"
+        "text": "推送完成並建立開啟中的警示（以 I'll fix it later 繞過的情況）"
       },
       {
         "id": "C",
-        "text": "允許推送完成，並將該 commit 標記為待審查"
+        "text": "推送完成，而且完全不觸發 push protection（豁免者的情況）"
       },
       {
         "id": "D",
-        "text": "阻擋推送，並說明原因，由貢獻者移除後重推"
+        "text": "推送被阻擋，待審查者核准繞過請求後放行（委派繞過的情況）"
       }
     ],
     "explanation": "Push protection 在推送當下攔截：阻擋推送、說明原因，要求貢獻者檢視被標記的內容、移除敏感資訊後重新推送。",
-    "trap": "把 push protection 想成「事後警示」會選到允許推送的選項；它的價值在於 secret 還沒進入 repository 就被擋下。",
+    "trap": "後三個選項都是真實的 push protection 結果，但各自對應繞過、豁免或委派審查；題幹明說沒有任何繞過設定，才會得到預設的阻擋行為。",
     "domain": "設定與使用 Secret Protection",
     "difficulty": "基礎",
     "keywords": ["D2", "D2-O2"]
@@ -213,28 +213,28 @@
     "objectiveIds": ["D2-O3"],
     "sourceIds": ["GH500-DOC-01", "GH500-DOC-03"],
     "type": "single",
-    "answer": "B",
-    "question": "發現一個 API 金鑰留在舊的 commit 中，官方建議的處理優先順序是什麼？",
+    "answer": "A",
+    "question": "團隊發現三個月前的 commit 含有一個仍然有效、且正式環境正在使用的雲端 API 金鑰。處理這則警示的首要動作是什麼？",
     "options": [
       {
         "id": "A",
-        "text": "先改寫 Git 歷史，再評估是否撤銷金鑰"
+        "text": "撤銷或輪替金鑰並更新使用它的服務（金鑰仍有效的情況）"
       },
       {
         "id": "B",
-        "text": "先撤銷或輪替金鑰，再評估是否改寫歷史"
+        "text": "以 used in tests 關閉警示（金鑰只用於測試的情況）"
       },
       {
         "id": "C",
-        "text": "先關閉警示，再評估是否撤銷金鑰"
+        "text": "以 false positive 關閉警示（偵測結果不是真的 secret 的情況）"
       },
       {
         "id": "D",
-        "text": "先封存 repository，再評估是否撤銷金鑰"
+        "text": "通報 GitHub 請其撤銷（私有 repository 中的 GitHub 權杖的情況）"
       }
     ],
     "explanation": "已提交的 secret 應視為已外洩。憑證一旦撤銷或輪替，改寫 Git 歷史通常不必要，而且耗時，所以先讓憑證失效。",
-    "trap": "清乾淨歷史看起來比較徹底，但風險來自憑證仍有效；憑證沒失效前，歷史再乾淨也沒有降低風險。",
+    "trap": "每個選項都是官方文件中真實存在的處理方式，但適用情境不同；題幹寫明金鑰仍有效且正在使用，所以首要動作是讓它失效。",
     "domain": "設定與使用 Secret Protection",
     "difficulty": "基礎",
     "keywords": ["D2", "D2-O3"]
@@ -297,28 +297,28 @@
     "objectiveIds": ["D2-O4"],
     "sourceIds": ["GH500-DOC-04", "GH500-DOC-02"],
     "type": "single",
-    "answer": "A",
-    "question": "委派繞過中，「exemption（豁免）」與「bypass privileges（繞過權限）」的差別是什麼？",
+    "answer": "B",
+    "question": "組織要讓遷移機器人帳號的推送完全不被 push protection 阻擋。應該授予哪一種設定？",
     "options": [
       {
         "id": "A",
-        "text": "豁免者的推送不觸發保護；有繞過權限者被擋時可自行繞過"
+        "text": "Bypass privileges 繞過權限名單"
       },
       {
         "id": "B",
-        "text": "豁免者被擋時可自行繞過；有繞過權限者的推送不觸發保護"
+        "text": "Exemption 豁免者名單設定"
       },
       {
         "id": "C",
-        "text": "豁免者的推送須經審查；有繞過權限者被擋時可自行繞過"
+        "text": "Delegated alert dismissal"
       },
       {
         "id": "D",
-        "text": "豁免者的推送不觸發保護；有繞過權限者的推送須經審查"
+        "text": "Custom pattern 自訂偵測樣式"
       }
     ],
-    "explanation": "Exemption 讓指定對象的推送完全不觸發 push protection，官方建議留給可信的自動化；bypass privileges 則是在被阻擋時可以自行繞過，並能審查他人的繞過請求。",
-    "trap": "「繞過」字面上聽起來比「豁免」寬鬆，實際上豁免才是完全不經過檢查，兩者的風險程度要分開看。",
+    "explanation": "Exemption 讓指定對象的推送完全不觸發 push protection，官方建議留給遷移機器人或服務帳號這類可信的自動化；bypass privileges 則是被阻擋時可以自行繞過，並能審查他人的繞過請求。",
+    "trap": "繞過權限聽起來比較寬鬆，但持有者仍會被阻擋，只是被擋時可以自行繞過；只有豁免才是完全不觸發。",
     "domain": "設定與使用 Secret Protection",
     "difficulty": "中等",
     "keywords": ["D2", "D2-O4"]
@@ -466,27 +466,27 @@
     "sourceIds": ["GH500-DOC-08"],
     "type": "single",
     "answer": "C",
-    "question": "Security overview 對某個 repository 沒有顯示任何警示。最合理的解讀是什麼？",
+    "question": "管理員在 security overview 看到某個 repository 沒有任何警示，準備回報「這個 repository 沒有弱點」。想確認這個結論是否可靠，下一步最合適的做法是什麼？",
     "options": [
       {
         "id": "A",
-        "text": "該 repository 目前沒有有效警示；若功能已啟用，可以確認沒有弱點"
+        "text": "用 Campaigns 檢視建立新的修復活動來追蹤"
       },
       {
         "id": "B",
-        "text": "該 repository 目前沒有有效警示；警示可能已被轉移到組織層級"
+        "text": "用 Assessments 檢視執行免費的 secret 風險評估"
       },
       {
         "id": "C",
-        "text": "該 repository 目前沒有有效警示；功能可能沒啟用，或弱點尚未被偵測"
+        "text": "用 Coverage 檢視確認這個 repository 是否已啟用安全功能"
       },
       {
         "id": "D",
-        "text": "該 repository 目前沒有有效警示；低嚴重度警示可能被隱藏，需手動展開"
+        "text": "用 Enablement 檢視比較各團隊採用安全功能的速度與進度"
       }
     ],
-    "explanation": "Security overview 顯示的是各功能產生的有效警示。沒有警示，可能是真的沒有問題，也可能是弱點尚未被偵測，或該功能在這個 repository 根本沒啟用，所以要搭配 Coverage 檢視確認啟用情況。",
-    "trap": "「看不到警示」很容易被當成「沒有風險」；它只說明目前有效警示為零，不代表偵測涵蓋完整。",
+    "explanation": "Security overview 顯示的是各功能產生的有效警示。沒有警示，可能是真的沒有問題，也可能是弱點尚未被偵測，或該功能在這個 repository 根本沒啟用；Coverage 檢視用來評估各 repository 採用安全功能的情況。",
+    "trap": "四個都是真實的檢視，但只有 Coverage 回答「這個 repository 有沒有啟用偵測」；「沒有警示」本身不能證明沒有風險。",
     "domain": "GitHub 安全套件、功能與生態系",
     "difficulty": "中等",
     "keywords": ["D1", "D1-O1"]
@@ -639,28 +639,28 @@
     "objectiveIds": ["D1-O3"],
     "sourceIds": ["GH500-DOC-12"],
     "type": "single",
-    "answer": "D",
-    "question": "Dependabot 會在什麼情況下為 repository 產生新的警示？",
+    "answer": "C",
+    "question": "某個 repository 已啟用 Dependabot alerts。一週內沒有人修改過 manifest 或 lockfile，今天卻出現一個新的 Dependabot 警示。最可能的原因是什麼？",
     "options": [
       {
         "id": "A",
-        "text": "當有人推送新的 commit 到 repository 時"
+        "text": "有人新增了一個相依性，使 dependency graph 變動"
       },
       {
         "id": "B",
-        "text": "當 pull request 被合併進預設分支之後"
+        "text": "Dependabot version updates 依排程開了更新 pull request"
       },
       {
         "id": "C",
-        "text": "當管理員在設定頁面手動觸發一次掃描時"
+        "text": "GitHub Advisory Database 新增了一則影響其相依性的 advisory"
       },
       {
         "id": "D",
-        "text": "當有新 advisory，或 dependency graph 變動"
+        "text": "管理員在設定頁面手動觸發了一次 Dependabot 掃描"
       }
     ],
-    "explanation": "Dependabot 把 dependency graph 與 GitHub Advisory Database 交叉比對。新的 advisory 加入資料庫，或 repository 的 dependency graph 改變時，就會產生警示。",
-    "trap": "把偵測想成「每次推送都掃描」會忽略新 advisory 公布這個觸發來源：程式碼沒改，警示也可能出現。",
+    "explanation": "Dependabot 在兩種情況下產生警示：資料庫新增 advisory，或 repository 的 dependency graph 變動。題幹說明相依性檔案沒有變，所以只剩新的 advisory 會造成新警示。",
+    "trap": "相依性變動也是真實的觸發來源，但題幹已排除；程式碼沒改，警示仍可能因為外部資料庫更新而出現。",
     "domain": "GitHub 安全套件、功能與生態系",
     "difficulty": "中等",
     "keywords": ["D1", "D1-O3"]
@@ -673,28 +673,28 @@
     "objectiveIds": ["D1-O3"],
     "sourceIds": ["GH500-DOC-11"],
     "type": "single",
-    "answer": "A",
-    "question": "啟用 delegated alert dismissal 後，有寫入權限的使用者想關閉警示，流程是什麼？",
+    "answer": "D",
+    "question": "組織已啟用 delegated alert dismissal。一位只有寫入權限的開發者認為某個 code scanning 警示是誤報，想關閉它。接下來的流程是什麼？",
     "options": [
       {
         "id": "A",
-        "text": "提出關閉請求，由擁有者或 security manager 核准或拒絕"
+        "text": "直接關閉警示（未啟用 delegated alert dismissal 時的情況）"
       },
       {
         "id": "B",
-        "text": "直接關閉警示，之後由擁有者或 security manager 覆核"
+        "text": "把警示指派給有寫入權限的同事（警示指派功能）"
       },
       {
         "id": "C",
-        "text": "提出關閉請求，由 repository 管理員核准或拒絕"
+        "text": "提出繞過請求，由繞過名單上的審查者核准（委派繞過 push protection）"
       },
       {
         "id": "D",
-        "text": "提出關閉請求，由 GitHub 支援團隊核准或拒絕"
+        "text": "提出關閉請求，由擁有者或 security manager 核准或拒絕"
       }
     ],
     "explanation": "啟用後，有寫入權限的使用者必須提出關閉請求；組織擁有者與 security manager 可以核准或拒絕，也能自己直接關閉。核准就關閉警示，拒絕則保持開啟。",
-    "trap": "預設下有寫入權限的人可直接關閉；容易把預設行為當成啟用後的行為，忽略多了一道審查。",
+    "trap": "前三個選項都是真實的行為，但分別屬於未啟用治理、警示指派與 push protection 的委派繞過；啟用 delegated alert dismissal 後，關閉才需要請求與審查。",
     "domain": "GitHub 安全套件、功能與生態系",
     "difficulty": "中等",
     "keywords": ["D1", "D1-O3"]
@@ -757,28 +757,28 @@
     "objectiveIds": ["D1-O4"],
     "sourceIds": ["GH500-DOC-10"],
     "type": "single",
-    "answer": "A",
-    "question": "Security manager 角色由誰指派？可以指派給誰？",
+    "answer": "D",
+    "question": "資安團隊需要檢視組織內所有安全警示並設定安全功能，但組織不想授予他們所有 repository 的管理員權限。應該怎麼做？",
     "options": [
       {
         "id": "A",
-        "text": "組織擁有者；對象是成員或團隊"
+        "text": "由企業擁有者把資安團隊加入企業擁有者名單"
       },
       {
         "id": "B",
-        "text": "組織擁有者；對象是整個組織的所有成員"
+        "text": "由 repository 管理員在每個 repository 授予團隊 admin 權限"
       },
       {
         "id": "C",
-        "text": "repository 管理員；對象是成員或團隊"
+        "text": "由組織擁有者建立一個只含稽核日誌權限的自訂角色"
       },
       {
         "id": "D",
-        "text": "企業擁有者；對象是成員或團隊"
+        "text": "由組織擁有者把 security manager 角色指派給資安團隊"
       }
     ],
-    "explanation": "Security manager 是組織層級的角色，由組織擁有者指派給任何成員或團隊。它包含所有 repository 的讀取權限、所有安全警示的寫入權限，以及設定安全功能的能力。",
-    "trap": "角色名稱容易被當成 repository 層級的權限；它是組織層級的，而且指派者是組織擁有者。",
+    "explanation": "Security manager 是組織層級的角色，由組織擁有者指派給任何成員或團隊。它包含所有 repository 的讀取權限、所有安全警示的寫入權限，以及設定安全功能的能力，但不需要授予 admin 權限。",
+    "trap": "前三個做法都能給出某種權限，但不是過度授權，就是缺少檢視警示與設定功能的能力；security manager 正是為「最小必要權限」設計的角色。",
     "domain": "GitHub 安全套件、功能與生態系",
     "difficulty": "基礎",
     "keywords": ["D1", "D1-O4"]
@@ -825,28 +825,28 @@
     "objectiveIds": ["D1-O4"],
     "sourceIds": ["GH500-DOC-12"],
     "type": "single",
-    "answer": "C",
-    "question": "Artifact attestations 的作用，下列哪一項描述最準確？",
+    "answer": "B",
+    "question": "團隊想讓使用者能驗證：他們用 GitHub Actions 建置的軟體，是由哪份原始碼與哪次工作流程產生的。應該使用哪個機制？",
     "options": [
       {
         "id": "A",
-        "text": "以密碼學簽署的聲明，說明部署時所在的環境與主機"
+        "text": "Immutable releases 功能"
       },
       {
         "id": "B",
-        "text": "以密碼學簽署的聲明，證明軟體不含已知弱點"
+        "text": "Artifact attestations 功能"
       },
       {
         "id": "C",
-        "text": "以密碼學簽署的聲明，說明建置使用的原始碼與工作流程"
+        "text": "Dependency review 功能"
       },
       {
         "id": "D",
-        "text": "以密碼學簽署的聲明，說明發布的核准人與審查紀錄"
+        "text": "Dependabot version updates 功能"
       }
     ],
-    "explanation": "Artifact attestations 是經密碼學簽署的聲明，說明建置的來源（原始碼與工作流程）或相關的 SBOM。它不保證安全，只提供資訊讓你更有把握相依性沒有被竄改。",
-    "trap": "簽署容易被當成安全認證；它只說明軟體是怎麼建置出來的（來源），不評估軟體有沒有弱點。",
+    "explanation": "Artifact attestations 是經密碼學簽署的聲明，說明建置的來源（原始碼與工作流程）或相關的 SBOM。它不保證軟體安全，只提供資訊讓你更有把握軟體沒有被竄改。",
+    "trap": "Immutable releases 同樣和發布完整性有關，但它禁止發布後修改 release，並不說明軟體是怎麼建置出來的。",
     "domain": "GitHub 安全套件、功能與生態系",
     "difficulty": "進階",
     "keywords": ["D1", "D1-O4"]
