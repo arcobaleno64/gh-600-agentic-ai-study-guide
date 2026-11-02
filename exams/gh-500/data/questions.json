@@ -1740,5 +1740,465 @@
     "domain": "設定與使用 Code Security",
     "difficulty": "中等",
     "keywords": ["D4", "D4-O4"]
+  },
+  {
+    "id": "GH500-058",
+    "exam": "GH-500",
+    "number": 58,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O1"],
+    "sourceIds": ["GH500-DOC-44"],
+    "type": "single",
+    "answer": "C",
+    "question": "下列哪個是格式正確的 GHSA ID？",
+    "options": [
+      {
+        "id": "A",
+        "text": "GHSA-2f9q-m3rv-w8cl"
+      },
+      {
+        "id": "B",
+        "text": "GHSA-2F9Q-M3RV-W8CJ"
+      },
+      {
+        "id": "C",
+        "text": "GHSA-2f9q-m3rv-w8cj"
+      },
+      {
+        "id": "D",
+        "text": "GHSA-2f9q-m3rv-w8c"
+      }
+    ],
+    "explanation": "格式是 GHSA 加三組各四碼，字元取自 23456789cfghjmpqrvwx，字母全為小寫；字母 l 不在字元集中。",
+    "trap": "大小寫與字元集都有規則；看起來像的 ID 可能含不允許的字元。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "進階",
+    "keywords": ["D5", "D5-O1"]
+  },
+  {
+    "id": "GH500-059",
+    "exam": "GH-500",
+    "number": 59,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O1"],
+    "sourceIds": ["GH500-DOC-44"],
+    "type": "true-false",
+    "answer": true,
+    "question": "EPSS 分數代表該弱點在未來 30 天內被利用的機率，而不是受影響專案的比例。",
+    "explanation": "EPSS 由 FIRST 提供，分數介於 0 到 1；例如 90.534% 表示未來 30 天內被利用的機率為 90.534%。",
+    "trap": "把機率誤讀成「有多少專案受影響」。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "基礎",
+    "keywords": ["D5", "D5-O1"]
+  },
+  {
+    "id": "GH500-060",
+    "exam": "GH-500",
+    "number": 60,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O1"],
+    "sourceIds": ["GH500-DOC-45"],
+    "type": "single",
+    "answer": "A",
+    "question": "一則直接從 National Vulnerability Database feed 自動發布、未經 GitHub 審查的 advisory，Dependabot 會怎麼處理？",
+    "options": [
+      {
+        "id": "A",
+        "text": "不為它產生 Dependabot 警示"
+      },
+      {
+        "id": "B",
+        "text": "產生警示，但標示為 unreviewed"
+      },
+      {
+        "id": "C",
+        "text": "只對 critical 嚴重度產生警示"
+      },
+      {
+        "id": "D",
+        "text": "只在啟用 malware alerts 時產生"
+      }
+    ],
+    "explanation": "Dependabot 不為未審查的 advisory 產生警示，因為這類 advisory 未檢查有效性或完整性；只有 GitHub-reviewed advisory 會觸發。",
+    "trap": "資料庫裡有的 advisory 不一定會出現在你的警示中。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "中等",
+    "keywords": ["D5", "D5-O1"]
+  },
+  {
+    "id": "GH500-061",
+    "exam": "GH-500",
+    "number": 61,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O1"],
+    "sourceIds": ["GH500-DOC-44"],
+    "type": "single",
+    "answer": "B",
+    "question": "惡意軟體（malware）advisory 的警示為什麼沒有修復版本？",
+    "options": [
+      {
+        "id": "A",
+        "text": "修補程式會在下個月才發布"
+      },
+      {
+        "id": "B",
+        "text": "惡意軟體是刻意設計，需移除並換掉"
+      },
+      {
+        "id": "C",
+        "text": "registry 會自動回收惡意的版本"
+      },
+      {
+        "id": "D",
+        "text": "Dependabot 只回報而不評估修復"
+      }
+    ],
+    "explanation": "惡意軟體是刻意設計來執行有害功能的程式碼，沒有可升級的修復版本；需要把它從專案移除，並找替代的相依性。",
+    "trap": "把惡意軟體當成一般弱點，等待升級到修復版本。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "中等",
+    "keywords": ["D5", "D5-O1"]
+  },
+  {
+    "id": "GH500-062",
+    "exam": "GH-500",
+    "number": 62,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O2"],
+    "sourceIds": ["GH500-DOC-46"],
+    "type": "single",
+    "answer": "C",
+    "question": "建立 security campaign 時，納入的警示數有什麼上限？",
+    "options": [
+      {
+        "id": "A",
+        "text": "100 則"
+      },
+      {
+        "id": "B",
+        "text": "500 則"
+      },
+      {
+        "id": "C",
+        "text": "1000 則"
+      },
+      {
+        "id": "D",
+        "text": "5000 則"
+      }
+    ],
+    "explanation": "建立 campaign 時要確認選擇的警示在 1000 則以內。",
+    "trap": "與 agentic autofix 一次最多 25 則的上限混淆。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "基礎",
+    "keywords": ["D5", "D5-O2"]
+  },
+  {
+    "id": "GH500-063",
+    "exam": "GH-500",
+    "number": 63,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O2"],
+    "sourceIds": ["GH500-DOC-09"],
+    "type": "single",
+    "answer": "B",
+    "question": "在 security campaign 中，一次最多可選幾則 code scanning 警示指派給 Copilot（agentic autofix）？",
+    "options": [
+      {
+        "id": "A",
+        "text": "10 則"
+      },
+      {
+        "id": "B",
+        "text": "25 則"
+      },
+      {
+        "id": "C",
+        "text": "50 則"
+      },
+      {
+        "id": "D",
+        "text": "100 則"
+      }
+    ],
+    "explanation": "一次最多選 25 則；一次指派啟動一個 agent session，並為所選警示建立一個 pull request。",
+    "trap": "campaign 的總警示上限與單次指派上限是兩個不同的數字。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "中等",
+    "keywords": ["D5", "D5-O2"]
+  },
+  {
+    "id": "GH500-064",
+    "exam": "GH-500",
+    "number": 64,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O2"],
+    "sourceIds": ["GH500-DOC-46"],
+    "type": "single",
+    "answer": "A",
+    "question": "Security campaign 的 campaign manager 必須是哪種身分？",
+    "options": [
+      {
+        "id": "A",
+        "text": "組織擁有者或 security manager"
+      },
+      {
+        "id": "B",
+        "text": "對 repository 有寫入權限的成員"
+      },
+      {
+        "id": "C",
+        "text": "任何具 admin 角色的組織成員"
+      },
+      {
+        "id": "D",
+        "text": "各 repository 的 CODEOWNERS"
+      }
+    ],
+    "explanation": "Campaign manager 必須是組織的擁有者或 security manager 的使用者或團隊。",
+    "trap": "能建立 campaign 的人（含具 admin 角色者）和能擔任 campaign manager 的人不完全相同。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "進階",
+    "keywords": ["D5", "D5-O2"]
+  },
+  {
+    "id": "GH500-065",
+    "exam": "GH-500",
+    "number": 65,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O2"],
+    "sourceIds": ["GH500-DOC-11"],
+    "type": "single",
+    "answer": "D",
+    "question": "在 GitHub Enterprise Server 上，Dependabot 警示的委派關閉需要哪個版本以上？",
+    "options": [
+      {
+        "id": "A",
+        "text": "3.17"
+      },
+      {
+        "id": "B",
+        "text": "3.19"
+      },
+      {
+        "id": "C",
+        "text": "3.23"
+      },
+      {
+        "id": "D",
+        "text": "3.21"
+      }
+    ],
+    "explanation": "Code scanning 與 secret scanning 的委派關閉在 GitHub Enterprise Server 3.17 以上可用，Dependabot 則需要 3.21 以上。",
+    "trap": "三種警示類型的版本門檻不同，容易全部記成 3.17。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "進階",
+    "keywords": ["D5", "D5-O2"]
+  },
+  {
+    "id": "GH500-066",
+    "exam": "GH-500",
+    "number": 66,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O3"],
+    "sourceIds": ["GH500-DOC-36"],
+    "type": "single",
+    "answer": "C",
+    "question": "哪個 repository property 可以停用改良的增量分析（例如因為硬體需求增加而失敗時）？",
+    "options": [
+      {
+        "id": "A",
+        "text": "github-codeql-config-file"
+      },
+      {
+        "id": "B",
+        "text": "github-codeql-extra-queries"
+      },
+      {
+        "id": "C",
+        "text": "github-codeql-disable-overlay"
+      },
+      {
+        "id": "D",
+        "text": "github-codeql-file-coverage-on-prs"
+      }
+    ],
+    "explanation": "將 github-codeql-disable-overlay 設為 true 可停用改良的增量分析。",
+    "trap": "四個屬性名稱都以 github-codeql 開頭，要記對各自的用途。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "中等",
+    "keywords": ["D5", "D5-O3"]
+  },
+  {
+    "id": "GH500-067",
+    "exam": "GH-500",
+    "number": 67,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O3"],
+    "sourceIds": ["GH500-DOC-36"],
+    "type": "single",
+    "answer": "D",
+    "question": "團隊要先驗證 repository property 的設定效果，再推廣到整個組織。官方建議怎麼做？",
+    "options": [
+      {
+        "id": "A",
+        "text": "直接對整個組織設值，出問題再回復"
+      },
+      {
+        "id": "B",
+        "text": "先在 fork 的 repository 測試再同步"
+      },
+      {
+        "id": "C",
+        "text": "在 advanced workflow 以環境變數模擬"
+      },
+      {
+        "id": "D",
+        "text": "在組織建立但不設值，改在測試庫設值"
+      }
+    ],
+    "explanation": "第一次設定屬性時，先在組織建立但不設值，改在一個測試 repository 設值並驗證，之後再推廣到組織或其他 repository。",
+    "trap": "屬性套用到所有 setup 類型，直接全組織設值的影響面最大。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "中等",
+    "keywords": ["D5", "D5-O3"]
+  },
+  {
+    "id": "GH500-068",
+    "exam": "GH-500",
+    "number": 68,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O4"],
+    "sourceIds": ["GH500-DOC-10"],
+    "type": "single",
+    "answer": "A",
+    "question": "某團隊持有 security manager 角色。對該團隊與某 repository 有 admin 權限的人，可以對該團隊的 repository 存取做什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "變更存取層級，但不能移除存取"
+      },
+      {
+        "id": "B",
+        "text": "移除存取，但不能變更存取層級"
+      },
+      {
+        "id": "C",
+        "text": "變更與移除存取兩者都可以做"
+      },
+      {
+        "id": "D",
+        "text": "兩者都不行，需組織擁有者操作"
+      }
+    ],
+    "explanation": "有 admin 權限的人可以變更團隊的存取層級，但不能移除存取。",
+    "trap": "角色保障了存取的下限，所以「可以調整」不等於「可以移除」。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "進階",
+    "keywords": ["D5", "D5-O4"]
+  },
+  {
+    "id": "GH500-069",
+    "exam": "GH-500",
+    "number": 69,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O4"],
+    "sourceIds": ["GH500-DOC-04"],
+    "type": "true-false",
+    "answer": true,
+    "question": "委派繞過 push protection 時，其他貢獻者提出的繞過請求會在 7 天後過期。",
+    "explanation": "委派繞過可為其他貢獻者的繞過請求引入審查流程，請求 7 天後過期。",
+    "trap": "把審查流程想成請求會一直等到有人處理。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "基礎",
+    "keywords": ["D5", "D5-O4"]
+  },
+  {
+    "id": "GH500-070",
+    "exam": "GH-500",
+    "number": 70,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O4"],
+    "sourceIds": ["GH500-DOC-04"],
+    "type": "multiple",
+    "answer": ["A", "B", "C"],
+    "question": "下列哪些人一律可以繞過 push protection？（選 3 項）",
+    "options": [
+      {
+        "id": "A",
+        "text": "組織內的擁有者角色"
+      },
+      {
+        "id": "B",
+        "text": "Security manager 角色"
+      },
+      {
+        "id": "C",
+        "text": "繞過名單中角色的成員"
+      },
+      {
+        "id": "D",
+        "text": "所有具寫入權限的成員"
+      },
+      {
+        "id": "E",
+        "text": "所有具 admin 角色的成員"
+      }
+    ],
+    "explanation": "組織擁有者、security manager，以及繞過名單中團隊、預設角色或自訂角色的成員，一律可以繞過；另有被指派具「審查並管理 secret scanning 繞過請求」權限之自訂角色的使用者。",
+    "trap": "寫入或 admin 權限本身不等於繞過權限，要在繞過名單中。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "進階",
+    "keywords": ["D5", "D5-O4"]
+  },
+  {
+    "id": "GH500-071",
+    "exam": "GH-500",
+    "number": 71,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O5"],
+    "sourceIds": ["GH500-DOC-07"],
+    "type": "single",
+    "answer": "D",
+    "question": "下列哪項功能的重點是處理已累積的警示，而不是在變更進入前預防？",
+    "options": [
+      {
+        "id": "A",
+        "text": "Push protection 推送保護"
+      },
+      {
+        "id": "B",
+        "text": "Dependency review 檢視"
+      },
+      {
+        "id": "C",
+        "text": "Code scanning 的 PR 檢查"
+      },
+      {
+        "id": "D",
+        "text": "Security campaigns 活動"
+      }
+    ],
+    "explanation": "Security campaigns 針對已存在的警示做大規模修復；push protection、dependency review 與 pull request 上的 code scanning 都在變更進入前運作。",
+    "trap": "都屬於安全功能，但時間點不同；題目問的是預防導向與事後處理。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "基礎",
+    "keywords": ["D5", "D5-O5"]
+  },
+  {
+    "id": "GH500-072",
+    "exam": "GH-500",
+    "number": 72,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O5"],
+    "sourceIds": ["GH500-DOC-15"],
+    "type": "true-false",
+    "answer": false,
+    "question": "Dependency review 的主要作用，是找出已經存在於相依性中的弱點。",
+    "explanation": "Dependabot alerts 找出已存在於相依性中的弱點；dependency review 則是在變更引入之前，於 pull request 顯示相依性變動與弱點。",
+    "trap": "兩者都顯示弱點資料，但時間點相反。",
+    "domain": "安全營運：最佳做法、優先順序與修復",
+    "difficulty": "中等",
+    "keywords": ["D5", "D5-O5"]
   }
 ]

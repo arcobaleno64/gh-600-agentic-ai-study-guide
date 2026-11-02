@@ -268,5 +268,29 @@
     "title": "Integration with code scanning",
     "url": "https://docs.github.com/en/code-security/concepts/code-scanning/integration-with-code-scanning",
     "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-44",
+    "title": "GitHub Advisory Database",
+    "url": "https://docs.github.com/en/code-security/concepts/vulnerability-reporting-and-management/github-advisory-database",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-45",
+    "title": "Global security advisories",
+    "url": "https://docs.github.com/en/code-security/concepts/vulnerability-reporting-and-management/global-security-advisories",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-46",
+    "title": "Creating and managing security campaigns",
+    "url": "https://docs.github.com/en/code-security/how-tos/manage-security-alerts/remediate-alerts-at-scale/creating-managing-security-campaigns",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-47",
+    "title": "Set code scanning merge protection",
+    "url": "https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/manage-your-configuration/set-merge-protection",
+    "publisher": "GitHub Docs"
   }
 ]

@@ -255,6 +255,75 @@
           "category": "設定與使用 Code Security"
         }
       ]
+    },
+    {
+      "id": "D5",
+      "title": "安全營運：最佳做法、優先順序與修復",
+      "terms": [
+        {
+          "id": "D5-T01",
+          "term": "GHSA ID",
+          "explanation": "GitHub 每則 advisory 的唯一識別碼，格式 GHSA-xxxx-xxxx-xxxx，字元取自 23456789cfghjmpqrvwx，字母全小寫。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        },
+        {
+          "id": "D5-T02",
+          "term": "GitHub-reviewed advisory",
+          "explanation": "對應到支援生態系套件、經 GitHub 審查有效性的 advisory；會產生 Dependabot 警示，未審查與惡意軟體 advisory 不會。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        },
+        {
+          "id": "D5-T03",
+          "term": "Malware advisory",
+          "explanation": "關於惡意開源套件的 advisory，沒有修復版本，要從專案移除並找替代；多為替換攻擊。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        },
+        {
+          "id": "D5-T04",
+          "term": "EPSS",
+          "explanation": "FIRST 提供的弱點被利用機率分數（0 到 1）；官方範例的意義是未來 30 天內被利用的機率，由 GitHub 每日同步，不可由社群編輯。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        },
+        {
+          "id": "D5-T05",
+          "term": "Security campaign",
+          "explanation": "把一組警示分享給開發者共同消化的機制；一個 campaign 的警示不得超過 1000 則，可指派給 Copilot 自動修復。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        },
+        {
+          "id": "D5-T06",
+          "term": "Campaign manager",
+          "explanation": "Security campaign 的主要聯絡人，必須是組織擁有者或 security manager 的使用者或團隊。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        },
+        {
+          "id": "D5-T07",
+          "term": "Delegated alert dismissal",
+          "explanation": "限制誰能直接關閉警示的治理功能；寫入權限者須請求，擁有者與 security manager 審查。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        },
+        {
+          "id": "D5-T08",
+          "term": "Security manager",
+          "explanation": "組織層級角色；可讀取所有 repository、寫入所有安全警示並設定安全功能，不需要 admin 權限。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        },
+        {
+          "id": "D5-T09",
+          "term": "Exemption",
+          "explanation": "委派繞過中讓特定對象的推送完全略過 push protection；適合遷移機器人或服務帳號。",
+          "exams": ["GH-500"],
+          "category": "安全營運：最佳做法、優先順序與修復"
+        }
+      ]
     }
   ]
 }
