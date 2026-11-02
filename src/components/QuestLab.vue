@@ -116,14 +116,18 @@ function cardState(id: string) {
               <circle cx="16" cy="28" r="8" />
               <circle cx="60" cy="28" r="8" />
               <circle cx="104" cy="28" r="8" />
-              <path d="M25 28 H50 M69 28 H94 M46 24 L51 28 L46 32 M90 24 L95 28 L90 32" />
+              <path
+                d="M25 28 H50 M69 28 H94 M46 24 L51 28 L46 32 M90 24 L95 28 L90 32"
+              />
             </g>
             <g v-else>
               <circle cx="14" cy="28" r="7" />
               <circle cx="60" cy="10" r="7" />
               <circle cx="60" cy="46" r="7" />
               <circle cx="106" cy="28" r="7" />
-              <path d="M20 24 L54 12 M20 32 L54 44 M66 12 L100 24 M66 44 L100 32" />
+              <path
+                d="M20 24 L54 12 M20 32 L54 44 M66 12 L100 24 M66 44 L100 32"
+              />
             </g>
           </svg>
           <span class="quest-card__label">{{ category.label }}</span>
@@ -131,7 +135,9 @@ function cardState(id: string) {
           <span v-if="answered" class="quest-card__detail">{{
             category.detail
           }}</span>
-          <span v-if="answered && category.id === current.answer" class="quest-mark"
+          <span
+            v-if="answered && category.id === current.answer"
+            class="quest-mark"
             >✓ 正解</span
           >
           <span
@@ -180,7 +186,10 @@ function cardState(id: string) {
               >
                 {{ option.text }}
                 <span
-                  v-if="followPicked !== null && option.id === current.followUp.answer"
+                  v-if="
+                    followPicked !== null &&
+                    option.id === current.followUp.answer
+                  "
                   class="quest-mark"
                   >✓ 正解</span
                 >
@@ -214,13 +223,21 @@ function cardState(id: string) {
       <h3>實驗室完成</h3>
       <p class="quest-tip"><strong>小知識</strong>{{ lab.tip }}</p>
       <div class="quest-actions">
-        <button type="button" class="button button--primary" @click="emit('exit')">
+        <button
+          type="button"
+          class="button button--primary"
+          @click="emit('exit')"
+        >
           回到地圖
         </button>
         <button type="button" class="button button--soft" @click="replay">
           再玩一次
         </button>
-        <button type="button" class="button button--ghost" @click="emit('textbook')">
+        <button
+          type="button"
+          class="button button--ghost"
+          @click="emit('textbook')"
+        >
           讀對應教材
         </button>
       </div>

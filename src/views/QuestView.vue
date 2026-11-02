@@ -24,7 +24,9 @@ import type { QuestionAnswer } from "../types";
 
 const path = buildPath();
 const node = computed(() => path.find((item) => item.id === route.param));
-const nodeIndex = computed(() => path.findIndex((item) => item.id === route.param));
+const nodeIndex = computed(() =>
+  path.findIndex((item) => item.id === route.param),
+);
 const cleared = computed(() => progress.quest.cleared);
 const totalStars = computed(() =>
   Object.values(cleared.value).reduce((sum, n) => sum + n, 0),
@@ -61,9 +63,7 @@ const wrongs = ref(0);
 const feedback = ref<HTMLElement | null>(null);
 
 const levelQs = computed(() =>
-  node.value?.kind === "level"
-    ? levelQuestions(questions, node.value.id)
-    : [],
+  node.value?.kind === "level" ? levelQuestions(questions, node.value.id) : [],
 );
 const question = computed(() => levelQs.value[qIndex.value]);
 const stars = computed(() => starsFor(wrongs.value, 1));
@@ -152,7 +152,8 @@ const optionIdOf = (id: string) => id;
         <span class="quest-chip">GH-600 · Agentic AI 闖關</span>
         <h2>代理任務闖關地圖</h2>
         <p>
-          跟著同一個 CSV 匯出案例，從任務契約一路走到護欄與課責。每關用教材題庫的情境題過關，
+          跟著同一個 CSV
+          匯出案例，從任務契約一路走到護欄與課責。每關用教材題庫的情境題過關，
           四間實驗室讓你親手操作「訊號、根因、編排、自主程度」。
         </p>
         <div class="quest-stats">
@@ -175,7 +176,10 @@ const optionIdOf = (id: string) => id;
           <p v-else class="quest-win">全部通關，辛苦了。</p>
         </div>
         <label class="toggle-control quest-free"
-          ><input v-model="progress.quest.freeRoam" type="checkbox" />自由探索（解除關卡鎖定）</label
+          ><input
+            v-model="progress.quest.freeRoam"
+            type="checkbox"
+          />自由探索（解除關卡鎖定）</label
         >
         <p class="quest-note">
           遊戲內容改寫自本站教材，不含實際考題；教材中的分類與配置是教學用整理，並非官方固定等級。
@@ -190,7 +194,9 @@ const optionIdOf = (id: string) => id;
         :aria-labelledby="`world-${group.world.id}`"
       >
         <header class="quest-world__head">
-          <span class="quest-glyph" aria-hidden="true">{{ group.world.glyph }}</span>
+          <span class="quest-glyph" aria-hidden="true">{{
+            group.world.glyph
+          }}</span>
           <div>
             <h3 :id="`world-${group.world.id}`">
               {{ group.world.domainId }} · {{ group.world.name }}
@@ -296,7 +302,9 @@ const optionIdOf = (id: string) => id;
         <span class="quest-chip">{{ node.info.objectiveId }}</span>
         <h2>{{ node.info.title }}</h2>
         <p class="quest-story">{{ node.info.story }}</p>
-        <p class="quest-tip"><strong>闖關前小知識</strong>{{ node.info.tip }}</p>
+        <p class="quest-tip">
+          <strong>闖關前小知識</strong>{{ node.info.tip }}
+        </p>
         <button
           type="button"
           class="button button--primary quest-cta"
@@ -357,8 +365,7 @@ const optionIdOf = (id: string) => id;
             >
             <span
               v-else-if="
-                submitted &&
-                isOptionSelected(question, answer, option.id)
+                submitted && isOptionSelected(question, answer, option.id)
               "
               class="quest-mark quest-mark--wrong"
               >✗ 你的選擇</span
@@ -389,7 +396,11 @@ const optionIdOf = (id: string) => id;
           </p>
           <p>{{ question.explanation }}</p>
           <p class="quest-tip"><strong>陷阱</strong>{{ question.trap }}</p>
-          <button type="button" class="button button--primary quest-cta" @click="advance">
+          <button
+            type="button"
+            class="button button--primary quest-cta"
+            @click="advance"
+          >
             {{ qIndex < levelQs.length - 1 ? "下一題" : "看結果" }}
           </button>
         </div>
@@ -403,7 +414,11 @@ const optionIdOf = (id: string) => id;
           <span v-for="n in 3" :key="n" :class="{ on: n <= stars }">★</span>
         </p>
         <h2>{{ node.info.title }} 通過</h2>
-        <p>答錯 {{ wrongs }} 題。{{ stars === 3 ? "完美過關。" : "想拿滿星可以再挑戰一次。" }}</p>
+        <p>
+          答錯 {{ wrongs }} 題。{{
+            stars === 3 ? "完美過關。" : "想拿滿星可以再挑戰一次。"
+          }}
+        </p>
         <p class="quest-tip"><strong>小知識</strong>{{ node.info.tip }}</p>
         <div class="quest-actions">
           <button type="button" class="button button--primary" @click="goNext">
@@ -412,7 +427,11 @@ const optionIdOf = (id: string) => id;
           <button type="button" class="button button--soft" @click="resetPlay">
             再玩一次
           </button>
-          <button type="button" class="button button--ghost" @click="readTextbook(node)">
+          <button
+            type="button"
+            class="button button--ghost"
+            @click="readTextbook(node)"
+          >
             讀對應教材
           </button>
         </div>
