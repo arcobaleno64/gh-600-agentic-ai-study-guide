@@ -1,0 +1,90 @@
+{
+  "lastVerified": "2026-11-02",
+  "disclaimer": "本網站是繁體中文原創學習整理，並非 Microsoft 或 GitHub 官方出版品；不包含實際考題、考古題或外洩題庫。正式應考前請重新核對官方認證頁與 Study Guide。",
+  "exam": {
+    "code": "GH-500",
+    "certificationName": "GitHub Advanced Security",
+    "examName": "GitHub Advanced Security",
+    "durationMinutes": 100,
+    "passingScore": 700,
+    "languages": [
+      "English",
+      "Spanish",
+      "Portuguese (Brazil)",
+      "Korean",
+      "Japanese"
+    ],
+    "studyGuideUpdatedAt": "2026-05-14",
+    "domains": [
+      {
+        "id": "D1",
+        "name": "GitHub 安全套件、功能與生態系",
+        "weight": { "min": 15, "max": 20 },
+        "objectives": [
+          { "id": "D1-O1", "name": "理解 GitHub 安全套件與架構" },
+          { "id": "D1-O2", "name": "套用安全 SDLC 與安全策略" },
+          { "id": "D1-O3", "name": "偵測、管理與回應安全警示" },
+          { "id": "D1-O4", "name": "管理存取、治理與供應鏈安全" }
+        ]
+      },
+      {
+        "id": "D2",
+        "name": "設定與使用 Secret Protection",
+        "weight": { "min": 15, "max": 20 },
+        "objectives": [
+          { "id": "D2-O1", "name": "啟用與設定 Secret Protection" },
+          { "id": "D2-O2", "name": "預防機密外洩" },
+          { "id": "D2-O3", "name": "管理與回應 Secret Protection 警示" },
+          { "id": "D2-O4", "name": "控制存取、原則與自訂" }
+        ]
+      },
+      {
+        "id": "D3",
+        "name": "設定與使用供應鏈安全",
+        "weight": { "min": 15, "max": 20 },
+        "objectives": [
+          { "id": "D3-O1", "name": "理解與管理相依性及供應鏈風險" },
+          { "id": "D3-O2", "name": "偵測、排定優先順序並回應供應鏈警示" },
+          { "id": "D3-O3", "name": "在開發過程中保護相依性" },
+          { "id": "D3-O4", "name": "設定原則、權限與整合" }
+        ]
+      },
+      {
+        "id": "D4",
+        "name": "設定與使用 Code Security",
+        "weight": { "min": 10, "max": 15 },
+        "objectives": [
+          { "id": "D4-O1", "name": "理解程式碼掃描的做法與工具" },
+          { "id": "D4-O2", "name": "設定 Code Security" },
+          { "id": "D4-O3", "name": "分析、分流並修復程式碼掃描結果" },
+          { "id": "D4-O4", "name": "最佳化並自動化 Code Security 營運" }
+        ]
+      },
+      {
+        "id": "D5",
+        "name": "安全營運：最佳做法、優先順序與修復",
+        "weight": { "min": 15, "max": 20 },
+        "objectives": [
+          { "id": "D5-O1", "name": "理解弱點脈絡與修復框架" },
+          { "id": "D5-O2", "name": "大規模排定與管理安全工作" },
+          { "id": "D5-O3", "name": "自訂並最佳化安全偵測" },
+          { "id": "D5-O4", "name": "跨角色協作並落實治理" },
+          { "id": "D5-O5", "name": "左移並強化預防性安全" }
+        ]
+      },
+      {
+        "id": "D6",
+        "name": "GitHub 安全套件管理",
+        "weight": { "min": 10, "max": 15 },
+        "objectives": [
+          { "id": "D6-O1", "name": "大規模推出與管理安全功能" },
+          { "id": "D6-O2", "name": "設定安全功能與預設值" },
+          { "id": "D6-O3", "name": "定義治理、存取與 Code Security 工作流程" },
+          { "id": "D6-O4", "name": "管理 CodeQL 與安全自動化" }
+        ]
+      }
+    ],
+    "studyGuide": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-500",
+    "certificationPage": "https://learn.microsoft.com/en-us/credentials/certifications/github-advanced-security/"
+  }
+}
