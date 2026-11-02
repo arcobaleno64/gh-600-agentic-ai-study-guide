@@ -7,6 +7,7 @@ export type RouteName =
   | "quiz"
   | "faq"
   | "review"
+  | "quest"
   | "sources"
   | "settings";
 export type ThemeMode = "system" | "light" | "dark";
@@ -119,6 +120,10 @@ export interface QuestionStat {
   wrong: number;
   lastAnsweredAt: string;
 }
+export interface QuestProgress {
+  cleared: Record<string, number>;
+  freeRoam: boolean;
+}
 export interface ProgressData {
   version: number;
   completedDays: number[];
@@ -129,6 +134,7 @@ export interface ProgressData {
   wrongQuestionIds: string[];
   quizAttempts: QuizAttempt[];
   reviewChecks: string[];
+  quest: QuestProgress;
   examDates: Partial<Record<ExamCode, string>>;
   theme: ThemeMode;
 }

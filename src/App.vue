@@ -16,6 +16,7 @@ import GlossaryView from "./views/GlossaryView.vue";
 import QuizView from "./views/QuizView.vue";
 import FaqView from "./views/FaqView.vue";
 import ReviewView from "./views/ReviewView.vue";
+import QuestView from "./views/QuestView.vue";
 import SourcesView from "./views/SourcesView.vue";
 import SettingsView from "./views/SettingsView.vue";
 import SearchOverlay from "./components/SearchOverlay.vue";
@@ -36,6 +37,7 @@ const views: Record<RouteName, Component> = {
   quiz: QuizView,
   faq: FaqView,
   review: ReviewView,
+  quest: QuestView,
   sources: SourcesView,
   settings: SettingsView,
 };
@@ -57,6 +59,7 @@ const nav = [
   { name: "quiz" as RouteName, label: "模擬題", icon: "題" },
   { name: "faq" as RouteName, label: "FAQ／Q&A", icon: "問" },
   { name: "review" as RouteName, label: "考前速查", icon: "查" },
+  { name: "quest" as RouteName, label: "闖關遊戲", icon: "玩" },
   { name: "sources" as RouteName, label: "官方來源", icon: "源" },
   { name: "settings" as RouteName, label: "設定", icon: "設" },
 ];

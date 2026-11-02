@@ -14,6 +14,7 @@ const names = new Set<RouteName>([
   "quiz",
   "faq",
   "review",
+  "quest",
   "sources",
   "settings",
 ]);
@@ -51,6 +52,7 @@ export const routeTitles: Record<RouteName, string> = {
   quiz: "模擬題",
   faq: "FAQ／Q&A",
   review: "考前速查",
+  quest: "闖關遊戲",
   sources: "官方來源",
   settings: "設定",
 };
