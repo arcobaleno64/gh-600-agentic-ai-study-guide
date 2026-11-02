@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { loadSite } from "../scripts/site.mjs";
 import {
   SITE_URL,
   answerText,
@@ -10,7 +12,11 @@ import {
 
 // The read-only pages are what crawlers and answer engines see; the hash app
 // at "/" is invisible to them. These tests guard what those readers get.
-const content = loadContent();
+// These tests pin gh-600 (the committed index.html and public/ files are its
+// baseline), so they give the same result whatever EXAM the build sets.
+const content = loadContent(
+  fileURLToPath(new URL("../exams/gh-600", import.meta.url)),
+);
 const { pages, files, urls } = buildStaticSite(content);
 const html = (path: string) =>
   files.get(`${path.slice(1)}index.html`) as string;
@@ -113,6 +119,7 @@ test("資料中的 HTML 字元會被跳脫", () => {
 });
 
 test("首頁、robots.txt 與產生器使用同一個正式網址", () => {
+  const SITE_URL = loadSite("gh-600").siteUrl;
   const index = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   assert.ok(
     new RegExp(`rel="canonical"\\s+href="${SITE_URL}/"`).test(index),

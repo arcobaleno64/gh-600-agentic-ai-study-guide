@@ -2,12 +2,21 @@ name: Deploy to Cloudflare Workers
 
 on:
   workflow_dispatch:
+    inputs:
+      exam:
+        description: Exam to build and deploy (one Worker per exam)
+        type: choice
+        options:
+          - gh-600
+          - gh-500
+        default: gh-600
+        required: true
 
 permissions:
   contents: read
 
 concurrency:
-  group: gh-600-cloudflare-production
+  group: cloudflare-production-${{ inputs.exam }}
   cancel-in-progress: true
 
 jobs:
@@ -15,6 +24,8 @@ jobs:
     if: vars.CLOUDFLARE_DEPLOY_ENABLED == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      EXAM: ${{ inputs.exam }}
     steps:
       - name: Checkout
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -27,9 +38,12 @@ jobs:
         run: npm ci
       - name: Validate and build
         run: npm run build
+      - name: Resolve Worker name
+        id: worker
+        run: echo "name=$(node -p "require('./exams/' + process.env.EXAM + '/data/site.json').workerName")" >> "$GITHUB_OUTPUT"
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd # v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy
+          command: deploy --name ${{ steps.worker.outputs.name }}
