@@ -1,6 +1,7 @@
 // Any exam under exams/; its code comes from that exam's exam-meta.json.
 export type ExamCode = string;
 export interface SiteConfig {
+  workerName: string;
   siteUrl: string;
   siteName: string;
   shortName: string;

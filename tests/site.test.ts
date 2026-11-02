@@ -74,3 +74,14 @@ for (const count of [5, 7]) {
     assert.ok(index.includes(`D${count} 第 ${count} 領域`));
   });
 }
+
+test("每個考試的網址主機名稱以 workerName 開頭，部署才會落在同一個網址", () => {
+  for (const code of exams) {
+    const site = loadSite(code) as { workerName: string; siteUrl: string };
+    assert.ok(site.workerName, `${code} 缺少 workerName`);
+    assert.ok(
+      new URL(site.siteUrl).hostname.startsWith(`${site.workerName}.`),
+      `${code} 的網址與 workerName 不一致`,
+    );
+  }
+});
