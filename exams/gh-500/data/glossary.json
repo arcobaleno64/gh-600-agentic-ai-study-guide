@@ -186,6 +186,75 @@
           "category": "設定與使用供應鏈安全"
         }
       ]
+    },
+    {
+      "id": "D4",
+      "title": "設定與使用 Code Security",
+      "terms": [
+        {
+          "id": "D4-T01",
+          "term": "CodeQL",
+          "explanation": "GitHub 開發的程式碼分析引擎；先建立 CodeQL database，再對資料庫執行查詢，結果顯示為 code scanning 警示。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T02",
+          "term": "Default setup",
+          "explanation": "最快、最省維護的 code scanning 設定；自動選語言、query suite 與觸發事件，不需維護 workflow 檔。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T03",
+          "term": "Advanced setup",
+          "explanation": "需要自訂 Actions workflow（建置、matrix、排程）或使用外部 CI 時採用的 code scanning 設定。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T04",
+          "term": "Query suite",
+          "explanation": "一次選入多個 CodeQL 查詢的集合；內建 default、security-extended 與 security-and-quality。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T05",
+          "term": "SARIF",
+          "explanation": "Static Analysis Results Interchange Format，以 JSON 為基礎的開放標準；code scanning 支援 2.1.0 的子集。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T06",
+          "term": "Security severity",
+          "explanation": "CodeQL 安全警示的 Critical、High、Medium、Low 等級，依 CVSS；有此等級時優先於 severity。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T07",
+          "term": "Copilot Autofix",
+          "explanation": "為單一 code scanning 警示產生一個建議修復，由你審查後自行建立 pull request；不消耗 AI credits。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T08",
+          "term": "Agentic autofix",
+          "explanation": "把警示指派給 Copilot，由 agent 探索程式碼、產生並驗證修復並開 draft pull request；會消耗 AI Credits 與 Actions 分鐘數。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        },
+        {
+          "id": "D4-T09",
+          "term": "Tool status page",
+          "explanation": "顯示預設分支上各 code scanning 工具的狀態、檔案涵蓋率與錯誤訊息，是除錯的起點。",
+          "exams": ["GH-500"],
+          "category": "設定與使用 Code Security"
+        }
+      ]
     }
   ]
 }

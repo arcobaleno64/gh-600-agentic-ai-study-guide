@@ -154,5 +154,119 @@
     "title": "Enforcing dependency review across an organization",
     "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/enforce-dependency-review",
     "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-25",
+    "title": "About code scanning",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/about-code-scanning",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-26",
+    "title": "About setup types for code scanning",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/setup-types",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-27",
+    "title": "Code scanning with CodeQL",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/codeql/codeql-code-scanning",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-28",
+    "title": "CodeQL query suites",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/codeql/codeql-query-suites",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-29",
+    "title": "Custom CodeQL queries",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/codeql/custom-queries",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-30",
+    "title": "SARIF files for code scanning",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/sarif-files",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-31",
+    "title": "Code scanning alerts",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning-alerts",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-32",
+    "title": "Triaging code scanning alerts in pull requests",
+    "url": "https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/triage-alerts-in-pull-requests",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-33",
+    "title": "Code scanning merge protection",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/merge-protection",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-34",
+    "title": "About autofix for code scanning",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-35",
+    "title": "About the tool status page",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/tool-status-page",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-36",
+    "title": "Repository properties for code scanning",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/repository-properties",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-37",
+    "title": "Configuring advanced setup for code scanning",
+    "url": "https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configuring-advanced-setup-for-code-scanning",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-38",
+    "title": "Uploading a SARIF file to GitHub",
+    "url": "https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/integrate-with-existing-tools/upload-sarif-file",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-39",
+    "title": "Resolving code scanning alerts",
+    "url": "https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-40",
+    "title": "CodeQL code scanning for compiled languages",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/codeql/codeql-for-compiled-languages",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-41",
+    "title": "Linking code scanning alerts to GitHub issues",
+    "url": "https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/track-alerts-in-issues",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-42",
+    "title": "Code scanning on pull requests",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning-on-pull-requests",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-43",
+    "title": "Integration with code scanning",
+    "url": "https://docs.github.com/en/code-security/concepts/code-scanning/integration-with-code-scanning",
+    "publisher": "GitHub Docs"
   }
 ]

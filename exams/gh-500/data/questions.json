@@ -1280,5 +1280,465 @@
     "domain": "設定與使用供應鏈安全",
     "difficulty": "中等",
     "keywords": ["D3", "D3-O4"]
+  },
+  {
+    "id": "GH500-043",
+    "exam": "GH-500",
+    "number": 43,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O1"],
+    "sourceIds": ["GH500-DOC-27"],
+    "type": "single",
+    "answer": "C",
+    "question": "專案主要用 PHP 撰寫，團隊想啟用 CodeQL default setup。官方文件對這個做法怎麼說？",
+    "options": [
+      {
+        "id": "A",
+        "text": "會自動改用 PHP 專用的查詢集"
+      },
+      {
+        "id": "B",
+        "text": "會要求先設定 manual build mode"
+      },
+      {
+        "id": "C",
+        "text": "CodeQL 不支援 PHP，可能不產生警示"
+      },
+      {
+        "id": "D",
+        "text": "只能使用 security-extended 查詢集"
+      }
+    ],
+    "explanation": "CodeQL 不支援清單以外的語言（例如 PHP、Scala）；嘗試使用可能不產生警示，分析也不完整。",
+    "trap": "看到「語言自動偵測」就以為什麼語言都能掃；清單以外的語言要改用能輸出 SARIF 的第三方工具。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "基礎",
+    "keywords": ["D4", "D4-O1"]
+  },
+  {
+    "id": "GH500-044",
+    "exam": "GH-500",
+    "number": 44,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O1"],
+    "sourceIds": ["GH500-DOC-40"],
+    "type": "single",
+    "answer": "B",
+    "question": "一個 Java repository 啟用 code scanning，沒有任何建置設定。CodeQL 預設用哪種 build mode 建立資料庫？",
+    "options": [
+      {
+        "id": "A",
+        "text": "autobuild，偵測並嘗試建置"
+      },
+      {
+        "id": "B",
+        "text": "none，不建置，直接從程式碼建立"
+      },
+      {
+        "id": "C",
+        "text": "manual，使用 workflow 定義的步驟"
+      },
+      {
+        "id": "D",
+        "text": "none，但要先啟用 dependency caching"
+      }
+    ],
+    "explanation": "C/C++、C#、Java 與 Rust 預設用 none（不建置）；其他編譯式語言（如 Go、Kotlin、Swift）用 autobuild。",
+    "trap": "Java 常被當成一定要建置的語言；現在預設是不建置。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "進階",
+    "keywords": ["D4", "D4-O1"]
+  },
+  {
+    "id": "GH500-045",
+    "exam": "GH-500",
+    "number": 45,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O1"],
+    "sourceIds": ["GH500-DOC-28"],
+    "type": "single",
+    "answer": "D",
+    "question": "團隊想在 default setup 下執行比預設更多、精確度稍低的查詢。應該選哪個 query suite？",
+    "options": [
+      {
+        "id": "A",
+        "text": "default，精確度高、誤報少的內建集合"
+      },
+      {
+        "id": "B",
+        "text": "security-and-quality，含可維護性與可靠性查詢"
+      },
+      {
+        "id": "C",
+        "text": "自訂 .qls 查詢集，由 YAML 定義"
+      },
+      {
+        "id": "D",
+        "text": "security-extended，介面上稱為 Extended"
+      }
+    ],
+    "explanation": "security-extended 是 default 加上精確度與嚴重度稍低的查詢，可用於 default setup；security-and-quality 與自訂 suite 需要 advanced setup。",
+    "trap": "security-and-quality 看起來更完整，但它只能用於 advanced setup。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O1"]
+  },
+  {
+    "id": "GH500-046",
+    "exam": "GH-500",
+    "number": 46,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O1"],
+    "sourceIds": ["GH500-DOC-29"],
+    "type": "true-false",
+    "answer": true,
+    "question": "要在 code scanning 中額外執行自訂 CodeQL 查詢，必須使用 advanced setup 或外部 CI 系統。",
+    "explanation": "額外查詢只能在 advanced setup 或外部 CI 執行，而且查詢要屬於已發布的 CodeQL query pack 或 repository 中的 CodeQL pack。",
+    "trap": "default setup 可以改 query suite，但不能任意加自訂查詢（自訂設定檔與 extra-queries 屬性是另一條路徑）。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O1"]
+  },
+  {
+    "id": "GH500-047",
+    "exam": "GH-500",
+    "number": 47,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O2"],
+    "sourceIds": ["GH500-DOC-26"],
+    "type": "single",
+    "answer": "A",
+    "question": "default setup 啟用後，在下列哪種情況下不會觸發掃描？",
+    "options": [
+      {
+        "id": "A",
+        "text": "來自 fork 的 pull request"
+      },
+      {
+        "id": "B",
+        "text": "對預設分支的 push 提交"
+      },
+      {
+        "id": "C",
+        "text": "以預設分支為目標的 pull request"
+      },
+      {
+        "id": "D",
+        "text": "啟用 default setup 當下的初始掃描"
+      }
+    ],
+    "explanation": "default setup 掃描啟用時、push 到預設或受保護分支、以及針對預設或受保護分支的 pull request，但不含來自 fork 的 pull request。",
+    "trap": "pull request 觸發看似包含所有來源；fork 來的被排除。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O2"]
+  },
+  {
+    "id": "GH500-048",
+    "exam": "GH-500",
+    "number": 48,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O2"],
+    "sourceIds": ["GH500-DOC-26"],
+    "type": "single",
+    "answer": "C",
+    "question": "default setup 的每週排程掃描要在什麼條件下才會運作？",
+    "options": [
+      {
+        "id": "A",
+        "text": "啟用後立即開始，不需任何活動"
+      },
+      {
+        "id": "B",
+        "text": "啟用滿 180 天之後才會開始"
+      },
+      {
+        "id": "C",
+        "text": "過去 180 天內有 push 或 PR 觸發"
+      },
+      {
+        "id": "D",
+        "text": "每次初始掃描完成後就會開始"
+      }
+    ],
+    "explanation": "每週排程的前提是過去 180 天內有 push 或 pull request 觸發過掃描；初始掃描與因設定變更觸發的掃描不算。",
+    "trap": "初始掃描看似算一次活動，但官方明說它不會啟動或延長排程。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "進階",
+    "keywords": ["D4", "D4-O2"]
+  },
+  {
+    "id": "GH500-049",
+    "exam": "GH-500",
+    "number": 49,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O2"],
+    "sourceIds": ["GH500-DOC-36"],
+    "type": "single",
+    "answer": "D",
+    "question": "組織設定了 github-codeql-config-file 屬性，而某個 advanced setup workflow 也在 codeql-action/init 指定了 config-file。最後使用哪一個？",
+    "options": [
+      {
+        "id": "A",
+        "text": "repository 屬性的值，因為屬於組織層級"
+      },
+      {
+        "id": "B",
+        "text": "兩個設定檔合併，重複的鍵互相覆寫"
+      },
+      {
+        "id": "C",
+        "text": "由設定檔的檔名字母順序來決定"
+      },
+      {
+        "id": "D",
+        "text": "workflow 中明確指定的 config-file"
+      }
+    ],
+    "explanation": "advanced workflow 明確指定的 config-file 輸入優先於 repository property；這讓 advanced workflow 可使用不同的設定。",
+    "trap": "組織層級通常優先，但這裡是明確指定的 workflow 輸入勝出。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "進階",
+    "keywords": ["D4", "D4-O2"]
+  },
+  {
+    "id": "GH500-050",
+    "exam": "GH-500",
+    "number": 50,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O2"],
+    "sourceIds": ["GH500-DOC-36"],
+    "type": "true-false",
+    "answer": false,
+    "question": "透過 repository properties 設定的 code scanning 自訂，只對 default setup 生效。",
+    "explanation": "透過 repository properties 的自訂套用到所有 setup 類型；這些屬性要由組織手動建立。",
+    "trap": "github-codeql-config-file 會和 default setup 的設定合併，容易誤以為只作用於 default setup。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O2"]
+  },
+  {
+    "id": "GH500-051",
+    "exam": "GH-500",
+    "number": 51,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O3"],
+    "sourceIds": ["GH500-DOC-31"],
+    "type": "single",
+    "answer": "B",
+    "question": "開發者在功能分支修好一則警示，但預設分支尚未合併。警示頁面的狀態會怎麼顯示？",
+    "options": [
+      {
+        "id": "A",
+        "text": "關閉，因為功能分支已修復"
+      },
+      {
+        "id": "B",
+        "text": "仍反映預設分支，看 Affected branches"
+      },
+      {
+        "id": "C",
+        "text": "顯示為 in progress，等待合併"
+      },
+      {
+        "id": "D",
+        "text": "自動關閉，並從警示清單移除"
+      }
+    ],
+    "explanation": "警示頁面只反映預設分支的狀態；其他分支的狀態在 Affected branches 檢視。",
+    "trap": "修復所在的分支不等於警示頁面反映的分支。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O3"]
+  },
+  {
+    "id": "GH500-052",
+    "exam": "GH-500",
+    "number": 52,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O3"],
+    "sourceIds": ["GH500-DOC-32"],
+    "type": "single",
+    "answer": "C",
+    "question": "pull request 上的 code scanning 檢查只發現 warning 與 note 等級的警示。檢查結果會是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "失敗，因為任何警示都會使檢查失敗"
+      },
+      {
+        "id": "B",
+        "text": "失敗，直到管理員審查過每則警示"
+      },
+      {
+        "id": "C",
+        "text": "成功，較低嚴重度視為警告或附註"
+      },
+      {
+        "id": "D",
+        "text": "略過，不顯示任何註解與檢查結果"
+      }
+    ],
+    "explanation": "只有 error、critical 或 high 會使檢查失敗；較低嚴重度視為警告或附註，檢查成功。可在 repository 設定中覆寫。",
+    "trap": "以為任何警示都會擋下 pull request；預設只有高嚴重度才會。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O3"]
+  },
+  {
+    "id": "GH500-053",
+    "exam": "GH-500",
+    "number": 53,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O3"],
+    "sourceIds": ["GH500-DOC-34"],
+    "type": "multiple",
+    "answer": ["A", "C", "E"],
+    "question": "下列哪些是 Copilot Autofix 與 agentic autofix 的共同點，或 Copilot Autofix 的特性？（選 3 項）",
+    "options": [
+      {
+        "id": "A",
+        "text": "由 LLM 根據程式碼與分析結果產生修復"
+      },
+      {
+        "id": "B",
+        "text": "一次可指派最多 25 則警示給 agent"
+      },
+      {
+        "id": "C",
+        "text": "Copilot Autofix 的建議不消耗 credits"
+      },
+      {
+        "id": "D",
+        "text": "需要 Copilot 授權才能使用"
+      },
+      {
+        "id": "E",
+        "text": "盡力而為，不保證每則警示都成功"
+      }
+    ],
+    "explanation": "兩者都用 LLM 產生修復，且都是盡力而為；Copilot Autofix 不消耗 AI credits。「最多 25 則警示」是 agentic autofix 的批次指派，兩者都不需要 Copilot 授權。",
+    "trap": "25 則的上限和 AI credits 的消耗屬於不同的功能，容易混在一起。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "進階",
+    "keywords": ["D4", "D4-O3"]
+  },
+  {
+    "id": "GH500-054",
+    "exam": "GH-500",
+    "number": 54,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O3"],
+    "sourceIds": ["GH500-DOC-33"],
+    "type": "single",
+    "answer": "B",
+    "question": "組織想用 ruleset 阻擋含高嚴重度 code scanning 警示的 pull request 合併，但某 repository 根本沒設定 code scanning。這個規則會怎麼運作？",
+    "options": [
+      {
+        "id": "A",
+        "text": "自動為該 repository 啟用 code scanning"
+      },
+      {
+        "id": "B",
+        "text": "因必要工具未設定而阻擋，且不自動啟用"
+      },
+      {
+        "id": "C",
+        "text": "不阻擋，因為該 repository 沒有警示"
+      },
+      {
+        "id": "D",
+        "text": "改由 status checks 取代這條規則"
+      }
+    ],
+    "explanation": "必要工具未在 repository 設定也是阻擋條件之一；設定規則不會自動啟用 code scanning；它與 status checks 無關。",
+    "trap": "以為規則會順便啟用掃描；它只是把「沒掃描」也視為不通過。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "進階",
+    "keywords": ["D4", "D4-O3"]
+  },
+  {
+    "id": "GH500-055",
+    "exam": "GH-500",
+    "number": 55,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O4"],
+    "sourceIds": ["GH500-DOC-35"],
+    "type": "single",
+    "answer": "A",
+    "question": "管理員發現某個 repository 的 code scanning 沒有如預期產生警示，想先確認各語言的檔案涵蓋率與最近掃描時間。應該看哪裡？",
+    "options": [
+      {
+        "id": "A",
+        "text": "Tool status page 檢視頁面"
+      },
+      {
+        "id": "B",
+        "text": "Security overview 的 Coverage"
+      },
+      {
+        "id": "C",
+        "text": "Dependency graph 的 Dependencies"
+      },
+      {
+        "id": "D",
+        "text": "Actions 的 workflow 執行清單"
+      }
+    ],
+    "explanation": "Tool status page 顯示各 code scanning 工具的設定狀態、最近掃描時間、各語言檔案涵蓋率與錯誤訊息，是除錯的起點；它只顯示 repository 預設分支，不在組織層級。",
+    "trap": "Coverage 檢視看的是安全功能啟用範圍，不是單一工具的檔案涵蓋率。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O4"]
+  },
+  {
+    "id": "GH500-056",
+    "exam": "GH-500",
+    "number": 56,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O4"],
+    "sourceIds": ["GH500-DOC-38"],
+    "type": "single",
+    "answer": "D",
+    "question": "同一個 workflow 要對同一個 commit 用 upload-sarif 上傳同一工具的兩個結果檔。必須提供什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "兩個檔案合併成單一 SARIF 檔再上傳"
+      },
+      {
+        "id": "B",
+        "text": "每個檔案使用不同的 SARIF 版本"
+      },
+      {
+        "id": "C",
+        "text": "在 repository 設定中啟用多重上傳"
+      },
+      {
+        "id": "D",
+        "text": "為每組結果指定唯一的 category"
+      }
+    ],
+    "explanation": "預設每次分析預期一個 SARIF 檔；同一 commit 上傳多組結果時，必須為每組指定唯一的 category。",
+    "trap": "category 通常在 CodeQL action 自動設定，所以容易忘記其他工具要自己指定。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "進階",
+    "keywords": ["D4", "D4-O4"]
+  },
+  {
+    "id": "GH500-057",
+    "exam": "GH-500",
+    "number": 57,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O4"],
+    "sourceIds": ["GH500-DOC-42"],
+    "type": "true-false",
+    "answer": true,
+    "question": "「Code scanning on pull requests」報告的 CodeQL 指標，只追蹤已合併到預設分支的 pull request。",
+    "explanation": "CodeQL 指標只追蹤已合併到 repository 預設分支的 pull request；Copilot Autofix 的指標只在啟用的 repository 顯示。",
+    "trap": "以為指標涵蓋所有開啟中的 pull request；只算已合併的。",
+    "domain": "設定與使用 Code Security",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O4"]
   }
 ]
