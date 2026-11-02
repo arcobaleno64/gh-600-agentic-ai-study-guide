@@ -2,6 +2,68 @@
   "version": "0.1.0-d2-sample",
   "categories": [
     {
+      "id": "D1",
+      "title": "GitHub 安全套件、功能與生態系",
+      "terms": [
+        {
+          "id": "D1-T01",
+          "term": "GitHub Secret Protection",
+          "explanation": "需購買的安全套件，包含 secret scanning 使用者警示、push protection、delegated bypass、custom patterns 與 AI 偵測的 secret。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T02",
+          "term": "GitHub Code Security",
+          "explanation": "需購買的安全套件，包含 code scanning、CodeQL CLI、Copilot Autofix、AI Scan、dependency review 與 security campaigns。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T03",
+          "term": "Security overview",
+          "explanation": "位於組織 Security and quality 頁籤，檢視整個組織的安全趨勢與風險，資料以各 repository 的預設分支為準。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T04",
+          "term": "Security campaign",
+          "explanation": "把一批警示分組分享給開發者的修復活動，有具名聯絡人，code scanning 警示會觸發 Copilot Autofix。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T05",
+          "term": "Security manager",
+          "explanation": "組織層級角色，擁有所有 repository 的讀取權限與所有安全警示的寫入權限，並能設定安全功能。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T06",
+          "term": "Delegated alert dismissal",
+          "explanation": "限制誰能直接關閉警示：有寫入權限的使用者須提出請求，由擁有者或 security manager 核准或拒絕。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T07",
+          "term": "Dependency graph",
+          "explanation": "列出 repository 的直接與間接相依性，是 dependency review 與 Dependabot 的資料基礎，可匯出為 SPDX 相容的 SBOM。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        },
+        {
+          "id": "D1-T08",
+          "term": "Artifact attestation",
+          "explanation": "經密碼學簽署的聲明，說明建置的來源與工作流程，或相關的 SBOM；不保證軟體安全。",
+          "exams": ["GH-500"],
+          "category": "GitHub 安全套件、功能與生態系"
+        }
+      ]
+    },
+    {
       "id": "D2",
       "title": "設定與使用 Secret Protection",
       "terms": [

@@ -402,5 +402,445 @@
     "domain": "設定與使用 Secret Protection",
     "difficulty": "進階",
     "keywords": ["D2", "D2-O4"]
+  },
+  {
+    "id": "GH500-015",
+    "exam": "GH-500",
+    "number": 15,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O1"],
+    "sourceIds": ["GH500-DOC-07"],
+    "type": "single",
+    "answer": "D",
+    "question": "下列哪一項功能在所有 GitHub 方案都能使用，不需要購買 Secret Protection 或 Code Security？",
+    "options": [
+      {
+        "id": "A",
+        "text": "Security campaigns，集中修復累積的警示"
+      },
+      {
+        "id": "B",
+        "text": "Custom patterns，自訂 secret 偵測樣式"
+      },
+      {
+        "id": "C",
+        "text": "Delegated bypass，委派繞過 push protection"
+      },
+      {
+        "id": "D",
+        "text": "Dependabot alerts 與 security updates"
+      }
+    ],
+    "explanation": "Dependabot alerts 與 security updates 屬於所有方案都能使用的功能。Security campaigns 需要 Code Security，custom patterns 與 delegated bypass 則需要 Secret Protection。",
+    "trap": "其他選項聽起來都像「基本的警示功能」；判斷時要回到功能表，看它列在哪一層，而不是看名稱像不像基礎功能。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "基礎",
+    "keywords": ["D1", "D1-O1"]
+  },
+  {
+    "id": "GH500-016",
+    "exam": "GH-500",
+    "number": 16,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O1"],
+    "sourceIds": ["GH500-DOC-08"],
+    "type": "true-false",
+    "answer": false,
+    "question": "Security overview 的各檢視顯示的是組織內所有分支的資料，而不只是預設分支。",
+    "explanation": "官方說明所有檢視顯示的都是各 repository 預設分支的資訊與指標。",
+    "trap": "把 security overview 當成全分支的彙總，會高估或低估實際風險；其他分支上的警示不在這些指標內。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "基礎",
+    "keywords": ["D1", "D1-O1"]
+  },
+  {
+    "id": "GH500-017",
+    "exam": "GH-500",
+    "number": 17,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O1"],
+    "sourceIds": ["GH500-DOC-08"],
+    "type": "single",
+    "answer": "C",
+    "question": "Security overview 對某個 repository 沒有顯示任何警示。最合理的解讀是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "該 repository 已確認沒有任何弱點，之後可免除檢查"
+      },
+      {
+        "id": "B",
+        "text": "警示已被系統自動封存，因此不需要再處理"
+      },
+      {
+        "id": "C",
+        "text": "可能沒有問題，也可能是功能沒啟用或弱點尚未被偵測"
+      },
+      {
+        "id": "D",
+        "text": "Security overview 只會顯示嚴重度最高的那一類警示"
+      }
+    ],
+    "explanation": "Security overview 顯示的是各功能產生的有效警示。沒有警示，可能是真的沒有問題，也可能是弱點尚未被偵測，或該功能在這個 repository 根本沒啟用，所以要搭配 Coverage 檢視確認啟用情況。",
+    "trap": "「看不到警示」很容易被當成「沒有風險」；它只說明目前有效警示為零，不代表偵測涵蓋完整。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O1"]
+  },
+  {
+    "id": "GH500-018",
+    "exam": "GH-500",
+    "number": 18,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O1"],
+    "sourceIds": ["GH500-DOC-07"],
+    "type": "multiple",
+    "answer": ["A", "C"],
+    "question": "下列哪些屬於 Secret Protection 提供的功能？（選 2 項）",
+    "options": [
+      {
+        "id": "A",
+        "text": "Custom patterns，自訂 secret 偵測樣式"
+      },
+      {
+        "id": "B",
+        "text": "Dependency review，檢視相依性變更"
+      },
+      {
+        "id": "C",
+        "text": "AI 偵測的 secret，找出無固定格式的密碼"
+      },
+      {
+        "id": "D",
+        "text": "CodeQL CLI，在本機執行程式碼分析"
+      }
+    ],
+    "explanation": "Custom patterns 與 AI 偵測的 secret 屬於 Secret Protection。Dependency review 與 CodeQL CLI 屬於 Code Security。",
+    "trap": "兩個套件都包含「掃描」類功能，名稱容易混淆；Secret Protection 管憑證，Code Security 管程式碼與相依性。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O1"]
+  },
+  {
+    "id": "GH500-019",
+    "exam": "GH-500",
+    "number": 19,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O2"],
+    "sourceIds": ["GH500-DOC-07", "GH500-DOC-12"],
+    "type": "single",
+    "answer": "B",
+    "question": "團隊想在合併 pull request 之前，了解其中相依性變更的安全影響。應該使用哪個功能？",
+    "options": [
+      {
+        "id": "A",
+        "text": "Dependabot version updates，依排程更新相依性"
+      },
+      {
+        "id": "B",
+        "text": "Dependency review，檢視新增與更新的相依性"
+      },
+      {
+        "id": "C",
+        "text": "Immutable releases，禁止發布後修改 release"
+      },
+      {
+        "id": "D",
+        "text": "Security campaigns，集中修復累積的警示"
+      }
+    ],
+    "explanation": "Dependency review 在 pull request 中顯示新增、移除或更新了哪些相依性，以及這些變更的安全影響，讓審查者在合併前判斷是否接受。",
+    "trap": "Dependabot 也和相依性有關，但它在合併後依警示或排程開 pull request，不是在審查變更時顯示影響。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "基礎",
+    "keywords": ["D1", "D1-O2"]
+  },
+  {
+    "id": "GH500-020",
+    "exam": "GH-500",
+    "number": 20,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O2"],
+    "sourceIds": ["GH500-DOC-09"],
+    "type": "single",
+    "answer": "A",
+    "question": "安全主管要把數百個 code scanning 警示分給開發者，並由一位聯絡人追蹤進度。最適合的功能是？",
+    "options": [
+      {
+        "id": "A",
+        "text": "Security campaign，分組警示並指派負責人"
+      },
+      {
+        "id": "B",
+        "text": "Delegated bypass，限制誰可以繞過保護"
+      },
+      {
+        "id": "C",
+        "text": "Custom pattern，增加新的偵測樣式與規則"
+      },
+      {
+        "id": "D",
+        "text": "Artifact attestation，證明建置來源"
+      }
+    ],
+    "explanation": "Security campaign 把一批警示分組分享給開發者，每個 campaign 有具名聯絡人，code scanning 警示還會自動觸發 Copilot Autofix 建議修復。",
+    "trap": "委派繞過與警示關閉治理管的是「誰能放行」，不是「怎麼把累積的警示分派出去修復」。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O2"]
+  },
+  {
+    "id": "GH500-021",
+    "exam": "GH-500",
+    "number": 21,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O2"],
+    "sourceIds": ["GH500-DOC-07"],
+    "type": "multiple",
+    "answer": ["A", "B", "C"],
+    "question": "下列哪些功能在變更進入預設分支或 repository 之前運作？（選 3 項）",
+    "options": [
+      {
+        "id": "A",
+        "text": "Push protection，推送時阻擋 secret"
+      },
+      {
+        "id": "B",
+        "text": "Code scanning，針對新增或修改的程式碼"
+      },
+      {
+        "id": "C",
+        "text": "Dependency review，檢視相依性變更"
+      },
+      {
+        "id": "D",
+        "text": "Security campaigns，事後修復累積的警示"
+      }
+    ],
+    "explanation": "Push protection 在推送時攔截，code scanning 讓你在合併進預設分支之前修復問題，dependency review 在合併前顯示相依性變更的影響。Security campaigns 則是對已存在的警示做大規模修復。",
+    "trap": "只看到「都屬於安全功能」就全選；題目問的是發生時間點，事後處理累積警示的功能不屬於預防導向。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "進階",
+    "keywords": ["D1", "D1-O2"]
+  },
+  {
+    "id": "GH500-022",
+    "exam": "GH-500",
+    "number": 22,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O3"],
+    "sourceIds": ["GH500-DOC-12"],
+    "type": "single",
+    "answer": "D",
+    "question": "Dependabot 會在什麼情況下為 repository 產生新的警示？",
+    "options": [
+      {
+        "id": "A",
+        "text": "每次有人推送到任何分支時，都會重新掃描一次"
+      },
+      {
+        "id": "B",
+        "text": "只有管理員在設定頁手動觸發掃描時才會產生"
+      },
+      {
+        "id": "C",
+        "text": "只有 pull request 被合併進預設分支之後才會產生"
+      },
+      {
+        "id": "D",
+        "text": "資料庫新增 advisory，或 repository 的 dependency graph 變動"
+      }
+    ],
+    "explanation": "Dependabot 把 dependency graph 與 GitHub Advisory Database 交叉比對。新的 advisory 加入資料庫，或 repository 的 dependency graph 改變時，就會產生警示。",
+    "trap": "把偵測想成「每次推送都掃描」會忽略新 advisory 公布這個觸發來源：程式碼沒改，警示也可能出現。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O3"]
+  },
+  {
+    "id": "GH500-023",
+    "exam": "GH-500",
+    "number": 23,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O3"],
+    "sourceIds": ["GH500-DOC-11"],
+    "type": "single",
+    "answer": "A",
+    "question": "啟用 delegated alert dismissal 後，有寫入權限的使用者想關閉警示，流程是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "提出請求，由擁有者或 security manager 審查"
+      },
+      {
+        "id": "B",
+        "text": "直接關閉警示，事後由管理員收到通知即可"
+      },
+      {
+        "id": "C",
+        "text": "不能關閉，只能把警示指派給其他同事處理"
+      },
+      {
+        "id": "D",
+        "text": "由 GitHub 自動審查請求，完全不需要任何人介入"
+      }
+    ],
+    "explanation": "啟用後，有寫入權限的使用者必須提出關閉請求；組織擁有者與 security manager 可以核准或拒絕，也能自己直接關閉。核准就關閉警示，拒絕則保持開啟。",
+    "trap": "預設下有寫入權限的人可直接關閉；容易把預設行為當成啟用後的行為，忽略多了一道審查。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O3"]
+  },
+  {
+    "id": "GH500-024",
+    "exam": "GH-500",
+    "number": 24,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O3"],
+    "sourceIds": ["GH500-DOC-08"],
+    "type": "true-false",
+    "answer": true,
+    "question": "把 repository 封存之後，其中仍開啟的警示會自動被關閉。",
+    "explanation": "官方在說明 security overview 的資料行為時指出，封存 repository 後，其中開啟的警示會自動關閉。",
+    "trap": "容易以為封存只是唯讀標記，不影響警示；它會改變警示狀態，進而影響儀表板的歷史數據解讀。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "基礎",
+    "keywords": ["D1", "D1-O3"]
+  },
+  {
+    "id": "GH500-025",
+    "exam": "GH-500",
+    "number": 25,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O3"],
+    "sourceIds": ["GH500-DOC-08"],
+    "type": "single",
+    "answer": "B",
+    "question": "稽核人員需要一份不會隨時間改變的去年第三季警示處置資料。官方建議的來源是？",
+    "options": [
+      {
+        "id": "A",
+        "text": "Security overview 的儀表板畫面截圖"
+      },
+      {
+        "id": "B",
+        "text": "稽核日誌（audit log）中的事件紀錄"
+      },
+      {
+        "id": "C",
+        "text": "Coverage 檢視中的啟用率統計"
+      },
+      {
+        "id": "D",
+        "text": "Dependabot 警示清單的目前狀態"
+      }
+    ],
+    "explanation": "Security overview 儀表板依 repository 目前狀態與警示歷史計算，同一段期間在不同時間查看可能得到不同結果；需要一致資料做合規或稽核時，官方建議改用稽核日誌。",
+    "trap": "截圖看起來是固定證據，但它反映的是當下計算結果；來源本身會變，截圖就不是可重現的稽核依據。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "進階",
+    "keywords": ["D1", "D1-O3"]
+  },
+  {
+    "id": "GH500-026",
+    "exam": "GH-500",
+    "number": 26,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O4"],
+    "sourceIds": ["GH500-DOC-10"],
+    "type": "single",
+    "answer": "A",
+    "question": "Security manager 角色由誰指派？可以指派給誰？",
+    "options": [
+      {
+        "id": "A",
+        "text": "組織擁有者指派，對象是任何成員或團隊"
+      },
+      {
+        "id": "B",
+        "text": "企業擁有者指派，對象只能是整個團隊"
+      },
+      {
+        "id": "C",
+        "text": "repository 管理員指派，對象只能是個別使用者"
+      },
+      {
+        "id": "D",
+        "text": "GitHub 支援團隊指派，需要另外提出申請"
+      }
+    ],
+    "explanation": "Security manager 是組織層級的角色，由組織擁有者指派給任何成員或團隊。它包含所有 repository 的讀取權限、所有安全警示的寫入權限，以及設定安全功能的能力。",
+    "trap": "角色名稱容易被當成 repository 層級的權限；它是組織層級的，而且指派者是組織擁有者。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "基礎",
+    "keywords": ["D1", "D1-O4"]
+  },
+  {
+    "id": "GH500-027",
+    "exam": "GH-500",
+    "number": 27,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O4"],
+    "sourceIds": ["GH500-DOC-12"],
+    "type": "multiple",
+    "answer": ["A", "B"],
+    "question": "關於 dependency review，下列哪些敘述正確？（選 2 項）",
+    "options": [
+      {
+        "id": "A",
+        "text": "顯示 pull request 中相依性的新增與移除"
+      },
+      {
+        "id": "B",
+        "text": "需要先啟用 dependency graph 才能使用"
+      },
+      {
+        "id": "C",
+        "text": "所有私有 repository 都能免費使用"
+      },
+      {
+        "id": "D",
+        "text": "只在推送到預設分支之後，才會產生任何結果"
+      }
+    ],
+    "explanation": "Dependency review 在 pull request 中顯示相依性的變更與安全影響，並依賴 dependency graph，所以需要先啟用。私有 repository 還需要組織擁有 Code Security 或 Advanced Security 授權。",
+    "trap": "「公開 repository 預設可用」容易被擴大成「所有 repository 免費」；私有 repository 有授權條件。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O4"]
+  },
+  {
+    "id": "GH500-028",
+    "exam": "GH-500",
+    "number": 28,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O4"],
+    "sourceIds": ["GH500-DOC-12"],
+    "type": "single",
+    "answer": "C",
+    "question": "Artifact attestations 的作用，下列哪一項描述最準確？",
+    "options": [
+      {
+        "id": "A",
+        "text": "保證軟體不含任何已知弱點，可免除後續掃描"
+      },
+      {
+        "id": "B",
+        "text": "自動修補相依性的弱點並提交 pull request"
+      },
+      {
+        "id": "C",
+        "text": "以密碼學簽署的聲明，說明建置的來源與工作流程"
+      },
+      {
+        "id": "D",
+        "text": "禁止 release 的資產與 Git tag 在發布後被修改"
+      }
+    ],
+    "explanation": "Artifact attestations 是經密碼學簽署的聲明，說明建置的來源（原始碼與工作流程）或相關的 SBOM。它不保證安全，只提供資訊讓你更有把握相依性沒有被竄改。",
+    "trap": "最後一個選項描述的是 immutable releases；兩者都和「發布完整性」有關，但一個是證明來源，一個是禁止修改。",
+    "domain": "GitHub 安全套件、功能與生態系",
+    "difficulty": "進階",
+    "keywords": ["D1", "D1-O4"]
   }
 ]

@@ -46,5 +46,41 @@
     "title": "Enabling secret scanning for your repository",
     "url": "https://docs.github.com/en/code-security/secret-scanning/enabling-secret-scanning-features/enabling-secret-scanning-for-your-repository",
     "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-07",
+    "title": "GitHub security features",
+    "url": "https://docs.github.com/en/code-security/getting-started/github-security-features",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-08",
+    "title": "Security overview",
+    "url": "https://docs.github.com/en/code-security/security-overview/about-security-overview",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-09",
+    "title": "About security campaigns",
+    "url": "https://docs.github.com/en/code-security/concepts/security-at-scale/about-security-campaigns",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-10",
+    "title": "Managing security managers in your organization",
+    "url": "https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/managing-security-managers-in-your-organization",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-11",
+    "title": "Delegated alert dismissal",
+    "url": "https://docs.github.com/en/code-security/concepts/security-at-scale/delegated-alert-dismissal",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH500-DOC-12",
+    "title": "Supply chain security",
+    "url": "https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/about-supply-chain-security",
+    "publisher": "GitHub Docs"
   }
 ]
