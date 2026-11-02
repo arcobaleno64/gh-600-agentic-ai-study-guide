@@ -183,7 +183,7 @@ function countdown(date: string) {
     <div class="dashboard-grid">
       <section class="panel panel--span-2">
         <div class="panel__header">
-          <h2>GH-600 考試地圖</h2>
+          <h2>{{ examMeta.exam.code }} 考試地圖</h2>
           <span class="muted">最後核對：{{ examMeta.lastVerified }}</span>
         </div>
         <dl class="exam-facts">

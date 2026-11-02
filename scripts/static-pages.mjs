@@ -6,10 +6,11 @@ import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { Marked } from "marked";
+import { loadSite } from "./site.mjs";
 
-export const SITE_URL =
-  "https://gh-600-agentic-ai-study-guide.t11306458.workers.dev";
-export const SITE_NAME = "GH-600 Agentic AI Developer 四週備考指南";
+const examSite = loadSite(process.env.EXAM || "gh-600");
+export const SITE_URL = examSite.siteUrl;
+export const SITE_NAME = examSite.siteName;
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const examDir = join(root, "exams", process.env.EXAM || "gh-600");
@@ -127,7 +128,7 @@ ${jsonLd({ "@context": "https://schema.org", ...page.schema, url: pageUrl(page.p
 <body>
 <a class="skip" href="#main">跳到主要內容</a>
 <header class="top">
-<a class="brand" href="/">GH-600 數位教科書</a>
+<a class="brand" href="/">${site.brand}</a>
 <a class="open-app" href="/#/${page.app}">開啟互動版</a>
 </header>
 <div class="shell">
@@ -227,7 +228,7 @@ function quizPages(content) {
   const index = {
     path: "/quiz/",
     label: "模擬題總覽",
-    title: "GH-600 模擬題",
+    title: `${content.meta.exam.code} 模擬題`,
     description: `依六個領域分組的 ${content.questions.length} 題原創模擬題，每題附正確答案、解析與常見陷阱。`,
     app: "quiz",
     group: "模擬題",
@@ -237,7 +238,10 @@ function quizPages(content) {
         return `<li><a href="${page.path}">${escapeHtml(page.title)}</a>（考試權重 ${weight.min}–${weight.max}%）</li>`;
       })
       .join("")}</ul>`,
-    schema: { "@type": "CollectionPage", name: "GH-600 模擬題" },
+    schema: {
+      "@type": "CollectionPage",
+      name: `${content.meta.exam.code} 模擬題`,
+    },
   };
   return [index, ...pages];
 }
@@ -247,11 +251,11 @@ function glossaryPage(content) {
     (n, c) => n + c.terms.length,
     0,
   );
-  const description = `GH-600 六個領域共 ${count} 個名詞的繁體中文解釋。`;
+  const description = `${content.meta.exam.code} 六個領域共 ${count} 個名詞的繁體中文解釋。`;
   return {
     path: "/glossary/",
     label: "名詞庫",
-    title: "GH-600 名詞庫",
+    title: `${content.meta.exam.code} 名詞庫`,
     description,
     app: "glossary",
     group: "速查",
@@ -268,7 +272,7 @@ function glossaryPage(content) {
       .join("\n"),
     schema: {
       "@type": "DefinedTermSet",
-      name: "GH-600 名詞庫",
+      name: `${content.meta.exam.code} 名詞庫`,
       hasDefinedTerm: content.glossary.categories.flatMap((c) =>
         c.terms.map((term) => ({
           "@type": "DefinedTerm",
@@ -288,8 +292,8 @@ function faqPage(content) {
   return {
     path: "/faq/",
     label: "FAQ／Q&A",
-    title: "GH-600 常見問題",
-    description: `GH-600 考試資訊與六領域觀念的 ${items.length} 則問答。`,
+    title: `${content.meta.exam.code} 常見問題`,
+    description: `${content.meta.exam.code} 考試資訊與六領域觀念的 ${items.length} 則問答。`,
     app: "faq",
     group: "速查",
     body: [...groups]
@@ -319,7 +323,7 @@ function reviewPage(content) {
   return {
     path: "/review/",
     label: "考前速查",
-    title: "GH-600 考前速查",
+    title: `${content.meta.exam.code} 考前速查`,
     description: "考前必記重點、易混淆觀念對照與考試當天檢查清單。",
     app: "review",
     group: "速查",
@@ -331,7 +335,7 @@ function reviewPage(content) {
       .join("")}
 <h2>易混淆觀念</h2><dl>${cheatsheet.map((row) => `<dt>${escapeHtml(row.combination)}</dt><dd>${escapeHtml(row.summary)}</dd>`).join("")}</dl>
 <h2>考試當天檢查清單</h2><ul>${examDayChecklist.map((line) => `<li>${escapeHtml(line)}</li>`).join("")}</ul>`,
-    schema: { "@type": "WebPage", name: "GH-600 考前速查" },
+    schema: { "@type": "WebPage", name: `${content.meta.exam.code} 考前速查` },
   };
 }
 
@@ -340,7 +344,7 @@ function planPage(content) {
   return {
     path: "/plan/",
     label: "四週計畫",
-    title: "GH-600 四週讀書計畫",
+    title: `${content.meta.exam.code} 四週讀書計畫`,
     description: "28 天的每日閱讀、產出與過關標準，以及錯題分類與補強方法。",
     app: "plan",
     group: "速查",
@@ -356,7 +360,10 @@ function planPage(content) {
       )
       .join("\n")}
 <h2>錯題分類與補強</h2><dl>${wrongAnswerMethod.map((row) => `<dt>${escapeHtml(row.type)}</dt><dd>症狀：${escapeHtml(row.symptom)}<br>補強：${escapeHtml(row.remedy)}</dd>`).join("")}</dl>`,
-    schema: { "@type": "WebPage", name: "GH-600 四週讀書計畫" },
+    schema: {
+      "@type": "WebPage",
+      name: `${content.meta.exam.code} 四週讀書計畫`,
+    },
   };
 }
 
@@ -364,7 +371,7 @@ function sourcesPage(content) {
   return {
     path: "/sources/",
     label: "官方來源",
-    title: "GH-600 官方來源",
+    title: `${content.meta.exam.code} 官方來源`,
     description: "本指南引用的 Microsoft Learn 與 GitHub Docs 官方文件清單。",
     app: "sources",
     group: "速查",
@@ -374,7 +381,7 @@ function sourcesPage(content) {
           `<li id="${source.id.toLowerCase()}"><a href="${escapeHtml(source.url)}" rel="noopener">${escapeHtml(source.title)}</a>（${escapeHtml(source.publisher)}）</li>`,
       )
       .join("")}</ul>`,
-    schema: { "@type": "WebPage", name: "GH-600 官方來源" },
+    schema: { "@type": "WebPage", name: `${content.meta.exam.code} 官方來源` },
   };
 }
 
@@ -382,7 +389,7 @@ function llmsTxt(pages, content) {
   const lines = [
     `# ${SITE_NAME}`,
     "",
-    `> 繁體中文（臺灣）的 GitHub Certified: Agentic AI Developer（Exam GH-600: ${content.meta.exam.examName}）備考教材：六領域教材、名詞庫、問答與 ${content.questions.length} 題附解析的原創模擬題。`,
+    `> 繁體中文（臺灣）的 ${content.meta.exam.certificationName}（Exam ${content.meta.exam.code}: ${content.meta.exam.examName}）備考教材：六領域教材、名詞庫、問答與 ${content.questions.length} 題附解析的原創模擬題。`,
     "",
     content.meta.disclaimer,
     "",
@@ -451,6 +458,7 @@ export function buildStaticSite(content = loadContent()) {
     sourcesPage(content),
   ];
   const site = {
+    brand: examSite.brand,
     nav: pages.filter((page) => !/^\/quiz\/d\d\/$/.test(page.path)),
     disclaimer: content.meta.disclaimer,
     lastVerified: content.meta.lastVerified,

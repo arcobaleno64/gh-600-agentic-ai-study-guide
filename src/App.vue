@@ -9,6 +9,7 @@ import {
 } from "vue";
 import { cycleTheme, progress, storageStatus } from "./store";
 import { route, routeTitles } from "./router";
+import { site } from "./site";
 import DashboardView from "./views/DashboardView.vue";
 import PlanView from "./views/PlanView.vue";
 import KnowledgeView from "./views/KnowledgeView.vue";
@@ -59,7 +60,9 @@ const nav = [
   { name: "quiz" as RouteName, label: "模擬題", icon: "題" },
   { name: "faq" as RouteName, label: "FAQ／Q&A", icon: "問" },
   { name: "review" as RouteName, label: "考前速查", icon: "查" },
-  { name: "quest" as RouteName, label: "闖關遊戲", icon: "玩" },
+  ...(site.quest
+    ? [{ name: "quest" as RouteName, label: "闖關遊戲", icon: "玩" }]
+    : []),
   { name: "sources" as RouteName, label: "官方來源", icon: "源" },
   { name: "settings" as RouteName, label: "設定", icon: "設" },
 ];
@@ -138,9 +141,7 @@ onBeforeUnmount(() => {
   <div class="app-shell textbook-shell">
     <header class="book-header">
       <div class="book-header__inner">
-        <a class="book-brand" href="#/knowledge/start-here"
-          >GH-600 數位教科書</a
-        >
+        <a class="book-brand" href="#/knowledge/start-here">{{ site.brand }}</a>
         <button class="book-menu-button" @click="menu?.showModal()">
           目錄
         </button>
@@ -182,7 +183,7 @@ onBeforeUnmount(() => {
       <component :is="currentView" />
     </main>
     <footer class="book-footer">
-      <span>GH-600 · Agentic AI 學習指南</span>
+      <span>{{ site.footer }}</span>
       <span
         >{{ online ? "已連線" : "目前離線" }} ·
         {{

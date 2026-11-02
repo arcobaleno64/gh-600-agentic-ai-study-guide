@@ -7,6 +7,7 @@ import ts from "typescript";
 import { compileScript, parse } from "vue/compiler-sfc";
 import * as vue from "vue";
 import { readingSections } from "../src/reading.ts";
+import { progressKeyFor } from "../src/storageKeys.ts";
 
 const require = createRequire(import.meta.url);
 function execute(
@@ -36,14 +37,16 @@ function execute(
 test("進度寫入失敗保留記憶體資料，恢復寫入後才解除警告", async () => {
   let blocked = true;
   let saved = "";
+  let savedKey = "";
   const store = execute(
     readFileSync(new URL("../src/store.ts", import.meta.url), "utf8"),
-    {},
+    { "./site": { progressKey: progressKeyFor("GH-600") } },
     {
       localStorage: {
         getItem: () => null,
-        setItem: (_key: string, value: string) => {
+        setItem: (key: string, value: string) => {
           if (blocked) throw new Error("QuotaExceededError");
+          savedKey = key;
           saved = value;
         },
       },
@@ -60,6 +63,8 @@ test("進度寫入失敗保留記憶體資料，恢復寫入後才解除警告",
   await vue.nextTick();
   assert.equal(store.storageStatus.value, "saved");
   assert.deepEqual(JSON.parse(saved).completedDays, [1, 2]);
+  // Existing GH-600 learners keep their progress only if the key never changes.
+  assert.equal(savedKey, "gh-600-study-progress-v1");
 });
 
 test("名詞抽卡遵守篩選，零筆不另抽全庫；下一張收起解釋並聚焦卡片", async () => {

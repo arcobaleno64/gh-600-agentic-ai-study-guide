@@ -3,12 +3,25 @@ import vue from "@vitejs/plugin-vue";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
+import { loadSite, renderSite } from "./scripts/site.mjs";
 
 // One exam per build: EXAM picks exams/<code>/ (default gh-600).
 const exam = process.env.EXAM || "gh-600";
+const site = loadSite(exam);
+// Files that carry the site identity; see scripts/site.mjs.
+const siteFile = (name: string) =>
+  renderSite(
+    readFileSync(new URL(`./public/${name}`, import.meta.url), "utf8"),
+    site,
+  );
+const siteFiles = ["manifest.webmanifest", "robots.txt", "404.html"];
 export default defineConfig({
   plugins: [
     vue(),
+    {
+      name: "exam-site",
+      transformIndexHtml: (html: string) => renderSite(html, site),
+    },
     {
       name: "textbook-offline-assets",
       apply: "build",
@@ -28,23 +41,26 @@ export default defineConfig({
             .update(name)
             .update(item.type === "chunk" ? item.code : item.source);
         }
-        for (const name of [
-          "manifest.webmanifest",
-          "icon-192.png",
-          "icon-512.png",
-        ]) {
+        hash.update(siteFile("manifest.webmanifest"));
+        for (const name of ["icon-192.png", "icon-512.png"]) {
           hash.update(
             readFileSync(new URL(`./public/${name}`, import.meta.url)),
           );
         }
+        for (const name of siteFiles)
+          this.emitFile({
+            type: "asset",
+            fileName: name,
+            source: siteFile(name),
+          });
         this.emitFile({
           type: "asset",
           fileName: "sw.js",
-          source: template
+          source: renderSite(template, site)
             .replace(
-              '"gh-600-study-guide-dev"',
+              JSON.stringify(`${site.cachePrefix}-dev`),
               JSON.stringify(
-                `gh-600-study-guide-${hash.digest("hex").slice(0, 16)}`,
+                `${site.cachePrefix}-${hash.digest("hex").slice(0, 16)}`,
               ),
             )
             .replace(

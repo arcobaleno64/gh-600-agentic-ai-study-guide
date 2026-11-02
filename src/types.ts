@@ -1,4 +1,15 @@
-export type ExamCode = "GH-600";
+export type ExamCode = "GH-600" | "GH-500";
+export interface SiteConfig {
+  siteUrl: string;
+  siteName: string;
+  shortName: string;
+  brand: string;
+  footer: string;
+  metaDescription: string;
+  summary: string;
+  cachePrefix: string;
+  quest: boolean;
+}
 export type RouteName =
   | "dashboard"
   | "plan"

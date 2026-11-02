@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref, watch } from "vue";
 import { examPart1, questions, sources } from "../content";
+import { examCode, sessionKey } from "../site";
+
+useSessionKey(sessionKey);
 import {
   addAttempt,
   clearWrongAnswers,
@@ -21,6 +24,7 @@ import {
   loadSession,
   saveSession,
   secondsLeft,
+  useSessionKey,
   type QuizMode,
   type RestoredSession,
 } from "../quizSession";
@@ -400,7 +404,7 @@ function finish(force = false) {
   }
   const attempt: QuizAttempt = {
     id: makeId("attempt"),
-    exam: "GH-600",
+    exam: examCode,
     mode: mode.value,
     date: new Date().toISOString(),
     correct,
