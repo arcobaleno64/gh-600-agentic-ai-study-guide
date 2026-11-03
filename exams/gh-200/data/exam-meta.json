@@ -1,0 +1,72 @@
+{
+  "lastVerified": "2026-11-03",
+  "disclaimer": "本網站是繁體中文原創學習整理，並非 Microsoft 或 GitHub 官方出版品；不包含實際考題、考古題或外洩題庫。正式應考前請重新核對官方認證頁與 Study Guide。",
+  "exam": {
+    "code": "GH-200",
+    "certificationName": "GitHub Actions",
+    "examName": "GitHub Actions",
+    "durationMinutes": 100,
+    "passingScore": 700,
+    "languages": [
+      "English",
+      "Spanish",
+      "Portuguese (Brazil)",
+      "Korean",
+      "Japanese"
+    ],
+    "studyGuideUpdatedAt": "2026-02-04",
+    "studyGuide": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-200",
+    "certificationPage": "https://learn.microsoft.com/en-us/credentials/certifications/github-actions/",
+    "domains": [
+      {
+        "id": "D1",
+        "name": "撰寫與管理工作流程",
+        "weight": { "min": 20, "max": 25 },
+        "objectives": [
+          { "id": "D1-O1", "name": "設定工作流程觸發條件與事件" },
+          { "id": "D1-O2", "name": "設計與實作工作流程結構" },
+          { "id": "D1-O3", "name": "管理工作流程執行與輸出" }
+        ]
+      },
+      {
+        "id": "D2",
+        "name": "使用與疑難排解工作流程",
+        "weight": { "min": 15, "max": 20 },
+        "objectives": [
+          { "id": "D2-O1", "name": "解讀工作流程行為與結果" },
+          { "id": "D2-O2", "name": "存取工作流程成品與記錄" },
+          { "id": "D2-O3", "name": "使用與管理工作流程範本" }
+        ]
+      },
+      {
+        "id": "D3",
+        "name": "撰寫與維護 actions",
+        "weight": { "min": 15, "max": 20 },
+        "objectives": [
+          { "id": "D3-O1", "name": "建立與疑難排解自訂 actions" },
+          { "id": "D3-O2", "name": "定義 action 結構與中繼資料" },
+          { "id": "D3-O3", "name": "散布與維護 actions" }
+        ]
+      },
+      {
+        "id": "D4",
+        "name": "管理企業的 GitHub Actions",
+        "weight": { "min": 20, "max": 25 },
+        "objectives": [
+          { "id": "D4-O1", "name": "散布與治理 actions 與工作流程" },
+          { "id": "D4-O2", "name": "大規模管理 runners" },
+          { "id": "D4-O3", "name": "管理加密 secrets 與 variables" }
+        ]
+      },
+      {
+        "id": "D5",
+        "name": "保護與最佳化自動化",
+        "weight": { "min": 10, "max": 15 },
+        "objectives": [
+          { "id": "D5-O1", "name": "實作安全最佳做法" },
+          { "id": "D5-O2", "name": "最佳化工作流程效能與成本" }
+        ]
+      }
+    ]
+  }
+}
