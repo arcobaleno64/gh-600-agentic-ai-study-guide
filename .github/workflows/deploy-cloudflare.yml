@@ -9,6 +9,7 @@ on:
         options:
           - gh-600
           - gh-500
+          - gh-200
         default: gh-600
         required: true
 

@@ -1,0 +1,279 @@
+{
+  "version": "1.0.0",
+  "weeks": [
+    {
+      "id": "week-1",
+      "week": 1,
+      "title": "觸發條件、工作流程結構與輸出",
+      "days": [
+        {
+          "day": 1,
+          "title": "建立考試地圖",
+          "reading": "讀認證頁、Study Guide 與五領域權重，再讀開始使用章。",
+          "output": "畫出五領域與 14 個 objective 的一頁地圖。",
+          "passCriteria": "能不看資料說出五領域與權重區間。",
+          "domainId": "D1"
+        },
+        {
+          "day": 2,
+          "title": "觸發條件與預設分支",
+          "reading": "D1-O1：只讀預設分支的事件、各事件的 GITHUB_SHA 與 GITHUB_REF、schedule 規則。",
+          "output": "整理事件與 SHA、REF 的對照表。",
+          "passCriteria": "能說出 schedule 與 pull_request 各拿到哪個 commit。",
+          "domainId": "D1"
+        },
+        {
+          "day": 3,
+          "title": "手動觸發、呼叫與權限",
+          "reading": "D1-O1：workflow_dispatch inputs、workflow_call、permissions、GITHUB_TOKEN 觸發的例外。",
+          "output": "寫出 inputs 與 github.event.inputs 的差異。",
+          "passCriteria": "能解釋 boolean 條件為什麼永遠不成立。",
+          "domainId": "D1"
+        },
+        {
+          "day": 4,
+          "title": "jobs、contexts 與 expressions",
+          "reading": "D1-O2：needs、if、各位置可用的 context。",
+          "output": "畫出 context 可用位置表。",
+          "passCriteria": "能說出 secrets 為什麼不能直接用在 if。",
+          "domainId": "D1"
+        },
+        {
+          "day": 5,
+          "title": "矩陣與服務容器",
+          "reading": "D1-O2：include、exclude、fail-fast、services 的連線方式。",
+          "output": "展開一個矩陣的所有組合並算出 job 數。",
+          "passCriteria": "能說出容器內與 runner 上連服務的主機差異。",
+          "domainId": "D1"
+        },
+        {
+          "day": 6,
+          "title": "快取與成品",
+          "reading": "D1-O3：快取鍵查找順序、分支範圍、成品不可變與保留期。",
+          "output": "整理快取查找順序與可還原的分支。",
+          "passCriteria": "能說出一次執行可還原哪些分支的快取。",
+          "domainId": "D1"
+        },
+        {
+          "day": 7,
+          "title": "資料傳遞與摘要",
+          "reading": "D1-O3：GITHUB_ENV、GITHUB_OUTPUT、job outputs、工作摘要、add-mask。",
+          "output": "做一張 job 與步驟間傳資料的對照表。",
+          "passCriteria": "能區分 outcome 與 conclusion。",
+          "domainId": "D1"
+        }
+      ]
+    },
+    {
+      "id": "week-2",
+      "week": 2,
+      "title": "疑難排解、範本與自訂 actions",
+      "days": [
+        {
+          "day": 8,
+          "title": "日誌與除錯記錄",
+          "reading": "D2-O1：Actions 日誌、Search logs、ACTIONS_STEP_DEBUG 與 ACTIONS_RUNNER_DEBUG。",
+          "output": "寫出兩個除錯設定各自多出什麼。",
+          "passCriteria": "能說出 secret 與 variable 同時存在時哪個優先。",
+          "domainId": "D2"
+        },
+        {
+          "day": 9,
+          "title": "重新執行",
+          "reading": "D2-O1：重跑三種方式、30 天與 50 次限制、沿用原 commit。",
+          "output": "做一張 UI、CLI、REST 三種重跑的對照表。",
+          "passCriteria": "能說出為什麼重跑不會測到新 commit。",
+          "domainId": "D2"
+        },
+        {
+          "day": 10,
+          "title": "成品與日誌的存取",
+          "reading": "D2-O2：REST 與 CLI 取得日誌、成品、302 導向與 1 分鐘網址。",
+          "output": "寫出下載成品的完整呼叫步驟。",
+          "passCriteria": "能說出下載網址的有效時間與刪除連動。",
+          "domainId": "D2"
+        },
+        {
+          "day": 11,
+          "title": "起始工作流程與重用",
+          "reading": "D2-O3：三種重用機制、組織範本的檔案、停用與啟用。",
+          "output": "做一張可重用工作流程、複合 action、起始工作流程的比較表。",
+          "passCriteria": "能依需求選出正確的重用機制。",
+          "domainId": "D2"
+        },
+        {
+          "day": 12,
+          "title": "action 類型與 JavaScript action",
+          "reading": "D3-O1：三種類型、JavaScript action 結構、打包與 pre、post。",
+          "output": "寫出三種類型可執行的作業系統。",
+          "passCriteria": "能說出為什麼不提交 node_modules。",
+          "domainId": "D3"
+        },
+        {
+          "day": 13,
+          "title": "中繼資料與複合 action",
+          "reading": "D3-O1、D3-O2：action.yml 必填欄位、inputs 與 outputs、複合 action 的規則。",
+          "output": "寫出複合 action 輸出需要的欄位。",
+          "passCriteria": "能說出 required: true 不會自動報錯。",
+          "domainId": "D3"
+        },
+        {
+          "day": 14,
+          "title": "散布與版本維護",
+          "reading": "D3-O3：三種散布模式、Marketplace 條件、版本標籤、immutable releases。",
+          "output": "寫出發佈 v1.4.0 時要移動的標籤。",
+          "passCriteria": "能說出 immutable releases 對移動標籤的影響。",
+          "domainId": "D3"
+        }
+      ]
+    },
+    {
+      "id": "week-3",
+      "week": 3,
+      "title": "企業治理、runners 與安全",
+      "days": [
+        {
+          "day": 15,
+          "title": "組織與企業政策",
+          "reading": "D4-O1：允許的 actions、樣式語法、SHA 固定、企業覆蓋規則、fork PR 政策。",
+          "output": "寫出組織與企業政策的覆蓋方向。",
+          "passCriteria": "能說出企業停用的政策下層能不能啟用。",
+          "domainId": "D4"
+        },
+        {
+          "day": 16,
+          "title": "自管 runner",
+          "reading": "D4-O2：連線需求、自動更新、暫時性 runner、job 選擇 runner 與排隊。",
+          "output": "整理自管 runner 的限制與數字。",
+          "passCriteria": "能說出 60 秒、24 小時與 30 天各代表什麼。",
+          "domainId": "D4"
+        },
+        {
+          "day": 17,
+          "title": "runner 群組與 larger runners",
+          "reading": "D4-O2：runner 群組、larger runners、靜態 IP、監控與疑難排解。",
+          "output": "畫出 runner 群組的存取關係。",
+          "passCriteria": "能說出群組預設開放給哪些 repository。",
+          "domainId": "D4"
+        },
+        {
+          "day": 18,
+          "title": "secrets 與 variables",
+          "reading": "D4-O3：三層級、優先順序、存取規則、REST 與 LibSodium。",
+          "output": "寫出 secrets 在 fork 與 Dependabot 下的行為。",
+          "passCriteria": "能說出同名 secret 在三層級的優先順序。",
+          "domainId": "D4"
+        },
+        {
+          "day": 19,
+          "title": "環境與 actions 信任",
+          "reading": "D5-O1：環境保護規則、挑選與固定 actions、Dependabot 與 CODEOWNERS。",
+          "output": "寫出環境保護規則的清單與數字。",
+          "passCriteria": "能說出為什麼標籤不如 SHA 安全。",
+          "domainId": "D5"
+        },
+        {
+          "day": 20,
+          "title": "script injection 與 GITHUB_TOKEN",
+          "reading": "D5-O1：script injection 防範、GITHUB_TOKEN 生命週期與權限。",
+          "output": "寫出把運算式改成環境變數的範例。",
+          "passCriteria": "能說出自管 runner 上權杖最多更新多久。",
+          "domainId": "D5"
+        },
+        {
+          "day": 21,
+          "title": "OIDC、證明與最佳化",
+          "reading": "D5-O1、D5-O2：OIDC claims、成品證明、限制、concurrency 與成本。",
+          "output": "做一張 OIDC 與長期 secret 的比較表。",
+          "passCriteria": "能說出 id-token: write 並不給資源寫入權限。",
+          "domainId": "D5"
+        }
+      ]
+    },
+    {
+      "id": "week-4",
+      "week": 4,
+      "title": "整合、題庫與模擬考",
+      "days": [
+        {
+          "day": 22,
+          "title": "整合章：控制鏈",
+          "reading": "整合章：從觸發到部署的控制鏈、題幹辨識順序。",
+          "output": "把自己的 repository 寫成一頁控制鏈。",
+          "passCriteria": "能指出哪一格只是「覺得是這樣」。",
+          "domainId": "D5"
+        },
+        {
+          "day": 23,
+          "title": "題庫：領域一與二",
+          "reading": "做題庫 D1、D2 的題目並讀完所有解析。",
+          "output": "記錄每一題答錯的原因類型。",
+          "passCriteria": "答對率高於七成，並寫出錯誤原因。",
+          "domainId": "D1"
+        },
+        {
+          "day": 24,
+          "title": "題庫：領域三與四",
+          "reading": "做題庫 D3、D4 的題目並讀完所有解析。",
+          "output": "更新錯題清單與必背句。",
+          "passCriteria": "答對率高於七成，並能說出混淆的概念。",
+          "domainId": "D3"
+        },
+        {
+          "day": 25,
+          "title": "題庫：領域五與整合題",
+          "reading": "做題庫 D5 的題目與整合章情境題。",
+          "output": "整理跨領域陷阱表。",
+          "passCriteria": "答對率高於七成，並能說出各題的限制詞。",
+          "domainId": "D5"
+        },
+        {
+          "day": 26,
+          "title": "仿真考：第一部分情境題",
+          "reading": "在仿真考模式完成第一部分十題情境題。",
+          "output": "記錄每個現象的判斷依據。",
+          "passCriteria": "能對每個現象說出原因與依據的文件。",
+          "domainId": "D1"
+        },
+        {
+          "day": 27,
+          "title": "錯題複習與數字記憶",
+          "reading": "回看錯題、必背句與數字（6、30、50、256、1 分鐘、24 小時）。",
+          "output": "把每個數字配一條它代表的規則。",
+          "passCriteria": "不看資料能說出主要數字各自的規則。",
+          "domainId": "D4"
+        },
+        {
+          "day": 28,
+          "title": "考前檢核",
+          "reading": "讀考前速查與考試日檢查清單，再做一次完整仿真考。",
+          "output": "完成考前檢查清單。",
+          "passCriteria": "仿真考正確率穩定，且能說出弱點領域的補救計畫。",
+          "domainId": "D5"
+        }
+      ]
+    }
+  ],
+  "wrongAnswerMethod": [
+    {
+      "type": "功能混淆",
+      "symptom": "把相近的機制當成同一個，例如可重用工作流程與複合 action。",
+      "remedy": "回到章節的對照表，寫出各自的使用層級與限制。"
+    },
+    {
+      "type": "題幹漏讀",
+      "symptom": "忽略「預設分支」「私有」「自管」「組織層級」等限制詞。",
+      "remedy": "圈出限制詞後再看選項。"
+    },
+    {
+      "type": "數字記錯",
+      "symptom": "把 6 小時、5 天、30 天、50 次、256 個、1 分鐘等數字互換。",
+      "remedy": "每個數字配一個它代表的規則，寫成必背句。"
+    },
+    {
+      "type": "直覺錯誤",
+      "symptom": "依常理選答案，但官方行為違反直覺，例如重跑不會拿到新 commit。",
+      "remedy": "把違反直覺的行為記進陷阱清單，並在練習 repository 驗證。"
+    }
+  ]
+}

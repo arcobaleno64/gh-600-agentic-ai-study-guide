@@ -1,0 +1,24 @@
+{
+  "workerName": "gh-200-github-actions-study-guide",
+  "siteUrl": "https://gh200.satenvision.com",
+  "domain": "gh200.satenvision.com",
+  "related": [
+    {
+      "label": "GH-500 GitHub Advanced Security",
+      "url": "https://gh500.satenvision.com"
+    },
+    {
+      "label": "GH-600 Agentic AI Developer",
+      "url": "https://gh600.satenvision.com"
+    }
+  ],
+  "siteName": "GH-200 GitHub Actions 四週備考指南",
+  "shortName": "GH-200 備考",
+  "brand": "GH-200 數位教科書",
+  "footer": "GH-200 · GitHub Actions 學習指南",
+  "metaDescription": "GH-200 GitHub Actions 四週互動式備考指南",
+  "summary": "28 天計畫、五領域教材、72 題原創題庫與考前速查。",
+  "cachePrefix": "gh-200-study-guide",
+  "walkthrough": false,
+  "quest": false
+}

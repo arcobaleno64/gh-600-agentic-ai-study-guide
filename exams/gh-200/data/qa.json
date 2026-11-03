@@ -1,0 +1,170 @@
+[
+  {
+    "id": "QA-01",
+    "category": "D1",
+    "question": "團隊在功能分支寫了每晚執行的 schedule 工作流程，等了幾天都沒跑，就開始檢查 cron 語法，錯在哪？",
+    "answer": "schedule 只在預設分支的檔案上執行；先確認檔案是否已合併到預設分支，再看語法。",
+    "keyWords": ["D1"]
+  },
+  {
+    "id": "QA-02",
+    "category": "D1",
+    "question": "workflow_dispatch 有 boolean 輸入 dry_run，條件寫 github.event.inputs.dry_run == false 永遠不成立，錯在哪？",
+    "answer": "github.event.inputs 會把 boolean 轉成字串；改用保留型別的 inputs.dry_run。",
+    "keyWords": ["D1"]
+  },
+  {
+    "id": "QA-03",
+    "category": "D1",
+    "question": "矩陣 2×2 共 4 組，exclude 一組後 include 一組新的 macOS 組合，團隊算出 3 個 job，錯在哪？",
+    "answer": "include 的新組合與既有組合衝突時成為獨立的新組合，所以是 4 − 1 + 1 = 4 個。",
+    "keyWords": ["D1"]
+  },
+  {
+    "id": "QA-04",
+    "category": "D1",
+    "question": "lint 設了 continue-on-error，後面的步驟用 conclusion == 'failure' 判斷，從沒執行，錯在哪？",
+    "answer": "conclusion 是套用 continue-on-error 之後的結果，會是 success；要看失敗過用 outcome。",
+    "keyWords": ["D1"]
+  },
+  {
+    "id": "QA-05",
+    "category": "D1",
+    "question": "團隊以為同一個 repository 的所有分支共用快取，結果兄弟分支一直未命中，錯在哪？",
+    "answer": "一次執行只能還原目前分支與預設分支（PR 再加基底分支）的快取，兄弟分支拿不到。",
+    "keyWords": ["D1"]
+  },
+  {
+    "id": "QA-06",
+    "category": "D2",
+    "question": "測試失敗後修好程式碼並推送，卻在舊執行上按 Re-run failed jobs 想驗證，錯在哪？",
+    "answer": "重跑沿用原本的 GITHUB_SHA，不會拿到新 commit；要看新推送觸發的新執行。",
+    "keyWords": ["D2"]
+  },
+  {
+    "id": "QA-07",
+    "category": "D2",
+    "question": "在日誌頁用 Search logs 搜不到確定存在的文字，團隊以為日誌遺失，錯在哪？",
+    "answer": "Search logs 只搜尋已展開的步驟；先展開要找的步驟，或下載日誌封存檔。",
+    "keyWords": ["D2"]
+  },
+  {
+    "id": "QA-08",
+    "category": "D2",
+    "question": "腳本把成品下載的 Location 網址存起來，隔天才使用而失敗，錯在哪？",
+    "answer": "網址只有 1 分鐘有效；每次下載都要重新呼叫端點取得新網址並立刻使用。",
+    "keyWords": ["D2"]
+  },
+  {
+    "id": "QA-09",
+    "category": "D2",
+    "question": "複合 action 需要 secret 卻讀不到，團隊想靠發佈到 Marketplace 解決，錯在哪？",
+    "answer": "複合 action 不能直接使用 secrets context，要由呼叫它的工作流程把 secret 當作 input 傳入。",
+    "keyWords": ["D2"]
+  },
+  {
+    "id": "QA-10",
+    "category": "D2",
+    "question": "團隊對排程工作流程按 Disable workflow，以為進行中的執行會立刻取消，錯在哪？",
+    "answer": "停用只是讓它不再觸發，不會取消進行中的執行；停用期間也不能重新執行，要先啟用。",
+    "keyWords": ["D2"]
+  },
+  {
+    "id": "QA-11",
+    "category": "D3",
+    "question": "同事把 node_modules 提交進 action 的 repository，說這樣使用者不用安裝，錯在哪？",
+    "answer": "官方說提交可能造成問題；應用 rollup.js 或 @vercel/ncc 打包成 dist/index.js 並提交。",
+    "keyWords": ["D3"]
+  },
+  {
+    "id": "QA-12",
+    "category": "D3",
+    "question": "輸入 token 設了 required: true，使用者沒傳值，action 卻照常跑，團隊以為是平台錯誤，錯在哪？",
+    "answer": "required: true 不會自動報錯，action 要自己檢查輸入，必要時 core.setFailed。",
+    "keyWords": ["D3"]
+  },
+  {
+    "id": "QA-13",
+    "category": "D3",
+    "question": "組織啟用 immutable releases 後，發佈流程強制推送移動 v1 標籤失敗，團隊以為是權限問題，錯在哪？",
+    "answer": "不可變 release 把標籤鎖定在特定 commit，無法移動；要調整版本策略，例如讓使用者釘到具體標籤或 SHA。",
+    "keyWords": ["D3"]
+  },
+  {
+    "id": "QA-14",
+    "category": "D3",
+    "question": "團隊把 Docker 容器 action 用在 Windows 與 macOS 的 runner 上，結果失敗，錯在哪？",
+    "answer": "Docker 容器 action 只能在 Linux runner 執行；跨平台需求改用 JavaScript action 或複合 action。",
+    "keyWords": ["D3"]
+  },
+  {
+    "id": "QA-15",
+    "category": "D4",
+    "question": "管理員把政策改成只允許組織自己的 actions，隔天所有 CI 在 checkout 失敗，錯在哪？",
+    "answer": "該設定會封鎖所有 GitHub 作者的 actions，包含 actions/checkout；要另外勾選 GitHub 建立的 actions。",
+    "keyWords": ["D4"]
+  },
+  {
+    "id": "QA-16",
+    "category": "D4",
+    "question": "企業停用了某政策，組織管理員想在自己的組織重新啟用它，錯在哪？",
+    "answer": "企業停用的政策，個別組織與 repository 不能再啟用；組織只能進一步限制。",
+    "keyWords": ["D4"]
+  },
+  {
+    "id": "QA-17",
+    "category": "D4",
+    "question": "團隊停用自管 runner 的自動更新，一個月後 job 都不再被排到那些 runner，錯在哪？",
+    "answer": "停用自動更新後必須在新版釋出後 30 天內更新，否則 GitHub 停止排 job 給它。",
+    "keyWords": ["D4"]
+  },
+  {
+    "id": "QA-18",
+    "category": "D4",
+    "question": "公開 repository 想用組織預設群組的自管 runner 省錢，以為群組預設就會開放，錯在哪？",
+    "answer": "群組預設只開放私有 repository，公開 repository 要覆寫；而且自管 runner 幾乎不該用在公開 repository。",
+    "keyWords": ["D4"]
+  },
+  {
+    "id": "QA-19",
+    "category": "D4",
+    "question": "工作流程寫 if: secrets.TOKEN != '' 而失效，團隊想把 secret 改存成 variable，錯在哪？",
+    "answer": "問題是 secrets 不能直接用在 if；應先放進 job 層級環境變數再判斷，而把機密放進 variable 不會被遮蔽。",
+    "keyWords": ["D4"]
+  },
+  {
+    "id": "QA-20",
+    "category": "D5",
+    "question": "步驟 run 直接插入 PR 標題，團隊覺得加上單引號就安全，錯在哪？",
+    "answer": "${{ }} 在 shell 執行前被替換成文字，引號可被跳脫；應設成環境變數再引用，或改用 action。",
+    "keyWords": ["D5"]
+  },
+  {
+    "id": "QA-21",
+    "category": "D5",
+    "question": "團隊為 OIDC 加了 id-token: write，就以為雲端部署已安全，錯在哪？",
+    "answer": "還要在雲端端至少定義一個信任條件；id-token: write 只允許請求權杖，不給資源寫入權限。",
+    "keyWords": ["D5"]
+  },
+  {
+    "id": "QA-22",
+    "category": "D5",
+    "question": "第三方 action 釘在 @v4，之後標籤被移到惡意 commit，團隊以為版本號夠具體，錯在哪？",
+    "answer": "標籤可被移動或刪除；應固定完整 commit SHA（確認來自原 repository），或使用 lockfile。",
+    "keyWords": ["D5"]
+  },
+  {
+    "id": "QA-23",
+    "category": "D5",
+    "question": "concurrency 同時設了 queue: max 與 cancel-in-progress: true，團隊期待兩者並用，錯在哪？",
+    "answer": "兩者不能同時使用，否則工作流程驗證失敗；要排隊用 queue: max，要取消舊的用 cancel-in-progress。",
+    "keyWords": ["D5"]
+  },
+  {
+    "id": "QA-24",
+    "category": "D5",
+    "question": "8 小時的批次作業放在 GitHub 代管 runner，團隊以為整次執行上限 35 天就夠，錯在哪？",
+    "answer": "35 天是整次執行的上限；單一 job 在代管 runner 最長 6 小時，自管 runner 是 5 天。",
+    "keyWords": ["D5"]
+  }
+]

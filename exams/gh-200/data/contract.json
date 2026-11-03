@@ -1,0 +1,11 @@
+{
+  "code": "GH-200",
+  "domains": 5,
+  "plan": { "weeks": 4, "days": 28 },
+  "minQuestions": 70,
+  "minTerms": 120,
+  "sources": { "min": 30, "max": 60 },
+  "minFaq": 24,
+  "minQa": 24,
+  "minMustRemember": 36
+}

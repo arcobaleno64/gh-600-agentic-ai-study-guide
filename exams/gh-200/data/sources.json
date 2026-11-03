@@ -1,0 +1,332 @@
+[
+  {
+    "id": "GH200-CERT",
+    "title": "GitHub Actions",
+    "url": "https://learn.microsoft.com/en-us/credentials/certifications/github-actions/",
+    "publisher": "Microsoft Learn"
+  },
+  {
+    "id": "GH200-SG",
+    "title": "Study guide for Exam GH-200: GitHub Actions",
+    "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-200",
+    "publisher": "Microsoft Learn"
+  },
+  {
+    "id": "GH200-DOC-01",
+    "title": "Events that trigger workflows",
+    "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-02",
+    "title": "Running variations of jobs",
+    "url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/run-job-variations",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-03",
+    "title": "Workflow commands",
+    "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-04",
+    "title": "Contexts",
+    "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/contexts",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-05",
+    "title": "Use Docker service containers",
+    "url": "https://docs.github.com/en/actions/tutorials/use-containerized-services/use-docker-service-containers",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-06",
+    "title": "Dependency caching",
+    "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-07",
+    "title": "Reusing workflow configurations (reference)",
+    "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/reusing-workflow-configurations",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-08",
+    "title": "Reusing workflow",
+    "url": "https://docs.github.com/en/actions/how-tos/reuse-automations/reuse-workflows",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-09",
+    "title": "Add a status badge",
+    "url": "https://docs.github.com/en/actions/how-tos/monitor-workflows/add-a-status-badge",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-10",
+    "title": "Workflow syntax",
+    "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-11",
+    "title": "Remove workflow artifacts",
+    "url": "https://docs.github.com/en/actions/how-tos/manage-workflow-runs/remove-workflow-artifacts",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-12",
+    "title": "Store and share data",
+    "url": "https://docs.github.com/en/actions/tutorials/store-and-share-data",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-13",
+    "title": "GitHub-hosted runners",
+    "url": "https://docs.github.com/en/actions/reference/runners/github-hosted-runners",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-14",
+    "title": "Re-run workflows and jobs",
+    "url": "https://docs.github.com/en/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-15",
+    "title": "Use workflow run logs",
+    "url": "https://docs.github.com/en/actions/how-tos/monitor-workflows/use-workflow-run-logs",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-16",
+    "title": "Enable debug logging",
+    "url": "https://docs.github.com/en/actions/how-tos/monitor-workflows/enable-debug-logging",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-17",
+    "title": "Disable and enable workflows",
+    "url": "https://docs.github.com/en/actions/how-tos/manage-workflow-runs/disable-and-enable-workflows",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-18",
+    "title": "Use workflow templates",
+    "url": "https://docs.github.com/en/actions/how-tos/write-workflows/use-workflow-templates",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-19",
+    "title": "Reusing workflow configurations (concepts)",
+    "url": "https://docs.github.com/en/actions/concepts/workflows-and-actions/reusing-workflow-configurations",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-20",
+    "title": "REST: artifacts",
+    "url": "https://docs.github.com/en/rest/actions/artifacts",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-21",
+    "title": "Create workflow templates",
+    "url": "https://docs.github.com/en/actions/how-tos/reuse-automations/create-workflow-templates",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-22",
+    "title": "REST: workflow runs",
+    "url": "https://docs.github.com/en/rest/actions/workflow-runs",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-23",
+    "title": "About custom actions",
+    "url": "https://docs.github.com/en/actions/concepts/workflows-and-actions/custom-actions",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-24",
+    "title": "Metadata syntax",
+    "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/metadata-syntax",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-25",
+    "title": "Create a JavaScript action",
+    "url": "https://docs.github.com/en/actions/tutorials/create-actions/create-a-javascript-action",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-26",
+    "title": "Create a composite action",
+    "url": "https://docs.github.com/en/actions/tutorials/create-actions/create-a-composite-action",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-27",
+    "title": "Release and maintain actions",
+    "url": "https://docs.github.com/en/actions/how-tos/create-and-publish-actions/release-and-maintain-actions",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-28",
+    "title": "Publish in GitHub Marketplace",
+    "url": "https://docs.github.com/en/actions/how-tos/create-and-publish-actions/publish-in-github-marketplace",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-29",
+    "title": "Share across private repositories",
+    "url": "https://docs.github.com/en/actions/how-tos/reuse-automations/share-across-private-repositories",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-30",
+    "title": "Immutable releases",
+    "url": "https://docs.github.com/en/code-security/concepts/supply-chain-security/immutable-releases",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-31",
+    "title": "Disabling or limiting GitHub Actions for your organization",
+    "url": "https://docs.github.com/en/organizations/managing-organization-settings/disabling-or-limiting-github-actions-for-your-organization",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-32",
+    "title": "Enforcing policies for GitHub Actions in your enterprise",
+    "url": "https://docs.github.com/en/enterprise-cloud@latest/admin/enforcing-policies/enforcing-policies-for-your-enterprise/enforcing-policies-for-github-actions-in-your-enterprise",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-33",
+    "title": "Manage access to self-hosted runners",
+    "url": "https://docs.github.com/en/actions/how-tos/manage-runners/self-hosted-runners/manage-access",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-34",
+    "title": "About self-hosted runners",
+    "url": "https://docs.github.com/en/actions/concepts/runners/self-hosted-runners",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-35",
+    "title": "Self-hosted runners reference",
+    "url": "https://docs.github.com/en/actions/reference/runners/self-hosted-runners",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-36",
+    "title": "Monitor and troubleshoot self-hosted runners",
+    "url": "https://docs.github.com/en/actions/how-tos/manage-runners/self-hosted-runners/monitor-and-troubleshoot",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-37",
+    "title": "About secrets",
+    "url": "https://docs.github.com/en/actions/concepts/security/secrets",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-38",
+    "title": "Use variables",
+    "url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-variables",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-39",
+    "title": "Using secrets in GitHub Actions",
+    "url": "https://docs.github.com/en/actions/how-tos/security-for-github-actions/security-guides/using-secrets-in-github-actions",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-40",
+    "title": "REST: secrets",
+    "url": "https://docs.github.com/en/rest/actions/secrets",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-41",
+    "title": "About GitHub-hosted runners",
+    "url": "https://docs.github.com/en/actions/concepts/runners/github-hosted-runners",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-42",
+    "title": "Customize GitHub-hosted runners",
+    "url": "https://docs.github.com/en/actions/how-tos/manage-runners/github-hosted-runners/customize-runners",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-43",
+    "title": "Manage larger runners",
+    "url": "https://docs.github.com/en/actions/how-tos/manage-runners/larger-runners/manage-larger-runners",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-44",
+    "title": "Secure use reference",
+    "url": "https://docs.github.com/en/actions/reference/security/secure-use",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-45",
+    "title": "Configuring OpenID Connect in cloud providers",
+    "url": "https://docs.github.com/en/actions/how-tos/security-for-github-actions/security-hardening-your-deployments/configuring-openid-connect-in-cloud-providers",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-46",
+    "title": "Manage environments",
+    "url": "https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-47",
+    "title": "About artifact attestations",
+    "url": "https://docs.github.com/en/actions/concepts/security/artifact-attestations",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-48",
+    "title": "Authenticate with GITHUB_TOKEN",
+    "url": "https://docs.github.com/en/actions/tutorials/authenticate-with-github_token",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-49",
+    "title": "OIDC reference",
+    "url": "https://docs.github.com/en/actions/reference/security/oidc",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-50",
+    "title": "Use artifact attestations",
+    "url": "https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-51",
+    "title": "Actions limits",
+    "url": "https://docs.github.com/en/actions/reference/limits",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-52",
+    "title": "GITHUB_TOKEN (concepts)",
+    "url": "https://docs.github.com/en/actions/concepts/security/github_token",
+    "publisher": "GitHub Docs"
+  },
+  {
+    "id": "GH200-DOC-53",
+    "title": "Billing for GitHub Actions",
+    "url": "https://docs.github.com/en/billing/concepts/product-billing/github-actions",
+    "publisher": "GitHub Docs"
+  }
+]

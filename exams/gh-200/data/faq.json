@@ -1,0 +1,170 @@
+[
+  {
+    "id": "FAQ-01",
+    "category": "考試資訊",
+    "question": "GH-200 對應哪個認證？",
+    "answer": "GitHub Actions 認證；本站以 Microsoft Learn 的認證頁與 Study Guide 為範圍依據。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-02",
+    "category": "考試資訊",
+    "question": "考試時間與及格分數是多少？",
+    "answer": "資料記載為 100 分鐘、及格分數 700；正式應考前請重新核對官方認證頁。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-03",
+    "category": "考試資訊",
+    "question": "考試提供哪些語言？",
+    "answer": "English、Spanish、Portuguese (Brazil)、Korean、Japanese。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-04",
+    "category": "考試資訊",
+    "question": "這個網站是官方出版品嗎？",
+    "answer": "不是。本站是繁體中文原創學習整理，不含實際考題、考古題或外洩題庫。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-05",
+    "category": "考試資訊",
+    "question": "五個領域與權重是什麼？",
+    "answer": "D1 撰寫與管理工作流程、D4 管理企業的 GitHub Actions：各 20–25%；D2 使用與疑難排解、D3 撰寫與維護 actions：各 15–20%；D5 保護與最佳化：10–15%。技能範圍標示為 2026 年 1 月版。",
+    "keyWords": []
+  },
+  {
+    "id": "FAQ-06",
+    "category": "D1",
+    "question": "排程工作流程為什麼一直沒有執行？",
+    "answer": "schedule 只在預設分支的檔案上執行；檔案還在功能分支時不會被排程觸發。",
+    "keyWords": ["D1"]
+  },
+  {
+    "id": "FAQ-07",
+    "category": "D1",
+    "question": "pull_request 事件的 GITHUB_SHA 是哪個 commit？",
+    "answer": "PR 的合併 commit，測的是合併後的結果；schedule 與 workflow_run 則是預設分支的最後 commit。",
+    "keyWords": ["D1"]
+  },
+  {
+    "id": "FAQ-08",
+    "category": "D1",
+    "question": "inputs 與 github.event.inputs 有什麼差別？",
+    "answer": "inputs 保留 boolean 型別；github.event.inputs 會把 boolean 轉成字串，所以兩者在條件上並不等價。",
+    "keyWords": ["D1"]
+  },
+  {
+    "id": "FAQ-09",
+    "category": "D1",
+    "question": "矩陣的 include 會怎麼處理？",
+    "answer": "加進所有不衝突的原始組合；會覆寫既有值時成為獨立的新組合。每次執行最多 256 個 job。",
+    "keyWords": ["D1"]
+  },
+  {
+    "id": "FAQ-10",
+    "category": "D1",
+    "question": "job 怎麼連到服務容器？",
+    "answer": "job 在容器內時用服務標籤當主機名稱，不需 ports；直接在 runner 上時用 localhost 並對應 ports。",
+    "keyWords": ["D1"]
+  },
+  {
+    "id": "FAQ-11",
+    "category": "D1",
+    "question": "快取可以還原哪些分支的內容？",
+    "answer": "目前分支與預設分支；PR 還可還原基底分支。兄弟分支與子分支拿不到。",
+    "keyWords": ["D1"]
+  },
+  {
+    "id": "FAQ-12",
+    "category": "D2",
+    "question": "重新執行有什麼限制？",
+    "answer": "初次執行後 30 天內、最多重跑 50 次，沿用原本的 GITHUB_SHA 與 GITHUB_REF，不會拿到新 commit。",
+    "keyWords": ["D2"]
+  },
+  {
+    "id": "FAQ-13",
+    "category": "D2",
+    "question": "怎麼取得 runner 層級的診斷記錄？",
+    "answer": "設定 ACTIONS_RUNNER_DEBUG 為 true，或重新執行時勾選 Enable debug logging，再下載封存檔看 runner-diagnostic-logs。",
+    "keyWords": ["D2"]
+  },
+  {
+    "id": "FAQ-14",
+    "category": "D2",
+    "question": "用 REST API 下載成品要注意什麼？",
+    "answer": "archive_format 必須是 zip，回應是 302，Location 的網址只有 1 分鐘有效，要立刻跟著抓。",
+    "keyWords": ["D2"]
+  },
+  {
+    "id": "FAQ-15",
+    "category": "D2",
+    "question": "怎麼分辨該用可重用工作流程、複合 action 還是起始工作流程？",
+    "answer": "要集中維護整個工作流程用可重用工作流程（job 層級）；要封裝一組步驟用複合 action（步驟層級）；要給新專案一個起點用起始工作流程（複製後獨立）。",
+    "keyWords": ["D2"]
+  },
+  {
+    "id": "FAQ-16",
+    "category": "D3",
+    "question": "三種 action 類型的差別？",
+    "answer": "Docker 容器 action 只能在 Linux；JavaScript action 跨 Linux、macOS、Windows；複合 action 把多個步驟包起來，跑在呼叫它的 job 的機器上。",
+    "keyWords": ["D3"]
+  },
+  {
+    "id": "FAQ-17",
+    "category": "D3",
+    "question": "JavaScript action 為什麼不該提交 node_modules？",
+    "answer": "官方說提交可能造成問題；應用 rollup.js 或 @vercel/ncc 打包成單一檔案並提交，main 指向它。",
+    "keyWords": ["D3"]
+  },
+  {
+    "id": "FAQ-18",
+    "category": "D3",
+    "question": "發佈到 Marketplace 需要哪些條件？",
+    "answer": "公開 repository、根目錄單一 action.yml、name 唯一、帳號接受開發者協議；符合條件即立即發佈，GitHub 不先審核。",
+    "keyWords": ["D3"]
+  },
+  {
+    "id": "FAQ-19",
+    "category": "D4",
+    "question": "怎麼限制組織能使用的 actions？",
+    "answer": "在 Actions 政策選限制模式，勾選 GitHub 建立的、已驗證建立者或指定樣式；樣式前加驚嘆號表示封鎖，最多 1000 個。",
+    "keyWords": ["D4"]
+  },
+  {
+    "id": "FAQ-20",
+    "category": "D4",
+    "question": "自管 runner 的更新與排隊有哪些時間？",
+    "answer": "停用自動更新後要在 30 天內更新；沒被接起 60 秒會重新排隊；沒有符合的 runner 排隊超過 24 小時失敗。",
+    "keyWords": ["D4"]
+  },
+  {
+    "id": "FAQ-21",
+    "category": "D4",
+    "question": "secrets 和 variables 設在哪裡？有什麼優先順序？",
+    "answer": "組織、repository、環境三層；同名時環境優先於 repository 與組織；variables 用 vars context 讀取。",
+    "keyWords": ["D4"]
+  },
+  {
+    "id": "FAQ-22",
+    "category": "D5",
+    "question": "怎麼防範 script injection？",
+    "answer": "把運算式的值設成環境變數再在指令碼引用，或改用 action 傳引數；並限制 permissions。",
+    "keyWords": ["D5"]
+  },
+  {
+    "id": "FAQ-23",
+    "category": "D5",
+    "question": "OIDC 要做哪些設定？",
+    "answer": "工作流程加 id-token: write，並在雲端端至少定義一個信任條件（例如限定 sub）；id-token: write 不給資源寫入權限。",
+    "keyWords": ["D5"]
+  },
+  {
+    "id": "FAQ-24",
+    "category": "D5",
+    "question": "固定 SHA 與使用標籤有什麼差別？",
+    "answer": "標籤可被移動或刪除，完整 commit SHA 不會；要確認 SHA 來自原 repository 而非 fork。",
+    "keyWords": ["D5"]
+  }
+]

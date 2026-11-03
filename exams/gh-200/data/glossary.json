@@ -1,0 +1,945 @@
+{
+  "version": "1.0.0",
+  "categories": [
+    {
+      "id": "D1",
+      "title": "撰寫與管理工作流程",
+      "terms": [
+        {
+          "id": "D1-T01",
+          "term": "schedule",
+          "explanation": "以 cron 設定的定時觸發，只在預設分支的檔案上執行；最短間隔每 5 分鐘，高負載時可能延遲，公開 repository 60 天無活動會停用。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T02",
+          "term": "workflow_dispatch",
+          "explanation": "手動觸發，可定義 inputs；只在預設分支的檔案上可用，最多 25 個頂層 input、資料量不超過 65,535 個字元。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T03",
+          "term": "workflow_call",
+          "explanation": "讓工作流程可被其他工作流程呼叫的事件，在 inputs 與 secrets 底下宣告可接受的參數。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T04",
+          "term": "repository_dispatch",
+          "explanation": "由外部以 API 送出的自訂事件；event_type 最多 100 個字元，client_payload 最多 10 個頂層屬性。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T05",
+          "term": "pull_request",
+          "explanation": "PR 事件，預設只在 opened、synchronize、reopened 執行；GITHUB_SHA 是 PR 的合併 commit。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T06",
+          "term": "pull_request_target",
+          "explanation": "在基底 repository 預設分支的 context 執行的特權觸發條件，可取得 secrets；不要搭配 checkout 不受信任的 PR 程式碼。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T07",
+          "term": "GITHUB_SHA",
+          "explanation": "觸發執行的 commit；pull_request 是合併 commit，schedule 與 workflow_run 是預設分支的最後 commit。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T08",
+          "term": "GITHUB_REF",
+          "explanation": "觸發執行的 ref；pull_request 是 refs/pull/編號/merge，schedule 是預設分支。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T09",
+          "term": "permissions",
+          "explanation": "設定 GITHUB_TOKEN 權限，可放在工作流程或 job 層；只要明確設定其中一項，沒列出的權限都變成 none。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T10",
+          "term": "inputs context",
+          "explanation": "保留 boolean 型別的輸入值 context，可直接用在條件。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T11",
+          "term": "github.event.inputs",
+          "explanation": "舊式輸入值 context，會把 boolean 轉成字串，所以與 false 比較永遠不成立。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T12",
+          "term": "needs",
+          "explanation": "建立 job 相依；被需要的 job 失敗或略過時，依賴它的 job 也會被略過。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T13",
+          "term": "always()",
+          "explanation": "狀態檢查函式，用在 job 的 if 時，無論相依 job 結果如何都執行。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T14",
+          "term": "context 可用位置",
+          "explanation": "不同位置可用的 context 不同，例如 jobs.<id>.if 可用 github、needs、vars、inputs，不含 secrets 與 env。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T15",
+          "term": "vars context",
+          "explanation": "讀取組織、repository、環境層級設定變數的 context，未設定時是空字串。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T16",
+          "term": "steps outcome",
+          "explanation": "套用 continue-on-error 之前的步驟結果。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T17",
+          "term": "steps conclusion",
+          "explanation": "套用 continue-on-error 之後的步驟結果。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T18",
+          "term": "strategy.matrix",
+          "explanation": "依變數組合展開成多個 job；每次執行最多 256 個 job。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T19",
+          "term": "include",
+          "explanation": "矩陣的擴充：加進所有不衝突的原始組合，會覆寫既有值時成為獨立的新組合。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T20",
+          "term": "exclude",
+          "explanation": "從矩陣移除特定組合，可只寫部分欄位比對。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T21",
+          "term": "fail-fast",
+          "explanation": "啟用時，一個 continue-on-error 為 false 的組合失敗，所有進行中與排隊的 job 都被取消。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T22",
+          "term": "max-parallel",
+          "explanation": "限制同時執行的矩陣 job 數量。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T23",
+          "term": "服務容器 services",
+          "explanation": "在 job 內宣告的相依服務；job 在容器內用標籤當主機，直接在 runner 上用 localhost 並設定 ports。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T24",
+          "term": "快取鍵 key",
+          "explanation": "快取的識別；查找順序為完全相同、key 前綴、restore-keys；快取不可變，要更新就用新鍵。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T25",
+          "term": "restore-keys",
+          "explanation": "找不到完全相同的 key 時依序比對的備援鍵。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T26",
+          "term": "成品 artifact",
+          "explanation": "在 job 之間或執行之後保存的檔案；v4 不可變，預設保留 90 天。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T27",
+          "term": "GITHUB_ENV",
+          "explanation": "寫入後讓之後的步驟取得環境變數；寫入的那一步看不到。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T28",
+          "term": "GITHUB_OUTPUT",
+          "explanation": "寫入步驟輸出，步驟需有 id，用 steps.<id>.outputs 讀取。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        },
+        {
+          "id": "D1-T29",
+          "term": "GITHUB_STEP_SUMMARY",
+          "explanation": "寫入工作摘要的 Markdown 檔，每個步驟上限 1 MiB。",
+          "exams": ["GH-200"],
+          "category": "撰寫與管理工作流程"
+        }
+      ]
+    },
+    {
+      "id": "D2",
+      "title": "使用與疑難排解工作流程",
+      "terms": [
+        {
+          "id": "D2-T01",
+          "term": "Search logs",
+          "explanation": "日誌頁的搜尋，只搜尋已展開的步驟。",
+          "exams": ["GH-200"],
+          "category": "使用與疑難排解工作流程"
+        },
+        {
+          "id": "D2-T02",
+          "term": "Download log archive",
+          "explanation": "從日誌頁下載封存檔；只重跑部分 job 時，封存檔只含重跑的 job。",
+          "exams": ["GH-200"],
+          "category": "使用與疑難排解工作流程"
+        },
+        {
+          "id": "D2-T03",
+          "term": "gh run view",
+          "explanation": "用命令列看執行日誌；--log 看整次，--log-failed 只看失敗步驟。",
+          "exams": ["GH-200"],
+          "category": "使用與疑難排解工作流程"
+        },
+        {
+          "id": "D2-T04",
+          "term": "ACTIONS_STEP_DEBUG",
+          "explanation": "設為 true 讓步驟日誌更詳細，並顯示 ::debug:: 訊息。",
+          "exams": ["GH-200"],
+          "category": "使用與疑難排解工作流程"
+        },
+        {
+          "id": "D2-T05",
+          "term": "ACTIONS_RUNNER_DEBUG",
+          "explanation": "設為 true 啟用 runner 診斷記錄，封存檔多出 runner-diagnostic-logs 資料夾。",
+          "exams": ["GH-200"],
+          "category": "使用與疑難排解工作流程"
+        },
+        {
+          "id": "D2-T06",
+          "term": "Enable debug logging",
+          "explanation": "重新執行時勾選，同時啟用 runner 診斷與步驟除錯；CLI 用 --debug。",
+          "exams": ["GH-200"],
+          "category": "使用與疑難排解工作流程"
+        },
+        {
+          "id": "D2-T07",
+          "term": "runner.debug",
+          "explanation": "context，可讓步驟只在除錯記錄啟用時執行。",
+          "exams": ["GH-200"],
+          "category": "使用與疑難排解工作流程"
+        },
+        {
+          "id": "D2-T08",
+          "term": "Re-run failed jobs",
+          "explanation": "只重跑失敗的 job；沿用原本的 GITHUB_SHA 與 GITHUB_REF。",
+          "exams": ["GH-200"],
+          "category": "使用與疑難排解工作流程"
+        },
+        {
+          "id": "D2-T09",
+          "term": "gh run rerun",
+          "explanation": "命令列重跑；加 --failed 只重跑失敗的 job，加 --job 重跑單一 job。",
+          "exams": ["GH-200"],
+          "category": "使用與疑難排解工作流程"
+        },
+        {
+          "id": "D2-T10",
+          "term": "重新執行的限制",
+          "explanation": "初次執行後 30 天內、最多重跑 50 次；工作流程被停用時不能重跑。",
+          "exams": ["GH-200"],
+          "category": "使用與疑難排解工作流程"
+        },
+        {
+          "id": "D2-T11",
+          "term": "成品下載端點",
+          "explanation": "REST 下載成品，archive_format 必須是 zip，回應 302 導向。",
+          "exams": ["GH-200"],
+          "category": "使用與疑難排解工作流程"
+        },
+        {
+          "id": "D2-T12",
+          "term": "Location 網址",
+          "explanation": "下載導向的網址，只有 1 分鐘有效。",
+          "exams": ["GH-200"],
+          "category": "使用與疑難排解工作流程"
+        },
+        {
+          "id": "D2-T13",
+          "term": "expired 與 expires_at",
+          "explanation": "成品物件的欄位，用來判斷是否已被保留期清掉。",
+          "exams": ["GH-200"],
+          "category": "使用與疑難排解工作流程"
+        },
+        {
+          "id": "D2-T14",
+          "term": "gh run delete",
+          "explanation": "命令列刪除整次執行；刪除執行時它的成品也一併刪除。",
+          "exams": ["GH-200"],
+          "category": "使用與疑難排解工作流程"
+        },
+        {
+          "id": "D2-T15",
+          "term": "可重用工作流程",
+          "explanation": "在 job 層級用 uses 呼叫整個工作流程檔，可用 secrets，最多 10 層，不能發佈到 Marketplace。",
+          "exams": ["GH-200"],
+          "category": "使用與疑難排解工作流程"
+        },
+        {
+          "id": "D2-T16",
+          "term": "複合 action",
+          "explanation": "在步驟層級呼叫的一組步驟，跑在呼叫它的 job 的機器上，不能直接用 secrets。",
+          "exams": ["GH-200"],
+          "category": "使用與疑難排解工作流程"
+        },
+        {
+          "id": "D2-T17",
+          "term": "起始工作流程",
+          "explanation": "新工作流程的起點範本，複製後就是自己的獨立檔案。",
+          "exams": ["GH-200"],
+          "category": "使用與疑難排解工作流程"
+        },
+        {
+          "id": "D2-T18",
+          "term": "workflow-templates",
+          "explanation": "組織 .github repository 中放起始工作流程範本的目錄。",
+          "exams": ["GH-200"],
+          "category": "使用與疑難排解工作流程"
+        },
+        {
+          "id": "D2-T19",
+          "term": ".properties.json",
+          "explanation": "範本的中繼資料檔，name 與 description 必填。",
+          "exams": ["GH-200"],
+          "category": "使用與疑難排解工作流程"
+        },
+        {
+          "id": "D2-T20",
+          "term": "$default-branch",
+          "explanation": "範本內的佔位符，建立時被換成 repository 的預設分支名。",
+          "exams": ["GH-200"],
+          "category": "使用與疑難排解工作流程"
+        },
+        {
+          "id": "D2-T21",
+          "term": "Disable workflow",
+          "explanation": "停用工作流程使其不再觸發；不會取消進行中的執行，停用期間不能重跑。",
+          "exams": ["GH-200"],
+          "category": "使用與疑難排解工作流程"
+        },
+        {
+          "id": "D2-T22",
+          "term": "github.event_name",
+          "explanation": "辨認這次執行由哪個事件觸發的欄位。",
+          "exams": ["GH-200"],
+          "category": "使用與疑難排解工作流程"
+        }
+      ]
+    },
+    {
+      "id": "D3",
+      "title": "撰寫與維護 actions",
+      "terms": [
+        {
+          "id": "D3-T01",
+          "term": "Docker 容器 action",
+          "explanation": "runs.using 為 docker，只能在 Linux runner 執行，啟動較慢。",
+          "exams": ["GH-200"],
+          "category": "撰寫與維護 actions"
+        },
+        {
+          "id": "D3-T02",
+          "term": "JavaScript action",
+          "explanation": "runs.using 為 node20 或 node24，可跨 Linux、macOS、Windows，啟動快。",
+          "exams": ["GH-200"],
+          "category": "撰寫與維護 actions"
+        },
+        {
+          "id": "D3-T03",
+          "term": "composite（runs.using）",
+          "explanation": "把多個步驟包成一個 action，每個有 run 的步驟必須指定 shell。",
+          "exams": ["GH-200"],
+          "category": "撰寫與維護 actions"
+        },
+        {
+          "id": "D3-T04",
+          "term": "action.yml",
+          "explanation": "action 的中繼資料檔，也可命名為 action.yaml，定義輸入、輸出與 runs。",
+          "exams": ["GH-200"],
+          "category": "撰寫與維護 actions"
+        },
+        {
+          "id": "D3-T05",
+          "term": "name、description、runs",
+          "explanation": "action.yml 頂層必填的三個鍵；author 與 inputs 是選填。",
+          "exams": ["GH-200"],
+          "category": "撰寫與維護 actions"
+        },
+        {
+          "id": "D3-T06",
+          "term": "main",
+          "explanation": "JavaScript action 必填，指向執行的檔案，通常是打包後的 dist/index.js。",
+          "exams": ["GH-200"],
+          "category": "撰寫與維護 actions"
+        },
+        {
+          "id": "D3-T07",
+          "term": "pre 與 post",
+          "explanation": "JavaScript action 在 main 前後執行的檔案；pre-if 與 post-if 預設都是 always()。",
+          "exams": ["GH-200"],
+          "category": "撰寫與維護 actions"
+        },
+        {
+          "id": "D3-T08",
+          "term": "@actions/core",
+          "explanation": "toolkit 套件，提供輸入輸出、結束狀態與除錯訊息，例如 core.setOutput。",
+          "exams": ["GH-200"],
+          "category": "撰寫與維護 actions"
+        },
+        {
+          "id": "D3-T09",
+          "term": "@actions/github",
+          "explanation": "toolkit 套件，回傳已驗證的 Octokit 用戶端並可存取 context。",
+          "exams": ["GH-200"],
+          "category": "撰寫與維護 actions"
+        },
+        {
+          "id": "D3-T10",
+          "term": "core.setFailed",
+          "explanation": "記錄訊息並設定失敗結束碼，讓 action 失敗。",
+          "exams": ["GH-200"],
+          "category": "撰寫與維護 actions"
+        },
+        {
+          "id": "D3-T11",
+          "term": "rollup.js 與 @vercel/ncc",
+          "explanation": "把程式碼與相依套件打包成單一檔案的工具，取代提交 node_modules。",
+          "exams": ["GH-200"],
+          "category": "撰寫與維護 actions"
+        },
+        {
+          "id": "D3-T12",
+          "term": "inputs 的 required",
+          "explanation": "只是標記，缺值時不會自動報錯，action 要自己檢查。",
+          "exams": ["GH-200"],
+          "category": "撰寫與維護 actions"
+        },
+        {
+          "id": "D3-T13",
+          "term": "inputs 的 default",
+          "explanation": "工作流程沒提供該輸入時使用的字串。",
+          "exams": ["GH-200"],
+          "category": "撰寫與維護 actions"
+        },
+        {
+          "id": "D3-T14",
+          "term": "deprecationMessage",
+          "explanation": "輸入被使用時以警告記錄的訊息。",
+          "exams": ["GH-200"],
+          "category": "撰寫與維護 actions"
+        },
+        {
+          "id": "D3-T15",
+          "term": "複合 action 的 value",
+          "explanation": "複合 action 輸出必填的鍵，指向某個步驟的輸出。",
+          "exams": ["GH-200"],
+          "category": "撰寫與維護 actions"
+        },
+        {
+          "id": "D3-T16",
+          "term": "github.action_path",
+          "explanation": "指向 action 所在目錄的路徑，可用來呼叫目錄內的指令碼。",
+          "exams": ["GH-200"],
+          "category": "撰寫與維護 actions"
+        },
+        {
+          "id": "D3-T17",
+          "term": "branding",
+          "explanation": "選填，控制 Marketplace 的圖示與顏色。",
+          "exams": ["GH-200"],
+          "category": "撰寫與維護 actions"
+        },
+        {
+          "id": "D3-T18",
+          "term": "私有 action 共用",
+          "explanation": "在私有 repository 的 Settings → Actions → General → Access 開放給其他 repository。",
+          "exams": ["GH-200"],
+          "category": "撰寫與維護 actions"
+        },
+        {
+          "id": "D3-T19",
+          "term": "GitHub Marketplace 發佈",
+          "explanation": "要公開 repository、根目錄單一 action.yml、name 唯一，且帳號接受開發者協議；符合條件即立即發佈，不經 GitHub 審核。",
+          "exams": ["GH-200"],
+          "category": "撰寫與維護 actions"
+        },
+        {
+          "id": "D3-T20",
+          "term": "主版本標籤",
+          "explanation": "如 v1，要指向最新且相容的 commit，使用者釘在 v1 就能取得相容更新。",
+          "exams": ["GH-200"],
+          "category": "撰寫與維護 actions"
+        },
+        {
+          "id": "D3-T21",
+          "term": "immutable release",
+          "explanation": "發佈後標籤與資產不能更動；鎖定的標籤不能移動，也不能強制推送。",
+          "exams": ["GH-200"],
+          "category": "撰寫與維護 actions"
+        },
+        {
+          "id": "D3-T22",
+          "term": "語意化版本",
+          "explanation": "以 v1.1.3 這類標籤建立 release，並維持主、次版本標籤。",
+          "exams": ["GH-200"],
+          "category": "撰寫與維護 actions"
+        }
+      ]
+    },
+    {
+      "id": "D4",
+      "title": "管理企業的 GitHub Actions",
+      "terms": [
+        {
+          "id": "D4-T01",
+          "term": "允許的 actions 政策",
+          "explanation": "組織可選全部啟用、停用，或限制為組織自己的加選定來源。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T02",
+          "term": "只允許組織自己的 actions",
+          "explanation": "會封鎖所有 GitHub 作者的 actions，包含 actions/checkout。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T03",
+          "term": "樣式語法",
+          "explanation": "OWNER/REPO@TAG-OR-SHA；* 為萬用字元，! 開頭表示封鎖，最多 1000 個樣式。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T04",
+          "term": "要求固定完整 commit SHA",
+          "explanation": "適用於組織與 GitHub 作者的 actions；可重用工作流程仍可用標籤。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T05",
+          "term": "本機 action",
+          "explanation": "以 ./ 路徑參照的 action，不受企業或組織 Actions 政策限制。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T06",
+          "term": "企業政策覆蓋",
+          "explanation": "企業啟用的政策下層可選擇停用；企業停用的政策下層不能再啟用。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T07",
+          "term": "fork PR 核准政策",
+          "explanation": "公開 repository 的外部協作者可設需要核准；預設所有首次貢獻者需核准，pull_request_target 一律執行。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T08",
+          "term": "預設 GITHUB_TOKEN 權限",
+          "explanation": "新組織對 contents 與 packages 預設唯讀；企業更嚴格時組織不能選更寬鬆。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T09",
+          "term": "建立與核准 PR 設定",
+          "explanation": "Allow GitHub Actions to create and approve pull requests，預設停用。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T10",
+          "term": "保留期",
+          "explanation": "預設 90 天，公開 repository 可設 1–90 天，私有與 internal 可設 1–400 天。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T11",
+          "term": "快取保留與容量",
+          "explanation": "預設 7 天與每個 repository 10 GB；企業可設上限。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T12",
+          "term": "自訂映像",
+          "explanation": "只能搭配 larger runners 使用，儲存另計入 Actions 儲存。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T13",
+          "term": "larger runners",
+          "explanation": "有更多核心或 GPU 的 GitHub 代管 runner，用於 Team 與 Enterprise Cloud。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T14",
+          "term": "靜態 IP 位址範圍",
+          "explanation": "larger runners 的選用功能，需 Enterprise Cloud，macOS 不支援。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T15",
+          "term": "最大並行數",
+          "explanation": "larger runners 同時可執行的 job 上限。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T16",
+          "term": "自管 runner",
+          "explanation": "自己部署與維護的 runner，job 之間狀態可能殘留，有 repository、組織、企業三種範圍。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T17",
+          "term": "自管 runner 連線需求",
+          "explanation": "出站 HTTPS 443、至少 70 kbps，並連到 github.com、api.github.com 等網域；使用 IP 允許清單要加入 runner 的 IP。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T18",
+          "term": "runner 自動更新",
+          "explanation": "預設啟用；停用後必須在新版釋出後 30 天內更新，否則 GitHub 不再排 job 給它。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T19",
+          "term": "暫時性 runner",
+          "explanation": "註冊時用 --ephemeral，執行一個 job 後取消註冊，日誌要轉送外部。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T20",
+          "term": "runner 群組",
+          "explanation": "組織有預設群組；群組預設只開放私有 repository，可覆寫。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T21",
+          "term": "job 如何選 runner",
+          "explanation": "標籤與群組都符合的線上閒置 runner；60 秒沒接起會重新排隊，排隊超過 24 小時失敗。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T22",
+          "term": "runner 狀態",
+          "explanation": "Idle 為閒置、Active 為執行中、Offline 為未連線。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T23",
+          "term": "_diag 日誌",
+          "explanation": "runner 安裝目錄中的日誌：Runner_、Worker_、SelfUpdate。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T24",
+          "term": "config --check",
+          "explanation": "檢查網路連線，需搭配 --url 與 --pat。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T25",
+          "term": "secrets 層級",
+          "explanation": "組織、repository、環境三層；同名時環境優先於 repository 與組織。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T26",
+          "term": "環境 secret 與審核",
+          "explanation": "啟用必要審核者時，核准前 job 拿不到環境 secret。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T27",
+          "term": "variables",
+          "explanation": "設定變數，用 vars context 讀取，不遮蔽，不要放機密。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T28",
+          "term": "secret 的限制",
+          "explanation": "不能直接用在 if；fork 與 Dependabot 觸發的工作流程拿不到；不會自動傳給可重用工作流程。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T29",
+          "term": "REST 設定 secret",
+          "explanation": "用 LibSodium 以公鑰加密，PUT 時帶 encrypted_value 與 key_id。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        },
+        {
+          "id": "D4-T30",
+          "term": "超過 48 KB 的 secret",
+          "explanation": "官方做法是用 gpg 加密檔案並把密碼存成 secret；日誌不會被遮蔽。",
+          "exams": ["GH-200"],
+          "category": "管理企業的 GitHub Actions"
+        }
+      ]
+    },
+    {
+      "id": "D5",
+      "title": "保護與最佳化自動化",
+      "terms": [
+        {
+          "id": "D5-T01",
+          "term": "script injection",
+          "explanation": "${{ }} 在 shell 執行前被替換成文字，不受信任的值可能變成指令；用中間環境變數或改用 action 防範。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T02",
+          "term": "中間環境變數",
+          "explanation": "把運算式的值設成 env，指令碼內以 $NAME 引用，值不會成為指令碼語法。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T03",
+          "term": "環境 environment",
+          "explanation": "含保護規則、secrets 與 variables 的部署目標；job 通過規則才會執行。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T04",
+          "term": "必要審核者",
+          "explanation": "最多 6 個人或團隊，其中一人核准即可。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T05",
+          "term": "防止自我審核",
+          "explanation": "阻止使用者核准自己觸發的執行。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T06",
+          "term": "等待計時器",
+          "explanation": "job 在環境上繼續之前的延遲，以分鐘計。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T07",
+          "term": "部署分支與標籤",
+          "explanation": "限制哪些分支與標籤可以部署到該環境，兩者分別設定。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T08",
+          "term": "管理員繞過",
+          "explanation": "預設管理員可繞過環境保護規則，可在設定中取消。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T09",
+          "term": "Verified creator",
+          "explanation": "Marketplace 上身分已驗證的徽章，是有用訊號，但不能取代檢視原始碼。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T10",
+          "term": "完整 commit SHA 固定",
+          "explanation": "標籤可被移動或刪除，SHA 不會；要確認 SHA 來自原 repository 而非 fork。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T11",
+          "term": "lockfile",
+          "explanation": "鎖定工作流程相依項目的確切 commit，官方說對採用者取代 SHA 固定。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T12",
+          "term": "Dependabot 與 actions",
+          "explanation": "version updates 開 PR 更新 actions；alerts 不涵蓋釘在 SHA 的 actions。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T13",
+          "term": "CODEOWNERS",
+          "explanation": "把 .github/workflows 加入，讓工作流程修改需指定審核者核准。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T14",
+          "term": "OpenSSF Scorecards",
+          "explanation": "自動標出風險做法的工具，檢查包含 script injection、權杖權限與固定版本。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T15",
+          "term": "GITHUB_TOKEN 生命週期",
+          "explanation": "每個 job 開始建立；代管 runner 最長 6 小時，自管 runner 最多更新到 24 小時。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T16",
+          "term": "GITHUB_TOKEN 與 PAT",
+          "explanation": "前者限單一 repository 且通常不觸發新執行；跨 repository 或需觸發時用 GitHub App 權杖或 PAT。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T17",
+          "term": "OIDC",
+          "explanation": "以短期權杖取代雲端長期憑證；雲端端必須定義信任條件。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T18",
+          "term": "id-token: write",
+          "explanation": "允許工作流程請求 OIDC 權杖，不給任何資源的寫入權限。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T19",
+          "term": "sub claim",
+          "explanation": "OIDC 權杖的主體，預設如 repo:組織/儲存庫:environment:環境名稱，可用 REST 自訂。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T20",
+          "term": "OIDC 簽發者與受眾",
+          "explanation": "簽發者是 token.actions.githubusercontent.com；預設受眾是 repository 擁有者的網址。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T21",
+          "term": "artifact attestation",
+          "explanation": "對建置來源的簽章聲明，用 actions/attest 產生，需 id-token、contents、attestations 權限。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T22",
+          "term": "SLSA Build Level",
+          "explanation": "單獨使用證明為 Level 2；在共用可重用工作流程建置可達 Level 3。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T23",
+          "term": "gh attestation verify",
+          "explanation": "消費者驗證成品證明的指令，搭配 -R 組織/儲存庫。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T24",
+          "term": "concurrency",
+          "explanation": "同群組只同時執行一個；群組名稱不分大小寫，cancel-in-progress 取消執行中的。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T25",
+          "term": "queue: max",
+          "explanation": "最多 100 個等待中的執行，不能與 cancel-in-progress: true 同時使用。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T26",
+          "term": "job 時間上限",
+          "explanation": "GitHub 代管 runner 6 小時、自管 runner 5 天；整次執行最長 35 天。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        },
+        {
+          "id": "D5-T27",
+          "term": "方案內含用量",
+          "explanation": "是金額而非分鐘數；標準代管 runner 在公開 repository 免費，larger runners 要計費。",
+          "exams": ["GH-200"],
+          "category": "保護與最佳化自動化"
+        }
+      ]
+    }
+  ]
+}

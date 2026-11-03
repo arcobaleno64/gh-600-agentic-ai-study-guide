@@ -1,0 +1,94 @@
+{
+  "mustRemember": {
+    "GH-200": [
+      "schedule、workflow_dispatch、workflow_run 等事件只在預設分支的工作流程檔上觸發。",
+      "pull_request 的 GITHUB_SHA 是 PR 合併 commit；schedule 與 workflow_run 回到預設分支的最後 commit。",
+      "schedule 最短間隔是每 5 分鐘一次，高負載時可能延遲，公開 repository 60 天無活動會停用。",
+      "inputs context 保留 boolean 型別；github.event.inputs 會把 boolean 轉成字串。",
+      "workflow_dispatch 最多 25 個頂層 input，資料量不超過 65,535 個字元。",
+      "GITHUB_TOKEN 引發的事件通常不建立新執行，例外是 workflow_dispatch 與 repository_dispatch。",
+      "jobs.<id>.if 可用 github、needs、vars、inputs；secrets 不能直接用在 if。",
+      "outcome 是套用 continue-on-error 之前的結果，conclusion 是之後的結果。",
+      "矩陣的 include 遇到衝突會成為獨立組合；每次執行最多 256 個 job。",
+      "job 在容器內時連服務用標籤當主機；直接在 runner 上才用 localhost 加 ports。",
+      "快取鍵查找順序：完全相同、key 前綴、restore-keys；快取不可變，預設 10 GB。",
+      "一次執行可還原目前分支與預設分支的快取，PR 還可還原基底分支的。",
+      "upload-artifact v4 的成品不可變，要為每個階段用新名稱；預設保留 90 天。",
+      "GITHUB_ENV 寫入的值，之後的步驟看得到、寫入的那一步看不到。",
+      "重新執行沿用原本的 GITHUB_SHA 與 GITHUB_REF，不會拿到新 commit。",
+      "初次執行後 30 天內可重跑，一次執行最多重跑 50 次。",
+      "ACTIONS_RUNNER_DEBUG 多出 runner-diagnostic-logs；ACTIONS_STEP_DEBUG 讓步驟日誌更詳細；兩者同時存在時 secret 優先。",
+      "REST 下載成品與日誌回 302，Location 網址只有 1 分鐘有效。",
+      "刪除整次工作流程執行時，它的成品會一起刪除。",
+      "可重用工作流程在 job 層級呼叫，可用 secrets；複合 action 在步驟層級，secrets 要用 input 傳入。",
+      "組織起始工作流程放在 .github repository 的 workflow-templates，每個範本附同名 .properties.json。",
+      "Docker 容器 action 只能在 Linux runner 執行；JavaScript action 跨三種作業系統。",
+      "不提交 node_modules，用 rollup.js 或 @vercel/ncc 打包成單一檔案。",
+      "複合 action 有 run 的步驟必須指定 shell；輸出必須有 value。",
+      "required: true 的 input 缺值時不會自動報錯，action 要自己檢查。",
+      "發佈 Marketplace 要公開 repository、根目錄單一 action.yml、name 唯一，且不經 GitHub 審核。",
+      "主版本標籤如 v1 要指向最新相容的 commit；immutable release 的標籤不能移動。",
+      "只允許組織自己的 actions 會連 actions/checkout 一起封鎖；樣式前加驚嘆號表示封鎖。",
+      "要求固定完整 SHA 時，可重用工作流程仍可用標籤；企業停用的政策下層不能啟用。",
+      "pull_request_target 觸發的工作流程不受 fork PR 核准政策影響，一律執行。",
+      "停用自動更新的自管 runner 要在 30 天內更新；暫時性 runner 執行一個 job 後取消註冊。",
+      "job 找不到符合的 runner 會排隊，超過 24 小時失敗；60 秒沒被接起會重新排隊。",
+      "runner 群組預設只開放私有 repository，自管 runner 幾乎不該用在公開 repository。",
+      "同名 secret 以環境優先於 repository 與組織；環境審核者核准前拿不到環境 secret。",
+      "fork 與 Dependabot 觸發的工作流程拿不到一般 secrets；REST 設定 secret 要用 LibSodium 加密。",
+      "環境必要審核者最多 6 人、一人核准即可；管理員預設可繞過保護規則。",
+      "script injection 的防範：用中間環境變數或改用 action；標籤可被移動，應固定完整 SHA。",
+      "id-token: write 只允許請求 OIDC 權杖，雲端端必須定義信任條件；GitHub 代管 job 6 小時、自管 5 天。"
+    ]
+  },
+  "cheatsheet": [
+    {
+      "combination": "可重用工作流程 vs 複合 action",
+      "summary": "前者在 job 層級呼叫、可用 secrets；後者在步驟層級、secrets 要用 input 傳入。"
+    },
+    {
+      "combination": "起始工作流程 vs 可重用工作流程",
+      "summary": "前者複製後各自獨立；後者集中維護，更新後呼叫端用同一份定義。"
+    },
+    {
+      "combination": "outcome vs conclusion",
+      "summary": "outcome 是 continue-on-error 之前的結果；conclusion 是之後的結果。"
+    },
+    {
+      "combination": "inputs vs github.event.inputs",
+      "summary": "inputs 保留 boolean 型別；github.event.inputs 會轉成字串。"
+    },
+    {
+      "combination": "重新執行 vs 新的推送",
+      "summary": "重跑沿用原 commit；新推送觸發新執行才會測到新程式碼。"
+    },
+    {
+      "combination": "ACTIONS_STEP_DEBUG vs ACTIONS_RUNNER_DEBUG",
+      "summary": "STEP 讓步驟日誌更詳細；RUNNER 多出 runner 診斷記錄資料夾。"
+    },
+    {
+      "combination": "GITHUB_TOKEN vs PAT",
+      "summary": "前者短期且限單一 repository，不觸發新執行；後者可跨 repository 且能觸發。"
+    },
+    {
+      "combination": "secrets vs variables",
+      "summary": "secrets 加密並遮蔽、不能直接用在 if；variables 用 vars context 且不遮蔽。"
+    },
+    {
+      "combination": "標籤 vs 完整 commit SHA",
+      "summary": "標籤可被移動或刪除；完整 SHA 不會被改寫，但要確認來自原 repository。"
+    },
+    {
+      "combination": "長期 secret vs OIDC",
+      "summary": "OIDC 以短期權杖取代長期憑證，但雲端端必須設定信任條件。"
+    }
+  ],
+  "examDayChecklist": [
+    "正式應考前重新核對官方認證頁與 Study Guide 的時間、分數與語言。",
+    "只帶考試中心允許的身分證明。",
+    "先讀題幹的動詞與限制詞，再看選項。",
+    "遇到事件類題目先判斷檔案所在的分支與該事件拿到的 commit。",
+    "不確定的題目先標記，完成後回看。",
+    "交卷前檢查複選題是否選齊。"
+  ]
+}
