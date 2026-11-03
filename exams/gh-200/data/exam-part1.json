@@ -1,0 +1,349 @@
+{
+  "scenario": {
+    "title": "情境：orders-api 的 CI/CD 與治理",
+    "intro": "Contoso 的訂單團隊在私有 repository orders-api 用 GitHub Actions 建置、測試與部署，組織另有平台團隊維護的共用元件。目前的設定如下：",
+    "facts": [
+      "ci.yml 在 pull_request 觸發，以 os × version 的矩陣測試，整合測試需要 PostgreSQL 服務容器。",
+      "nightly.yml 設有 schedule，目前只存在於功能分支 feat/nightly。",
+      "部署使用平台團隊的可重用工作流程，並指定 production 環境；組織另有自管 runner 群組。",
+      "平台團隊近期調整了組織的 Actions 政策，並維護一個共用的複合 action。"
+    ],
+    "context": "上線一個月後，團隊回報以下現象：",
+    "observations": [
+      "(a) nightly.yml 設了每晚執行的 schedule，卻從沒執行過。",
+      "(b) 測試失敗後，開發者修好程式碼並推送，然後在舊的執行上按 Re-run failed jobs，結果還是同樣的錯。",
+      "(c) 整合測試的 job 設了 container: node:20 並宣告 services: postgres，測試程式連 localhost:5432 失敗。",
+      "(d) lint 步驟失敗但設了 continue-on-error: true；之後的清理步驟用 steps.lint.conclusion == 'failure' 判斷，從沒執行過。",
+      "(e) 平台團隊的複合 action 需要雲端權杖，卻讀不到 secrets context。",
+      "(f) 組織管理員把政策改成只允許組織自己的 actions，隔天所有 CI 都在 actions/checkout 這一步失敗。",
+      "(g) 部署工作流程原本把雲端存取金鑰存成 secret，資安要求改成短期憑證；團隊只加了 id-token: write，雲端端未設定。",
+      "(h) 某步驟用 run: echo \"${{ github.event.pull_request.title }}\" 輸出 PR 標題。",
+      "(i) 一個 job 的 runs-on: [self-hosted, linux, gpu] 在佇列中等了一整天後失敗，所有自管 runner 都顯示 Idle。",
+      "(j) 腳本呼叫成品下載端點，把回應 Location 標頭的網址存起來，隔天再用它下載。"
+    ]
+  },
+  "questions": [
+    {
+      "id": "GH200-P1-01",
+      "exam": "GH-200",
+      "number": 901,
+      "domainId": "D1",
+      "objectiveIds": ["D1-O1"],
+      "sourceIds": ["GH200-DOC-01"],
+      "type": "single",
+      "answer": "B",
+      "question": "現象 (a)：nightly.yml 設了每晚執行的 schedule，卻從沒執行過。最可能的原因是什麼？",
+      "options": [
+        {
+          "id": "A",
+          "text": "排程的最短間隔是每小時，所以設定無效"
+        },
+        {
+          "id": "B",
+          "text": "檔案還在功能分支，排程只讀預設分支"
+        },
+        {
+          "id": "C",
+          "text": "schedule 必須先手動觸發一次才會生效"
+        },
+        {
+          "id": "D",
+          "text": "排程只在 pull request 合併後的 ref 執行"
+        }
+      ],
+      "explanation": "schedule 只在預設分支上的工作流程檔觸發，功能分支的檔案不會被排程執行；先合併到預設分支才會開始依時間執行。",
+      "trap": "沒有執行時很容易先懷疑 cron 語法；要先確認檔案所在的分支。",
+      "domain": "撰寫與管理工作流程",
+      "difficulty": "基礎",
+      "keywords": ["D1", "D1-O1"]
+    },
+    {
+      "id": "GH200-P1-02",
+      "exam": "GH-200",
+      "number": 902,
+      "domainId": "D2",
+      "objectiveIds": ["D2-O1"],
+      "sourceIds": ["GH200-DOC-14"],
+      "type": "single",
+      "answer": "B",
+      "question": "現象 (b)：測試失敗後，開發者修好程式碼並推送，然後在舊的執行上按 Re-run failed jobs，結果還是同樣的錯。應該怎麼驗證修復？",
+      "options": [
+        {
+          "id": "A",
+          "text": "改按 Re-run all jobs，重跑會自動使用最新 commit"
+        },
+        {
+          "id": "B",
+          "text": "看新推送所觸發的新執行，重跑沿用原本的 commit"
+        },
+        {
+          "id": "C",
+          "text": "勾選 Enable debug logging，除錯記錄會抓新程式碼"
+        },
+        {
+          "id": "D",
+          "text": "停用再啟用該工作流程，之後重跑就會更新"
+        }
+      ],
+      "explanation": "重新執行沿用原事件的 GITHUB_SHA 與 GITHUB_REF，不會拿到新 commit；新推送會觸發新的執行，要看新執行的結果。",
+      "trap": "整個重跑與只重跑失敗的 job 都一樣沿用原 commit，改按哪一個都不會改變這點。",
+      "domain": "使用與疑難排解工作流程",
+      "difficulty": "中等",
+      "keywords": ["D2", "D2-O1"]
+    },
+    {
+      "id": "GH200-P1-03",
+      "exam": "GH-200",
+      "number": 903,
+      "domainId": "D1",
+      "objectiveIds": ["D1-O2"],
+      "sourceIds": ["GH200-DOC-05"],
+      "type": "single",
+      "answer": "B",
+      "question": "現象 (c)：整合測試的 job 設了 container: node:20，並宣告 services: postgres，測試程式連 localhost:5432 失敗。應該怎麼改？",
+      "options": [
+        {
+          "id": "A",
+          "text": "補上 ports: 5432:5432，繼續連 localhost"
+        },
+        {
+          "id": "B",
+          "text": "改連 postgres:5432，用服務標籤當主機"
+        },
+        {
+          "id": "C",
+          "text": "改成使用 Windows runner 以取得本機位址"
+        },
+        {
+          "id": "D",
+          "text": "另開 job 執行資料庫，再用 needs 相連"
+        }
+      ],
+      "explanation": "job 在容器內執行時，服務的主機名稱是標籤，不需要 ports；只有 job 直接在 runner 上時才用 localhost 加 ports 對應。服務容器也只支援 Linux。",
+      "trap": "加上 ports 對應是 job 直接在 runner 上時的做法；容器內的 localhost 指向容器自己。",
+      "domain": "撰寫與管理工作流程",
+      "difficulty": "中等",
+      "keywords": ["D1", "D1-O2"]
+    },
+    {
+      "id": "GH200-P1-04",
+      "exam": "GH-200",
+      "number": 904,
+      "domainId": "D1",
+      "objectiveIds": ["D1-O2"],
+      "sourceIds": ["GH200-DOC-04"],
+      "type": "single",
+      "answer": "A",
+      "question": "現象 (d)：lint 步驟失敗但設了 continue-on-error: true；之後的清理步驟寫 if: steps.lint.conclusion == 'failure'，從沒執行過。應該怎麼改？",
+      "options": [
+        {
+          "id": "A",
+          "text": "把條件改成 steps.lint.outcome == 'failure'"
+        },
+        {
+          "id": "B",
+          "text": "移除 continue-on-error，讓失敗中止整個 job"
+        },
+        {
+          "id": "C",
+          "text": "把條件改成 steps.lint.status == 'failed'"
+        },
+        {
+          "id": "D",
+          "text": "在清理步驟前再加一個 always() 的空步驟"
+        }
+      ],
+      "explanation": "outcome 是套用 continue-on-error 之前的結果，仍是 failure；conclusion 是之後的結果，會是 success，所以原條件不成立。",
+      "trap": "兩個欄位名稱很像，常被互換；要偵測步驟其實失敗過，讀的是 outcome。",
+      "domain": "撰寫與管理工作流程",
+      "difficulty": "進階",
+      "keywords": ["D1", "D1-O2"]
+    },
+    {
+      "id": "GH200-P1-05",
+      "exam": "GH-200",
+      "number": 905,
+      "domainId": "D2",
+      "objectiveIds": ["D2-O3"],
+      "sourceIds": ["GH200-DOC-19", "GH200-DOC-26"],
+      "type": "single",
+      "answer": "D",
+      "question": "現象 (e)：平台團隊的複合 action 需要雲端權杖，卻讀不到 secrets context。依官方做法應該怎麼處理？",
+      "options": [
+        {
+          "id": "A",
+          "text": "把權杖寫死在 action.yml 的 inputs 預設值"
+        },
+        {
+          "id": "B",
+          "text": "發佈到 Marketplace，之後 secrets 就能讀取"
+        },
+        {
+          "id": "C",
+          "text": "改在 runs 區塊宣告 secrets 欄位"
+        },
+        {
+          "id": "D",
+          "text": "由呼叫它的工作流程把權杖當 input 傳入"
+        }
+      ],
+      "explanation": "複合 action 不能直接使用 secrets context，要由呼叫它的工作流程把 secret 當作 input 傳入；寫死權杖則會把機密提交進 repository。",
+      "trap": "可重用工作流程可以傳 secrets，複合 action 不行；寫死預設值看似方便，卻是最糟的做法。",
+      "domain": "使用與疑難排解工作流程",
+      "difficulty": "中等",
+      "keywords": ["D2", "D2-O3"]
+    },
+    {
+      "id": "GH200-P1-06",
+      "exam": "GH-200",
+      "number": 906,
+      "domainId": "D4",
+      "objectiveIds": ["D4-O1"],
+      "sourceIds": ["GH200-DOC-31"],
+      "type": "single",
+      "answer": "A",
+      "question": "現象 (f)：組織管理員把政策改成只允許組織自己的 actions，隔天所有 CI 都在 actions/checkout 這一步失敗。應該怎麼處理？",
+      "options": [
+        {
+          "id": "A",
+          "text": "在允許清單勾選 GitHub 建立的 actions"
+        },
+        {
+          "id": "B",
+          "text": "改成在每個工作流程檔固定 checkout 的 SHA"
+        },
+        {
+          "id": "C",
+          "text": "請各 repository 自行把 checkout 改為本機 action"
+        },
+        {
+          "id": "D",
+          "text": "把政策改成停用 Actions 後再重新啟用"
+        }
+      ],
+      "explanation": "只允許組織自己的 actions 會封鎖所有 GitHub 作者的 actions，包含 actions/checkout；要另外勾選 GitHub 建立的 actions 或加入對應樣式。",
+      "trap": "固定 SHA 只影響版本參照，不會改變政策是否允許；政策的封鎖發生在允許清單這一層。",
+      "domain": "管理企業的 GitHub Actions",
+      "difficulty": "中等",
+      "keywords": ["D4", "D4-O1"]
+    },
+    {
+      "id": "GH200-P1-07",
+      "exam": "GH-200",
+      "number": 907,
+      "domainId": "D5",
+      "objectiveIds": ["D5-O1"],
+      "sourceIds": ["GH200-DOC-45", "GH200-DOC-49"],
+      "type": "single",
+      "answer": "B",
+      "question": "現象 (g)：部署工作流程原本把雲端存取金鑰存成 secret，資安要求改成短期憑證。團隊只在工作流程加了 id-token: write，雲端端什麼都沒設。下列哪個說法正確？",
+      "options": [
+        {
+          "id": "A",
+          "text": "完成了，GitHub 會自動產生雲端端需要的信任條件"
+        },
+        {
+          "id": "B",
+          "text": "還要在雲端端定義信任條件，例如限定 sub"
+        },
+        {
+          "id": "C",
+          "text": "還要把 permissions 改成 write-all 才能換取權杖"
+        },
+        {
+          "id": "D",
+          "text": "還要改用 PAT，OIDC 不支援雲端部署"
+        }
+      ],
+      "explanation": "id-token: write 只允許請求 JWT；雲端端必須至少定義一個信任條件（例如限定 sub 或環境），才能避免不受信任的 repository 換取存取權杖。",
+      "trap": "id-token: write 並不給任何資源的寫入權限，也不會替雲端設定任何條件。",
+      "domain": "保護與最佳化自動化",
+      "difficulty": "進階",
+      "keywords": ["D5", "D5-O1"]
+    },
+    {
+      "id": "GH200-P1-08",
+      "exam": "GH-200",
+      "number": 908,
+      "domainId": "D5",
+      "objectiveIds": ["D5-O1"],
+      "sourceIds": ["GH200-DOC-44"],
+      "type": "multiple",
+      "answer": ["A", "C"],
+      "question": "現象 (h)：某步驟寫 run: echo \"${{ github.event.pull_request.title }}\"。下列哪些做法能降低 script injection 的風險？（選 2 項）",
+      "options": [
+        {
+          "id": "A",
+          "text": "把值設成環境變數，指令碼內用 $TITLE 引用"
+        },
+        {
+          "id": "B",
+          "text": "用單引號包住整個運算式"
+        },
+        {
+          "id": "C",
+          "text": "改用 action，把標題當引數傳入"
+        },
+        {
+          "id": "D",
+          "text": "對標題做 URL 編碼後再插入指令"
+        }
+      ],
+      "explanation": "${{ }} 在 shell 執行前被替換成文字；用中間環境變數或改用 action 傳引數，值就不會成為指令碼語法的一部分。引號與編碼只是表面處理。",
+      "trap": "看起來像在「清洗」輸入的做法，攻擊字串仍可能跳脫；要讓值不進入指令碼的語法層。",
+      "domain": "保護與最佳化自動化",
+      "difficulty": "中等",
+      "keywords": ["D5", "D5-O1"]
+    },
+    {
+      "id": "GH200-P1-09",
+      "exam": "GH-200",
+      "number": 909,
+      "domainId": "D4",
+      "objectiveIds": ["D4-O2"],
+      "sourceIds": ["GH200-DOC-35"],
+      "type": "single",
+      "answer": "A",
+      "question": "現象 (i)：一個 job 的 runs-on: [self-hosted, linux, gpu] 在佇列中等了一整天，最後失敗，所有自管 runner 都顯示 Idle。最可能的原因是什麼？",
+      "options": [
+        {
+          "id": "A",
+          "text": "runner 的標籤或群組存取沒有與 job 完全符合"
+        },
+        {
+          "id": "B",
+          "text": "自管 runner 一次只能同時接受一個 repository"
+        },
+        {
+          "id": "C",
+          "text": "job 超過 6 小時的執行時間上限被終止"
+        },
+        {
+          "id": "D",
+          "text": "runner 在 60 秒內沒有接起 job 就永久放棄"
+        }
+      ],
+      "explanation": "job 只會送給標籤與群組都符合 runs-on 的線上閒置 runner；沒有符合者就留在佇列，排隊超過 24 小時就失敗。要檢查標籤是否完全相符，以及該 repository 是否有權使用該 runner 群組。",
+      "trap": "Idle 只代表 runner 沒在忙，不代表它符合這個 job；6 小時是代管 runner 的執行上限，與排隊無關。",
+      "domain": "管理企業的 GitHub Actions",
+      "difficulty": "中等",
+      "keywords": ["D4", "D4-O2"]
+    },
+    {
+      "id": "GH200-P1-10",
+      "exam": "GH-200",
+      "number": 910,
+      "domainId": "D2",
+      "objectiveIds": ["D2-O2"],
+      "sourceIds": ["GH200-DOC-20"],
+      "type": "true-false",
+      "answer": false,
+      "question": "現象 (j)：腳本呼叫成品下載端點，把回應 Location 標頭的網址存起來，隔天再用它下載。這個做法可行。",
+      "explanation": "下載端點回應 302，Location 的網址只有 1 分鐘有效；每次下載都要重新呼叫端點取得新網址並立刻使用。",
+      "trap": "把網址存起來稍後使用是自然的做法；這個網址是短效的。",
+      "domain": "使用與疑難排解工作流程",
+      "difficulty": "中等",
+      "keywords": ["D2", "D2-O2"]
+    }
+  ]
+}
