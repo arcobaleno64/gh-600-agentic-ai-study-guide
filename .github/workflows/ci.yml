@@ -31,8 +31,9 @@ jobs:
       - name: Audit production dependencies
         run: npm audit --omit=dev
 
-  # Every exam under exams/ is validated and built on its own; the default
-  # exam's tests, types and audit already run in verify above.
+  # Every exam under exams/ is validated, tested and built on its own (the
+  # deploy runs `npm run build` with EXAM set, which runs the tests); types,
+  # formatting and audit run once in verify above.
   exams:
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -54,6 +55,8 @@ jobs:
         run: |
           EXAM=${{ matrix.exam }} node scripts/validate-content.mjs
           EXAM=${{ matrix.exam }} node scripts/check-language.mjs
+      - name: Test ${{ matrix.exam }}
+        run: EXAM=${{ matrix.exam }} npm test
       - name: Build ${{ matrix.exam }}
         run: |
           EXAM=${{ matrix.exam }} npx vite build
