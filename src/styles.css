@@ -2476,6 +2476,10 @@ kbd {
   color: var(--faint);
   font-size: 12px;
 }
+.book-footer a {
+  color: inherit;
+  text-decoration: underline;
+}
 .book-menu {
   color: var(--text);
   width: min(640px, calc(100vw - 32px));

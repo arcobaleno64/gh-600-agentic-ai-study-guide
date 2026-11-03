@@ -100,3 +100,21 @@ test("每個考試的網址就是它部署的自訂網域，且各考試不重�
     domains.add(site.domain);
   }
 });
+
+// The footer links each exam to its siblings. A new exam has to be added to
+// the others too, or its readers can never reach it from the existing sites.
+test("每個考試的「同系列」連結恰好是其他考試的網址", () => {
+  for (const code of exams) {
+    const site = loadSite(code) as {
+      siteUrl: string;
+      related: { label: string; url: string }[];
+    };
+    const expected = exams
+      .filter((other) => other !== code)
+      .map((other) => loadSite(other).siteUrl)
+      .sort();
+    assert.deepEqual(site.related.map((item) => item.url).sort(), expected);
+    for (const item of site.related)
+      assert.ok(item.label.trim(), `${code} 有空白的連結名稱`);
+  }
+});

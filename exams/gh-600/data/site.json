@@ -2,6 +2,12 @@
   "workerName": "gh-600-agentic-ai-study-guide",
   "siteUrl": "https://gh600.satenvision.com",
   "domain": "gh600.satenvision.com",
+  "related": [
+    {
+      "label": "GH-500 GitHub Advanced Security",
+      "url": "https://gh500.satenvision.com"
+    }
+  ],
   "siteName": "GH-600 Agentic AI Developer 四週備考指南",
   "shortName": "GH-600 備考",
   "brand": "GH-600 數位教科書",
