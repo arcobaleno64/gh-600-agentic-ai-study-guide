@@ -12,19 +12,19 @@
     "options": [
       {
         "id": "A",
-        "text": "排程只在預設分支的檔案上執行，這個檔案還沒合併進去"
+        "text": "排程只讀預設分支的檔案，這個檔案還在功能分支"
       },
       {
         "id": "B",
-        "text": "排程的最短間隔是每小時一次，所以 15 分鐘的設定無效"
+        "text": "排程的最短間隔是 30 分鐘，所以 15 分鐘的設定被略過"
       },
       {
         "id": "C",
-        "text": "排程必須先用手動觸發執行一次，才會開始依時間執行"
+        "text": "排程要等第一次 push 到該分支後，才會開始計時"
       },
       {
         "id": "D",
-        "text": "排程只在工作流程檔位於 PR 合併 ref 時才會被觸發"
+        "text": "排程要等公開 repository 滿 60 天之後才會啟用"
       }
     ],
     "explanation": "schedule 只在預設分支的最新 commit 上執行，功能分支上的檔案不會被排程觸發；官方的最短間隔是每 5 分鐘一次，所以 15 分鐘本身有效。",
@@ -46,7 +46,7 @@
     "options": [
       {
         "id": "A",
-        "text": "最近一次被推送的分支尖端 commit，與該分支"
+        "text": "最近一次被推送的 commit，與被推送的 ref"
       },
       {
         "id": "B",
@@ -54,11 +54,11 @@
       },
       {
         "id": "C",
-        "text": "最近一個 PR 的合併 commit，與它的合併 ref"
+        "text": "最近一次合併的 PR 合併 commit，與其合併 ref"
       },
       {
         "id": "D",
-        "text": "排程設定所在分支的最後 commit，與該分支"
+        "text": "功能分支上最新的 commit，與該功能分支"
       }
     ],
     "explanation": "schedule 的 GITHUB_SHA 是預設分支的最後一個 commit，GITHUB_REF 是預設分支；workflow_run 也是同樣的結果。",
@@ -96,23 +96,23 @@
     "options": [
       {
         "id": "A",
-        "text": "把 input 的型別改成 choice，並把值設成字串"
+        "text": "把 input 改成 choice 型別，讓值以字串比較"
       },
       {
         "id": "B",
-        "text": "在 on 區塊替 input 補上 default: false 的設定"
+        "text": "在 on 區塊替 input 補上預設值 false"
       },
       {
         "id": "C",
-        "text": "改用 inputs.dry_run，因為它會保留 boolean 型別"
+        "text": "改用 inputs.dry_run，因為它保留 boolean 型別"
       },
       {
         "id": "D",
-        "text": "改成比較 github.event.inputs.dry_run == null，避開型別"
+        "text": "把條件改成 github.event.inputs.dry_run == 0"
       }
     ],
     "explanation": "github.event.inputs 會把 boolean 轉成字串，'false' == false 不成立；inputs context 保留 boolean 型別，可以直接當條件。",
-    "trap": "default: false 只決定沒有輸入時的預設值，並不會改變 github.event.inputs 把值轉成字串的行為，所以補了預設值仍然是同樣的結果。",
+    "trap": "補上預設值只決定沒有輸入時的值，不會改變 github.event.inputs 把值轉成字串的行為；改成字串型別則會讓問題更明顯，而不是消除它。",
     "domain": "撰寫與管理工作流程",
     "difficulty": "中等",
     "keywords": ["D1", "D1-O1"]
@@ -134,7 +134,7 @@
       },
       {
         "id": "B",
-        "text": "input 的型別只能是 string 一種"
+        "text": "最多可以定義 10 個頂層 input"
       },
       {
         "id": "C",
@@ -142,11 +142,11 @@
       },
       {
         "id": "D",
-        "text": "每個 input 都必須明確設定 required: true"
+        "text": "inputs 的資料量不能超過 1 MiB"
       }
     ],
     "explanation": "官方的上限是最多 25 個頂層屬性、資料量不超過 65,535 個字元；型別除了 string 還有 boolean、choice、number、environment。",
-    "trap": "required 與 default 都是可選的設定；限制看的是 input 的個數與總資料量，而不是型別，也不是每一個都得必填。",
+    "trap": "25 個與 65,535 個字元是官方的上限，另外兩個數字是常被記混的其他限制；型別除了 string 還有 boolean、choice、number、environment。",
     "domain": "撰寫與管理工作流程",
     "difficulty": "中等",
     "keywords": ["D1", "D1-O1"]
@@ -164,11 +164,11 @@
     "options": [
       {
         "id": "A",
-        "text": "push 與 pull_request 這兩個最常見的事件"
+        "text": "workflow_dispatch 與 workflow_call"
       },
       {
         "id": "B",
-        "text": "schedule 與 workflow_run 這兩個非互動事件"
+        "text": "repository_dispatch 與 workflow_run"
       },
       {
         "id": "C",
@@ -176,7 +176,7 @@
       },
       {
         "id": "D",
-        "text": "issues 與 issue_comment 這兩個討論事件"
+        "text": "pull_request 與 workflow_dispatch"
       }
     ],
     "explanation": "由 GITHUB_TOKEN 引發的事件通常不會建立新的工作流程執行，目的是避免遞迴；例外是 workflow_dispatch 與 repository_dispatch。",
@@ -227,24 +227,24 @@
     "objectiveIds": ["D1-O2"],
     "sourceIds": ["GH200-DOC-05"],
     "type": "single",
-    "answer": "C",
+    "answer": "B",
     "question": "job 設了 container: node:20 並宣告 services: postgres，測試程式用 localhost:5432 連不上資料庫。應該怎麼改？",
     "options": [
       {
         "id": "A",
-        "text": "在 services 補上 ports: 5432:5432，並繼續使用 localhost"
+        "text": "在 services 補上 ports: 5432:5432，繼續連 localhost"
       },
       {
         "id": "B",
-        "text": "改成另開一個 job 專門執行資料庫，再用 needs 相連"
+        "text": "改連 postgres:5432，用服務標籤當主機名稱"
       },
       {
         "id": "C",
-        "text": "改連 postgres:5432，用服務標籤當作主機名稱"
+        "text": "改連 127.0.0.1:5432，並在 container 加上網路設定"
       },
       {
         "id": "D",
-        "text": "把 job 換成 Windows runner，以取得本機網路位址"
+        "text": "改用 service 開頭的 context 取得主機名稱再連線"
       }
     ],
     "explanation": "job 跑在容器內時，服務的主機名稱會對應到標籤，不需要設定 ports；只有 job 直接跑在 runner 上時才用 localhost 加 ports 對應。",
@@ -266,19 +266,19 @@
     "options": [
       {
         "id": "A",
-        "text": "會，因為 conclusion 永遠反映步驟實際的失敗結果"
+        "text": "會執行，因為 conclusion 反映步驟實際的失敗結果"
       },
       {
         "id": "B",
-        "text": "會，因為 continue-on-error 只影響 job 而不影響 steps"
+        "text": "會執行，因為 continue-on-error 只影響整個 job 的結果"
       },
       {
         "id": "C",
-        "text": "不會，因為設了 continue-on-error 的步驟不會有 steps 資料"
+        "text": "不會執行，因為 conclusion 要等 job 結束後才有值"
       },
       {
         "id": "D",
-        "text": "不會，因為 conclusion 是套用 continue-on-error 之後的結果"
+        "text": "不會執行，因為 conclusion 是套用 continue-on-error 之後的結果"
       }
     ],
     "explanation": "outcome 是套用 continue-on-error 之前的結果，conclusion 是之後的結果；這個步驟 outcome 是 failure、conclusion 是 success，所以條件不成立。",
@@ -342,11 +342,11 @@
       },
       {
         "id": "C",
-        "text": "把 deploy 搬到另一個工作流程檔"
+        "text": "在 deploy 加上 continue-on-error: true"
       },
       {
         "id": "D",
-        "text": "移除 needs，讓 deploy 自動等待 test 結束"
+        "text": "把 deploy 的 needs 改成 needs.test.result"
       }
     ],
     "explanation": "被需要的 job 失敗或被略過時，依賴它的 job 也會被略過；在 job 的 if 使用 always()，就會無論相依 job 的結果如何都執行。",
@@ -368,15 +368,15 @@
     "options": [
       {
         "id": "A",
-        "text": "進行中與排隊中的 job 都會被取消"
+        "text": "所有進行中與排隊中的 job 都會被取消"
       },
       {
         "id": "B",
-        "text": "只有使用同一種作業系統的組合會被取消"
+        "text": "只有進行中的 job 被取消，排隊中的繼續執行"
       },
       {
         "id": "C",
-        "text": "已排隊的繼續執行，只取消進行中的 job"
+        "text": "只有使用同一種作業系統的組合會被取消"
       },
       {
         "id": "D",
@@ -397,24 +397,24 @@
     "objectiveIds": ["D1-O3"],
     "sourceIds": ["GH200-DOC-06"],
     "type": "single",
-    "answer": "C",
+    "answer": "B",
     "question": "快取還原時，沒有找到與 key 完全相同的項目。接下來依什麼順序比對？",
     "options": [
       {
         "id": "A",
-        "text": "直接放棄還原，並在 job 結束時重新建立一份新快取"
-      },
-      {
-        "id": "B",
         "text": "先比對 restore-keys，再比對 key 的前綴"
       },
       {
-        "id": "C",
+        "id": "B",
         "text": "先比對 key 的前綴，再依序比對 restore-keys"
       },
       {
+        "id": "C",
+        "text": "只比對與 key 完全相同的項目，找不到就不還原"
+      },
+      {
         "id": "D",
-        "text": "只比對預設分支上最近建立的那一個快取"
+        "text": "先比對預設分支，再比對目前分支的 key"
       }
     ],
     "explanation": "查找順序是：與 key 完全相同、key 的前綴、restore-keys 依列出順序；同一個 restore key 符合多個項目時，使用最近建立的。",
@@ -436,19 +436,19 @@
     "options": [
       {
         "id": "A",
-        "text": "寫入 GITHUB_ENV 的值只對之後的步驟可見，寫入當下看不到"
+        "text": "寫入的值只對之後的步驟可見，寫入當下看不到"
       },
       {
         "id": "B",
-        "text": "GITHUB_ENV 只能傳遞數字，字串必須改用 GITHUB_OUTPUT"
+        "text": "值要在同一步驟用 ${{ env.version }} 讀取才有效"
       },
       {
         "id": "C",
-        "text": "步驟沒有設定 id，所以環境變數不會被建立出來"
+        "text": "步驟必須先設定 id，之後的步驟才讀得到"
       },
       {
         "id": "D",
-        "text": "GITHUB_ENV 的值要等整個 job 結束後才會生效"
+        "text": "寫入的值會等到下一個 job 才開始生效"
       }
     ],
     "explanation": "寫入 GITHUB_ENV 的環境變數，之後的所有步驟都看得到，但寫入的那一步看不到；要在同一步驟使用，就直接用 shell 變數。",
@@ -481,24 +481,24 @@
     "objectiveIds": ["D1-O3"],
     "sourceIds": ["GH200-DOC-03"],
     "type": "single",
-    "answer": "A",
+    "answer": "D",
     "question": "某個步驟寫入 $GITHUB_STEP_SUMMARY 的內容超過 1 MiB。會發生什麼事？",
     "options": [
       {
         "id": "A",
-        "text": "該步驟的摘要上傳失敗並產生錯誤註解，步驟與 job 的狀態不變"
+        "text": "整個 job 被標成失敗，之後的步驟被取消"
       },
       {
         "id": "B",
-        "text": "整個 job 會被標成失敗，並且取消之後的所有步驟"
+        "text": "摘要被截斷到 1 MiB，只顯示最前面的部分"
       },
       {
         "id": "C",
-        "text": "摘要會被自動截斷到 1 MiB，並且只顯示最前面的部分"
+        "text": "摘要改以成品形式保存，並附上下載連結"
       },
       {
         "id": "D",
-        "text": "摘要改成以成品的形式保存，並附上下載連結"
+        "text": "該步驟的摘要上傳失敗並產生錯誤註解，狀態不變"
       }
     ],
     "explanation": "每個步驟的摘要上限是 1 MiB；超過時該步驟的摘要上傳失敗並建立錯誤註解，但不會改變步驟或 job 的狀態。",
@@ -570,15 +570,15 @@
     "options": [
       {
         "id": "A",
-        "text": "初次執行後 7 天內，次數沒有上限"
+        "text": "初次執行後 30 天內，最多重跑 20 次"
       },
       {
         "id": "B",
-        "text": "初次執行後 90 天內，最多重跑 10 次"
+        "text": "初次執行後 90 天內，最多重跑 50 次"
       },
       {
         "id": "C",
-        "text": "初次執行後 30 天內，最多重跑 10 次"
+        "text": "初次執行後 60 天內，最多重跑 10 次"
       },
       {
         "id": "D",
@@ -599,7 +599,7 @@
     "objectiveIds": ["D2-O1"],
     "sourceIds": ["GH200-DOC-16"],
     "type": "single",
-    "answer": "D",
+    "answer": "B",
     "question": "要讓下載的日誌封存檔多出 runner-diagnostic-logs 資料夾，應該啟用哪一個設定？",
     "options": [
       {
@@ -608,15 +608,15 @@
       },
       {
         "id": "B",
-        "text": "在工作流程的 env 加入 RUNNER_DIAGNOSTICS 並設為 1"
+        "text": "ACTIONS_RUNNER_DEBUG 設為 true，啟用 runner 診斷"
       },
       {
         "id": "C",
-        "text": "在 job 層級加上 debug: true 並重新推送"
+        "text": "ACTIONS_RUNNER_LOG 設為 verbose，保留完整日誌"
       },
       {
         "id": "D",
-        "text": "ACTIONS_RUNNER_DEBUG 設為 true，啟用 runner 診斷"
+        "text": "ACTIONS_DIAGNOSTICS 設為 true，產生診斷資料夾"
       }
     ],
     "explanation": "ACTIONS_RUNNER_DEBUG 啟用 runner 診斷記錄，封存檔會多出 runner-diagnostic-logs，內含 runner 與 worker 程序記錄；ACTIONS_STEP_DEBUG 則讓步驟日誌更詳細。",
@@ -633,24 +633,24 @@
     "objectiveIds": ["D2-O1"],
     "sourceIds": ["GH200-DOC-16"],
     "type": "single",
-    "answer": "C",
+    "answer": "B",
     "question": "同一個 repository 同時把 ACTIONS_STEP_DEBUG 建成 secret（值為 false）與 variable（值為 true）。哪一個會生效？",
     "options": [
       {
         "id": "A",
-        "text": "variable 生效，因為範圍較小"
+        "text": "variable 生效，值為 true，因為範圍較明確"
       },
       {
         "id": "B",
-        "text": "兩者衝突時，工作流程直接失敗"
+        "text": "secret 生效，值為 false，secret 的優先順序較高"
       },
       {
         "id": "C",
-        "text": "secret 生效，值為 false"
+        "text": "兩者合併，只要有一個為 true 就會啟用該功能"
       },
       {
         "id": "D",
-        "text": "較晚建立的那一個生效"
+        "text": "較晚建立的那一個生效，與類型無關"
       }
     ],
     "explanation": "兩者都可以建成 secret 或 variable；同時存在時 secret 優先，所以實際為 false。",
@@ -683,24 +683,24 @@
     "objectiveIds": ["D2-O1"],
     "sourceIds": ["GH200-DOC-15"],
     "type": "single",
-    "answer": "D",
+    "answer": "A",
     "question": "在 job 日誌頁用 Search logs 搜尋一段你確定存在的文字，卻沒有結果。最可能的原因是什麼？",
     "options": [
       {
         "id": "A",
-        "text": "需要先下載日誌封存檔，搜尋功能才有資料"
+        "text": "那個步驟還沒展開，搜尋只涵蓋已展開的步驟"
       },
       {
         "id": "B",
-        "text": "只有失敗的 job 才提供搜尋功能"
+        "text": "搜尋只涵蓋失敗的步驟，成功的步驟被排除"
       },
       {
         "id": "C",
-        "text": "搜尋只在最新一次重跑的嘗試中有效"
+        "text": "搜尋只比對步驟名稱，不比對日誌內容"
       },
       {
         "id": "D",
-        "text": "那個步驟還沒展開，搜尋只涵蓋已展開的步驟"
+        "text": "日誌超過保留期的部分已被清除，所以搜尋不到"
       }
     ],
     "explanation": "Search logs 只搜尋已展開的步驟；要找的步驟要先展開。需要完整日誌時可以下載 log archive。",
@@ -717,24 +717,24 @@
     "objectiveIds": ["D2-O1"],
     "sourceIds": ["GH200-DOC-15"],
     "type": "single",
-    "answer": "B",
+    "answer": "C",
     "question": "在終端機只想看某次執行中失敗的步驟日誌，該用哪個指令？",
     "options": [
       {
         "id": "A",
-        "text": "gh run rerun RUN_ID --failed 這個重跑指令"
+        "text": "gh run rerun RUN_ID --failed 這個指令"
       },
       {
         "id": "B",
-        "text": "gh run view RUN_ID --log-failed"
+        "text": "gh run list --status failure --log 這個指令"
       },
       {
         "id": "C",
-        "text": "gh run view --job JOB_ID --log 這個指令"
+        "text": "gh run view RUN_ID --log-failed"
       },
       {
         "id": "D",
-        "text": "gh run watch RUN_ID --exit-status 這個指令"
+        "text": "gh run view RUN_ID --log --failed 這個指令"
       }
     ],
     "explanation": "gh run view RUN_ID --log-failed 只顯示失敗步驟的日誌；--log 顯示整次執行，--job 搭配 --log 看單一 job。",
@@ -756,11 +756,11 @@
     "options": [
       {
         "id": "A",
-        "text": "約 1 小時，足夠排程後再下載"
+        "text": "約 10 分鐘，在工作流程結束前都有效"
       },
       {
         "id": "B",
-        "text": "約 24 小時，與成品保留期無關"
+        "text": "約 1 小時，足夠排程後再下載"
       },
       {
         "id": "C",
@@ -785,24 +785,24 @@
     "objectiveIds": ["D2-O2"],
     "sourceIds": ["GH200-DOC-20"],
     "type": "multiple",
-    "answer": ["B", "C"],
+    "answer": ["A", "B"],
     "question": "關於 REST API 下載成品端點，下列哪些正確？（選 2 項）",
     "options": [
       {
         "id": "A",
-        "text": "回應直接帶 zip 內容，不需要導向"
-      },
-      {
-        "id": "B",
-        "text": "archive_format 必須是 zip"
-      },
-      {
-        "id": "C",
         "text": "回應是 302，網址在 Location 標頭"
       },
       {
+        "id": "B",
+        "text": "archive_format 參數只能指定為 zip"
+      },
+      {
+        "id": "C",
+        "text": "回應的 Location 網址有效約 1 小時"
+      },
+      {
         "id": "D",
-        "text": "下載網址在成品過期前都有效"
+        "text": "可用 archive_format=tar 下載封存檔"
       }
     ],
     "explanation": "archive_format 只能是 zip；回應是 302 重新導向，網址在 Location 標頭，且只有 1 分鐘有效。",
@@ -819,24 +819,24 @@
     "objectiveIds": ["D2-O2"],
     "sourceIds": ["GH200-DOC-22", "GH200-DOC-11"],
     "type": "single",
-    "answer": "B",
+    "answer": "A",
     "question": "用 DELETE 刪除一次工作流程執行時，那次執行的成品會怎樣？",
     "options": [
       {
         "id": "A",
-        "text": "保留到各自的保留期結束才清除"
-      },
-      {
-        "id": "B",
         "text": "一併從儲存空間中刪除，不另保留"
       },
       {
+        "id": "B",
+        "text": "保留到各自的保留期結束才清除"
+      },
+      {
         "id": "C",
-        "text": "移到 repository 層級另外保存"
+        "text": "標記為過期，但仍可下載 30 天"
       },
       {
         "id": "D",
-        "text": "需要另外逐一手動刪除每個成品，不會連動"
+        "text": "移到 repository 層級另外保存"
       }
     ],
     "explanation": "刪除一次執行時，它的成品也會一起從儲存空間刪除；只想留下日誌就改刪個別成品。",
@@ -874,11 +874,11 @@
     "options": [
       {
         "id": "A",
-        "text": "改成把它發佈到 Marketplace，之後 secrets 就會自動可用"
+        "text": "在 action.yml 的 runs 區塊宣告 secrets 欄位"
       },
       {
         "id": "B",
-        "text": "在 action.yml 的 runs 區塊直接宣告 secrets 欄位"
+        "text": "在步驟的 env 寫入 secrets.NAME，action 內就自動可讀"
       },
       {
         "id": "C",
@@ -886,7 +886,7 @@
       },
       {
         "id": "D",
-        "text": "把複合 action 改放在另一個 repository 內使用"
+        "text": "把 action 發佈到 Marketplace，secrets 就自動可用"
       }
     ],
     "explanation": "複合 action 不能直接使用 secrets context，要由呼叫它的工作流程把 secret 當作 input 傳入。",
@@ -912,15 +912,15 @@
       },
       {
         "id": "B",
-        "text": "各 repository 的 .github/workflows 目錄，並在每個檔案開頭加上範本註解標記"
+        "text": "組織 .github repo 的 workflow-templates 目錄，只需放工作流程檔即可"
       },
       {
         "id": "C",
-        "text": "組織 .github repo 的 workflows 目錄，只需放工作流程檔即可，不必附加中繼資料"
+        "text": "組織 .github repo 的 .github/workflows 目錄，檔名加上 template- 前綴"
       },
       {
         "id": "D",
-        "text": "任何公開 repository 的根目錄，含 template.yml 與一份說明用的 README 檔案"
+        "text": "各 repository 的 .github/workflow-templates 目錄，並附 template.json"
       }
     ],
     "explanation": "範本放在組織 .github repository 的 workflow-templates 目錄；每個範本需要工作流程檔，以及同名、副檔名為 .properties.json 的中繼資料檔（name 與 description 必填）。",
@@ -942,7 +942,7 @@
     "options": [
       {
         "id": "A",
-        "text": "立刻被取消，狀態標為 cancelled"
+        "text": "會在目前的 job 結束後停止後續的 job"
       },
       {
         "id": "B",
@@ -950,11 +950,11 @@
       },
       {
         "id": "C",
-        "text": "繼續執行，且停用期間仍可重新執行"
+        "text": "不會被取消，且停用期間仍可重新執行"
       },
       {
         "id": "D",
-        "text": "被暫停，等重新啟用之後再從中斷處接續"
+        "text": "會被暫停，重新啟用後從中斷處接續"
       }
     ],
     "explanation": "停用只是讓工作流程不再觸發，不會取消進行中的執行；停用期間也不能重新執行那些執行，要先啟用。",
@@ -984,11 +984,11 @@
       },
       {
         "id": "C",
-        "text": "只能寫成單一個 shell 指令碼的步驟"
+        "text": "複合 action，但只能在 Linux 與 Windows 上執行"
       },
       {
         "id": "D",
-        "text": "Docker 容器 action，並在各平台各裝一份 Docker"
+        "text": "Docker 容器 action，只在 macOS 與 Linux 上執行"
       }
     ],
     "explanation": "JavaScript action 可以跑在 Linux、macOS 與 Windows；Docker 容器 action 只能在 Linux runner 執行。",
@@ -1026,7 +1026,7 @@
     "options": [
       {
         "id": "A",
-        "text": "改成在 action 執行時由 npm 下載套件，並且不提交任何檔案"
+        "text": "改成在 action 執行時由 npm 下載套件，不提交任何檔案"
       },
       {
         "id": "B",
@@ -1038,7 +1038,7 @@
       },
       {
         "id": "D",
-        "text": "把 node_modules 壓縮成 zip 檔後再一併提交"
+        "text": "只提交 package-lock.json，讓執行器自行還原套件"
       }
     ],
     "explanation": "官方說提交 node_modules 可能造成問題；改用 rollup.js 或 @vercel/ncc 把程式碼與相依套件打包成 dist/index.js 並提交，main 指向它。",
@@ -1064,7 +1064,7 @@
       },
       {
         "id": "B",
-        "text": "把 runs.using 改為 composite-run"
+        "text": "在 action.yml 頂層補上 shell: bash 的預設值"
       },
       {
         "id": "C",
@@ -1118,15 +1118,15 @@
       },
       {
         "id": "C",
-        "text": "failure()，只在 main 失敗時才執行"
+        "text": "success()，依整個 job 的狀態評估"
       },
       {
         "id": "D",
-        "text": "success()，依整個工作流程的狀態評估"
+        "text": "always()，依 action 自己的狀態評估"
       }
     ],
     "explanation": "pre-if 與 post-if 預設都是 always()，其中的狀態檢查函式依 job 的狀態評估，不是 action 自己的狀態。",
-    "trap": "post 常被用來清理，直覺上以為只在成功時才跑；預設其實是不論結果都跑。",
+    "trap": "post 常被用來清理，直覺上以為只在成功時才跑；預設其實是不論結果都跑，而且狀態是依 job 評估，不是依 action 自己。",
     "domain": "撰寫與維護 actions",
     "difficulty": "進階",
     "keywords": ["D3", "D3-O1"]
@@ -1144,15 +1144,15 @@
     "options": [
       {
         "id": "A",
-        "text": "把輸出改名為 value，並移除 description"
+        "text": "在 outputs 底下改用 default 欄位提供值"
       },
       {
         "id": "B",
-        "text": "在輸出加上 required: true 的設定"
+        "text": "把 description 改成運算式，指向步驟輸出"
       },
       {
         "id": "C",
-        "text": "改在步驟用 set-output 的舊式工作流程命令"
+        "text": "在 runs 區塊另外加上 outputs 鍵並重複宣告"
       },
       {
         "id": "D",
@@ -1212,11 +1212,11 @@
     "options": [
       {
         "id": "A",
-        "text": "每個子資料夾各放一個 action.yml，Marketplace 會全部列出"
+        "text": "根目錄與各子資料夾各放一份，Marketplace 會全部列出"
       },
       {
         "id": "B",
-        "text": "根目錄放兩份 action.yml 與 action.yaml 互為備份"
+        "text": "根目錄只放一個，子資料夾可放多個並一併列出"
       },
       {
         "id": "C",
@@ -1224,7 +1224,7 @@
       },
       {
         "id": "D",
-        "text": "放在 .github 目錄，Marketplace 才會自動讀取"
+        "text": "根目錄放 action.yml，另在 .github 放 marketplace.yml"
       }
     ],
     "explanation": "要發佈到 Marketplace，根目錄只能有一個 action 中繼資料檔；子資料夾裡的檔案可以使用，但不會被 Marketplace 自動列出。",
@@ -1246,7 +1246,7 @@
     "options": [
       {
         "id": "A",
-        "text": "required: true 只在 Marketplace 發佈時才會檢查"
+        "text": "required: true 只在工作流程以 with 傳入空字串時才檢查"
       },
       {
         "id": "B",
@@ -1254,11 +1254,11 @@
       },
       {
         "id": "C",
-        "text": "必須同時設定 default，required 才會生效"
+        "text": "required 要搭配 deprecationMessage 才會生效"
       },
       {
         "id": "D",
-        "text": "required 只對複合 action 有效，其他類型不支援"
+        "text": "required 只對 Docker action 有效，由 entrypoint 檢查"
       }
     ],
     "explanation": "required: true 並不會在缺值時自動報錯，action 必須自己檢查輸入，必要時用 core.setFailed 結束。",
@@ -1280,15 +1280,15 @@
     "options": [
       {
         "id": "A",
-        "text": "私有 repository 的 Settings → Pages 與網站設定"
+        "text": "組織 Settings 的 Actions → Runner groups 頁面"
       },
       {
         "id": "B",
-        "text": "組織層級的 Marketplace 設定頁面與分類選項"
+        "text": "私有 repository 的 Settings → Collaborators and teams"
       },
       {
         "id": "C",
-        "text": "action.yml 的 branding 區塊與圖示顏色設定"
+        "text": "組織層級在 Marketplace 設定的私有目錄頁面"
       },
       {
         "id": "D",
@@ -1322,7 +1322,7 @@
       },
       {
         "id": "C",
-        "text": "先在私有目錄上架 30 天觀察期"
+        "text": "先在待審清單停留 24 小時，再自動上架"
       },
       {
         "id": "D",
@@ -1360,7 +1360,7 @@
       },
       {
         "id": "D",
-        "text": "把 main 分支改名為 v1，讓分支直接取代標籤"
+        "text": "把 v1 改成分支名稱，並指向最新的 main"
       }
     ],
     "explanation": "用語意化版本標籤建立 release，並讓主版本標籤 v1 與次版本標籤 v1.4 指向最新且相容的 commit；破壞性變更才發 v2。",
@@ -1390,15 +1390,15 @@
       },
       {
         "id": "C",
-        "text": "標籤必須先刪除，才能用強制推送移動"
+        "text": "移動標籤需要簽章，強制推送時沒有附上"
       },
       {
         "id": "D",
-        "text": "v1 這種主版本標籤不允許綁定 release"
+        "text": "移動主版本標籤需要 release 建立者的核准"
       }
     ],
     "explanation": "immutable release 發佈後，標籤鎖定在特定 commit，不能移動，且 release 存在時不能刪除；因此不能再用強制推送移動綁定 release 的標籤。",
-    "trap": "失敗看起來像權限問題；原因是標籤本身被鎖定，需要調整版本策略，例如讓使用者釘到具體標籤或 SHA。",
+    "trap": "失敗看起來像權限或簽章問題；原因是標籤本身被鎖定，需要調整版本策略，例如讓使用者釘到具體標籤或 SHA。",
     "domain": "撰寫與維護 actions",
     "difficulty": "進階",
     "keywords": ["D3", "D3-O3"]
@@ -1420,15 +1420,15 @@
       },
       {
         "id": "B",
-        "text": "照常執行，因為 GitHub 建立的 actions 永遠被允許"
+        "text": "照常執行，因為 checkout 屬於 GitHub 內建的步驟"
       },
       {
         "id": "C",
-        "text": "照常執行，因為 checkout 屬於本機 action"
+        "text": "被封鎖，但只有私有 repository 的工作流程受影響"
       },
       {
         "id": "D",
-        "text": "只在私有 repository 的工作流程中被封鎖"
+        "text": "照常執行，但只限預設分支上的工作流程"
       }
     ],
     "explanation": "只允許組織自己的 actions 會封鎖所有 GitHub 作者的 actions，所以 actions/checkout 也不能用；要放行需另外勾選 GitHub 建立的 actions。",
@@ -1445,7 +1445,7 @@
     "objectiveIds": ["D4-O1"],
     "sourceIds": ["GH200-DOC-31"],
     "type": "single",
-    "answer": "D",
+    "answer": "B",
     "question": "在允許的 actions 清單輸入「*, !space-org/action@*」。這代表什麼意思？",
     "options": [
       {
@@ -1454,15 +1454,15 @@
       },
       {
         "id": "B",
-        "text": "全部封鎖，只有萬用字元本身例外"
+        "text": "除了 space-org/action 之外，全部允許"
       },
       {
         "id": "C",
-        "text": "清單語法錯誤，萬用字元不能與驚嘆號並用"
+        "text": "封鎖所有 space-org 的 actions，其餘只允許本機 action"
       },
       {
         "id": "D",
-        "text": "除了 space-org/action 之外，全部允許"
+        "text": "除了 space-org/action 的最新標籤之外，全部允許"
       }
     ],
     "explanation": "樣式以逗號分隔，* 是萬用字元，前面加 ! 表示封鎖；所以這串是除了 space-org/action 的任何版本之外全部允許。清單最多 1000 個樣式。",
@@ -1500,7 +1500,7 @@
     "options": [
       {
         "id": "A",
-        "text": "可以，組織層級的設定永遠優先於企業"
+        "text": "可以，因為組織可以覆寫企業的所有政策"
       },
       {
         "id": "B",
@@ -1512,7 +1512,7 @@
       },
       {
         "id": "D",
-        "text": "不行，除非先聯絡 GitHub 支援人員解除"
+        "text": "不行，除非企業擁有者把該組織加入例外清單"
       }
     ],
     "explanation": "企業啟用的政策，組織或 repository 還能選擇性停用；企業停用的政策，個別組織與 repository 不能再啟用。組織只能進一步限制，不能放寬。",
@@ -1538,15 +1538,15 @@
       },
       {
         "id": "B",
-        "text": "由 pull_request 觸發的工作流程"
+        "text": "由 workflow_run 觸發的工作流程"
       },
       {
         "id": "C",
-        "text": "由 workflow_dispatch 觸發的工作流程"
+        "text": "由 repository_dispatch 觸發的工作流程"
       },
       {
         "id": "D",
-        "text": "由 pull_request_review 觸發的工作流程"
+        "text": "由 pull_request 觸發的工作流程"
       }
     ],
     "explanation": "由 pull_request_target 觸發的工作流程一律執行，不受 fork PR 核准政策影響；這也是它屬於特權觸發條件、需要特別小心的原因。",
@@ -1568,7 +1568,7 @@
     "options": [
       {
         "id": "A",
-        "text": "啟用，但只限預設分支的 pull request"
+        "text": "啟用，但只限 Dependabot 與 GitHub App 建立的 PR"
       },
       {
         "id": "B",
@@ -1648,7 +1648,7 @@
       },
       {
         "id": "D",
-        "text": "不會失敗，會無限期地等下去"
+        "text": "排隊超過 72 小時後自動取消"
       }
     ],
     "explanation": "沒有符合的 runner 時 job 留在佇列，排隊超過 24 小時就會失敗；60 秒是 runner 沒有接起 job 時重新排隊的時間。",
@@ -1670,7 +1670,7 @@
     "options": [
       {
         "id": "A",
-        "text": "改用 GitHub 代管 runner 取代"
+        "text": "把 runner 重新註冊到企業層級而不是組織"
       },
       {
         "id": "B",
@@ -1678,7 +1678,7 @@
       },
       {
         "id": "C",
-        "text": "請使用者改用個人帳號的 PAT 註冊"
+        "text": "把 runner 的標籤改成 self-hosted 才能通過清單檢查"
       },
       {
         "id": "D",
@@ -1704,19 +1704,19 @@
     "options": [
       {
         "id": "A",
-        "text": "組織內所有公開與私有的 repository"
+        "text": "組織內所有公開與私有的 repository 皆可使用"
       },
       {
         "id": "B",
-        "text": "只有私有 repository，但可以覆寫"
+        "text": "只有私有 repository，但管理員可以覆寫設定"
       },
       {
         "id": "C",
-        "text": "只有當初註冊該 runner 的 repository"
+        "text": "只有組織內被明確選取的 repository，預設為零個"
       },
       {
         "id": "D",
-        "text": "只有組織名下的 .github repository"
+        "text": "所有 repository，但公開 repository 的 fork 除外"
       }
     ],
     "explanation": "預設只有私有 repository 能使用群組內的 runner，可以覆寫；官方提醒自管 runner 最好只給私有 repository，因為 fork 的 PR 可能執行危險的程式碼。",
@@ -1750,7 +1750,7 @@
       },
       {
         "id": "D",
-        "text": "只能搭配 GitHub 代管 runner 使用"
+        "text": "適合長時間重複使用，以保存快取與狀態"
       }
     ],
     "explanation": "暫時性 runner 在執行一個 job 後就由 GitHub 取消註冊，清理由你負責，日誌也要轉送到外部儲存。",
@@ -1772,19 +1772,19 @@
     "options": [
       {
         "id": "A",
-        "text": "所有方案與所有作業系統都可使用"
+        "text": "Team 與 Enterprise Cloud 皆可，支援所有系統"
       },
       {
         "id": "B",
-        "text": "只要啟用在組織層級即可套用到全部"
+        "text": "需要 Enterprise Cloud，且包含 macOS 在內皆支援"
       },
       {
         "id": "C",
-        "text": "需要 Enterprise Cloud，macOS 不支援"
+        "text": "需要 Enterprise Cloud，但 macOS 不支援"
       },
       {
         "id": "D",
-        "text": "需要 Team 方案，且僅限 Windows 與 Linux"
+        "text": "需要 Team 方案，只能在組織層級啟用"
       }
     ],
     "explanation": "靜態 IP 範圍需要 GitHub Enterprise Cloud，macOS 的 larger runners 不支援；要在每個 runner 上個別啟用，預設最多 10 個池。",
@@ -1806,19 +1806,19 @@
     "options": [
       {
         "id": "A",
-        "text": "核准後使用環境的 secret，核准前拿不到"
+        "text": "核准後才使用環境的 secret，核准前完全拿不到"
       },
       {
         "id": "B",
-        "text": "使用組織的 secret，因為範圍最大"
+        "text": "使用組織的 secret，環境只負責審核不提供值"
       },
       {
         "id": "C",
-        "text": "使用 repository 的 secret，環境設定被忽略"
+        "text": "使用 repository 的 secret，完全忽略環境的設定"
       },
       {
         "id": "D",
-        "text": "三個同時提供，由步驟自行選擇"
+        "text": "核准後用環境的 secret，核准前可用同名 repository 值"
       }
     ],
     "explanation": "環境 secret 優先於同名的 repository 或組織 secret；若環境啟用必要審核者，job 在核准之前無法存取環境 secret。",
@@ -1840,7 +1840,7 @@
     "options": [
       {
         "id": "A",
-        "text": "改用單引號包住 secrets.TOKEN"
+        "text": "改用 format() 函式包住 secrets.TOKEN 再比較"
       },
       {
         "id": "B",
@@ -1848,7 +1848,7 @@
       },
       {
         "id": "C",
-        "text": "在步驟加上 continue-on-error"
+        "text": "把比較改寫在 steps.if 而不是 jobs.if"
       },
       {
         "id": "D",
@@ -1902,7 +1902,7 @@
       },
       {
         "id": "D",
-        "text": "用 PAT 的前八碼當作金鑰來做 AES 加密"
+        "text": "用組織的 SSH 金鑰做 RSA 加密後放進 encrypted_value"
       }
     ],
     "explanation": "必須先取得該範圍的公鑰與 key_id，用 LibSodium 以公鑰加密 secret 的值，再用 PUT 送出 encrypted_value 與 key_id。",
@@ -1936,7 +1936,7 @@
       },
       {
         "id": "D",
-        "text": "不行，私有 repository 只能用個人帳號的 secrets"
+        "text": "不行，但同層級的 variables 可以被私有 repository 使用"
       }
     ],
     "explanation": "GitHub Free 的組織層級 secrets 與 variables 不能被私有 repository 存取；要讓私有 repository 使用，需要更高的方案。",
@@ -1962,7 +1962,7 @@
       },
       {
         "id": "B",
-        "text": "只允許維護者開啟 pull request 再執行這段"
+        "text": "改在 pull_request_target 觸發，標題就會被視為可信"
       },
       {
         "id": "C",
@@ -2008,7 +2008,7 @@
     "options": [
       {
         "id": "A",
-        "text": "沒問題，因為權杖只有該 job 能使用"
+        "text": "沒問題，因為這個權杖只有該 job 自己能使用"
       },
       {
         "id": "B",
@@ -2016,7 +2016,7 @@
       },
       {
         "id": "C",
-        "text": "只要換成長期憑證存成 secret 就能避免這個問題"
+        "text": "只要在工作流程加上 environment 就會限制雲端存取"
       },
       {
         "id": "D",
@@ -2050,7 +2050,7 @@
       },
       {
         "id": "C",
-        "text": "沒有上限，由第一個回覆的人決定"
+        "text": "最多 6 個，必須全部核准"
       },
       {
         "id": "D",
@@ -2076,7 +2076,7 @@
     "options": [
       {
         "id": "A",
-        "text": "改用 @main，永遠使用最新的程式碼"
+        "text": "改用 @v4 的主版本分支名稱，而不是標籤"
       },
       {
         "id": "B",
@@ -2114,7 +2114,7 @@
       },
       {
         "id": "B",
-        "text": "改回標籤參照，這樣警示才會再度出現"
+        "text": "改回用標籤參照，讓警示可以重新被產生"
       },
       {
         "id": "C",
@@ -2122,7 +2122,7 @@
       },
       {
         "id": "D",
-        "text": "改用 pull_request_target 定期檢查相依性"
+        "text": "在 CODEOWNERS 加入工作流程目錄，改由審核者手動更新"
       }
     ],
     "explanation": "Dependabot alerts 不涵蓋釘在 SHA 的 actions，所以不會產生警示；用 version updates 開 PR 把 actions 更新到新版，security updates 則把有弱點的版本升到最低修補版。",
@@ -2144,11 +2144,11 @@
     "options": [
       {
         "id": "A",
-        "text": "權杖在 job 開始後 1 小時就固定過期"
+        "text": "權杖在 job 開始 6 小時後固定過期，與 runner 類型無關"
       },
       {
         "id": "B",
-        "text": "權杖只能在 GitHub 代管 runner 上使用"
+        "text": "自管 runner 上的 GITHUB_TOKEN 預設只有唯讀權限"
       },
       {
         "id": "C",
@@ -2156,11 +2156,11 @@
       },
       {
         "id": "D",
-        "text": "權杖被每次 push 事件自動撤銷並重新發行"
+        "text": "權杖最多只能更新到 12 小時，更長的要改用其他驗證"
       }
     ],
     "explanation": "自管 runner 的 job 可長達 5 天，但 GITHUB_TOKEN 最多只能更新到 24 小時；更長的 job 要改用 PAT 或其他驗證方式。GitHub 代管 runner 的 job 最長 6 小時。",
-    "trap": "權杖壽命綁在 job 與 runner 類型；不是固定一小時，也不是每次推送重發。",
+    "trap": "權杖壽命綁在 job 與 runner 類型；代管 runner 最長 6 小時，自管 runner 的權杖最多更新到 24 小時，不是固定一個時間。",
     "domain": "保護與最佳化自動化",
     "difficulty": "進階",
     "keywords": ["D5", "D5-O1"]
@@ -2178,7 +2178,7 @@
     "options": [
       {
         "id": "A",
-        "text": "contents: write、packages: write、actions: read"
+        "text": "id-token: write、contents: write、attestations: read"
       },
       {
         "id": "B",
@@ -2190,7 +2190,7 @@
       },
       {
         "id": "D",
-        "text": "security-events: write、id-token: write"
+        "text": "id-token: write、contents: read、security-events: write"
       }
     ],
     "explanation": "官方範例的權限是 id-token: write、contents: read、attestations: write；容器映像還要加 packages: write。消費者再用 gh attestation verify 驗證。",
@@ -2216,7 +2216,7 @@
       },
       {
         "id": "B",
-        "text": "queue: max 會被忽略，只套用取消設定"
+        "text": "兩者可並用，但 queue 的上限會降為 1"
       },
       {
         "id": "C",
@@ -2224,7 +2224,7 @@
       },
       {
         "id": "D",
-        "text": "只有自管 runner 才支援同時使用兩者"
+        "text": "queue: max 優先，cancel-in-progress 會被忽略"
       }
     ],
     "explanation": "queue: max 最多允許 100 個等待中的執行，但不能與 cancel-in-progress: true 同時使用，否則工作流程驗證失敗；群組名稱不分大小寫。",
@@ -2246,7 +2246,7 @@
     "options": [
       {
         "id": "A",
-        "text": "用自管 runner，job 上限是 5 天"
+        "text": "用自管 runner，單一 job 上限是 5 天"
       },
       {
         "id": "B",
@@ -2258,7 +2258,7 @@
       },
       {
         "id": "D",
-        "text": "用矩陣把同一個 job 重複執行 8 次"
+        "text": "用 GitHub 代管 runner，上限是 12 小時"
       }
     ],
     "explanation": "GitHub 代管 runner 的單一 job 上限是 6 小時，自管 runner 是 5 天；35 天是整個工作流程執行的上限，不是單一 job。",
