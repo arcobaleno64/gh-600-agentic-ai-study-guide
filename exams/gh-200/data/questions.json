@@ -1,0 +1,2270 @@
+[
+  {
+    "id": "GH200-001",
+    "exam": "GH-200",
+    "number": 1,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O1"],
+    "sourceIds": ["GH200-DOC-01"],
+    "type": "single",
+    "answer": "A",
+    "question": "你在功能分支新增了一個每 15 分鐘執行的 schedule 工作流程，數小時後都沒有任何執行。最可能的原因是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "排程只在預設分支的檔案上執行，這個檔案還沒合併進去"
+      },
+      {
+        "id": "B",
+        "text": "排程的最短間隔是每小時一次，所以 15 分鐘的設定無效"
+      },
+      {
+        "id": "C",
+        "text": "排程必須先用手動觸發執行一次，才會開始依時間執行"
+      },
+      {
+        "id": "D",
+        "text": "排程只在工作流程檔位於 PR 合併 ref 時才會被觸發"
+      }
+    ],
+    "explanation": "schedule 只在預設分支的最新 commit 上執行，功能分支上的檔案不會被排程觸發；官方的最短間隔是每 5 分鐘一次，所以 15 分鐘本身有效。",
+    "trap": "看到「沒有執行」就檢查 cron 語法是最常見的反應；要先確認檔案所在的分支，因為 schedule、workflow_dispatch 這類事件只讀預設分支的檔案。",
+    "domain": "撰寫與管理工作流程",
+    "difficulty": "基礎",
+    "keywords": ["D1", "D1-O1"]
+  },
+  {
+    "id": "GH200-002",
+    "exam": "GH-200",
+    "number": 2,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O1"],
+    "sourceIds": ["GH200-DOC-01"],
+    "type": "single",
+    "answer": "B",
+    "question": "由 schedule 事件觸發的執行，GITHUB_SHA 與 GITHUB_REF 分別是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "最近一次被推送的分支尖端 commit，與該分支"
+      },
+      {
+        "id": "B",
+        "text": "預設分支的最後一個 commit，與預設分支"
+      },
+      {
+        "id": "C",
+        "text": "最近一個 PR 的合併 commit，與它的合併 ref"
+      },
+      {
+        "id": "D",
+        "text": "排程設定所在分支的最後 commit，與該分支"
+      }
+    ],
+    "explanation": "schedule 的 GITHUB_SHA 是預設分支的最後一個 commit，GITHUB_REF 是預設分支；workflow_run 也是同樣的結果。",
+    "trap": "pull_request 測的是合併後的結果，push 是被推送的尖端 commit；schedule 與 workflow_run 永遠回到預設分支，所以不會測到尚未合併的修改。",
+    "domain": "撰寫與管理工作流程",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O1"]
+  },
+  {
+    "id": "GH200-003",
+    "exam": "GH-200",
+    "number": 3,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O1"],
+    "sourceIds": ["GH200-DOC-01"],
+    "type": "true-false",
+    "answer": false,
+    "question": "由 pull_request 事件觸發的執行，GITHUB_SHA 是該 PR 分支尖端的最後一個 commit。",
+    "explanation": "pull_request 的 GITHUB_SHA 是 PR 合併 ref（refs/pull/編號/merge）上的最後一個合併 commit，測試跑的是合併後的結果。",
+    "trap": "PR 分支的尖端 commit 看起來最自然，所以很容易照直覺答「是」；事件拿到的其實是合併 ref，這也是 PR 測試能提早發現衝突的原因。",
+    "domain": "撰寫與管理工作流程",
+    "difficulty": "基礎",
+    "keywords": ["D1", "D1-O1"]
+  },
+  {
+    "id": "GH200-004",
+    "exam": "GH-200",
+    "number": 4,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O1"],
+    "sourceIds": ["GH200-DOC-01", "GH200-DOC-10"],
+    "type": "single",
+    "answer": "C",
+    "question": "workflow_dispatch 有一個 boolean 類型的 input dry_run，工作流程條件寫 if: github.event.inputs.dry_run == false，結果永遠不成立。應該怎麼修？",
+    "options": [
+      {
+        "id": "A",
+        "text": "把 input 的型別改成 choice，並把值設成字串"
+      },
+      {
+        "id": "B",
+        "text": "在 on 區塊替 input 補上 default: false 的設定"
+      },
+      {
+        "id": "C",
+        "text": "改用 inputs.dry_run，因為它會保留 boolean 型別"
+      },
+      {
+        "id": "D",
+        "text": "改成比較 github.event.inputs.dry_run == null，避開型別"
+      }
+    ],
+    "explanation": "github.event.inputs 會把 boolean 轉成字串，'false' == false 不成立；inputs context 保留 boolean 型別，可以直接當條件。",
+    "trap": "default: false 只決定沒有輸入時的預設值，並不會改變 github.event.inputs 把值轉成字串的行為，所以補了預設值仍然是同樣的結果。",
+    "domain": "撰寫與管理工作流程",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O1"]
+  },
+  {
+    "id": "GH200-005",
+    "exam": "GH-200",
+    "number": 5,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O1"],
+    "sourceIds": ["GH200-DOC-01", "GH200-DOC-10"],
+    "type": "multiple",
+    "answer": ["A", "C"],
+    "question": "關於 workflow_dispatch 的 inputs 限制，下列哪些正確？（選 2 項）",
+    "options": [
+      {
+        "id": "A",
+        "text": "最多可以定義 25 個頂層 input"
+      },
+      {
+        "id": "B",
+        "text": "input 的型別只能是 string 一種"
+      },
+      {
+        "id": "C",
+        "text": "inputs 的資料量不能超過 65,535 個字元"
+      },
+      {
+        "id": "D",
+        "text": "每個 input 都必須明確設定 required: true"
+      }
+    ],
+    "explanation": "官方的上限是最多 25 個頂層屬性、資料量不超過 65,535 個字元；型別除了 string 還有 boolean、choice、number、environment。",
+    "trap": "required 與 default 都是可選的設定；限制看的是 input 的個數與總資料量，而不是型別，也不是每一個都得必填。",
+    "domain": "撰寫與管理工作流程",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O1"]
+  },
+  {
+    "id": "GH200-006",
+    "exam": "GH-200",
+    "number": 6,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O1"],
+    "sourceIds": ["GH200-DOC-01", "GH200-DOC-52"],
+    "type": "single",
+    "answer": "C",
+    "question": "工作流程用 GITHUB_TOKEN 推送了一個 commit，預期它會觸發另一個 on: push 的工作流程，卻沒有任何新的執行。下列哪一組事件是這個規則的例外，仍會建立執行？",
+    "options": [
+      {
+        "id": "A",
+        "text": "push 與 pull_request 這兩個最常見的事件"
+      },
+      {
+        "id": "B",
+        "text": "schedule 與 workflow_run 這兩個非互動事件"
+      },
+      {
+        "id": "C",
+        "text": "workflow_dispatch 與 repository_dispatch"
+      },
+      {
+        "id": "D",
+        "text": "issues 與 issue_comment 這兩個討論事件"
+      }
+    ],
+    "explanation": "由 GITHUB_TOKEN 引發的事件通常不會建立新的工作流程執行，目的是避免遞迴；例外是 workflow_dispatch 與 repository_dispatch。",
+    "trap": "需要鏈式觸發時，很容易以為換成另一種 repository 事件就行；實際上要改用這兩個例外事件，或改用 GitHub App 安裝權杖或 PAT 來推送。",
+    "domain": "撰寫與管理工作流程",
+    "difficulty": "進階",
+    "keywords": ["D1", "D1-O1"]
+  },
+  {
+    "id": "GH200-007",
+    "exam": "GH-200",
+    "number": 7,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O2"],
+    "sourceIds": ["GH200-DOC-02"],
+    "type": "single",
+    "answer": "B",
+    "question": "矩陣設定 os: [ubuntu-latest, windows-latest]、version: [16, 18]；exclude 一組 {os: windows-latest, version: 16}；include 一組 {os: macos-latest, version: 20}。總共會產生幾個 job？",
+    "options": [
+      {
+        "id": "A",
+        "text": "3 個"
+      },
+      {
+        "id": "B",
+        "text": "4 個"
+      },
+      {
+        "id": "C",
+        "text": "5 個"
+      },
+      {
+        "id": "D",
+        "text": "6 個"
+      }
+    ],
+    "explanation": "原本 2×2 共 4 組，exclude 移除 1 組剩 3 組；include 的 macOS 組合與任何既有組合都衝突，無法併入，成為獨立的新組合，所以共 4 個。",
+    "trap": "include 不是無條件加在每個組合上；它的 os 值不在原本的清單裡，會與既有組合衝突而另成一組，因此只增加 1 個，而不是把 4 組都擴充。",
+    "domain": "撰寫與管理工作流程",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O2"]
+  },
+  {
+    "id": "GH200-008",
+    "exam": "GH-200",
+    "number": 8,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O2"],
+    "sourceIds": ["GH200-DOC-05"],
+    "type": "single",
+    "answer": "C",
+    "question": "job 設了 container: node:20 並宣告 services: postgres，測試程式用 localhost:5432 連不上資料庫。應該怎麼改？",
+    "options": [
+      {
+        "id": "A",
+        "text": "在 services 補上 ports: 5432:5432，並繼續使用 localhost"
+      },
+      {
+        "id": "B",
+        "text": "改成另開一個 job 專門執行資料庫，再用 needs 相連"
+      },
+      {
+        "id": "C",
+        "text": "改連 postgres:5432，用服務標籤當作主機名稱"
+      },
+      {
+        "id": "D",
+        "text": "把 job 換成 Windows runner，以取得本機網路位址"
+      }
+    ],
+    "explanation": "job 跑在容器內時，服務的主機名稱會對應到標籤，不需要設定 ports；只有 job 直接跑在 runner 上時才用 localhost 加 ports 對應。",
+    "trap": "ports 對應只在 job 直接跑在 runner 上才需要；job 在容器內時，補上 ports 並不會讓 localhost 變成服務的位址，而且服務容器只支援 Linux。",
+    "domain": "撰寫與管理工作流程",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O2"]
+  },
+  {
+    "id": "GH200-009",
+    "exam": "GH-200",
+    "number": 9,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O2"],
+    "sourceIds": ["GH200-DOC-04"],
+    "type": "single",
+    "answer": "D",
+    "question": "步驟 lint 失敗，但設了 continue-on-error: true。後面的步驟寫 if: steps.lint.conclusion == 'failure'，它會執行嗎？",
+    "options": [
+      {
+        "id": "A",
+        "text": "會，因為 conclusion 永遠反映步驟實際的失敗結果"
+      },
+      {
+        "id": "B",
+        "text": "會，因為 continue-on-error 只影響 job 而不影響 steps"
+      },
+      {
+        "id": "C",
+        "text": "不會，因為設了 continue-on-error 的步驟不會有 steps 資料"
+      },
+      {
+        "id": "D",
+        "text": "不會，因為 conclusion 是套用 continue-on-error 之後的結果"
+      }
+    ],
+    "explanation": "outcome 是套用 continue-on-error 之前的結果，conclusion 是之後的結果；這個步驟 outcome 是 failure、conclusion 是 success，所以條件不成立。",
+    "trap": "兩個欄位名稱很像，常被互換；要偵測「步驟其實失敗過」該讀 outcome，而 conclusion 讀到的是被容許後的結果。",
+    "domain": "撰寫與管理工作流程",
+    "difficulty": "進階",
+    "keywords": ["D1", "D1-O2"]
+  },
+  {
+    "id": "GH200-010",
+    "exam": "GH-200",
+    "number": 10,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O2"],
+    "sourceIds": ["GH200-DOC-04"],
+    "type": "multiple",
+    "answer": ["A", "B", "D"],
+    "question": "下列哪些 context 可以用在 jobs.<job_id>.if？（選 3 項）",
+    "options": [
+      {
+        "id": "A",
+        "text": "github（工作流程與事件資訊）"
+      },
+      {
+        "id": "B",
+        "text": "needs（相依 job 的輸出與結果）"
+      },
+      {
+        "id": "C",
+        "text": "secrets（儲存的加密機密）"
+      },
+      {
+        "id": "D",
+        "text": "vars（組織或 repository 的變數）"
+      }
+    ],
+    "explanation": "jobs.<job_id>.if 可用的 context 有 github、needs、vars、inputs，不含 secrets 與 env。",
+    "trap": "步驟層級的 if 又多了 env、steps 等 context，容易把兩處混為一談；但 secrets 在兩個 if 都不能直接使用，要先放進環境變數再判斷。",
+    "domain": "撰寫與管理工作流程",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O2"]
+  },
+  {
+    "id": "GH200-011",
+    "exam": "GH-200",
+    "number": 11,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O2"],
+    "sourceIds": ["GH200-DOC-10"],
+    "type": "single",
+    "answer": "B",
+    "question": "job deploy 設了 needs: test，而 test 失敗了。要讓 deploy 無論 test 的結果都會執行，應該怎麼做？",
+    "options": [
+      {
+        "id": "A",
+        "text": "在 test 的矩陣設定 fail-fast: false"
+      },
+      {
+        "id": "B",
+        "text": "在 deploy 的 if 裡使用 always()"
+      },
+      {
+        "id": "C",
+        "text": "把 deploy 搬到另一個工作流程檔"
+      },
+      {
+        "id": "D",
+        "text": "移除 needs，讓 deploy 自動等待 test 結束"
+      }
+    ],
+    "explanation": "被需要的 job 失敗或被略過時，依賴它的 job 也會被略過；在 job 的 if 使用 always()，就會無論相依 job 的結果如何都執行。",
+    "trap": "fail-fast 只管矩陣內部的取消行為，與 job 之間的相依無關；移除 needs 則會讓兩個 job 平行執行，不再有先後關係。",
+    "domain": "撰寫與管理工作流程",
+    "difficulty": "基礎",
+    "keywords": ["D1", "D1-O2"]
+  },
+  {
+    "id": "GH200-012",
+    "exam": "GH-200",
+    "number": 12,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O2"],
+    "sourceIds": ["GH200-DOC-02"],
+    "type": "single",
+    "answer": "A",
+    "question": "矩陣啟用了 fail-fast，其中一個 continue-on-error 為 false 的組合失敗了。其他組合會怎樣？",
+    "options": [
+      {
+        "id": "A",
+        "text": "進行中與排隊中的 job 都會被取消"
+      },
+      {
+        "id": "B",
+        "text": "只有使用同一種作業系統的組合會被取消"
+      },
+      {
+        "id": "C",
+        "text": "已排隊的繼續執行，只取消進行中的 job"
+      },
+      {
+        "id": "D",
+        "text": "全部繼續執行，整體在最後才標成失敗"
+      }
+    ],
+    "explanation": "fail-fast 啟用時，只要一個 continue-on-error: false 的 job 失敗，所有進行中與排隊的 job 都會被取消。",
+    "trap": "取消的範圍是整個矩陣，不分作業系統或版本；想讓實驗性組合失敗而不連累其他組合，要用 continue-on-error 而不是調整 fail-fast。",
+    "domain": "撰寫與管理工作流程",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O2"]
+  },
+  {
+    "id": "GH200-013",
+    "exam": "GH-200",
+    "number": 13,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O3"],
+    "sourceIds": ["GH200-DOC-06"],
+    "type": "single",
+    "answer": "C",
+    "question": "快取還原時，沒有找到與 key 完全相同的項目。接下來依什麼順序比對？",
+    "options": [
+      {
+        "id": "A",
+        "text": "直接放棄還原，並在 job 結束時重新建立一份新快取"
+      },
+      {
+        "id": "B",
+        "text": "先比對 restore-keys，再比對 key 的前綴"
+      },
+      {
+        "id": "C",
+        "text": "先比對 key 的前綴，再依序比對 restore-keys"
+      },
+      {
+        "id": "D",
+        "text": "只比對預設分支上最近建立的那一個快取"
+      }
+    ],
+    "explanation": "查找順序是：與 key 完全相同、key 的前綴、restore-keys 依列出順序；同一個 restore key 符合多個項目時，使用最近建立的。",
+    "trap": "restore-keys 是備援而不是優先；若把順序顛倒，就會誤判快取命中的來源，並且錯估為什麼拿到的是舊內容。",
+    "domain": "撰寫與管理工作流程",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O3"]
+  },
+  {
+    "id": "GH200-014",
+    "exam": "GH-200",
+    "number": 14,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O3"],
+    "sourceIds": ["GH200-DOC-03"],
+    "type": "single",
+    "answer": "A",
+    "question": "步驟 build 執行 echo \"version=1.2\" >> \"$GITHUB_ENV\"，同一個步驟接著 echo $version，卻是空的。原因是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "寫入 GITHUB_ENV 的值只對之後的步驟可見，寫入當下看不到"
+      },
+      {
+        "id": "B",
+        "text": "GITHUB_ENV 只能傳遞數字，字串必須改用 GITHUB_OUTPUT"
+      },
+      {
+        "id": "C",
+        "text": "步驟沒有設定 id，所以環境變數不會被建立出來"
+      },
+      {
+        "id": "D",
+        "text": "GITHUB_ENV 的值要等整個 job 結束後才會生效"
+      }
+    ],
+    "explanation": "寫入 GITHUB_ENV 的環境變數，之後的所有步驟都看得到，但寫入的那一步看不到；要在同一步驟使用，就直接用 shell 變數。",
+    "trap": "需要 id 的是 GITHUB_OUTPUT（用 steps.<id>.outputs 讀取），不是 GITHUB_ENV；兩者的用法容易混淆，但生效時間點並不是整個 job 結束之後。",
+    "domain": "撰寫與管理工作流程",
+    "difficulty": "基礎",
+    "keywords": ["D1", "D1-O3"]
+  },
+  {
+    "id": "GH200-015",
+    "exam": "GH-200",
+    "number": 15,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O3"],
+    "sourceIds": ["GH200-DOC-12"],
+    "type": "true-false",
+    "answer": false,
+    "question": "在 upload-artifact v4，同一次執行中用同樣的名稱再上傳一次，可以更新先前那個成品的內容。",
+    "explanation": "v4 的成品是不可變的；要保存新的內容，應該替每個階段使用新的成品名稱，而不是用同名成品當作更新。",
+    "trap": "從檔案系統的角度看，「覆寫同一個檔名」很直覺；成品是不可變的，這個直覺在 v4 並不成立。",
+    "domain": "撰寫與管理工作流程",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O3"]
+  },
+  {
+    "id": "GH200-016",
+    "exam": "GH-200",
+    "number": 16,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O3"],
+    "sourceIds": ["GH200-DOC-03"],
+    "type": "single",
+    "answer": "A",
+    "question": "某個步驟寫入 $GITHUB_STEP_SUMMARY 的內容超過 1 MiB。會發生什麼事？",
+    "options": [
+      {
+        "id": "A",
+        "text": "該步驟的摘要上傳失敗並產生錯誤註解，步驟與 job 的狀態不變"
+      },
+      {
+        "id": "B",
+        "text": "整個 job 會被標成失敗，並且取消之後的所有步驟"
+      },
+      {
+        "id": "C",
+        "text": "摘要會被自動截斷到 1 MiB，並且只顯示最前面的部分"
+      },
+      {
+        "id": "D",
+        "text": "摘要改成以成品的形式保存，並附上下載連結"
+      }
+    ],
+    "explanation": "每個步驟的摘要上限是 1 MiB；超過時該步驟的摘要上傳失敗並建立錯誤註解，但不會改變步驟或 job 的狀態。",
+    "trap": "超限會有錯誤註解，容易被誤認為 job 失敗；實際上它不會改變狀態，也不會自動截斷，所以重要的測試摘要要自己控制大小。",
+    "domain": "撰寫與管理工作流程",
+    "difficulty": "進階",
+    "keywords": ["D1", "D1-O3"]
+  },
+  {
+    "id": "GH200-017",
+    "exam": "GH-200",
+    "number": 17,
+    "domainId": "D1",
+    "objectiveIds": ["D1-O3"],
+    "sourceIds": ["GH200-DOC-06"],
+    "type": "multiple",
+    "answer": ["A", "C"],
+    "question": "在一般分支上執行的工作流程，可以還原哪些分支的快取？（選 2 項）",
+    "options": [
+      {
+        "id": "A",
+        "text": "目前這次執行所在的分支"
+      },
+      {
+        "id": "B",
+        "text": "同一個 repository 的兄弟分支"
+      },
+      {
+        "id": "C",
+        "text": "該 repository 的預設分支"
+      },
+      {
+        "id": "D",
+        "text": "從目前分支切出去的子分支"
+      }
+    ],
+    "explanation": "一次執行可以還原目前分支與預設分支的快取；PR 的執行還可以還原基底分支的快取。兄弟分支與子分支的快取都拿不到。",
+    "trap": "把「同一個 repository 的快取共用」想成全部共用是常見的誤解；實際上分支之間有隔離，只有目前分支、預設分支與（PR 的）基底分支可以存取。",
+    "domain": "撰寫與管理工作流程",
+    "difficulty": "中等",
+    "keywords": ["D1", "D1-O3"]
+  },
+  {
+    "id": "GH200-018",
+    "exam": "GH-200",
+    "number": 18,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O1"],
+    "sourceIds": ["GH200-DOC-14"],
+    "type": "true-false",
+    "answer": true,
+    "question": "在舊的執行上按 Re-run failed jobs，重跑使用的 GITHUB_SHA 與 GITHUB_REF，與原本那次執行相同。",
+    "explanation": "重跑沿用原事件的 GITHUB_SHA 與 GITHUB_REF，並以最初觸發者的權限執行，所以不會拿到之後推送的新 commit。",
+    "trap": "修好程式碼後直覺會想「重跑一次看看」；重跑驗證不到新程式碼，要看新推送所觸發的新執行。",
+    "domain": "使用與疑難排解工作流程",
+    "difficulty": "基礎",
+    "keywords": ["D2", "D2-O1"]
+  },
+  {
+    "id": "GH200-019",
+    "exam": "GH-200",
+    "number": 19,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O1"],
+    "sourceIds": ["GH200-DOC-14"],
+    "type": "single",
+    "answer": "D",
+    "question": "關於重新執行工作流程的限制，下列哪一項正確？",
+    "options": [
+      {
+        "id": "A",
+        "text": "初次執行後 7 天內，次數沒有上限"
+      },
+      {
+        "id": "B",
+        "text": "初次執行後 90 天內，最多重跑 10 次"
+      },
+      {
+        "id": "C",
+        "text": "初次執行後 30 天內，最多重跑 10 次"
+      },
+      {
+        "id": "D",
+        "text": "初次執行後 30 天內，最多重跑 50 次"
+      }
+    ],
+    "explanation": "官方限制是初次執行後 30 天內可以重跑，一次執行最多重跑 50 次，完整重跑與部分重跑都計入。",
+    "trap": "天數與次數各有一個容易記混的數字；兩個限制要一起記，只對一個仍會選錯。",
+    "domain": "使用與疑難排解工作流程",
+    "difficulty": "中等",
+    "keywords": ["D2", "D2-O1"]
+  },
+  {
+    "id": "GH200-020",
+    "exam": "GH-200",
+    "number": 20,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O1"],
+    "sourceIds": ["GH200-DOC-16"],
+    "type": "single",
+    "answer": "D",
+    "question": "要讓下載的日誌封存檔多出 runner-diagnostic-logs 資料夾，應該啟用哪一個設定？",
+    "options": [
+      {
+        "id": "A",
+        "text": "ACTIONS_STEP_DEBUG 設為 true，輸出更多步驟除錯事件"
+      },
+      {
+        "id": "B",
+        "text": "在工作流程的 env 加入 RUNNER_DIAGNOSTICS 並設為 1"
+      },
+      {
+        "id": "C",
+        "text": "在 job 層級加上 debug: true 並重新推送"
+      },
+      {
+        "id": "D",
+        "text": "ACTIONS_RUNNER_DEBUG 設為 true，啟用 runner 診斷"
+      }
+    ],
+    "explanation": "ACTIONS_RUNNER_DEBUG 啟用 runner 診斷記錄，封存檔會多出 runner-diagnostic-logs，內含 runner 與 worker 程序記錄；ACTIONS_STEP_DEBUG 則讓步驟日誌更詳細。",
+    "trap": "兩個名稱都有 DEBUG，容易互換；STEP 管步驟日誌與 ::debug:: 訊息，RUNNER 管 runner 本身的診斷。",
+    "domain": "使用與疑難排解工作流程",
+    "difficulty": "中等",
+    "keywords": ["D2", "D2-O1"]
+  },
+  {
+    "id": "GH200-021",
+    "exam": "GH-200",
+    "number": 21,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O1"],
+    "sourceIds": ["GH200-DOC-16"],
+    "type": "single",
+    "answer": "C",
+    "question": "同一個 repository 同時把 ACTIONS_STEP_DEBUG 建成 secret（值為 false）與 variable（值為 true）。哪一個會生效？",
+    "options": [
+      {
+        "id": "A",
+        "text": "variable 生效，因為範圍較小"
+      },
+      {
+        "id": "B",
+        "text": "兩者衝突時，工作流程直接失敗"
+      },
+      {
+        "id": "C",
+        "text": "secret 生效，值為 false"
+      },
+      {
+        "id": "D",
+        "text": "較晚建立的那一個生效"
+      }
+    ],
+    "explanation": "兩者都可以建成 secret 或 variable；同時存在時 secret 優先，所以實際為 false。",
+    "trap": "一般會以為「範圍小的覆蓋範圍大的」或「後建立的覆蓋先建立的」；除錯記錄這兩個設定是以類型決定優先。",
+    "domain": "使用與疑難排解工作流程",
+    "difficulty": "進階",
+    "keywords": ["D2", "D2-O1"]
+  },
+  {
+    "id": "GH200-022",
+    "exam": "GH-200",
+    "number": 22,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O1"],
+    "sourceIds": ["GH200-DOC-16"],
+    "type": "true-false",
+    "answer": true,
+    "question": "重新執行時勾選 Enable debug logging，會同時啟用 runner 診斷記錄與步驟除錯記錄。",
+    "explanation": "重新執行時的 Enable debug logging（CLI 為 --debug）會同時啟用兩者，不必改 secret 或 variable；任何能執行該工作流程的人都能這樣做。",
+    "trap": "不少人以為只有 repository 寫入權限的人才能開除錯記錄；重新執行的勾選項不需要先建立設定。",
+    "domain": "使用與疑難排解工作流程",
+    "difficulty": "基礎",
+    "keywords": ["D2", "D2-O1"]
+  },
+  {
+    "id": "GH200-023",
+    "exam": "GH-200",
+    "number": 23,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O1"],
+    "sourceIds": ["GH200-DOC-15"],
+    "type": "single",
+    "answer": "D",
+    "question": "在 job 日誌頁用 Search logs 搜尋一段你確定存在的文字，卻沒有結果。最可能的原因是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "需要先下載日誌封存檔，搜尋功能才有資料"
+      },
+      {
+        "id": "B",
+        "text": "只有失敗的 job 才提供搜尋功能"
+      },
+      {
+        "id": "C",
+        "text": "搜尋只在最新一次重跑的嘗試中有效"
+      },
+      {
+        "id": "D",
+        "text": "那個步驟還沒展開，搜尋只涵蓋已展開的步驟"
+      }
+    ],
+    "explanation": "Search logs 只搜尋已展開的步驟；要找的步驟要先展開。需要完整日誌時可以下載 log archive。",
+    "trap": "搜尋框在頁面上，看起來像是全文搜尋；實際範圍取決於哪些步驟已展開。",
+    "domain": "使用與疑難排解工作流程",
+    "difficulty": "中等",
+    "keywords": ["D2", "D2-O1"]
+  },
+  {
+    "id": "GH200-024",
+    "exam": "GH-200",
+    "number": 24,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O1"],
+    "sourceIds": ["GH200-DOC-15"],
+    "type": "single",
+    "answer": "B",
+    "question": "在終端機只想看某次執行中失敗的步驟日誌，該用哪個指令？",
+    "options": [
+      {
+        "id": "A",
+        "text": "gh run rerun RUN_ID --failed 這個重跑指令"
+      },
+      {
+        "id": "B",
+        "text": "gh run view RUN_ID --log-failed"
+      },
+      {
+        "id": "C",
+        "text": "gh run view --job JOB_ID --log 這個指令"
+      },
+      {
+        "id": "D",
+        "text": "gh run watch RUN_ID --exit-status 這個指令"
+      }
+    ],
+    "explanation": "gh run view RUN_ID --log-failed 只顯示失敗步驟的日誌；--log 顯示整次執行，--job 搭配 --log 看單一 job。",
+    "trap": "gh run rerun 是重新執行，不是查看日誌；名稱裡有 failed 不代表它會輸出失敗的日誌。",
+    "domain": "使用與疑難排解工作流程",
+    "difficulty": "基礎",
+    "keywords": ["D2", "D2-O1"]
+  },
+  {
+    "id": "GH200-025",
+    "exam": "GH-200",
+    "number": 25,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O2"],
+    "sourceIds": ["GH200-DOC-20"],
+    "type": "single",
+    "answer": "D",
+    "question": "呼叫 REST API 下載成品，回應是 302 與 Location 標頭。這個下載網址的有效時間是多久？",
+    "options": [
+      {
+        "id": "A",
+        "text": "約 1 小時，足夠排程後再下載"
+      },
+      {
+        "id": "B",
+        "text": "約 24 小時，與成品保留期無關"
+      },
+      {
+        "id": "C",
+        "text": "直到該成品的保留期結束為止"
+      },
+      {
+        "id": "D",
+        "text": "只有 1 分鐘，需要立刻跟著抓"
+      }
+    ],
+    "explanation": "成品下載與日誌下載的 302 導向網址都只有 1 分鐘有效，每次下載都應重新呼叫端點取得新網址。",
+    "trap": "存下網址稍後再用是自然的做法；這個網址是短效的，隔一陣子就會失效。",
+    "domain": "使用與疑難排解工作流程",
+    "difficulty": "中等",
+    "keywords": ["D2", "D2-O2"]
+  },
+  {
+    "id": "GH200-026",
+    "exam": "GH-200",
+    "number": 26,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O2"],
+    "sourceIds": ["GH200-DOC-20"],
+    "type": "multiple",
+    "answer": ["B", "C"],
+    "question": "關於 REST API 下載成品端點，下列哪些正確？（選 2 項）",
+    "options": [
+      {
+        "id": "A",
+        "text": "回應直接帶 zip 內容，不需要導向"
+      },
+      {
+        "id": "B",
+        "text": "archive_format 必須是 zip"
+      },
+      {
+        "id": "C",
+        "text": "回應是 302，網址在 Location 標頭"
+      },
+      {
+        "id": "D",
+        "text": "下載網址在成品過期前都有效"
+      }
+    ],
+    "explanation": "archive_format 只能是 zip；回應是 302 重新導向，網址在 Location 標頭，且只有 1 分鐘有效。",
+    "trap": "「重新導向」與「直接回內容」是兩種不同行為；這個端點要先跟著導向才拿得到檔案。",
+    "domain": "使用與疑難排解工作流程",
+    "difficulty": "中等",
+    "keywords": ["D2", "D2-O2"]
+  },
+  {
+    "id": "GH200-027",
+    "exam": "GH-200",
+    "number": 27,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O2"],
+    "sourceIds": ["GH200-DOC-22", "GH200-DOC-11"],
+    "type": "single",
+    "answer": "B",
+    "question": "用 DELETE 刪除一次工作流程執行時，那次執行的成品會怎樣？",
+    "options": [
+      {
+        "id": "A",
+        "text": "保留到各自的保留期結束才清除"
+      },
+      {
+        "id": "B",
+        "text": "一併從儲存空間中刪除，不另保留"
+      },
+      {
+        "id": "C",
+        "text": "移到 repository 層級另外保存"
+      },
+      {
+        "id": "D",
+        "text": "需要另外逐一手動刪除每個成品，不會連動"
+      }
+    ],
+    "explanation": "刪除一次執行時，它的成品也會一起從儲存空間刪除；只想留下日誌就改刪個別成品。",
+    "trap": "日誌與成品是分開管理的兩種資料，容易以為刪除動作不會連動；實際上刪整次執行會一併清除成品。",
+    "domain": "使用與疑難排解工作流程",
+    "difficulty": "中等",
+    "keywords": ["D2", "D2-O2"]
+  },
+  {
+    "id": "GH200-028",
+    "exam": "GH-200",
+    "number": 28,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O2"],
+    "sourceIds": ["GH200-DOC-12"],
+    "type": "true-false",
+    "answer": false,
+    "question": "actions/download-artifact 預設可以直接下載其他工作流程執行所上傳的成品，不需額外設定。",
+    "explanation": "預設只能取得同一次執行稍早上傳的成品；跨執行下載要提供 token 與執行編號。",
+    "trap": "成品在 repository 裡看得到，容易以為任何執行都能取用；跨執行取用要明確指定來源。",
+    "domain": "使用與疑難排解工作流程",
+    "difficulty": "中等",
+    "keywords": ["D2", "D2-O2"]
+  },
+  {
+    "id": "GH200-029",
+    "exam": "GH-200",
+    "number": 29,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O3"],
+    "sourceIds": ["GH200-DOC-19", "GH200-DOC-26"],
+    "type": "single",
+    "answer": "C",
+    "question": "複合 action 需要用到一個 secret，卻無法從 secrets context 讀到。應該怎麼做？",
+    "options": [
+      {
+        "id": "A",
+        "text": "改成把它發佈到 Marketplace，之後 secrets 就會自動可用"
+      },
+      {
+        "id": "B",
+        "text": "在 action.yml 的 runs 區塊直接宣告 secrets 欄位"
+      },
+      {
+        "id": "C",
+        "text": "由呼叫它的工作流程把 secret 當作 input 傳入"
+      },
+      {
+        "id": "D",
+        "text": "把複合 action 改放在另一個 repository 內使用"
+      }
+    ],
+    "explanation": "複合 action 不能直接使用 secrets context，要由呼叫它的工作流程把 secret 當作 input 傳入。",
+    "trap": "可重用工作流程可以用 secrets，複合 action 不行；兩種重用機制常被混為一談。",
+    "domain": "使用與疑難排解工作流程",
+    "difficulty": "中等",
+    "keywords": ["D2", "D2-O3"]
+  },
+  {
+    "id": "GH200-030",
+    "exam": "GH-200",
+    "number": 30,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O3"],
+    "sourceIds": ["GH200-DOC-18", "GH200-DOC-21"],
+    "type": "single",
+    "answer": "A",
+    "question": "要讓組織成員在 New workflow 頁面挑選範本，每個範本需要放在哪裡、包含哪些檔案？",
+    "options": [
+      {
+        "id": "A",
+        "text": "組織 .github repo 的 workflow-templates 目錄，含工作流程檔與同名 .properties.json"
+      },
+      {
+        "id": "B",
+        "text": "各 repository 的 .github/workflows 目錄，並在每個檔案開頭加上範本註解標記"
+      },
+      {
+        "id": "C",
+        "text": "組織 .github repo 的 workflows 目錄，只需放工作流程檔即可，不必附加中繼資料"
+      },
+      {
+        "id": "D",
+        "text": "任何公開 repository 的根目錄，含 template.yml 與一份說明用的 README 檔案"
+      }
+    ],
+    "explanation": "範本放在組織 .github repository 的 workflow-templates 目錄；每個範本需要工作流程檔，以及同名、副檔名為 .properties.json 的中繼資料檔（name 與 description 必填）。",
+    "trap": "放 .github/workflows 的檔案是會被執行的工作流程，不是範本；範本要放在 workflow-templates，並附中繼資料檔。",
+    "domain": "使用與疑難排解工作流程",
+    "difficulty": "進階",
+    "keywords": ["D2", "D2-O3"]
+  },
+  {
+    "id": "GH200-031",
+    "exam": "GH-200",
+    "number": 31,
+    "domainId": "D2",
+    "objectiveIds": ["D2-O3"],
+    "sourceIds": ["GH200-DOC-17"],
+    "type": "single",
+    "answer": "B",
+    "question": "對一個正在執行的工作流程按 Disable workflow，進行中的執行會怎樣？",
+    "options": [
+      {
+        "id": "A",
+        "text": "立刻被取消，狀態標為 cancelled"
+      },
+      {
+        "id": "B",
+        "text": "不會被取消，但停用期間無法重新執行"
+      },
+      {
+        "id": "C",
+        "text": "繼續執行，且停用期間仍可重新執行"
+      },
+      {
+        "id": "D",
+        "text": "被暫停，等重新啟用之後再從中斷處接續"
+      }
+    ],
+    "explanation": "停用只是讓工作流程不再觸發，不會取消進行中的執行；停用期間也不能重新執行那些執行，要先啟用。",
+    "trap": "停用不等於取消，也不等於刪除；檔案保留、之後可以啟用，與刪除檔案是兩回事。",
+    "domain": "使用與疑難排解工作流程",
+    "difficulty": "基礎",
+    "keywords": ["D2", "D2-O3"]
+  },
+  {
+    "id": "GH200-032",
+    "exam": "GH-200",
+    "number": 32,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O1"],
+    "sourceIds": ["GH200-DOC-23"],
+    "type": "single",
+    "answer": "B",
+    "question": "團隊同時使用 Ubuntu、Windows 與 macOS 的 GitHub 代管 runner，要寫一個呼叫 REST API 並整理結果的 action。哪種類型適合？",
+    "options": [
+      {
+        "id": "A",
+        "text": "Docker 容器 action，用 Dockerfile 打包環境"
+      },
+      {
+        "id": "B",
+        "text": "JavaScript action，三種作業系統都能執行"
+      },
+      {
+        "id": "C",
+        "text": "只能寫成單一個 shell 指令碼的步驟"
+      },
+      {
+        "id": "D",
+        "text": "Docker 容器 action，並在各平台各裝一份 Docker"
+      }
+    ],
+    "explanation": "JavaScript action 可以跑在 Linux、macOS 與 Windows；Docker 容器 action 只能在 Linux runner 執行。",
+    "trap": "Docker 看起來能跨平台，但容器 action 在 macOS 與 Windows 的 GitHub 代管 runner 上無法執行；跨平台需求先排除它。",
+    "domain": "撰寫與維護 actions",
+    "difficulty": "基礎",
+    "keywords": ["D3", "D3-O1"]
+  },
+  {
+    "id": "GH200-033",
+    "exam": "GH-200",
+    "number": 33,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O1"],
+    "sourceIds": ["GH200-DOC-23"],
+    "type": "true-false",
+    "answer": false,
+    "question": "Docker 容器 action 可以在 GitHub 代管的 Windows runner 上執行。",
+    "explanation": "Docker 容器 action 只能在 Linux runner 執行；自管 runner 若要使用，也要先安裝 Docker。",
+    "trap": "容器技術常被當成跨平台的方案；這裡的限制是 runner 的作業系統，不是映像本身。",
+    "domain": "撰寫與維護 actions",
+    "difficulty": "基礎",
+    "keywords": ["D3", "D3-O1"]
+  },
+  {
+    "id": "GH200-034",
+    "exam": "GH-200",
+    "number": 34,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O1"],
+    "sourceIds": ["GH200-DOC-25"],
+    "type": "single",
+    "answer": "C",
+    "question": "同事把 node_modules 提交進 JavaScript action 的 repository，說這樣使用者不用另外安裝。比較好的做法是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "改成在 action 執行時由 npm 下載套件，並且不提交任何檔案"
+      },
+      {
+        "id": "B",
+        "text": "把 node_modules 放進 .gitignore，要求使用者自行安裝"
+      },
+      {
+        "id": "C",
+        "text": "用 rollup.js 或 @vercel/ncc 打包成單一檔案並提交"
+      },
+      {
+        "id": "D",
+        "text": "把 node_modules 壓縮成 zip 檔後再一併提交"
+      }
+    ],
+    "explanation": "官方說提交 node_modules 可能造成問題；改用 rollup.js 或 @vercel/ncc 把程式碼與相依套件打包成 dist/index.js 並提交，main 指向它。",
+    "trap": "「不提交相依套件」與「要求使用者安裝」都不符合 action 的使用方式，使用者只會用 uses 呼叫；要提交的是打包後的單一檔案。",
+    "domain": "撰寫與維護 actions",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O1"]
+  },
+  {
+    "id": "GH200-035",
+    "exam": "GH-200",
+    "number": 35,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O1"],
+    "sourceIds": ["GH200-DOC-24", "GH200-DOC-26"],
+    "type": "single",
+    "answer": "D",
+    "question": "複合 action 的某個步驟寫了 run: ./cleanup.sh，被判定為無效。最可能缺少什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "在步驟上加 id，讓輸出可以被引用"
+      },
+      {
+        "id": "B",
+        "text": "把 runs.using 改為 composite-run"
+      },
+      {
+        "id": "C",
+        "text": "在步驟前加入 uses 的 checkout 步驟"
+      },
+      {
+        "id": "D",
+        "text": "在該步驟指定 shell，例如 bash"
+      }
+    ],
+    "explanation": "複合 action 中有 run 的步驟必須同時設定 shell。",
+    "trap": "一般工作流程的 run 步驟可以省略 shell 而使用預設值；複合 action 的 run 沒有這個預設，必須明確指定。",
+    "domain": "撰寫與維護 actions",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O1"]
+  },
+  {
+    "id": "GH200-036",
+    "exam": "GH-200",
+    "number": 36,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O1"],
+    "sourceIds": ["GH200-DOC-24", "GH200-DOC-25"],
+    "type": "true-false",
+    "answer": true,
+    "question": "JavaScript action 在 action.yml 的 runs.using 要設成 node20 或 node24 這類 Node.js 版本。",
+    "explanation": "JavaScript action 的 runs.using 值是 node20 或 node24，main 必填並指向要執行的檔案。",
+    "trap": "容易把它與 Docker 的 'docker' 或複合的 'composite' 混淆；三種類型的 runs.using 各有固定值。",
+    "domain": "撰寫與維護 actions",
+    "difficulty": "基礎",
+    "keywords": ["D3", "D3-O1"]
+  },
+  {
+    "id": "GH200-037",
+    "exam": "GH-200",
+    "number": 37,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O1"],
+    "sourceIds": ["GH200-DOC-24"],
+    "type": "single",
+    "answer": "A",
+    "question": "JavaScript action 同時定義了 pre 與 post，沒有另外設定 pre-if 或 post-if。它們預設在什麼條件下執行？",
+    "options": [
+      {
+        "id": "A",
+        "text": "always()，依 job 的狀態評估"
+      },
+      {
+        "id": "B",
+        "text": "success()，依 action 自己的狀態評估"
+      },
+      {
+        "id": "C",
+        "text": "failure()，只在 main 失敗時才執行"
+      },
+      {
+        "id": "D",
+        "text": "success()，依整個工作流程的狀態評估"
+      }
+    ],
+    "explanation": "pre-if 與 post-if 預設都是 always()，其中的狀態檢查函式依 job 的狀態評估，不是 action 自己的狀態。",
+    "trap": "post 常被用來清理，直覺上以為只在成功時才跑；預設其實是不論結果都跑。",
+    "domain": "撰寫與維護 actions",
+    "difficulty": "進階",
+    "keywords": ["D3", "D3-O1"]
+  },
+  {
+    "id": "GH200-038",
+    "exam": "GH-200",
+    "number": 38,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O2"],
+    "sourceIds": ["GH200-DOC-24"],
+    "type": "single",
+    "answer": "D",
+    "question": "複合 action 宣告了輸出 result，但沒有 value，呼叫端拿不到值。應該怎麼修？",
+    "options": [
+      {
+        "id": "A",
+        "text": "把輸出改名為 value，並移除 description"
+      },
+      {
+        "id": "B",
+        "text": "在輸出加上 required: true 的設定"
+      },
+      {
+        "id": "C",
+        "text": "改在步驟用 set-output 的舊式工作流程命令"
+      },
+      {
+        "id": "D",
+        "text": "替輸出補上 value，指向某個步驟的輸出"
+      }
+    ],
+    "explanation": "複合 action 的輸出必須有 value，指向步驟的輸出，例如 steps.calc.outputs.result；該步驟要有 id 並寫入 GITHUB_OUTPUT。",
+    "trap": "JavaScript 與 Docker action 的輸出只需要 description，沒有 value；規則因 action 類型而異。",
+    "domain": "撰寫與維護 actions",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O2"]
+  },
+  {
+    "id": "GH200-039",
+    "exam": "GH-200",
+    "number": 39,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O2"],
+    "sourceIds": ["GH200-DOC-24"],
+    "type": "multiple",
+    "answer": ["A", "B", "D"],
+    "question": "action 中繼資料檔的頂層，哪些鍵是必填？（選 3 項）",
+    "options": [
+      {
+        "id": "A",
+        "text": "name，action 的名稱"
+      },
+      {
+        "id": "B",
+        "text": "description，簡短的說明"
+      },
+      {
+        "id": "C",
+        "text": "author，作者的名稱"
+      },
+      {
+        "id": "D",
+        "text": "runs，執行方式的設定"
+      }
+    ],
+    "explanation": "頂層必填的鍵是 name、description、runs；author 與 inputs 是選填。",
+    "trap": "author 看起來像基本資料而容易被當成必填；官方把它列為選填。",
+    "domain": "撰寫與維護 actions",
+    "difficulty": "基礎",
+    "keywords": ["D3", "D3-O2"]
+  },
+  {
+    "id": "GH200-040",
+    "exam": "GH-200",
+    "number": 40,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O2"],
+    "sourceIds": ["GH200-DOC-24", "GH200-DOC-28"],
+    "type": "single",
+    "answer": "C",
+    "question": "準備發佈到 GitHub Marketplace 的 repository，中繼資料檔應該怎麼放？",
+    "options": [
+      {
+        "id": "A",
+        "text": "每個子資料夾各放一個 action.yml，Marketplace 會全部列出"
+      },
+      {
+        "id": "B",
+        "text": "根目錄放兩份 action.yml 與 action.yaml 互為備份"
+      },
+      {
+        "id": "C",
+        "text": "根目錄只放一個 action.yml 或 action.yaml"
+      },
+      {
+        "id": "D",
+        "text": "放在 .github 目錄，Marketplace 才會自動讀取"
+      }
+    ],
+    "explanation": "要發佈到 Marketplace，根目錄只能有一個 action 中繼資料檔；子資料夾裡的檔案可以使用，但不會被 Marketplace 自動列出。",
+    "trap": "monorepo 習慣把每個元件放在子資料夾；這種配置能用，但無法一個 repository 發佈多個 Marketplace action。",
+    "domain": "撰寫與維護 actions",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O2"]
+  },
+  {
+    "id": "GH200-041",
+    "exam": "GH-200",
+    "number": 41,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O2"],
+    "sourceIds": ["GH200-DOC-24"],
+    "type": "single",
+    "answer": "B",
+    "question": "輸入 token 設了 required: true，使用者沒有傳值，action 卻照常執行，到後面才出錯。為什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "required: true 只在 Marketplace 發佈時才會檢查"
+      },
+      {
+        "id": "B",
+        "text": "required: true 不會自動報錯，action 要自己檢查輸入"
+      },
+      {
+        "id": "C",
+        "text": "必須同時設定 default，required 才會生效"
+      },
+      {
+        "id": "D",
+        "text": "required 只對複合 action 有效，其他類型不支援"
+      }
+    ],
+    "explanation": "required: true 並不會在缺值時自動報錯，action 必須自己檢查輸入，必要時用 core.setFailed 結束。",
+    "trap": "欄位名稱看起來像驗證規則，卻只是描述性的標記；缺值的處理要寫在 action 的程式裡。",
+    "domain": "撰寫與維護 actions",
+    "difficulty": "進階",
+    "keywords": ["D3", "D3-O2"]
+  },
+  {
+    "id": "GH200-042",
+    "exam": "GH-200",
+    "number": 42,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O3"],
+    "sourceIds": ["GH200-DOC-29"],
+    "type": "single",
+    "answer": "D",
+    "question": "要讓同一組織的其他 repository 使用放在私有 repository 的 action，應該在哪裡設定？",
+    "options": [
+      {
+        "id": "A",
+        "text": "私有 repository 的 Settings → Pages 與網站設定"
+      },
+      {
+        "id": "B",
+        "text": "組織層級的 Marketplace 設定頁面與分類選項"
+      },
+      {
+        "id": "C",
+        "text": "action.yml 的 branding 區塊與圖示顏色設定"
+      },
+      {
+        "id": "D",
+        "text": "該 repository 的 Settings → Actions → General → Access"
+      }
+    ],
+    "explanation": "在私有 repository 的 Settings → Actions → General → Access 開放給其他 repository；runner 以範圍受限、一小時後過期的安裝權杖下載。",
+    "trap": "Marketplace 只接受公開 repository；私有 repository 的 action 要走存取設定，而且要注意外部協作者也可能間接取得存取。",
+    "domain": "撰寫與維護 actions",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O3"]
+  },
+  {
+    "id": "GH200-043",
+    "exam": "GH-200",
+    "number": 43,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O3"],
+    "sourceIds": ["GH200-DOC-28"],
+    "type": "single",
+    "answer": "A",
+    "question": "符合所有條件並發佈 action 到 GitHub Marketplace 時，GitHub 會怎麼處理？",
+    "options": [
+      {
+        "id": "A",
+        "text": "立即發佈，GitHub 不會先審核"
+      },
+      {
+        "id": "B",
+        "text": "先由 GitHub 人工審核，通過後才上架"
+      },
+      {
+        "id": "C",
+        "text": "先在私有目錄上架 30 天觀察期"
+      },
+      {
+        "id": "D",
+        "text": "需要至少 100 次下載才會公開顯示"
+      }
+    ],
+    "explanation": "符合條件時 action 會立即發佈，GitHub 不會先審核。",
+    "trap": "應用程式商店常見人工審核流程；Marketplace 的 action 沒有發佈前的審核，信任要靠使用者自己評估。",
+    "domain": "撰寫與維護 actions",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O3"]
+  },
+  {
+    "id": "GH200-044",
+    "exam": "GH-200",
+    "number": 44,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O3"],
+    "sourceIds": ["GH200-DOC-27"],
+    "type": "single",
+    "answer": "B",
+    "question": "你剛發佈 action 的 v1.4.0 release，要讓釘在 v1 的使用者取得新版，又不被破壞性變更影響。應該怎麼做？",
+    "options": [
+      {
+        "id": "A",
+        "text": "刪除 v1 標籤，要求使用者改用 v1.4.0"
+      },
+      {
+        "id": "B",
+        "text": "把 v1 與 v1.4 標籤移到這個相容的 commit"
+      },
+      {
+        "id": "C",
+        "text": "改發新的 v2 標籤，讓使用者自行升級"
+      },
+      {
+        "id": "D",
+        "text": "把 main 分支改名為 v1，讓分支直接取代標籤"
+      }
+    ],
+    "explanation": "用語意化版本標籤建立 release，並讓主版本標籤 v1 與次版本標籤 v1.4 指向最新且相容的 commit；破壞性變更才發 v2。",
+    "trap": "主版本標籤是給使用者「自動取得相容更新」的指標，相容時要移動它；刪除或改發 v2 會讓使用者無法自動取得。",
+    "domain": "撰寫與維護 actions",
+    "difficulty": "中等",
+    "keywords": ["D3", "D3-O3"]
+  },
+  {
+    "id": "GH200-045",
+    "exam": "GH-200",
+    "number": 45,
+    "domainId": "D3",
+    "objectiveIds": ["D3-O3"],
+    "sourceIds": ["GH200-DOC-27", "GH200-DOC-30"],
+    "type": "single",
+    "answer": "B",
+    "question": "組織啟用 immutable releases 後，發佈流程用強制推送移動 v1 標籤失敗。原因是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "強制推送被分支保護規則擋下，與 release 無關"
+      },
+      {
+        "id": "B",
+        "text": "release 的標籤被鎖定在特定 commit，不能移動"
+      },
+      {
+        "id": "C",
+        "text": "標籤必須先刪除，才能用強制推送移動"
+      },
+      {
+        "id": "D",
+        "text": "v1 這種主版本標籤不允許綁定 release"
+      }
+    ],
+    "explanation": "immutable release 發佈後，標籤鎖定在特定 commit，不能移動，且 release 存在時不能刪除；因此不能再用強制推送移動綁定 release 的標籤。",
+    "trap": "失敗看起來像權限問題；原因是標籤本身被鎖定，需要調整版本策略，例如讓使用者釘到具體標籤或 SHA。",
+    "domain": "撰寫與維護 actions",
+    "difficulty": "進階",
+    "keywords": ["D3", "D3-O3"]
+  },
+  {
+    "id": "GH200-046",
+    "exam": "GH-200",
+    "number": 46,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O1"],
+    "sourceIds": ["GH200-DOC-31"],
+    "type": "single",
+    "answer": "A",
+    "question": "組織把 Actions 政策設成只允許組織自己的 actions 與可重用工作流程，沒有勾選任何其他來源。之後工作流程裡的 actions/checkout 會怎樣？",
+    "options": [
+      {
+        "id": "A",
+        "text": "被封鎖，因為 GitHub 作者的 actions 也不在允許範圍內"
+      },
+      {
+        "id": "B",
+        "text": "照常執行，因為 GitHub 建立的 actions 永遠被允許"
+      },
+      {
+        "id": "C",
+        "text": "照常執行，因為 checkout 屬於本機 action"
+      },
+      {
+        "id": "D",
+        "text": "只在私有 repository 的工作流程中被封鎖"
+      }
+    ],
+    "explanation": "只允許組織自己的 actions 會封鎖所有 GitHub 作者的 actions，所以 actions/checkout 也不能用；要放行需另外勾選 GitHub 建立的 actions。",
+    "trap": "checkout 幾乎每個工作流程都用，容易假設它永遠可用；政策沒有為 GitHub 自己的 actions 保留例外。",
+    "domain": "管理企業的 GitHub Actions",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O1"]
+  },
+  {
+    "id": "GH200-047",
+    "exam": "GH-200",
+    "number": 47,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O1"],
+    "sourceIds": ["GH200-DOC-31"],
+    "type": "single",
+    "answer": "D",
+    "question": "在允許的 actions 清單輸入「*, !space-org/action@*」。這代表什麼意思？",
+    "options": [
+      {
+        "id": "A",
+        "text": "只允許 space-org 的 action，其餘一律封鎖"
+      },
+      {
+        "id": "B",
+        "text": "全部封鎖，只有萬用字元本身例外"
+      },
+      {
+        "id": "C",
+        "text": "清單語法錯誤，萬用字元不能與驚嘆號並用"
+      },
+      {
+        "id": "D",
+        "text": "除了 space-org/action 之外，全部允許"
+      }
+    ],
+    "explanation": "樣式以逗號分隔，* 是萬用字元，前面加 ! 表示封鎖；所以這串是除了 space-org/action 的任何版本之外全部允許。清單最多 1000 個樣式。",
+    "trap": "驚嘆號容易被讀成「強調」；在這份清單裡它代表封鎖，且預設只有列出的樣式才被允許。",
+    "domain": "管理企業的 GitHub Actions",
+    "difficulty": "進階",
+    "keywords": ["D4", "D4-O1"]
+  },
+  {
+    "id": "GH200-048",
+    "exam": "GH-200",
+    "number": 48,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O1"],
+    "sourceIds": ["GH200-DOC-31"],
+    "type": "true-false",
+    "answer": true,
+    "question": "組織啟用「要求 actions 固定到完整 commit SHA」後，可重用工作流程仍然可以用標籤來參照。",
+    "explanation": "這個要求適用於組織的 actions 與 GitHub 作者的 actions；可重用工作流程仍可用標籤參照，已被鎖定檔鎖定的相依項目也滿足要求。",
+    "trap": "「全部都要釘 SHA」是直覺的解讀；政策把可重用工作流程排除在這個要求之外。",
+    "domain": "管理企業的 GitHub Actions",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O1"]
+  },
+  {
+    "id": "GH200-049",
+    "exam": "GH-200",
+    "number": 49,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O1"],
+    "sourceIds": ["GH200-DOC-32"],
+    "type": "single",
+    "answer": "B",
+    "question": "企業停用了某項 Actions 政策，某組織的管理員想在自己的組織重新啟用它。結果如何？",
+    "options": [
+      {
+        "id": "A",
+        "text": "可以，組織層級的設定永遠優先於企業"
+      },
+      {
+        "id": "B",
+        "text": "不行，企業停用的政策下層不能再啟用"
+      },
+      {
+        "id": "C",
+        "text": "可以，但只限該組織的私有 repository"
+      },
+      {
+        "id": "D",
+        "text": "不行，除非先聯絡 GitHub 支援人員解除"
+      }
+    ],
+    "explanation": "企業啟用的政策，組織或 repository 還能選擇性停用；企業停用的政策，個別組織與 repository 不能再啟用。組織只能進一步限制，不能放寬。",
+    "trap": "政策只往更嚴格的方向傳遞；覆蓋方向不是「近的優先」，要看企業是啟用還是停用。",
+    "domain": "管理企業的 GitHub Actions",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O1"]
+  },
+  {
+    "id": "GH200-050",
+    "exam": "GH-200",
+    "number": 50,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O1"],
+    "sourceIds": ["GH200-DOC-31"],
+    "type": "single",
+    "answer": "A",
+    "question": "公開 repository 要求首次貢獻者的 fork PR 工作流程先經核准。下列哪一類工作流程不受這項核准設定影響，一律執行？",
+    "options": [
+      {
+        "id": "A",
+        "text": "由 pull_request_target 觸發的工作流程"
+      },
+      {
+        "id": "B",
+        "text": "由 pull_request 觸發的工作流程"
+      },
+      {
+        "id": "C",
+        "text": "由 workflow_dispatch 觸發的工作流程"
+      },
+      {
+        "id": "D",
+        "text": "由 pull_request_review 觸發的工作流程"
+      }
+    ],
+    "explanation": "由 pull_request_target 觸發的工作流程一律執行，不受 fork PR 核准政策影響；這也是它屬於特權觸發條件、需要特別小心的原因。",
+    "trap": "核准政策看起來像是對所有 PR 工作流程一視同仁；它管的是 pull_request 這類，不含 pull_request_target。",
+    "domain": "管理企業的 GitHub Actions",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O1"]
+  },
+  {
+    "id": "GH200-051",
+    "exam": "GH-200",
+    "number": 51,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O1"],
+    "sourceIds": ["GH200-DOC-31"],
+    "type": "single",
+    "answer": "D",
+    "question": "「Allow GitHub Actions to create and approve pull requests」這個設定的預設值是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "啟用，但只限預設分支的 pull request"
+      },
+      {
+        "id": "B",
+        "text": "啟用，且同時適用於 fork 的 pull request"
+      },
+      {
+        "id": "C",
+        "text": "依組織方案決定，Team 方案預設啟用"
+      },
+      {
+        "id": "D",
+        "text": "停用，工作流程預設不能建立或核准 PR"
+      }
+    ],
+    "explanation": "這個設定預設停用，工作流程預設不能建立或核准 pull request，需要管理員明確開啟。",
+    "trap": "會建立 PR 的自動化很常見，容易以為這是預設能力；它必須手動開啟。",
+    "domain": "管理企業的 GitHub Actions",
+    "difficulty": "基礎",
+    "keywords": ["D4", "D4-O1"]
+  },
+  {
+    "id": "GH200-052",
+    "exam": "GH-200",
+    "number": 52,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O2"],
+    "sourceIds": ["GH200-DOC-34", "GH200-DOC-35"],
+    "type": "single",
+    "answer": "C",
+    "question": "團隊停用了自管 runner 的自動更新。新版 runner 釋出後，最多多久內必須完成更新，否則 GitHub 不再把 job 排給它？",
+    "options": [
+      {
+        "id": "A",
+        "text": "新版釋出後 7 天內"
+      },
+      {
+        "id": "B",
+        "text": "新版釋出後 14 天內"
+      },
+      {
+        "id": "C",
+        "text": "新版釋出後 30 天內"
+      },
+      {
+        "id": "D",
+        "text": "新版釋出後 90 天內"
+      }
+    ],
+    "explanation": "停用自動更新後，必須在新版釋出後 30 天內安裝，否則 GitHub 不再排 job 給它；重大安全更新則會擋住 job 直到更新。",
+    "trap": "預設的自動更新是在一週內完成，容易把「一週」和「期限」混為一談；停用後的期限是 30 天。",
+    "domain": "管理企業的 GitHub Actions",
+    "difficulty": "進階",
+    "keywords": ["D4", "D4-O2"]
+  },
+  {
+    "id": "GH200-053",
+    "exam": "GH-200",
+    "number": 53,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O2"],
+    "sourceIds": ["GH200-DOC-35"],
+    "type": "single",
+    "answer": "A",
+    "question": "job 的 runs-on 指定的標籤沒有任何符合的 runner，job 一直留在佇列。多久後會失敗？",
+    "options": [
+      {
+        "id": "A",
+        "text": "排隊超過 24 小時後自動取消"
+      },
+      {
+        "id": "B",
+        "text": "排隊超過 60 秒後就自動取消"
+      },
+      {
+        "id": "C",
+        "text": "排隊超過 6 小時後就自動取消"
+      },
+      {
+        "id": "D",
+        "text": "不會失敗，會無限期地等下去"
+      }
+    ],
+    "explanation": "沒有符合的 runner 時 job 留在佇列，排隊超過 24 小時就會失敗；60 秒是 runner 沒有接起 job 時重新排隊的時間。",
+    "trap": "兩個時間都與佇列有關：60 秒是重新排隊，24 小時才是失敗；6 小時則是 GitHub 代管 runner 的 job 執行上限。",
+    "domain": "管理企業的 GitHub Actions",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O2"]
+  },
+  {
+    "id": "GH200-054",
+    "exam": "GH-200",
+    "number": 54,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O2"],
+    "sourceIds": ["GH200-DOC-35"],
+    "type": "single",
+    "answer": "D",
+    "question": "組織使用 IP 允許清單，新註冊的自管 runner 連不上 GitHub。除了確認出站 443 之外，還需要做什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "改用 GitHub 代管 runner 取代"
+      },
+      {
+        "id": "B",
+        "text": "在 runner 設定檔加入 GitHub 的 IP 範圍"
+      },
+      {
+        "id": "C",
+        "text": "請使用者改用個人帳號的 PAT 註冊"
+      },
+      {
+        "id": "D",
+        "text": "把自管 runner 的 IP 位址加進允許清單"
+      }
+    ],
+    "explanation": "使用 IP 允許清單時，必須把自管 runner 的 IP 位址加進清單；runner 還需要能對外建立 443 的 HTTPS 連線並連到必要網域。",
+    "trap": "常見的想法是把 GitHub 的位址加進 runner 端；實際上被擋的是 runner 這一端的來源 IP。",
+    "domain": "管理企業的 GitHub Actions",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O2"]
+  },
+  {
+    "id": "GH200-055",
+    "exam": "GH-200",
+    "number": 55,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O2"],
+    "sourceIds": ["GH200-DOC-33"],
+    "type": "single",
+    "answer": "B",
+    "question": "組織預設群組內的自管 runner，預設可以被哪些 repository 使用？",
+    "options": [
+      {
+        "id": "A",
+        "text": "組織內所有公開與私有的 repository"
+      },
+      {
+        "id": "B",
+        "text": "只有私有 repository，但可以覆寫"
+      },
+      {
+        "id": "C",
+        "text": "只有當初註冊該 runner 的 repository"
+      },
+      {
+        "id": "D",
+        "text": "只有組織名下的 .github repository"
+      }
+    ],
+    "explanation": "預設只有私有 repository 能使用群組內的 runner，可以覆寫；官方提醒自管 runner 最好只給私有 repository，因為 fork 的 PR 可能執行危險的程式碼。",
+    "trap": "把 runner 加進群組不代表所有 repository 都能用；預設的預設就是只開給私有 repository。",
+    "domain": "管理企業的 GitHub Actions",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O2"]
+  },
+  {
+    "id": "GH200-056",
+    "exam": "GH-200",
+    "number": 56,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O2"],
+    "sourceIds": ["GH200-DOC-34", "GH200-DOC-44"],
+    "type": "multiple",
+    "answer": ["B", "C"],
+    "question": "關於以 --ephemeral 註冊的自管 runner，下列哪些正確？（選 2 項）",
+    "options": [
+      {
+        "id": "A",
+        "text": "GitHub 會在每個 job 後自動清理機器上的檔案"
+      },
+      {
+        "id": "B",
+        "text": "註冊後執行完一個 job 就會取消註冊"
+      },
+      {
+        "id": "C",
+        "text": "它的日誌應該轉送到外部的儲存位置保存"
+      },
+      {
+        "id": "D",
+        "text": "只能搭配 GitHub 代管 runner 使用"
+      }
+    ],
+    "explanation": "暫時性 runner 在執行一個 job 後就由 GitHub 取消註冊，清理由你負責，日誌也要轉送到外部儲存。",
+    "trap": "「取消註冊」不等於「清理機器」；機器上的狀態與檔案仍需自己處理。",
+    "domain": "管理企業的 GitHub Actions",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O2"]
+  },
+  {
+    "id": "GH200-057",
+    "exam": "GH-200",
+    "number": 57,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O2"],
+    "sourceIds": ["GH200-DOC-43"],
+    "type": "single",
+    "answer": "C",
+    "question": "要為 larger runners 設定靜態 IP 位址範圍，下列哪一項正確？",
+    "options": [
+      {
+        "id": "A",
+        "text": "所有方案與所有作業系統都可使用"
+      },
+      {
+        "id": "B",
+        "text": "只要啟用在組織層級即可套用到全部"
+      },
+      {
+        "id": "C",
+        "text": "需要 Enterprise Cloud，macOS 不支援"
+      },
+      {
+        "id": "D",
+        "text": "需要 Team 方案，且僅限 Windows 與 Linux"
+      }
+    ],
+    "explanation": "靜態 IP 範圍需要 GitHub Enterprise Cloud，macOS 的 larger runners 不支援；要在每個 runner 上個別啟用，預設最多 10 個池。",
+    "trap": "靜態 IP 不是 larger runners 的預設功能，方案與作業系統都有條件。",
+    "domain": "管理企業的 GitHub Actions",
+    "difficulty": "進階",
+    "keywords": ["D4", "D4-O2"]
+  },
+  {
+    "id": "GH200-058",
+    "exam": "GH-200",
+    "number": 58,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O3"],
+    "sourceIds": ["GH200-DOC-37", "GH200-DOC-08"],
+    "type": "single",
+    "answer": "A",
+    "question": "同名的 API_KEY 同時存在於組織、repository 與 production 環境。job 指定 environment: production，環境設了必要審核者。實際會怎樣？",
+    "options": [
+      {
+        "id": "A",
+        "text": "核准後使用環境的 secret，核准前拿不到"
+      },
+      {
+        "id": "B",
+        "text": "使用組織的 secret，因為範圍最大"
+      },
+      {
+        "id": "C",
+        "text": "使用 repository 的 secret，環境設定被忽略"
+      },
+      {
+        "id": "D",
+        "text": "三個同時提供，由步驟自行選擇"
+      }
+    ],
+    "explanation": "環境 secret 優先於同名的 repository 或組織 secret；若環境啟用必要審核者，job 在核准之前無法存取環境 secret。",
+    "trap": "「範圍越大越優先」是常見直覺；同名時越具體的層級優先，而且環境還多一道核准關卡。",
+    "domain": "管理企業的 GitHub Actions",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O3"]
+  },
+  {
+    "id": "GH200-059",
+    "exam": "GH-200",
+    "number": 59,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O3"],
+    "sourceIds": ["GH200-DOC-39", "GH200-DOC-04"],
+    "type": "single",
+    "answer": "D",
+    "question": "你寫了 if: secrets.TOKEN != ''，工作流程無效。應該怎麼改？",
+    "options": [
+      {
+        "id": "A",
+        "text": "改用單引號包住 secrets.TOKEN"
+      },
+      {
+        "id": "B",
+        "text": "把 secret 改存成 variable 後直接比較"
+      },
+      {
+        "id": "C",
+        "text": "在步驟加上 continue-on-error"
+      },
+      {
+        "id": "D",
+        "text": "放進 job 層級環境變數，再用 env 判斷"
+      }
+    ],
+    "explanation": "secrets 不能直接用在 if 條件；先把它放進 job 層級的環境變數，再用 env context 判斷。",
+    "trap": "改存 variable 會把機密暴露在不會遮蔽的位置；問題是 context 的可用範圍，不是引號。",
+    "domain": "管理企業的 GitHub Actions",
+    "difficulty": "進階",
+    "keywords": ["D4", "D4-O3"]
+  },
+  {
+    "id": "GH200-060",
+    "exam": "GH-200",
+    "number": 60,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O3"],
+    "sourceIds": ["GH200-DOC-39"],
+    "type": "true-false",
+    "answer": true,
+    "question": "由 Dependabot 事件觸發的工作流程，無法讀取 repository 的一般 secrets。",
+    "explanation": "Dependabot 事件觸發的工作流程拿不到一般 secrets；從 fork 觸發的工作流程除了 GITHUB_TOKEN 之外，也不會傳遞 secrets。",
+    "trap": "Dependabot 的 PR 看起來像 repository 內部的 PR，容易以為它和一般分支的工作流程一樣能讀 secrets。",
+    "domain": "管理企業的 GitHub Actions",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O3"]
+  },
+  {
+    "id": "GH200-061",
+    "exam": "GH-200",
+    "number": 61,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O3"],
+    "sourceIds": ["GH200-DOC-40"],
+    "type": "single",
+    "answer": "B",
+    "question": "要用 REST API 建立或更新 repository secret，值該如何處理？",
+    "options": [
+      {
+        "id": "A",
+        "text": "以 Base64 編碼後直接放進 encrypted_value"
+      },
+      {
+        "id": "B",
+        "text": "用 LibSodium 與公鑰加密，並帶對應的 key_id"
+      },
+      {
+        "id": "C",
+        "text": "以 SHA256 雜湊後放進 encrypted_value"
+      },
+      {
+        "id": "D",
+        "text": "用 PAT 的前八碼當作金鑰來做 AES 加密"
+      }
+    ],
+    "explanation": "必須先取得該範圍的公鑰與 key_id，用 LibSodium 以公鑰加密 secret 的值，再用 PUT 送出 encrypted_value 與 key_id。",
+    "trap": "Base64 只是編碼不是加密，雜湊也無法還原；API 要的是用公鑰加密的結果。",
+    "domain": "管理企業的 GitHub Actions",
+    "difficulty": "進階",
+    "keywords": ["D4", "D4-O3"]
+  },
+  {
+    "id": "GH200-062",
+    "exam": "GH-200",
+    "number": 62,
+    "domainId": "D4",
+    "objectiveIds": ["D4-O3"],
+    "sourceIds": ["GH200-DOC-37", "GH200-DOC-38"],
+    "type": "single",
+    "answer": "C",
+    "question": "GitHub Free 的組織設定了組織層級的 secrets。組織內的私有 repository 能使用它們嗎？",
+    "options": [
+      {
+        "id": "A",
+        "text": "可以，只要存取政策選擇所有 repository"
+      },
+      {
+        "id": "B",
+        "text": "可以，但只限預設分支上執行的工作流程"
+      },
+      {
+        "id": "C",
+        "text": "不行，Free 的組織 secrets 不能給私有 repository 用"
+      },
+      {
+        "id": "D",
+        "text": "不行，私有 repository 只能用個人帳號的 secrets"
+      }
+    ],
+    "explanation": "GitHub Free 的組織層級 secrets 與 variables 不能被私有 repository 存取；要讓私有 repository 使用，需要更高的方案。",
+    "trap": "存取政策設成所有 repository 看似涵蓋全部，但方案限制先於政策。",
+    "domain": "管理企業的 GitHub Actions",
+    "difficulty": "中等",
+    "keywords": ["D4", "D4-O3"]
+  },
+  {
+    "id": "GH200-063",
+    "exam": "GH-200",
+    "number": 63,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O1"],
+    "sourceIds": ["GH200-DOC-44"],
+    "type": "single",
+    "answer": "C",
+    "question": "工作流程寫了 run: echo \"${{ github.event.pull_request.title }}\"。要防範有人把 PR 標題改成惡意指令，官方首選的做法是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "把整個運算式改用單引號包起來再交給 shell"
+      },
+      {
+        "id": "B",
+        "text": "只允許維護者開啟 pull request 再執行這段"
+      },
+      {
+        "id": "C",
+        "text": "把值設成環境變數，指令碼內用 $TITLE 引用"
+      },
+      {
+        "id": "D",
+        "text": "先把標題做 URL 編碼，再把結果插進指令中"
+      }
+    ],
+    "explanation": "${{ }} 在 shell 執行前就被替換成文字；把值放進中間環境變數，再在指令碼中引用，值就不會被用來產生指令碼本身。更好的做法是改用 action 並把值當引數傳入。",
+    "trap": "引號與編碼只是表面處理，攻擊字串仍可能跳脫；真正的修法是讓值不進入指令碼的語法層。",
+    "domain": "保護與最佳化自動化",
+    "difficulty": "中等",
+    "keywords": ["D5", "D5-O1"]
+  },
+  {
+    "id": "GH200-064",
+    "exam": "GH-200",
+    "number": 64,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O1"],
+    "sourceIds": ["GH200-DOC-45"],
+    "type": "true-false",
+    "answer": false,
+    "question": "在工作流程設定 permissions: id-token: write，就會讓這個工作流程取得修改雲端資源的寫入權限。",
+    "explanation": "id-token: write 只是允許工作流程向 OIDC 提供者請求 JWT，不會給它修改任何資源的權限；能做什麼取決於雲端端的信任條件與角色。",
+    "trap": "權限名稱裡的 write 容易讓人以為是寫入資源；它只代表可以請求權杖。",
+    "domain": "保護與最佳化自動化",
+    "difficulty": "中等",
+    "keywords": ["D5", "D5-O1"]
+  },
+  {
+    "id": "GH200-065",
+    "exam": "GH-200",
+    "number": 65,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O1"],
+    "sourceIds": ["GH200-DOC-45", "GH200-DOC-49"],
+    "type": "single",
+    "answer": "B",
+    "question": "團隊設定了 OIDC，工作流程已有 id-token: write，但雲端端沒有設定任何信任條件。下列說明何者正確？",
+    "options": [
+      {
+        "id": "A",
+        "text": "沒問題，因為權杖只有該 job 能使用"
+      },
+      {
+        "id": "B",
+        "text": "必須在雲端端定義至少一個信任條件，例如限定 sub"
+      },
+      {
+        "id": "C",
+        "text": "只要換成長期憑證存成 secret 就能避免這個問題"
+      },
+      {
+        "id": "D",
+        "text": "信任條件由 GitHub 自動依 repository 名稱產生"
+      }
+    ],
+    "explanation": "必須在雲端端至少定義一個信任條件，才能避免不受信任的 repository 向你的雲端資源請求存取權杖；sub 的預設格式例如 repo:組織/儲存庫:environment:環境名稱。",
+    "trap": "權杖只供單一 job 使用，並不代表任何 repository 都能換得；缺少信任條件等於沒有限制來源。",
+    "domain": "保護與最佳化自動化",
+    "difficulty": "進階",
+    "keywords": ["D5", "D5-O1"]
+  },
+  {
+    "id": "GH200-066",
+    "exam": "GH-200",
+    "number": 66,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O1"],
+    "sourceIds": ["GH200-DOC-46"],
+    "type": "single",
+    "answer": "D",
+    "question": "環境的必要審核者最多可以指定幾個人或團隊，核准規則是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "最多 3 個，必須全部核准"
+      },
+      {
+        "id": "B",
+        "text": "最多 10 個，過半數核准即可"
+      },
+      {
+        "id": "C",
+        "text": "沒有上限，由第一個回覆的人決定"
+      },
+      {
+        "id": "D",
+        "text": "最多 6 個，其中一人核准即可"
+      }
+    ],
+    "explanation": "必要審核者最多可指定 6 個人或團隊，只要其中一人核准，job 就可以繼續；另可啟用防止自我審核。",
+    "trap": "多人審核容易被想成需要多數同意；環境保護規則只要求其中一位核准。",
+    "domain": "保護與最佳化自動化",
+    "difficulty": "中等",
+    "keywords": ["D5", "D5-O1"]
+  },
+  {
+    "id": "GH200-067",
+    "exam": "GH-200",
+    "number": 67,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O1"],
+    "sourceIds": ["GH200-DOC-44"],
+    "type": "single",
+    "answer": "B",
+    "question": "你把第三方 action 釘在 @v4 標籤，之後該 action 的 repository 被入侵，v4 標籤被移到惡意 commit。哪種做法能避免這個風險？",
+    "options": [
+      {
+        "id": "A",
+        "text": "改用 @main，永遠使用最新的程式碼"
+      },
+      {
+        "id": "B",
+        "text": "固定到完整 commit SHA，並確認來自原 repository"
+      },
+      {
+        "id": "C",
+        "text": "把版本號改成 @v4.0.0 這樣更具體的標籤"
+      },
+      {
+        "id": "D",
+        "text": "只使用 Marketplace 上有已驗證徽章的 action"
+      }
+    ],
+    "explanation": "標籤可以被移動或刪除；固定到完整 commit SHA（並確認 SHA 來自原 repository 而不是 fork）才不會被改寫。已驗證徽章是有用訊號，但不能取代版本固定與檢視。",
+    "trap": "更具體的標籤仍是標籤；已驗證徽章只代表身分已驗證，不代表程式碼沒被入侵。",
+    "domain": "保護與最佳化自動化",
+    "difficulty": "中等",
+    "keywords": ["D5", "D5-O1"]
+  },
+  {
+    "id": "GH200-068",
+    "exam": "GH-200",
+    "number": 68,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O1"],
+    "sourceIds": ["GH200-DOC-44"],
+    "type": "single",
+    "answer": "A",
+    "question": "團隊把 actions 都釘在 SHA 後，不再收到 Dependabot 警示。為了持續得到更新，應該怎麼做？",
+    "options": [
+      {
+        "id": "A",
+        "text": "啟用 Dependabot version updates 開 PR 更新"
+      },
+      {
+        "id": "B",
+        "text": "改回標籤參照，這樣警示才會再度出現"
+      },
+      {
+        "id": "C",
+        "text": "關閉 SHA 固定，改由組織政策強制允許清單"
+      },
+      {
+        "id": "D",
+        "text": "改用 pull_request_target 定期檢查相依性"
+      }
+    ],
+    "explanation": "Dependabot alerts 不涵蓋釘在 SHA 的 actions，所以不會產生警示；用 version updates 開 PR 把 actions 更新到新版，security updates 則把有弱點的版本升到最低修補版。",
+    "trap": "沒有警示不代表沒有弱點；SHA 固定只是讓警示機制看不到這些 actions。",
+    "domain": "保護與最佳化自動化",
+    "difficulty": "進階",
+    "keywords": ["D5", "D5-O1"]
+  },
+  {
+    "id": "GH200-069",
+    "exam": "GH-200",
+    "number": 69,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O1"],
+    "sourceIds": ["GH200-DOC-52"],
+    "type": "single",
+    "answer": "C",
+    "question": "在自管 runner 上有一個長達數天的 job，用 GITHUB_TOKEN 呼叫 API 到後半段失敗。最可能的原因是什麼？",
+    "options": [
+      {
+        "id": "A",
+        "text": "權杖在 job 開始後 1 小時就固定過期"
+      },
+      {
+        "id": "B",
+        "text": "權杖只能在 GitHub 代管 runner 上使用"
+      },
+      {
+        "id": "C",
+        "text": "權杖最多只能更新到 24 小時，更長的要改用其他驗證"
+      },
+      {
+        "id": "D",
+        "text": "權杖被每次 push 事件自動撤銷並重新發行"
+      }
+    ],
+    "explanation": "自管 runner 的 job 可長達 5 天，但 GITHUB_TOKEN 最多只能更新到 24 小時；更長的 job 要改用 PAT 或其他驗證方式。GitHub 代管 runner 的 job 最長 6 小時。",
+    "trap": "權杖壽命綁在 job 與 runner 類型；不是固定一小時，也不是每次推送重發。",
+    "domain": "保護與最佳化自動化",
+    "difficulty": "進階",
+    "keywords": ["D5", "D5-O1"]
+  },
+  {
+    "id": "GH200-070",
+    "exam": "GH-200",
+    "number": 70,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O1"],
+    "sourceIds": ["GH200-DOC-47", "GH200-DOC-50"],
+    "type": "single",
+    "answer": "B",
+    "question": "要為建置出來的二進位檔產生 artifact attestation，工作流程至少需要哪組權限？",
+    "options": [
+      {
+        "id": "A",
+        "text": "contents: write、packages: write、actions: read"
+      },
+      {
+        "id": "B",
+        "text": "id-token: write、contents: read、attestations: write"
+      },
+      {
+        "id": "C",
+        "text": "id-token: read、contents: read、attestations: read"
+      },
+      {
+        "id": "D",
+        "text": "security-events: write、id-token: write"
+      }
+    ],
+    "explanation": "官方範例的權限是 id-token: write、contents: read、attestations: write；容器映像還要加 packages: write。消費者再用 gh attestation verify 驗證。",
+    "trap": "attestation 要簽章，需要 OIDC 權杖與寫入證明的權限；只有讀取權限無法產生。",
+    "domain": "保護與最佳化自動化",
+    "difficulty": "中等",
+    "keywords": ["D5", "D5-O1"]
+  },
+  {
+    "id": "GH200-071",
+    "exam": "GH-200",
+    "number": 71,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O2"],
+    "sourceIds": ["GH200-DOC-10"],
+    "type": "single",
+    "answer": "C",
+    "question": "工作流程用了 concurrency，想讓同一群組排隊最多 100 個等待中的執行，同時又設定 cancel-in-progress: true。結果如何？",
+    "options": [
+      {
+        "id": "A",
+        "text": "兩者可並用，新執行會取消舊執行後再排隊"
+      },
+      {
+        "id": "B",
+        "text": "queue: max 會被忽略，只套用取消設定"
+      },
+      {
+        "id": "C",
+        "text": "queue: max 不能與 cancel-in-progress: true 同時使用"
+      },
+      {
+        "id": "D",
+        "text": "只有自管 runner 才支援同時使用兩者"
+      }
+    ],
+    "explanation": "queue: max 最多允許 100 個等待中的執行，但不能與 cancel-in-progress: true 同時使用，否則工作流程驗證失敗；群組名稱不分大小寫。",
+    "trap": "「取消舊的」與「排隊等待」是相反的策略，兩者不能同時選。",
+    "domain": "保護與最佳化自動化",
+    "difficulty": "進階",
+    "keywords": ["D5", "D5-O2"]
+  },
+  {
+    "id": "GH200-072",
+    "exam": "GH-200",
+    "number": 72,
+    "domainId": "D5",
+    "objectiveIds": ["D5-O2"],
+    "sourceIds": ["GH200-DOC-51"],
+    "type": "single",
+    "answer": "A",
+    "question": "批次作業需要連續執行 8 小時。下列哪種做法符合限制？",
+    "options": [
+      {
+        "id": "A",
+        "text": "用自管 runner，job 上限是 5 天"
+      },
+      {
+        "id": "B",
+        "text": "用 GitHub 代管 runner，上限是 24 小時"
+      },
+      {
+        "id": "C",
+        "text": "用 GitHub 代管 runner，上限是 35 天"
+      },
+      {
+        "id": "D",
+        "text": "用矩陣把同一個 job 重複執行 8 次"
+      }
+    ],
+    "explanation": "GitHub 代管 runner 的單一 job 上限是 6 小時，自管 runner 是 5 天；35 天是整個工作流程執行的上限，不是單一 job。",
+    "trap": "35 天看起來最寬鬆，但那是整個執行的總長；單一 job 還是受 runner 類型的限制。",
+    "domain": "保護與最佳化自動化",
+    "difficulty": "中等",
+    "keywords": ["D5", "D5-O2"]
+  }
+]
