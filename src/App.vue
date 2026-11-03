@@ -184,6 +184,12 @@ onBeforeUnmount(() => {
     </main>
     <footer class="book-footer">
       <span>{{ site.footer }}</span>
+      <span v-if="site.related.length"
+        >同系列：<template v-for="(item, i) in site.related" :key="item.url"
+          ><template v-if="i">、</template
+          ><a :href="item.url">{{ item.label }}</a></template
+        ></span
+      >
       <span
         >{{ online ? "已連線" : "目前離線" }} ·
         {{

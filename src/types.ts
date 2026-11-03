@@ -4,6 +4,7 @@ export interface SiteConfig {
   workerName: string;
   siteUrl: string;
   domain: string;
+  related: { label: string; url: string }[];
   siteName: string;
   shortName: string;
   brand: string;
