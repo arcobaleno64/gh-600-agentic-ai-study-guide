@@ -3,6 +3,7 @@ export type ExamCode = string;
 export interface SiteConfig {
   workerName: string;
   siteUrl: string;
+  domain: string;
   siteName: string;
   shortName: string;
   brand: string;

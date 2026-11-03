@@ -75,13 +75,28 @@ for (const count of [5, 7]) {
   });
 }
 
-test("每個考試的網址主機名稱以 workerName 開頭，部署才會落在同一個網址", () => {
+// The deploy workflow publishes each exam to its own Worker and its own
+// custom domain; siteUrl must be that domain or the canonical and og URLs
+// point somewhere else than the site that was deployed.
+test("每個考試的網址就是它部署的自訂網域，且各考試不重複", () => {
+  const domains = new Set<string>();
   for (const code of exams) {
-    const site = loadSite(code) as { workerName: string; siteUrl: string };
+    const site = loadSite(code) as {
+      workerName: string;
+      domain: string;
+      siteUrl: string;
+    };
     assert.ok(site.workerName, `${code} 缺少 workerName`);
     assert.ok(
-      new URL(site.siteUrl).hostname.startsWith(`${site.workerName}.`),
-      `${code} 的網址與 workerName 不一致`,
+      site.domain.endsWith(".satenvision.com"),
+      `${code} 的 domain 不在 satenvision.com`,
     );
+    assert.equal(
+      site.siteUrl,
+      `https://${site.domain}`,
+      `${code} 的網址與 domain 不一致`,
+    );
+    assert.ok(!domains.has(site.domain), `${code} 的 domain 與其他考試重複`);
+    domains.add(site.domain);
   }
 });
