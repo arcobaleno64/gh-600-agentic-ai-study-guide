@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-import { readFileSync } from "node:fs";
+import { copyFileSync, existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { loadSite, renderSite } from "./scripts/site.mjs";
@@ -21,6 +22,17 @@ export default defineConfig({
     {
       name: "exam-site",
       transformIndexHtml: (html: string) => renderSite(html, site),
+    },
+    {
+      // An exam may bring its own social preview image (exams/<code>/og.png);
+      // without one the build keeps public/og.png, the gh-600 baseline.
+      name: "exam-og-image",
+      apply: "build",
+      writeBundle(options) {
+        const own = new URL(`./exams/${exam}/og.png`, import.meta.url);
+        if (existsSync(own))
+          copyFileSync(own, join(options.dir ?? "dist", "og.png"));
+      },
     },
     {
       name: "textbook-offline-assets",
