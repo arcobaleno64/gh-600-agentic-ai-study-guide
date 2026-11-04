@@ -110,6 +110,10 @@ function layout(site, page) {
         `<li><a href="${item.path}"${item.path === page.path ? ' aria-current="page"' : ""}>${escapeHtml(item.label)}</a></li>`,
     )
     .join("");
+  // Same sibling-exam links as the app footer (App.vue), for readers without JS.
+  const related = site.related.length
+    ? `<p>同系列：${site.related.map((item) => `<a href="${escapeHtml(item.url)}">${escapeHtml(item.label)}</a>`).join("、")}</p>`
+    : "";
   return `<!doctype html>
 <html lang="zh-Hant-TW">
 <head>
@@ -142,7 +146,7 @@ ${jsonLd({ "@context": "https://schema.org", ...page.schema, url: pageUrl(page.p
 ${page.body}
 </main>
 </div>
-<footer><p>${escapeHtml(site.disclaimer)}</p><p>內容最後核對：${escapeHtml(site.lastVerified)}</p></footer>
+<footer><p>${escapeHtml(site.disclaimer)}</p><p>內容最後核對：${escapeHtml(site.lastVerified)}</p>${related}</footer>
 </body>
 </html>
 `;
@@ -466,6 +470,7 @@ export function buildStaticSite(content = loadContent()) {
     nav: pages.filter((page) => !/^\/quiz\/d\d\/$/.test(page.path)),
     disclaimer: content.meta.disclaimer,
     lastVerified: content.meta.lastVerified,
+    related: examSite.related ?? [],
   };
   const files = new Map();
   for (const page of pages)

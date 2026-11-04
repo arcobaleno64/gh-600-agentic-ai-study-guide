@@ -77,6 +77,26 @@ test("站內連結都指向產生的頁面、首頁或互動版的 hash 路由",
   assert.deepEqual(fallbackBroken, []);
 });
 
+test("每一頁的頁尾都列出同系列的其他考試站，與互動版一致", () => {
+  const related = loadSite(process.env.EXAM || "gh-600").related as {
+    label: string;
+    url: string;
+  }[];
+  assert.ok(related.length > 0);
+  for (const page of pages) {
+    const footer =
+      html(page.path).match(/<footer>[\s\S]*<\/footer>/)?.[0] ?? "";
+    assert.match(footer, /同系列：/, page.path);
+    for (const item of related)
+      assert.ok(
+        footer.includes(
+          `<a href="${escape(item.url)}">${escape(item.label)}</a>`,
+        ),
+        `${page.path} 缺少 ${item.url}`,
+      );
+  }
+});
+
 test("sitemap 與 llms.txt 列出的網址剛好是首頁加上所有產生的頁面", () => {
   const expected = [
     `${SITE_URL}/`,
